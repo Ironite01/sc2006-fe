@@ -1,0 +1,9 @@
+form.signupForm input {
+    border-radius: 0.4rem;
+}
+
+label.profilePicture:hover {
+    opacity: 80%;
+    cursor: pointer;
+    transition: 0.5s;
+}
