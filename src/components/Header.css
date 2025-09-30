@@ -1,8 +1,14 @@
-.header {
+header {
     background-color: #5b4e43;
     min-height: 6rem;
     font-size: 1.3rem;
     color: white;
     min-width: 100%;
     width: fit-content;
+    padding: 0 1rem;
+}
+
+header a:hover {
+    background-color: #483b30;
+    cursor: pointer;
 }
