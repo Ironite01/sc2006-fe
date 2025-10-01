@@ -1,7 +1,9 @@
-import { profile } from '../assets';
-import { useState } from 'react';
+import { profile } from '../../assets';
+import { useState, useEffect } from 'react';
 import './Signup.css';
-import { isEmailValid, isStrongPassword, isUsernameValid } from '../helpers/regex';
+import { isEmailValid, isStrongPassword, isUsernameValid } from '../../helpers/regex';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
     const [currentPicture, setCurrentPicture] = useState(null);
@@ -9,6 +11,13 @@ export default function Signup() {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [cpasswordError, setCpasswordError] = useState("");
+
+    const user = Cookies.get('user');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) navigate("/", { replace: true });
+    }, [user]);
 
     function onFormSubmit(e) {
         e.preventDefault();
