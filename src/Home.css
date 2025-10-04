@@ -1,0 +1,33 @@
+/*banner*/
+.home {padding: 16px 24px 80px;}
+.banner {position: relative; height: 180px; border-radius: 16px; overflow: hidden;}
+.banner img { height: 100%; width: 100%; object-fit: cover; filter: brightness(0.6)}
+.banner .text { position: absolute; left: 20px; bottom: 18px; color: #fff;}
+.banner .label { font-size: 14px; opacity: .9; }
+.banner .title { font-size: 28px; font-weight: 800; }
+
+/*section titles*/
+.section { margin-top: 22px; }
+.section h2 {
+  font-size: 18px; font-weight: 700; margin: 0 0 8px;
+  display: inline-block; padding: 4px 10px; border-radius: 6px;
+}
+
+/*rows*/
+.row {
+  display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px;
+  scroll-snap-type: x mandatory;
+}
+/*.row::-webkit-scrollbar { height: 8px; }
+.row::-webkit-scrollbar-thumb { background: #bbb; border-radius: 8px; }*/
+
+/*shop cards*/
+.shop-card {
+  min-width: 200px; max-width: 240px; scroll-snap-align: start;
+  background: #2b241f; color: #fff; border-radius: 12px; overflow: hidden;
+}
+.shop-card .thumb { height: 150px; padding: 10px; background-size: cover; background-position: center; }
+.shop-card .meta { padding: 10px; }
+.shop-card .tag { font-size: 12px; opacity: .85; background: rgba(255,255,255,.12); padding: 2px 8px; border-radius: 999px; }
+.shop-card .name { margin: 8px 2px 6px; font-weight: 700; }
+.shop-card .fill { height: 100%; background: #ff9a2b; }
