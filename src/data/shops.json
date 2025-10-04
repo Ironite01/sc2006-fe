@@ -1,0 +1,99 @@
+{
+  "localGems": [
+    {
+      "id": "kampong-thrift",
+      "name": "Kampong Thrift",
+      "tag": "Retail",
+      "imageUrl": "https://bestlah.sg/wp-content/uploads/2024/07/Best-Thrift-Shops-Singapore-768x512.jpg"
+    },
+    {
+      "id": "neighbourhood-CD-shop",
+      "name": "Neighbourhood CD Shop",
+      "tag": "Retail",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": "neighbourhood-CD-shop",
+      "name": "Neighbourhood CD Shop",
+      "tag": "Retail",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": "neighbourhood-CD-shop",
+      "name": "Neighbourhood CD Shop",
+      "tag": "Retail",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": "neighbourhood-CD-shop",
+      "name": "Neighbourhood CD Shop",
+      "tag": "Retail",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": "neighbourhood-CD-shop",
+      "name": "Neighbourhood CD Shop",
+      "tag": "Retail",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": "neighbourhood-CD-shop",
+      "name": "Neighbourhood CD Shop",
+      "tag": "Retail",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      "id": "neighbourhood-CD-shop",
+      "name": "Neighbourhood CD Shop",
+      "tag": "Retail",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+    }
+  ],
+  "flavours": [
+    {
+      "id": "makan-place",
+      "name": "Makan Place",
+      "tag": "Restaurant",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png"
+    },
+    {
+      "id": "spice-hub",
+      "name": "Spice Hub",
+      "tag": "Restaurant",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg"
+    }
+    ,
+    {
+      "id": "spice-hub",
+      "name": "Spice Hub",
+      "tag": "Restaurant",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg"
+    }
+    ,
+    {
+      "id": "spice-hub",
+      "name": "Spice Hub",
+      "tag": "Restaurant",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg"
+    }
+    ,
+    {
+      "id": "spice-hub",
+      "name": "Spice Hub",
+      "tag": "Restaurant",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg"
+    },
+    {
+      "id": "spice-hub",
+      "name": "Spice Hub",
+      "tag": "Restaurant",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg"
+    },
+    {
+      "id": "spice-hub",
+      "name": "Spice Hub",
+      "tag": "Restaurant",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg"
+    }
+  ]
+}
