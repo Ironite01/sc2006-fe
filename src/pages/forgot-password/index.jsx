@@ -56,11 +56,7 @@ export default function ForgotPassword() {
                     <button type="submit" className="reset-button">
                         Reset password
                     </button>
-                </form>
-                
-                <p className="button-description">
-                    sends an email based on the field above (username or email) for the request to reset password
-                </p>
+                </form>                
             </div>
         </div>
     );

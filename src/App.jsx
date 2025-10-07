@@ -6,6 +6,7 @@ import Home from './Home';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import ForgotPassword from './pages/forgot-password';
+import Campaign from './pages/campaign';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/campaign" element={<Campaign />} />
           </Routes>
         </BrowserRouter>
       </main>

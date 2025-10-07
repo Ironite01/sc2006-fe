@@ -1,0 +1,101 @@
+.campaign-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.campaign-nav {
+    display: flex;
+    background-color: #5b4e43;
+    border-radius: 0.5rem 0.5rem 0 0;
+    margin-bottom: 0;
+}
+
+.nav-tab {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 0.5rem 0.5rem 0 0;
+    transition: background-color 0.3s ease;
+}
+
+.nav-tab:hover {
+    background-color: #483b30;
+}
+
+.nav-tab.active {
+    background-color: #FDF3EA;
+    color: #333;
+}
+
+.campaign-content {
+    background-color: #FDF3EA;
+    padding: 2rem;
+    border-radius: 0 0.5rem 0.5rem 0.5rem;
+    min-height: 600px;
+}
+
+.update-composer-placeholder {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+}
+
+.update-composer-placeholder h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.campaign-form-wrapper {
+    background-color: #FDF3EA;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.form-header {
+    background-color: #5b4e43;
+    padding: 1rem 2rem;
+}
+
+.back-btn {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: white;
+    color: #5b4e43;
+}
+
+@media (max-width: 768px) {
+    .campaign-container {
+        padding: 1rem;
+    }
+    
+    .campaign-nav {
+        flex-direction: column;
+    }
+    
+    .nav-tab {
+        border-radius: 0;
+    }
+    
+    .nav-tab:first-child {
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+    
+    .form-header {
+        padding: 1rem;
+    }
+}
