@@ -8,18 +8,15 @@ export default function ForgotPassword() {
 
     function onFormSubmit(e) {
         e.preventDefault();
-        // Reset messages
         setErrorMessage('');
         setSuccessMessage('');
 
-        // Basic validation
         if (!email.trim()) {
-            setErrorMessage('Text field is @ symbol exists, so validates if it is a valid email, otherwise, assume username.');
+            setErrorMessage('ERROR MESSAGE');
             return;
         }
 
-        // Simulate sending reset email
-        setSuccessMessage('A black text message if email is sent successfully. Otherwise it is a red text error.');
+        setSuccessMessage('BLACK TEXT WHEN EMAIL SENT SUCCESS - OTHERWISE RED TEXT ERROR');
     }
 
     return (
@@ -43,8 +40,8 @@ export default function ForgotPassword() {
                         />
                         
                         <p className="help-text">
-                            Some message when username requests for password reset.{' '}
-                            <span className="help-text-link">Or some error if any.</span>
+                            Some message when username requests for password reset{' '}
+                            <span className="help-text-link">or some error if any</span>
                         </p>
                         
                         {errorMessage && (
@@ -62,7 +59,7 @@ export default function ForgotPassword() {
                 </form>
                 
                 <p className="button-description">
-                    This button sends an email based on the field above (username or email) for the request to reset password.
+                    sends an email based on the field above (username or email) for the request to reset password
                 </p>
             </div>
         </div>
