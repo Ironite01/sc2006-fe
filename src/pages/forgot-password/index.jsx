@@ -56,7 +56,11 @@ export default function ForgotPassword() {
                     <button type="submit" className="reset-button">
                         Reset password
                     </button>
-                </form>                
+
+                    <div className="back-to-login">
+                        Remember your password? <a href='/login'>Back to login</a>
+                    </div>
+                </form>
             </div>
         </div>
     );

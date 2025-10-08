@@ -1,25 +1,89 @@
 footer {
-    background-color: #2c2c2c;
-    min-height: 10rem;
-    font-size: 1.3rem;
+    background: #2c2520;
+    min-height: auto;
+    font-size: 0.95rem;
     color: white;
     min-width: 100%;
     width: fit-content;
-    border-radius: 12px 12px 0 0;
-    padding: 0 1rem;
+    border-radius: 0;
+    padding: 2.5rem 3.5rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 5rem;
+    border-top: 4px solid var(--primary);
+    position: relative;
+}
+
+footer nav {
+    gap: 0.75rem;
+}
+
+footer a {
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 8px 10px;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 8px;
+    right: 8px;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
 }
 
 footer a:hover {
-    background-color: #4b4b4b;
+    background-color: rgba(217, 119, 6, 0.15);
     cursor: pointer;
+    color: var(--primary-light);
+}
+
+footer a:hover::after {
+    transform: scaleX(1);
 }
 
 footer a.social {
-    padding: 0;
+    padding: 0.6rem;
     margin: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+footer a.social::after {
+    display: none;
 }
 
 footer a.social:hover {
-    background-color: initial;
-    opacity: 60%;
+    background: var(--primary);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 6px 16px rgba(217, 119, 6, 0.4);
+}
+
+footer a.social img {
+    transition: transform 0.3s ease;
+    filter: brightness(1);
+}
+
+footer a.social:hover img {
+    filter: brightness(1.2);
+}
+
+footer .footer-section {
+    padding: 0.75rem 0;
+}
+
+footer .footer-section:first-child {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
 }
