@@ -2,9 +2,18 @@ import { useState, useEffect } from 'react';
 import { profile } from '../assets';
 import './Header.css';
 import Searchbar from './Searchbar';
+import Cookies from 'js-cookie';
 
 export default function Header({ onSearch }) {
+    const user = Cookies.get('user');
     const [profilePicture, setProfilePicture] = useState(profile);
+
+    useEffect(() => {
+        if (user) {
+            const userObj = JSON.parse(user)
+            if (userObj?.picture) setProfilePicture(userObj.picture);
+        }
+    }, [user]);
 
     useEffect(() => {
         const handler = () => {
@@ -26,7 +35,7 @@ export default function Header({ onSearch }) {
             </nav>
             <div className="flex order-2 items-center gap-[1.25rem]">
                 <Searchbar onSearch={onSearch} />
-                <img src={profilePicture} alt="Profile logo" className='h-[2.75rem] w-[2.75rem] rounded-full profile' />
+                <img src={profilePicture} alt="Profile logo" className='h-[2.75rem] w-[2.75rem] rounded-full profile' referrerPolicy="no-referrer" />
             </div>
         </nav>
     </header>
