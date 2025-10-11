@@ -3,14 +3,11 @@ import { profile, google, microsoft } from '../../assets';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../paths';
-import { useMsal } from '@azure/msal-react';
-import { loginRequest } from '../../config/authConfig';
 import './Login.css';
 
 export default function Login() {
     const user = Cookies.get('user');
     const navigate = useNavigate();
-    const { instance } = useMsal();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -18,13 +15,8 @@ export default function Login() {
         if (user) navigate("/", { replace: true });
     }, [user]);
 
-    async function handleAzureLogin() {
-        try {
-            await instance.loginRedirect(loginRequest);
-        } catch (error) {
-            console.error("Azure login error:", error);
-            setError("Azure login failed. Please try again.");
-        }
+    function handleAzureLogin() {
+        window.location.href = auth.azureLogin;
     }
 
     async function onFormSubmit(e) {
@@ -112,7 +104,7 @@ export default function Login() {
                 <div className="divider">or continue with</div>
 
                 <div className="oauth-buttons">
-                    <a href='http://localhost:3000/login/google'>
+                    <a href={auth.googleLogin}>
                         <button type='button' className="google">
                             <img src={google} alt="Google" />
                             <span>Continue with Google</span>
