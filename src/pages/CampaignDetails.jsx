@@ -6,16 +6,37 @@ import campaigns from '../data/campaigns.json';
 export default function CampaignDetails() {
   const { id } = useParams();
   const [campaign, setCampaign] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [donationAmount, setDonationAmount] = useState(25);
   const [commentText, setCommentText] = useState('');
 
   useEffect(() => {
-    const foundCampaign = campaigns.campaigns.find(c => c.id === parseInt(id));
+    // Handle both string and numeric IDs
+    const foundCampaign = campaigns.campaigns.find(c => {
+      // Try exact match first (for string IDs)
+      if (c.id === id) return true;
+      // Try numeric match (for numeric IDs)
+      if (c.id === parseInt(id)) return true;
+      return false;
+    });
     setCampaign(foundCampaign);
+    setLoading(false);
   }, [id]);
 
-  if (!campaign) {
+  if (loading) {
     return <div className="loading">Loading campaign details...</div>;
+  }
+
+  if (!campaign) {
+    return (
+      <div className="loading">
+        <h2>Campaign Not Found</h2>
+        <p>This campaign is coming soon! Check back later.</p>
+        <a href="/" style={{ color: '#4F46E5', textDecoration: 'underline' }}>
+          Return to Home
+        </a>
+      </div>
+    );
   }
 
   const handleDonationChange = (e) => {

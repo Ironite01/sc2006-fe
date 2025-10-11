@@ -1,6 +1,302 @@
 {
   "campaigns": [
     {
+      "id": "old-town-bistro",
+      "name": "Old Town Bistro",
+      "tag": "Cafe",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
+      "rentDue": "2025-11-20",
+      "fundingGoal": 35000,
+      "currentFunding": 24500,
+      "progress": 70,
+      "story": "Old Town Bistro has been a cozy neighborhood café for over 8 years, serving artisanal coffee and homemade sandwiches. We pride ourselves on creating a warm, welcoming space where the community can gather, work, and connect.\n\nRising costs and reduced foot traffic have put us in a challenging position. But we believe in the power of community support to keep our doors open. Your contribution will help us cover rent, pay our dedicated baristas, and continue serving the quality food and drinks you love.\n\nWe're more than just a café - we're a community hub. Help us continue being your home away from home.",
+      "supporters": 152,
+      "daysLeft": 50,
+      "rewardTiers": [
+        {
+          "amount": 10,
+          "title": "Coffee Voucher",
+          "description": "1 free coffee of your choice + thank you card",
+          "backers": 67
+        },
+        {
+          "amount": 25,
+          "title": "Café Essentials",
+          "description": "3 coffee vouchers + sandwich combo",
+          "backers": 54
+        },
+        {
+          "amount": 50,
+          "title": "Weekly Coffee Pass",
+          "description": "Free coffee every day for a week + all previous rewards",
+          "backers": 23
+        },
+        {
+          "amount": 100,
+          "title": "Supporter Card",
+          "description": "10% lifetime discount + monthly free pastry",
+          "backers": 6
+        },
+        {
+          "amount": 250,
+          "title": "Coffee Masterclass",
+          "description": "Private barista workshop for 2 + lifetime 15% discount",
+          "backers": 2
+        }
+      ],
+      "updates": [
+        {
+          "id": 1,
+          "date": "2025-09-30",
+          "title": "70% Funded - Amazing Progress!",
+          "content": "We're blown away by the community support! Thanks to you, we're 70% funded. Every contribution brings us closer to staying open.",
+          "image": null
+        },
+        {
+          "id": 2,
+          "date": "2025-09-22",
+          "title": "Campaign Launch",
+          "content": "Today marks the beginning of our campaign to save Old Town Bistro. Your support means everything to us!",
+          "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600"
+        }
+      ],
+      "owners": [
+        {
+          "name": "Mabel Tan",
+          "role": "Owner & Head Barista",
+          "bio": "Mabel opened Old Town Bistro with a dream of creating a community space. Her passion for coffee and hospitality shines through every cup.",
+          "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300"
+        }
+      ],
+      "comments": [
+        {
+          "id": 1,
+          "author": "James Wong",
+          "date": "2025-09-29",
+          "content": "This café is my second home! Can't imagine the neighborhood without it. Full support!",
+          "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100"
+        },
+        {
+          "id": 2,
+          "author": "Rachel Ng",
+          "date": "2025-09-28",
+          "content": "Best coffee in the area. Donated and shared with everyone I know!",
+          "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100"
+        }
+      ],
+      "shopsLostData": {
+        "totalClosed": 1247,
+        "byYear": [
+          { "year": "2020", "count": 312 },
+          { "year": "2021", "count": 289 },
+          { "year": "2022", "count": 234 },
+          { "year": "2023", "count": 221 },
+          { "year": "2024", "count": 191 }
+        ],
+        "byCategory": [
+          { "category": "F&B", "count": 487 },
+          { "category": "Retail", "count": 356 },
+          { "category": "Services", "count": 234 },
+          { "category": "Others", "count": 170 }
+        ]
+      }
+    },
+    {
+      "id": "golden-wok",
+      "name": "Golden Wok",
+      "tag": "Chinese",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
+      "rentDue": "2025-11-10",
+      "fundingGoal": 45000,
+      "currentFunding": 36000,
+      "progress": 80,
+      "story": "Golden Wok has been serving authentic Chinese cuisine for over 12 years. From hand-pulled noodles to traditional dim sum, we bring flavors from home to Singapore's diverse community.\n\nOur family business has weathered many storms, but the current economic climate has been especially tough. With your help, we can continue sharing our culinary heritage and keeping our family legacy alive.\n\nEvery dish we serve comes with generations of recipes and love. Join us in preserving this tradition for future generations.",
+      "supporters": 198,
+      "daysLeft": 40,
+      "rewardTiers": [
+        {
+          "amount": 10,
+          "title": "Thank You Note",
+          "description": "Personalized thank you card from our family",
+          "backers": 73
+        },
+        {
+          "amount": 25,
+          "title": "Dim Sum Box",
+          "description": "Box of 8 assorted dim sum + thank you note",
+          "backers": 82
+        },
+        {
+          "amount": 50,
+          "title": "Family Meal Voucher",
+          "description": "$70 dining voucher + dim sum box",
+          "backers": 31
+        },
+        {
+          "amount": 100,
+          "title": "VIP Diner Card",
+          "description": "15% lifetime discount + priority reservations",
+          "backers": 9
+        },
+        {
+          "amount": 250,
+          "title": "Cooking Class",
+          "description": "Private dumpling-making class for 4 + 20% lifetime discount",
+          "backers": 3
+        }
+      ],
+      "updates": [
+        {
+          "id": 1,
+          "date": "2025-10-01",
+          "title": "80% Funded - Almost There!",
+          "content": "We're overwhelmed by the support! Just 20% more to go. Thank you to every single supporter who believes in us.",
+          "image": null
+        },
+        {
+          "id": 2,
+          "date": "2025-09-18",
+          "title": "Our Campaign Begins",
+          "content": "Today we launch our campaign with hope and gratitude. Your support will keep our family tradition alive.",
+          "image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600"
+        }
+      ],
+      "owners": [
+        {
+          "name": "Sarah Chen",
+          "role": "Owner & Head Chef",
+          "bio": "Sarah learned cooking from her grandmother in Guangdong. She brought those recipes to Singapore and has been sharing them for over a decade.",
+          "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=300"
+        }
+      ],
+      "comments": [
+        {
+          "id": 1,
+          "author": "Tommy Lee",
+          "date": "2025-09-30",
+          "content": "Best dim sum outside of Hong Kong! Proud to support. 加油!",
+          "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100"
+        },
+        {
+          "id": 2,
+          "author": "Linda Koh",
+          "date": "2025-09-29",
+          "content": "My family's favorite Sunday spot. We can't lose this gem!",
+          "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100"
+        }
+      ],
+      "shopsLostData": {
+        "totalClosed": 1247,
+        "byYear": [
+          { "year": "2020", "count": 312 },
+          { "year": "2021", "count": 289 },
+          { "year": "2022", "count": 234 },
+          { "year": "2023", "count": 221 },
+          { "year": "2024", "count": 191 }
+        ],
+        "byCategory": [
+          { "category": "F&B", "count": 487 },
+          { "category": "Retail", "count": 356 },
+          { "category": "Services", "count": 234 },
+          { "category": "Others", "count": 170 }
+        ]
+      }
+    },
+    {
+      "id": "mama-kitchen",
+      "name": "Mama's Kitchen",
+      "tag": "Home Cooking",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
+      "rentDue": "2025-11-25",
+      "fundingGoal": 30000,
+      "currentFunding": 12000,
+      "progress": 40,
+      "story": "Mama's Kitchen is all about comfort food that reminds you of home. For 6 years, we've been serving hearty, home-style meals made with love and the freshest ingredients.\n\nThe pandemic changed everything. We've adapted, pivoted, and fought to stay open. But we need your help to make it through this challenging period and continue serving the comfort food you love.\n\nWhen you support us, you're not just saving a restaurant - you're preserving a place where memories are made and families gather.",
+      "supporters": 89,
+      "daysLeft": 55,
+      "rewardTiers": [
+        {
+          "amount": 10,
+          "title": "Thank You Card",
+          "description": "Heartfelt thank you card from Mama herself",
+          "backers": 34
+        },
+        {
+          "amount": 25,
+          "title": "Home-Cooked Meal",
+          "description": "1 complimentary meal + thank you card",
+          "backers": 38
+        },
+        {
+          "amount": 50,
+          "title": "Weekly Lunch Pass",
+          "description": "5 lunch vouchers + home-cooked meal",
+          "backers": 13
+        },
+        {
+          "amount": 100,
+          "title": "Family Supporter",
+          "description": "12% lifetime discount + monthly free dessert",
+          "backers": 3
+        },
+        {
+          "amount": 250,
+          "title": "Cooking Session",
+          "description": "Private cooking lesson with Mama + 15% lifetime discount",
+          "backers": 1
+        }
+      ],
+      "updates": [
+        {
+          "id": 1,
+          "date": "2025-09-25",
+          "title": "40% Funded - Keep It Going!",
+          "content": "Thank you for believing in us! We're 40% there. Every contribution helps us get closer to our goal. Please share our campaign!",
+          "image": null
+        },
+        {
+          "id": 2,
+          "date": "2025-09-16",
+          "title": "Campaign Launch",
+          "content": "With hope in our hearts, we're launching this campaign. Your support means we can keep cooking with love for our community.",
+          "image": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600"
+        }
+      ],
+      "owners": [
+        {
+          "name": "Leo Fernandez",
+          "role": "Owner & Chef",
+          "bio": "Leo, affectionately known as 'Mama', learned to cook from his mother. He opened Mama's Kitchen to share that same warmth and love through food.",
+          "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300"
+        }
+      ],
+      "comments": [
+        {
+          "id": 1,
+          "author": "Sophie Tan",
+          "date": "2025-09-24",
+          "content": "This place feels like eating at my grandmother's house. So much love in every dish!",
+          "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100"
+        }
+      ],
+      "shopsLostData": {
+        "totalClosed": 1247,
+        "byYear": [
+          { "year": "2020", "count": 312 },
+          { "year": "2021", "count": 289 },
+          { "year": "2022", "count": 234 },
+          { "year": "2023", "count": 221 },
+          { "year": "2024", "count": 191 }
+        ],
+        "byCategory": [
+          { "category": "F&B", "count": 487 },
+          { "category": "Retail", "count": 356 },
+          { "category": "Services", "count": 234 },
+          { "category": "Others", "count": 170 }
+        ]
+      }
+    },
+    {
       "id": 1,
       "name": "Tiong Bahru Bakery",
       "tag": "Local Heritage",
