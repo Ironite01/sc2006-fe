@@ -50,6 +50,7 @@ export default function Home({ searchQuery }) {
               filteredLocalGems.map((s) => (
                 <ShopCard
                   key={s.id}
+                  id={1}
                   imageUrl={s.imageUrl}
                   tag={s.tag}
                   name={s.name}
@@ -68,6 +69,7 @@ export default function Home({ searchQuery }) {
               filteredFlavours.map((s) => (
                 <ShopCard
                   key={s.id}
+                  id={1}
                   imageUrl={s.imageUrl}
                   tag={s.tag}
                   name={s.name}

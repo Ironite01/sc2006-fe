@@ -8,6 +8,7 @@ import Signup from './pages/signup';
 import Login from './pages/login';
 import ForgotPassword from './pages/forgot-password';
 import Campaign from './pages/campaign';
+import CampaignDetails from './pages/CampaignDetails';
 import AuthCallback from './pages/auth/AuthCallback';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/campaign" element={<Campaign />} />
+          <Route path="/campaign/:id" element={<CampaignDetails />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
         </Routes>
       </main>

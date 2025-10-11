@@ -1,0 +1,125 @@
+{
+  "campaigns": [
+    {
+      "id": 1,
+      "name": "Tiong Bahru Bakery",
+      "tag": "Local Heritage",
+      "imageUrl": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800",
+      "rentDue": "2025-11-15",
+      "fundingGoal": 50000,
+      "currentFunding": 37500,
+      "progress": 75,
+      "story": "Tiong Bahru Bakery has been serving our community for over 15 years, bringing fresh artisan bread and pastries to families across Singapore. What started as a small family operation has grown into a beloved neighborhood staple, known for our signature sourdough and French croissants.\n\nThe pandemic hit us hard, and rising rent costs have made it increasingly difficult to keep our doors open. But our passion for baking and serving our loyal customers keeps us going. With your support, we can secure our lease for another year and continue doing what we love - bringing quality baked goods to the community.\n\nEvery donation helps us cover operational costs, pay our dedicated staff, and invest in quality ingredients. We're not just asking for support; we're inviting you to be part of our journey and share in our success.",
+      "supporters": 247,
+      "daysLeft": 45,
+      "rewardTiers": [
+        {
+          "amount": 10,
+          "title": "Thank You Card",
+          "description": "Personalized thank you card from the bakery team",
+          "backers": 89
+        },
+        {
+          "amount": 25,
+          "title": "Bakery Box",
+          "description": "Box of 6 assorted pastries + Thank you card",
+          "backers": 112
+        },
+        {
+          "amount": 50,
+          "title": "Bread Lover's Bundle",
+          "description": "2 loaves of artisan bread + pastry box + card",
+          "backers": 34
+        },
+        {
+          "amount": 100,
+          "title": "Supporter Discount Card",
+          "description": "15% lifetime discount card + all previous rewards",
+          "backers": 9
+        },
+        {
+          "amount": 250,
+          "title": "VIP Baker Experience",
+          "description": "Private baking class for 2 + lifetime 20% discount + all rewards",
+          "backers": 3
+        }
+      ],
+      "updates": [
+        {
+          "id": 1,
+          "date": "2025-09-28",
+          "title": "75% Funded - Thank You!",
+          "content": "We're overwhelmed by the support from our community! We've reached 75% of our goal in just 2 weeks. Your generosity means the world to us. Keep sharing our campaign!",
+          "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600"
+        },
+        {
+          "id": 2,
+          "date": "2025-09-20",
+          "title": "New Reward Tier Added!",
+          "content": "By popular demand, we've added a VIP Baker Experience reward tier! Learn our secret sourdough recipe in a private class.",
+          "image": null
+        },
+        {
+          "id": 3,
+          "date": "2025-09-15",
+          "title": "Campaign Launched!",
+          "content": "Our campaign is officially live! Thank you to everyone who has already shown their support. Together, we can keep our bakery thriving.",
+          "image": "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=600"
+        }
+      ],
+      "owners": [
+        {
+          "name": "Linda Tan",
+          "role": "Head Baker & Owner",
+          "bio": "With 20 years of baking experience, Linda brings traditional French techniques to Singapore. She trained in Paris and returned home to share her passion.",
+          "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300"
+        },
+        {
+          "name": "Marcus Wong",
+          "role": "Co-Owner & Operations Manager",
+          "bio": "Marcus handles the business side while ensuring every customer leaves with a smile. His dedication to quality and community is unmatched.",
+          "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300"
+        }
+      ],
+      "comments": [
+        {
+          "id": 1,
+          "author": "Sarah Lim",
+          "date": "2025-09-27",
+          "content": "Best croissants in Singapore! Happy to support. We can't lose this gem!",
+          "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100"
+        },
+        {
+          "id": 2,
+          "author": "David Chen",
+          "date": "2025-09-26",
+          "content": "Been coming here every Sunday for 5 years. Supporting all the way! 💪",
+          "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100"
+        },
+        {
+          "id": 3,
+          "author": "Emily Koh",
+          "date": "2025-09-25",
+          "content": "The sourdough is incredible. Just donated and shared with all my friends!",
+          "avatar": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100"
+        }
+      ],
+      "shopsLostData": {
+        "totalClosed": 1247,
+        "byYear": [
+          { "year": "2020", "count": 312 },
+          { "year": "2021", "count": 289 },
+          { "year": "2022", "count": 234 },
+          { "year": "2023", "count": 221 },
+          { "year": "2024", "count": 191 }
+        ],
+        "byCategory": [
+          { "category": "F&B", "count": 487 },
+          { "category": "Retail", "count": 356 },
+          { "category": "Services", "count": 234 },
+          { "category": "Others", "count": 170 }
+        ]
+      }
+    }
+  ]
+}
