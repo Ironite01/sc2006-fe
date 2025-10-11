@@ -368,6 +368,366 @@
           { "category": "Others", "count": 170 }
         ]
       }
+    },
+    {
+      "id": "corner-coffee",
+      "name": "Corner Coffee House",
+      "tag": "Cafe",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
+      "rentDue": "2025-11-18",
+      "fundingGoal": 32000,
+      "currentFunding": 22400,
+      "progress": 70,
+      "story": "Corner Coffee House has been your neighborhood corner spot for 5 years. We're the place where friendships are made over lattes, where students study for exams, and where remote workers find their second office.\n\nThe rent increase has caught us off guard. We've built something special here - a genuine community space - and we don't want to lose it. Your support will help us negotiate with our landlord and keep serving the neighborhood.\n\nEvery coffee purchased, every hour spent here has made this place what it is. Help us keep the corner warm and welcoming.",
+      "supporters": 134,
+      "daysLeft": 48,
+      "rewardTiers": [
+        {"amount": 10, "title": "Coffee Punch Card", "description": "5 coffee stamps on your loyalty card", "backers": 58},
+        {"amount": 25, "title": "Weekday Special", "description": "10 coffee vouchers valid weekdays", "backers": 48},
+        {"amount": 50, "title": "Coffee & Pastry Pack", "description": "$60 value of coffee and pastries", "backers": 21},
+        {"amount": 100, "title": "VIP Corner Member", "description": "15% lifetime discount + free wifi upgrade", "backers": 5},
+        {"amount": 250, "title": "Latte Art Workshop", "description": "Private 2-hour workshop + 20% lifetime discount", "backers": 2}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-09-29", "title": "70% Funded!", "content": "Amazing progress! Your support is incredible. We're getting closer to securing our lease.", "image": null}
+      ],
+      "owners": [
+        {"name": "Keane Lim", "role": "Owner & Barista", "bio": "Keane left corporate life to open Corner Coffee. His mission: create a space where everyone feels at home.", "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "Amy Chen", "date": "2025-09-28", "content": "This is my study sanctuary! Can't imagine life without it.", "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
+    },
+    {
+      "id": "noodle-alley",
+      "name": "Noodle Alley",
+      "tag": "Asian",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
+      "rentDue": "2025-11-12",
+      "fundingGoal": 38000,
+      "currentFunding": 30400,
+      "progress": 80,
+      "story": "Noodle Alley brings authentic Asian street food flavors to Singapore. For 10 years, we've been hand-pulling noodles and crafting broths that take 12 hours to perfect.\n\nWe're family-run, and every bowl carries generations of technique. Rising costs threaten to close our doors, but we believe our community will rally behind us.\n\nYour support keeps traditional noodle-making alive and preserves authentic flavors for the next generation.",
+      "supporters": 211,
+      "daysLeft": 42,
+      "rewardTiers": [
+        {"amount": 10, "title": "Thank You Bowl", "description": "Free bowl of signature noodles", "backers": 94},
+        {"amount": 25, "title": "Noodle Lover Pack", "description": "3 bowls of any noodles + drink", "backers": 76},
+        {"amount": 50, "title": "Weekly Noodle Pass", "description": "7 days of free noodles", "backers": 29},
+        {"amount": 100, "title": "Noodle Master Card", "description": "15% lifetime discount + priority seating", "backers": 9},
+        {"amount": 250, "title": "Noodle-Making Class", "description": "Learn hand-pulled noodles + 20% lifetime discount", "backers": 3}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-10-02", "title": "80% There!", "content": "Just 20% away from our goal! Thank you for believing in authentic noodles.", "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600"}
+      ],
+      "owners": [
+        {"name": "Sally Zhang", "role": "Owner & Head Chef", "bio": "Third-generation noodle maker. Sally learned from her grandmother and brings century-old recipes to life daily.", "image": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "Kevin Tan", "date": "2025-10-01", "content": "Best noodles in Singapore! The broth is unmatched. Full support!", "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
+    },
+    {
+      "id": "sunset-diner",
+      "name": "Sunset Diner",
+      "tag": "Western",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
+      "rentDue": "2025-11-28",
+      "fundingGoal": 42000,
+      "currentFunding": 16800,
+      "progress": 40,
+      "story": "Sunset Diner is where comfort food meets nostalgia. Our burgers, steaks, and milkshakes have been bringing smiles for 7 years. We're a retro American diner with a Singapore heart.\n\nPost-pandemic recovery has been slow. We need your help to stay afloat and continue serving the classics you love in a fun, vibrant atmosphere.\n\nSupport us and keep the neon lights glowing for families, couples, and friends who make memories here.",
+      "supporters": 97,
+      "daysLeft": 58,
+      "rewardTiers": [
+        {"amount": 10, "title": "Milkshake Voucher", "description": "1 free classic milkshake", "backers": 41},
+        {"amount": 25, "title": "Burger & Fries", "description": "Burger, fries, and drink combo", "backers": 35},
+        {"amount": 50, "title": "Diner Deluxe", "description": "$60 dining voucher", "backers": 16},
+        {"amount": 100, "title": "Retro Member Card", "description": "10% lifetime discount + free birthday meal", "backers": 4},
+        {"amount": 250, "title": "Private Booth Party", "description": "Private booth party for 6 + 15% lifetime discount", "backers": 1}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-09-26", "title": "40% Funded - Keep Going!", "content": "We're making progress! Share our campaign and help us reach more supporters.", "image": null}
+      ],
+      "owners": [
+        {"name": "Russell Anderson", "role": "Owner & Chef", "bio": "Russell grew up loving American diners. He brought that passion to Singapore, creating a space that feels like stepping back in time.", "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "Michelle Goh", "date": "2025-09-25", "content": "Best burgers and the vibe is amazing! My kids love this place.", "avatar": "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
+    },
+    {
+      "id": "laksa-haven",
+      "name": "Laksa Haven",
+      "tag": "Local",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
+      "rentDue": "2025-11-16",
+      "fundingGoal": 28000,
+      "currentFunding": 19600,
+      "progress": 70,
+      "story": "Laksa Haven serves Singapore's iconic laksa with a secret family recipe passed down three generations. Our rich, spicy coconut broth has won awards and hearts for 11 years.\n\nRising ingredient costs and rent hikes threaten our survival. We're asking our loyal customers and laksa lovers to help preserve this culinary tradition.\n\nEvery bowl tells a story. Help us continue telling ours.",
+      "supporters": 168,
+      "daysLeft": 46,
+      "rewardTiers": [
+        {"amount": 10, "title": "Laksa Bowl", "description": "1 free bowl of signature laksa", "backers": 71},
+        {"amount": 25, "title": "Laksa Week", "description": "5 laksa vouchers", "backers": 63},
+        {"amount": 50, "title": "Laksa Feast", "description": "10 laksa vouchers + sambal bottle", "backers": 26},
+        {"amount": 100, "title": "Laksa Loyalist", "description": "12% lifetime discount + recipe book", "backers": 6},
+        {"amount": 250, "title": "Laksa Masterclass", "description": "Learn the secret recipe + 18% lifetime discount", "backers": 2}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-09-30", "title": "70% Funded!", "content": "Your love for laksa is overwhelming! Let's get to 100% together.", "image": "https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=600"}
+      ],
+      "owners": [
+        {"name": "Arriane Lim", "role": "Owner & Chef", "bio": "Arriane inherited her grandmother's laksa recipe. She's dedicated to keeping the tradition alive with every bowl.", "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "Daniel Koh", "date": "2025-09-29", "content": "This laksa reminds me of my childhood. Can't let it disappear!", "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
+    },
+    {
+      "id": "tandoori-nights",
+      "name": "Tandoori Nights",
+      "tag": "Indian",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
+      "rentDue": "2025-11-14",
+      "fundingGoal": 40000,
+      "currentFunding": 28000,
+      "progress": 70,
+      "story": "Tandoori Nights brings authentic North Indian cuisine to Singapore. Our tandoor oven has been firing up naan and kebabs for 9 years, filling the air with aromatic spices.\n\nWe're a family business facing unprecedented challenges. Your support will help us keep the tandoor burning and continue serving generations of recipes.\n\nAuthentic Indian food brings people together. Help us keep that tradition alive.",
+      "supporters": 186,
+      "daysLeft": 44,
+      "rewardTiers": [
+        {"amount": 10, "title": "Naan & Curry", "description": "Free naan and curry of choice", "backers": 79},
+        {"amount": 25, "title": "Tandoori Combo", "description": "Tandoori chicken + 2 naan + drink", "backers": 68},
+        {"amount": 50, "title": "Feast Voucher", "description": "$65 dining voucher", "backers": 28},
+        {"amount": 100, "title": "Spice Club Member", "description": "15% lifetime discount + monthly free dessert", "backers": 8},
+        {"amount": 250, "title": "Cooking Experience", "description": "Private tandoori cooking class + 18% lifetime discount", "backers": 3}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-10-01", "title": "70% Achieved!", "content": "Thank you for your incredible support! Together we'll keep authentic Indian flavors alive.", "image": null}
+      ],
+      "owners": [
+        {"name": "Jaslyn Kaur", "role": "Owner & Head Chef", "bio": "Jaslyn learned cooking from her mother in Punjab. She's passionate about sharing authentic North Indian cuisine.", "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "Raj Patel", "date": "2025-09-30", "content": "Best butter chicken outside of India! This place is a gem.", "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
+    },
+    {
+      "id": "makan-place",
+      "name": "Makan Place",
+      "tag": "Hawker",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
+      "rentDue": "2025-11-22",
+      "fundingGoal": 25000,
+      "currentFunding": 15000,
+      "progress": 60,
+      "story": "Makan Place is your neighborhood hawker stall serving authentic local favorites. From char kway teow to chicken rice, we've been feeding hungry Singaporeans for 13 years.\n\nHawker culture is fading, and we're fighting to keep it alive. Your support will help us upgrade equipment, cover rising costs, and continue serving affordable, delicious meals.\n\nWe're more than food - we're part of Singapore's heritage.",
+      "supporters": 142,
+      "daysLeft": 52,
+      "rewardTiers": [
+        {"amount": 10, "title": "Hawker Meal", "description": "1 free hawker meal of choice", "backers": 67},
+        {"amount": 25, "title": "Week of Meals", "description": "5 meal vouchers", "backers": 52},
+        {"amount": 50, "title": "Makan Month", "description": "15 meal vouchers", "backers": 18},
+        {"amount": 100, "title": "Loyal Patron", "description": "10% lifetime discount + free drink daily", "backers": 4},
+        {"amount": 250, "title": "Hawker Cooking Class", "description": "Learn signature dishes + 15% lifetime discount", "backers": 1}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-09-27", "title": "60% Funded!", "content": "Thank you for supporting local hawker culture! Let's reach our goal together.", "image": null}
+      ],
+      "owners": [
+        {"name": "Stefanie Ng", "role": "Owner & Chef", "bio": "Stefanie took over the stall from her parents. She's committed to preserving hawker traditions and affordable food.", "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "Ben Lim", "date": "2025-09-26", "content": "Best char kway teow! This is what Singapore is about.", "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
+    },
+    {
+      "id": "spice-hub",
+      "name": "Spice Hub",
+      "tag": "Indian",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
+      "rentDue": "2025-11-30",
+      "fundingGoal": 33000,
+      "currentFunding": 13200,
+      "progress": 40,
+      "story": "Spice Hub specializes in South Indian vegetarian cuisine. Our dosas, idlis, and masala are made fresh daily using traditional methods passed down generations.\n\nWe're struggling with increased costs while keeping prices affordable. Your support will help us continue serving authentic, healthy South Indian food.\n\nPreserve vegetarian culinary traditions and support community dining.",
+      "supporters": 78,
+      "daysLeft": 60,
+      "rewardTiers": [
+        {"amount": 10, "title": "Dosa Treat", "description": "1 free masala dosa + chutney", "backers": 34},
+        {"amount": 25, "title": "Breakfast Set", "description": "3 breakfast combos", "backers": 28},
+        {"amount": 50, "title": "Thali Experience", "description": "$55 dining voucher", "backers": 12},
+        {"amount": 100, "title": "Spice Member", "description": "12% lifetime discount + free filter coffee", "backers": 3},
+        {"amount": 250, "title": "South Indian Cooking", "description": "Dosa-making class + 15% lifetime discount", "backers": 1}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-09-24", "title": "Campaign Launch!", "content": "Help us preserve authentic South Indian vegetarian cuisine. Every contribution counts!", "image": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600"}
+      ],
+      "owners": [
+        {"name": "Michael Rajan", "role": "Owner & Chef", "bio": "Michael brings authentic South Indian recipes from Tamil Nadu, keeping vegetarian traditions alive.", "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "Priya Sharma", "date": "2025-09-23", "content": "Best dosas in Singapore! Tastes like home.", "avatar": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
+    },
+    {
+      "id": "bella-trattoria",
+      "name": "Bella Trattoria",
+      "tag": "Italian",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
+      "rentDue": "2025-11-17",
+      "fundingGoal": 48000,
+      "currentFunding": 33600,
+      "progress": 70,
+      "story": "Bella Trattoria brings authentic Italian flavors to Singapore. Our pasta is handmade daily, our sauces simmer for hours, and our pizza dough ferments for 48 hours.\n\nWe're a family-run Italian restaurant facing rising import costs. Your support keeps authentic Italian cuisine accessible and our family dream alive.\n\nHelp us continue bringing la dolce vita to Singapore.",
+      "supporters": 203,
+      "daysLeft": 47,
+      "rewardTiers": [
+        {"amount": 10, "title": "Espresso & Biscotti", "description": "Italian espresso + biscotti", "backers": 86},
+        {"amount": 25, "title": "Pasta Dish", "description": "Any pasta + drink", "backers": 74},
+        {"amount": 50, "title": "Pizza Night", "description": "$60 dining voucher", "backers": 31},
+        {"amount": 100, "title": "Trattoria VIP", "description": "15% lifetime discount + complimentary wine", "backers": 9},
+        {"amount": 250, "title": "Pasta Making Class", "description": "Private pasta class for 2 + 20% lifetime discount", "backers": 3}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-09-30", "title": "70% Funded - Grazie!", "content": "Thank you for supporting authentic Italian cuisine! Mille grazie to all our supporters.", "image": null}
+      ],
+      "owners": [
+        {"name": "Chris Romano", "role": "Owner & Head Chef", "bio": "Chris grew up in Tuscany and brings generations of Italian cooking traditions to every dish.", "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "Maria Gonzalez", "date": "2025-09-29", "content": "The carbonara is perfection! Most authentic Italian in Singapore.", "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
+    },
+    {
+      "id": "sushi-corner",
+      "name": "Sushi Corner",
+      "tag": "Japanese",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
+      "rentDue": "2025-11-11",
+      "fundingGoal": 50000,
+      "currentFunding": 40000,
+      "progress": 80,
+      "story": "Sushi Corner serves traditional Edomae-style sushi. Our chef trained in Tokyo for 8 years before bringing authentic techniques to Singapore 12 years ago.\n\nRising seafood costs and rent threaten our commitment to quality. Your support ensures we continue sourcing the finest fish and maintaining traditional standards.\n\nPreserve authentic sushi craftsmanship and support sustainable sourcing.",
+      "supporters": 227,
+      "daysLeft": 41,
+      "rewardTiers": [
+        {"amount": 10, "title": "Miso & Edamame", "description": "Miso soup + edamame", "backers": 98},
+        {"amount": 25, "title": "Sushi Set", "description": "6-piece nigiri set", "backers": 83},
+        {"amount": 50, "title": "Omakase Lite", "description": "$65 dining voucher", "backers": 33},
+        {"amount": 100, "title": "Sushi Connoisseur", "description": "15% lifetime discount + priority seating", "backers": 10},
+        {"amount": 250, "title": "Sushi Master Session", "description": "Private sushi-making class + 20% lifetime discount", "backers": 3}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-10-02", "title": "80% Funded!", "content": "Arigato gozaimasu! Just 20% more to preserve authentic sushi traditions.", "image": "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=600"}
+      ],
+      "owners": [
+        {"name": "Conrad Yamamoto", "role": "Owner & Sushi Chef", "bio": "Conrad trained under master sushi chefs in Tokyo. He's dedicated to preserving traditional Edomae techniques.", "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "Yuki Tanaka", "date": "2025-10-01", "content": "This is authentic Japanese sushi. Reminds me of Tokyo!", "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
+    },
+    {
+      "id": "thai-basil",
+      "name": "Thai Basil",
+      "tag": "Thai",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
+      "rentDue": "2025-11-08",
+      "fundingGoal": 36000,
+      "currentFunding": 32400,
+      "progress": 90,
+      "story": "Thai Basil brings authentic Bangkok street food and royal Thai cuisine to Singapore. Our green curry and pad thai have won multiple awards over our 14-year journey.\n\nWe're almost there! Just a final push to secure our future. Your support celebrates authentic Thai flavors and family traditions.\n\nHelp us cross the finish line and continue serving award-winning Thai cuisine.",
+      "supporters": 239,
+      "daysLeft": 38,
+      "rewardTiers": [
+        {"amount": 10, "title": "Thai Iced Tea", "description": "Free Thai iced tea + spring rolls", "backers": 104},
+        {"amount": 25, "title": "Pad Thai Set", "description": "Pad thai + tom yum soup", "backers": 91},
+        {"amount": 50, "title": "Thai Feast", "description": "$60 dining voucher", "backers": 32},
+        {"amount": 100, "title": "Basil VIP", "description": "15% lifetime discount + monthly free dessert", "backers": 9},
+        {"amount": 250, "title": "Thai Cooking Class", "description": "Authentic Thai cooking class + 18% lifetime discount", "backers": 3}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-10-03", "title": "90% Funded - Almost There!", "content": "Khob khun krab! We're 90% funded! One final push to secure our future.", "image": null}
+      ],
+      "owners": [
+        {"name": "Jeremiah Suthep", "role": "Owner & Chef", "bio": "Jeremiah learned cooking from his grandmother in Bangkok. He brings royal Thai recipes and street food favorites.", "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "Nina Pong", "date": "2025-10-02", "content": "Best green curry I've ever had! Tastes exactly like Bangkok.", "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
+    },
+    {
+      "id": "burger-junction",
+      "name": "Burger Junction",
+      "tag": "American",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
+      "rentDue": "2025-12-01",
+      "fundingGoal": 35000,
+      "currentFunding": 10500,
+      "progress": 30,
+      "story": "Burger Junction makes gourmet burgers with locally-sourced ingredients. We've been flipping patties and serving smiles for 4 years, building a loyal following.\n\nWe're the new kids on the block facing tough competition. Your support will help us grow, invest in equipment, and continue crafting quality burgers.\n\nSupport local burger innovation and help us compete with big chains.",
+      "supporters": 67,
+      "daysLeft": 61,
+      "rewardTiers": [
+        {"amount": 10, "title": "Fries & Shake", "description": "Free fries + milkshake", "backers": 29},
+        {"amount": 25, "title": "Burger Combo", "description": "Any burger + sides + drink", "backers": 24},
+        {"amount": 50, "title": "Burger Week", "description": "5 burger combo vouchers", "backers": 10},
+        {"amount": 100, "title": "Junction Member", "description": "10% lifetime discount + free birthday burger", "backers": 3},
+        {"amount": 250, "title": "Create Your Burger", "description": "Name a burger + 15% lifetime discount", "backers": 1}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-09-23", "title": "30% and Climbing!", "content": "Thank you early supporters! Help us spread the word and reach our goal.", "image": null}
+      ],
+      "owners": [
+        {"name": "Faith Martinez", "role": "Owner & Chef", "bio": "Faith's passion for gourmet burgers led her to open Burger Junction. Every burger is made with love and quality.", "image": "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "Alex Tan", "date": "2025-09-22", "content": "These burgers are next level! Way better than fast food chains.", "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
+    },
+    {
+      "id": "dim-sum-house",
+      "name": "Dim Sum House",
+      "tag": "Chinese",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
+      "rentDue": "2025-11-19",
+      "fundingGoal": 44000,
+      "currentFunding": 30800,
+      "progress": 70,
+      "story": "Dim Sum House specializes in traditional Cantonese dim sum. Every dumpling is hand-folded, every bun steamed to perfection. We've been serving yum cha traditions for 16 years.\n\nRising costs for quality ingredients threaten our standards. Your support helps us maintain quality while keeping prices fair.\n\nPreserve authentic dim sum craftsmanship and Sunday yum cha traditions.",
+      "supporters": 195,
+      "daysLeft": 49,
+      "rewardTiers": [
+        {"amount": 10, "title": "Dim Sum Duo", "description": "2 baskets of dim sum", "backers": 84},
+        {"amount": 25, "title": "Yum Cha Set", "description": "4 baskets + Chinese tea", "backers": 71},
+        {"amount": 50, "title": "Dim Sum Feast", "description": "$60 dining voucher", "backers": 29},
+        {"amount": 100, "title": "Dim Sum Master", "description": "15% lifetime discount + VIP seating", "backers": 8},
+        {"amount": 250, "title": "Dumpling Workshop", "description": "Dumpling-making class for 4 + 20% lifetime discount", "backers": 3}
+      ],
+      "updates": [
+        {"id": 1, "date": "2025-09-30", "title": "70% Funded!", "content": "Thank you for supporting traditional dim sum! Let's preserve Sunday yum cha culture together.", "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=600"}
+      ],
+      "owners": [
+        {"name": "Alicia Wong", "role": "Owner & Dim Sum Chef", "bio": "Alicia trained in Hong Kong's finest dim sum kitchens. She brings authentic techniques and flavors to Singapore.", "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300"}
+      ],
+      "comments": [
+        {"id": 1, "author": "William Lee", "date": "2025-09-29", "content": "Sunday dim sum here is a family tradition. Best har gow in Singapore!", "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100"}
+      ],
+      "shopsLostData": {"totalClosed": 1247, "byYear": [{"year": "2020", "count": 312}, {"year": "2021", "count": 289}, {"year": "2022", "count": 234}, {"year": "2023", "count": 221}, {"year": "2024", "count": 191}], "byCategory": [{"category": "F&B", "count": 487}, {"category": "Retail", "count": 356}, {"category": "Services", "count": 234}, {"category": "Others", "count": 170}]}
     }
   ]
 }
