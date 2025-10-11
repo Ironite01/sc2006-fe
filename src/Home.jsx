@@ -1,11 +1,14 @@
 import "./Home.css"
 import ShopCard from "./components/ShopCard";
 import shops from "./data/shops.json"
+import { useNavigate } from 'react-router-dom';
 
 export default function Home({ searchQuery }) {
+  const navigate = useNavigate();
 
   const localGems = shops.localGems;
   const flavours = shops.flavours;
+  const featuredShop = localGems[0];
 
   const filterShops = (shopList) => {
     if (!searchQuery) return shopList;
@@ -18,21 +21,27 @@ export default function Home({ searchQuery }) {
   const filteredLocalGems = filterShops(localGems);
   const filteredFlavours = filterShops(flavours);
 
+  const handleFeaturedClick = () => {
+    if (featuredShop?.id) {
+      navigate(`/campaign/${featuredShop.id}`);
+    }
+  };
+
   return (
     <div className="home">
-      <section className="banner">
-        <img src={localGems[0].imageUrl} />
+      <section className="banner" onClick={handleFeaturedClick} style={{ cursor: 'pointer' }}>
+        <img src={featuredShop.imageUrl} alt={featuredShop.name} />
         <div className="text">
           <div className="label">Featured Shop:</div>
-          <div className="title">{localGems[0].name}</div>
+          <div className="title">{featuredShop.name}</div>
         </div>
         <div className="progress-indicator">
           <div className="progress-header">
             <span className="progress-label">Funding Progress</span>
-            <span className="progress-percentage">{localGems[0].progress}%</span>
+            <span className="progress-percentage">{featuredShop.progress}%</span>
           </div>
           <div className="progress-bar">
-            <div className="progress-fill" style={{width: `${localGems[0].progress}%`}}></div>
+            <div className="progress-fill" style={{width: `${featuredShop.progress}%`}}></div>
           </div>
         </div>
       </section>
