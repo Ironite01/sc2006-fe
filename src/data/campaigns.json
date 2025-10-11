@@ -83,23 +83,7 @@
           "content": "Best coffee in the area. Donated and shared with everyone I know!",
           "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100"
         }
-      ],
-      "shopsLostData": {
-        "totalClosed": 1247,
-        "byYear": [
-          { "year": "2020", "count": 312 },
-          { "year": "2021", "count": 289 },
-          { "year": "2022", "count": 234 },
-          { "year": "2023", "count": 221 },
-          { "year": "2024", "count": 191 }
-        ],
-        "byCategory": [
-          { "category": "F&B", "count": 487 },
-          { "category": "Retail", "count": 356 },
-          { "category": "Services", "count": 234 },
-          { "category": "Others", "count": 170 }
-        ]
-      }
+      ]
     },
     {
       "id": "golden-wok",
@@ -184,23 +168,7 @@
           "content": "My family's favorite Sunday spot. We can't lose this gem!",
           "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100"
         }
-      ],
-      "shopsLostData": {
-        "totalClosed": 1247,
-        "byYear": [
-          { "year": "2020", "count": 312 },
-          { "year": "2021", "count": 289 },
-          { "year": "2022", "count": 234 },
-          { "year": "2023", "count": 221 },
-          { "year": "2024", "count": 191 }
-        ],
-        "byCategory": [
-          { "category": "F&B", "count": 487 },
-          { "category": "Retail", "count": 356 },
-          { "category": "Services", "count": 234 },
-          { "category": "Others", "count": 170 }
-        ]
-      }
+      ]
     },
     {
       "id": "mama-kitchen",
@@ -278,23 +246,7 @@
           "content": "This place feels like eating at my grandmother's house. So much love in every dish!",
           "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100"
         }
-      ],
-      "shopsLostData": {
-        "totalClosed": 1247,
-        "byYear": [
-          { "year": "2020", "count": 312 },
-          { "year": "2021", "count": 289 },
-          { "year": "2022", "count": 234 },
-          { "year": "2023", "count": 221 },
-          { "year": "2024", "count": 191 }
-        ],
-        "byCategory": [
-          { "category": "F&B", "count": 487 },
-          { "category": "Retail", "count": 356 },
-          { "category": "Services", "count": 234 },
-          { "category": "Others", "count": 170 }
-        ]
-      }
+      ]
     },
     {
       "id": 1,

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './CampaignDetails.css';
 import campaigns from '../data/campaigns.json';
+import ShopsLostSection from '../components/ShopsLostSection';
 
 export default function CampaignDetails() {
   const { id } = useParams();
@@ -149,54 +150,7 @@ export default function CampaignDetails() {
           </section>
 
           {/* Shops We've Lost */}
-          <section className="shops-lost-section">
-            <h2>Shops We've Lost</h2>
-            <p className="section-description">
-              Over {campaign.shopsLostData.totalClosed} local businesses have closed in recent years.
-              Don't let {campaign.name} become another statistic.
-            </p>
-
-            <div className="data-visualization">
-              <div className="chart-container">
-                <h3>Closures by Year</h3>
-                <div className="bar-chart">
-                  {campaign.shopsLostData.byYear.map(item => (
-                    <div key={item.year} className="bar-item">
-                      <div className="bar-wrapper">
-                        <div
-                          className="bar"
-                          style={{ height: `${(item.count / 312) * 100}%` }}
-                        >
-                          <span className="bar-value">{item.count}</span>
-                        </div>
-                      </div>
-                      <span className="bar-label">{item.year}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="chart-container">
-                <h3>Closures by Category</h3>
-                <div className="category-chart">
-                  {campaign.shopsLostData.byCategory.map(item => (
-                    <div key={item.category} className="category-item">
-                      <div className="category-header">
-                        <span className="category-name">{item.category}</span>
-                        <span className="category-count">{item.count}</span>
-                      </div>
-                      <div className="category-bar">
-                        <div
-                          className="category-fill"
-                          style={{ width: `${(item.count / 487) * 100}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
+          <ShopsLostSection category={campaign.tag} businessName={campaign.name} />
 
           {/* Meet The Owners */}
           <section className="owners-section">
