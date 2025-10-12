@@ -9,10 +9,33 @@
 }
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
-  background-color: #FDF3EA;
+  background: #F5F1EB;
+  min-height: 100vh;
+
+  --primary: #D97706;
+  --primary-dark: #B45309;
+  --primary-light: #FBBF24;
+  --secondary: #92400E;
+  --accent: #EA580C;
+  --success: #059669;
+  --warning: #F59E0B;
+  --error: #DC2626;
+  --text-primary: #1C1917;
+  --text-secondary: #78716C;
+  --text-muted: #A8A29E;
+  --background: #F5F1EB;
+  --card-background: #FFFFFF;
+  --brown-dark: #5b4e43;
+  --brown-medium: #78716C;
+  --brown-light: #D6D3D1;
+  --border-light: #E7E5E4;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

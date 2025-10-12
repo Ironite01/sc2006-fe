@@ -1,0 +1,110 @@
+{
+  "categories": {
+    "Cafe": {
+      "totalClosed": 487,
+      "byYear": [
+        { "year": "2020", "count": 112 },
+        { "year": "2021", "count": 103 },
+        { "year": "2022", "count": 98 },
+        { "year": "2023", "count": 92 },
+        { "year": "2024", "count": 82 }
+      ],
+      "byCategory": [
+        { "category": "Coffee Shops", "count": 203 },
+        { "category": "Tea Houses", "count": 156 },
+        { "category": "Dessert Cafes", "count": 128 }
+      ]
+    },
+    "Chinese": {
+      "totalClosed": 356,
+      "byYear": [
+        { "year": "2020", "count": 89 },
+        { "year": "2021", "count": 78 },
+        { "year": "2022", "count": 71 },
+        { "year": "2023", "count": 67 },
+        { "year": "2024", "count": 51 }
+      ],
+      "byCategory": [
+        { "category": "Dim Sum Restaurants", "count": 142 },
+        { "category": "Noodle Houses", "count": 118 },
+        { "category": "Regional Cuisine", "count": 96 }
+      ]
+    },
+    "Home Cooking": {
+      "totalClosed": 234,
+      "byYear": [
+        { "year": "2020", "count": 58 },
+        { "year": "2021", "count": 52 },
+        { "year": "2022", "count": 47 },
+        { "year": "2023", "count": 43 },
+        { "year": "2024", "count": 34 }
+      ],
+      "byCategory": [
+        { "category": "Home-Style Restaurants", "count": 98 },
+        { "category": "Family Diners", "count": 87 },
+        { "category": "Comfort Food", "count": 49 }
+      ]
+    },
+    "Local Heritage": {
+      "totalClosed": 421,
+      "byYear": [
+        { "year": "2020", "count": 98 },
+        { "year": "2021", "count": 91 },
+        { "year": "2022", "count": 84 },
+        { "year": "2023", "count": 79 },
+        { "year": "2024", "count": 69 }
+      ],
+      "byCategory": [
+        { "category": "Traditional Bakeries", "count": 187 },
+        { "category": "Heritage Food Stalls", "count": 143 },
+        { "category": "Local Specialty Shops", "count": 91 }
+      ]
+    },
+    "Restaurant": {
+      "totalClosed": 487,
+      "byYear": [
+        { "year": "2020", "count": 112 },
+        { "year": "2021", "count": 103 },
+        { "year": "2022", "count": 98 },
+        { "year": "2023", "count": 92 },
+        { "year": "2024", "count": 82 }
+      ],
+      "byCategory": [
+        { "category": "Fine Dining", "count": 156 },
+        { "category": "Casual Dining", "count": 203 },
+        { "category": "Fast Casual", "count": 128 }
+      ]
+    },
+    "Retail": {
+      "totalClosed": 356,
+      "byYear": [
+        { "year": "2020", "count": 89 },
+        { "year": "2021", "count": 78 },
+        { "year": "2022", "count": 71 },
+        { "year": "2023", "count": 67 },
+        { "year": "2024", "count": 51 }
+      ],
+      "byCategory": [
+        { "category": "Specialty Retail", "count": 142 },
+        { "category": "Fashion & Apparel", "count": 118 },
+        { "category": "Home Goods", "count": 96 }
+      ]
+    },
+    "default": {
+      "totalClosed": 1247,
+      "byYear": [
+        { "year": "2020", "count": 312 },
+        { "year": "2021", "count": 289 },
+        { "year": "2022", "count": 234 },
+        { "year": "2023", "count": 221 },
+        { "year": "2024", "count": 191 }
+      ],
+      "byCategory": [
+        { "category": "F&B", "count": 487 },
+        { "category": "Retail", "count": 356 },
+        { "category": "Services", "count": 234 },
+        { "category": "Others", "count": 170 }
+      ]
+    }
+  }
+}

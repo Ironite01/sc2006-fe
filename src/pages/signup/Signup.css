@@ -1,9 +1,160 @@
-form.signupForm input {
-    border-radius: 0.4rem;
+.signup-container {
+    min-height: calc(100vh - 16rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+form.signupForm {
+    background: white;
+    padding: 3rem 2.5rem;
+    border-radius: 2rem;
+    box-shadow: var(--shadow-lg);
+    max-width: 520px;
+    width: 100%;
+    border: 1px solid rgba(217, 119, 6, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+form.signupForm::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary);
+}
+
+form.signupForm input:not([type="radio"]):not([type="file"]) {
+    border-radius: 1rem;
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    border: 2px solid #E5E7EB;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #F9FAFB;
+}
+
+form.signupForm input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.1);
+}
+
+label.profilePicture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    transition: all 0.4s ease;
 }
 
 label.profilePicture:hover {
-    opacity: 80%;
     cursor: pointer;
-    transition: 0.5s;
+    transform: scale(1.08);
+}
+
+label.profilePicture img {
+    box-shadow: var(--shadow-md);
+    border: 3px solid var(--primary);
+}
+
+label.profilePicture span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: var(--primary);
+    color: white;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+label.profilePicture:hover span {
+    transform: rotate(90deg);
+}
+
+form.signupForm button[type="submit"] {
+    width: 100%;
+    background: var(--primary);
+    padding: 0.875rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
+    transition: all 0.3s ease;
+}
+
+form.signupForm button[type="submit"]:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(217, 119, 6, 0.4);
+}
+
+.form-field {
+    margin-bottom: 1.25rem;
+}
+
+.form-field label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.form-field p.error {
+    font-size: 0.85rem;
+    min-height: 1.2rem;
+}
+
+.radio-group {
+    display: flex;
+    gap: 2rem;
+    padding: 0.75rem 0;
+}
+
+.radio-group input[type="radio"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.radio-group label {
+    display: inline;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.signup-form-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.signup-form-title h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.signup-form-title p {
+    color: #666;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.login-link a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+    color: var(--primary-dark);
 }

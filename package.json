@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@azure/msal-browser": "^4.24.1",
+    "@azure/msal-react": "^3.0.20",
     "@tailwindcss/vite": "^4.1.12",
     "js-cookie": "^3.0.5",
     "react": "^19.1.1",

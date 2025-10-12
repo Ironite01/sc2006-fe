@@ -1,66 +1,66 @@
 {
   "localGems": [
     {
-      "id": "kampong-thrift",
-      "name": "Kampong Thrift",
-      "tag": "Retail",
-      "imageUrl": "https://bestlah.sg/wp-content/uploads/2024/07/Best-Thrift-Shops-Singapore-768x512.jpg",
+      "id": "old-town-bistro",
+      "name": "Old Town Bistro",
+      "tag": "Cafe",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
       "progress": 70,
       "businessRepresentative": "Mabel"
     },
     {
-      "id": "neighbourhood-CD-shop",
-      "name": "Neighbourhood CD Shop",
-      "tag": "Retail",
-      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "id": "golden-wok",
+      "name": "Golden Wok",
+      "tag": "Chinese",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
       "progress": 80,
       "businessRepresentative": "Sarah"
     },
     {
-      "id": "neighbourhood-CD-shop",
-      "name": "Neighbourhood CD Shop",
-      "tag": "Retail",
-      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "id": "mama-kitchen",
+      "name": "Mama's Kitchen",
+      "tag": "Home Cooking",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
       "progress": 40,
       "businessRepresentative": "Leo"
     },
     {
-      "id": "neighbourhood-CD-shop",
-      "name": "Neighbourhood CD Shop",
-      "tag": "Retail",
-      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "id": "corner-coffee",
+      "name": "Corner Coffee House",
+      "tag": "Cafe",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
       "progress": 70,
       "businessRepresentative": "Keane"
     },
     {
-      "id": "neighbourhood-CD-shop",
-      "name": "Neighbourhood CD Shop",
-      "tag": "Retail",
-      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "id": "noodle-alley",
+      "name": "Noodle Alley",
+      "tag": "Asian",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
       "progress": 80,
       "businessRepresentative": "Sally"
     },
     {
-      "id": "neighbourhood-CD-shop",
-      "name": "Neighbourhood CD Shop",
-      "tag": "Retail",
-      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "id": "sunset-diner",
+      "name": "Sunset Diner",
+      "tag": "Western",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
       "progress": 40,
       "businessRepresentative": "Russell"
     },
     {
-      "id": "neighbourhood-CD-shop",
-      "name": "Neighbourhood CD Shop",
-      "tag": "Retail",
-      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "id": "laksa-haven",
+      "name": "Laksa Haven",
+      "tag": "Local",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
       "progress": 70,
       "businessRepresentative": "Arriane"
     },
     {
-      "id": "neighbourhood-CD-shop",
-      "name": "Neighbourhood CD Shop",
-      "tag": "Retail",
-      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.Z-RFcP7HmVbFr8Lzf1CUIQHaE9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "id": "tandoori-nights",
+      "name": "Tandoori Nights",
+      "tag": "Indian",
+      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
       "progress": 70,
       "businessRepresentative": "Jaslyn"
     }
@@ -69,7 +69,7 @@
     {
       "id": "makan-place",
       "name": "Makan Place",
-      "tag": "Restaurant",
+      "tag": "Hawker",
       "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
       "progress": 60,
       "businessRepresentative": "Stefanie"
@@ -77,51 +77,48 @@
     {
       "id": "spice-hub",
       "name": "Spice Hub",
-      "tag": "Restaurant",
+      "tag": "Indian",
       "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
       "progress": 40,
       "businessRepresentative": "Michael"
-    }
-    ,
+    },
     {
-      "id": "spice-hub",
-      "name": "Spice Hub",
-      "tag": "Restaurant",
-      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
+      "id": "bella-trattoria",
+      "name": "Bella Trattoria",
+      "tag": "Italian",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
       "progress": 70,
       "businessRepresentative": "Chris"
-    }
-    ,
+    },
     {
-      "id": "spice-hub",
-      "name": "Spice Hub",
-      "tag": "Restaurant",
+      "id": "sushi-corner",
+      "name": "Sushi Corner",
+      "tag": "Japanese",
       "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
       "progress": 80,
       "businessRepresentative": "Conrad"
-    }
-    ,
+    },
     {
-      "id": "spice-hub",
-      "name": "Spice Hub",
-      "tag": "Restaurant",
-      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
+      "id": "thai-basil",
+      "name": "Thai Basil",
+      "tag": "Thai",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
       "progress": 90,
       "businessRepresentative": "Jeremiah"
     },
     {
-      "id": "spice-hub",
-      "name": "Spice Hub",
-      "tag": "Restaurant",
+      "id": "burger-junction",
+      "name": "Burger Junction",
+      "tag": "American",
       "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
       "progress": 30,
       "businessRepresentative": "Faith"
     },
     {
-      "id": "spice-hub",
-      "name": "Spice Hub",
-      "tag": "Restaurant",
-      "imageUrl": "https://cdn.foodadvisor.com.sg/1/400x250/tccrg/roho1995800/fortuna-italian-pizza-pasta-restaurant.jpg",
+      "id": "dim-sum-house",
+      "name": "Dim Sum House",
+      "tag": "Chinese",
+      "imageUrl": "https://static.thehoneycombers.com/wp-content/uploads/sites/2/2017/04/artichoke-768x549.png",
       "progress": 70,
       "businessRepresentative": "Alicia"
     }
