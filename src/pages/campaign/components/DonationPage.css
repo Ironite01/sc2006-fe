@@ -1,0 +1,190 @@
+.donation-page {
+  max-width: 800px;
+  margin: 40px auto;
+  font-family: "Segoe UI", sans-serif;
+  color: #2b2b2b;
+  padding: 0 16px;
+}
+
+.donation-page h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.donation-hero {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.donation-hero img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 97%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+.tier-section {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.tier {
+  flex: 1;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  background: #fff;
+}
+
+.tier.active {
+  border: 2px solid #6b5b4b;
+  background: #f8f2ec;
+}
+
+.custom-amount input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.reward-preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5ece0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 16px;
+}
+
+.reward-badge {
+  background: #d2b48c;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.donation-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.donation-form input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+
+.checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.checkbox-row {
+  display: grid;
+  grid-template-columns: auto 1fr; /* box + text */
+  align-items: center;
+  gap: 10px;
+  text-align: left; /* prevent text-align from parent */
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #6b5b4b; /* brand tint */
+}
+
+.checkbox-row span {
+  display: block;
+  line-height: 1.4;
+  color: #2b2b2b;
+  word-break: break-word;
+}
+
+.checkbox-row a {
+  color: #6b5b4b;
+  text-decoration: underline;
+}
+
+
+
+.error-msg {
+  color: #c62828;
+  margin-top: 4px;
+}
+
+.success-msg {
+  color: #2e7d32;
+  margin-top: 4px;
+}
+
+.btn-donate,
+.btn-paypal {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 12px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+}
+
+.btn-donate {
+  background-color: #6b5b4b;
+  color: white;
+}
+
+.btn-paypal {
+  background-color: #fff;
+  border: 1px solid #aaa;
+}
+
+
+.donation-form .checks { 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.donation-form .checks label {
+  display: inline-flex !important;   /* ⬅ beats global label styles */
+  align-items: center;
+  gap: 8px;
+  line-height: 1.2;
+}
+
+.donation-form .checks input[type="checkbox"] {
+  margin: 0;
+  flex: 0 0 auto;
+  vertical-align: middle;            /* smooth baseline */
+}
