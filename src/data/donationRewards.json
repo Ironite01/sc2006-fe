@@ -1,0 +1,20 @@
+{
+  "default": [
+    { "amount": 10, "title": "Hawker Meal", "description": "1 free hawker meal of choice" },
+    { "amount": 25, "title": "Week of Meals", "description": "Free meals for 1 week" },
+    { "amount": 50, "title": "T-Shirt", "description": "Limited edition tee" },
+    { "amount": 100, "title": "Special Print", "description": "Signed art print" }
+  ],
+
+  "1": [
+    { "amount": 15, "title": "Old Town Meal", "description": "1 meal set" },
+    { "amount": 30, "title": "Weekend Treats", "description": "2 meals + drinks" },
+    { "amount": 60, "title": "Supporter Tee", "description": "Exclusive tee" }
+  ],
+
+  "2": [
+    { "amount": 20, "title": "Coffee & Co. Voucher", "description": "$10 voucher" },
+    { "amount": 40, "title": "Coffee Bag", "description": "House blend 250g" },
+    { "amount": 80, "title": "Barista Class", "description": "1 hour taster" }
+  ]
+}
