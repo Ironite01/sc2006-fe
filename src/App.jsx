@@ -10,6 +10,10 @@ import ForgotPassword from './pages/forgot-password';
 import Campaign from './pages/campaign';
 import CampaignDetails from './pages/CampaignDetails';
 import AuthCallback from './pages/auth/AuthCallback';
+import DonationPage from "./pages/campaign/DonationPage.jsx";
+
+<Route path="/donation" element={<DonationPage />} />
+
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -26,6 +30,7 @@ function App() {
           <Route path="/campaign" element={<Campaign />} />
           <Route path="/campaign/:id" element={<CampaignDetails />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/campaign/:id/donation" element={<DonationPage />} />
         </Routes>
       </main>
       <Footer />
