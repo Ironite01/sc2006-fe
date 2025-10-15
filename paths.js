@@ -8,3 +8,8 @@ export const auth = {
     googleLogin: `${backendPath}/login/google`,
     azureLogin: `${backendPath}/login/azure`
 }
+
+export const shop = {
+  list: `${backendPath}/shops`,
+  one: (id) => `${backendPath}/shops/${id}`
+};
