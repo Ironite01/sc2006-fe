@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import './CampaignDetails.css';
 import campaigns from '../data/campaigns.json';
 import ShopsLostSection from '../components/ShopsLostSection';
+import { useNavigate } from "react-router-dom";
+
 
 export default function CampaignDetails() {
   const { id } = useParams();
@@ -10,6 +12,18 @@ export default function CampaignDetails() {
   const [loading, setLoading] = useState(true);
   const [donationAmount, setDonationAmount] = useState(25);
   const [commentText, setCommentText] = useState('');
+  const navigate = useNavigate();
+
+  const handleDonateClick = () => {
+    navigate(`/campaign/${id}/donation`, {
+      state: {
+        campaignId: id,
+        amount: donationAmount,
+        reward: getSelectedReward(),
+      },
+    });
+  };
+
 
   useEffect(() => {
     // Handle both string and numeric IDs
@@ -254,9 +268,10 @@ export default function CampaignDetails() {
               })}
             </div>
 
-            <button className="donate-btn">
+            <button className="donate-btn" onClick={handleDonateClick}>
               Donate {formatCurrency(donationAmount)}
             </button>
+
 
             <p className="secure-note">
               <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
