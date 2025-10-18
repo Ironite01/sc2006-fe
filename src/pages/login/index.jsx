@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { profile, google, microsoft } from '../../assets';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../../paths';
 import './Login.css';
 
 export default function Login() {
@@ -16,7 +15,35 @@ export default function Login() {
     }, [user]);
 
     function handleAzureLogin() {
-        window.location.href = auth.azureLogin;
+        // Mock OAuth login - create a mock user and set cookie
+        const mockUser = {
+            id: '1',
+            username: 'microsoft_user',
+            email: 'user@microsoft.com',
+            user_type: 'Supporter',
+            picture: 'https://via.placeholder.com/150'
+        };
+
+        Cookies.set('user', JSON.stringify(mockUser), { expires: 7 });
+        localStorage.setItem('profilePicture', JSON.stringify(mockUser.picture));
+        window.dispatchEvent(new Event("profileUpdated"));
+        navigate("/", { replace: true });
+    }
+
+    function handleGoogleLogin() {
+        // Mock OAuth login - create a mock user and set cookie
+        const mockUser = {
+            id: '2',
+            username: 'google_user',
+            email: 'user@gmail.com',
+            user_type: 'Supporter',
+            picture: 'https://via.placeholder.com/150'
+        };
+
+        Cookies.set('user', JSON.stringify(mockUser), { expires: 7 });
+        localStorage.setItem('profilePicture', JSON.stringify(mockUser.picture));
+        window.dispatchEvent(new Event("profileUpdated"));
+        navigate("/", { replace: true });
     }
 
     async function onFormSubmit(e) {
@@ -25,37 +52,29 @@ export default function Login() {
         setLoading(true);
 
         const form = e.target;
-        const params = new URLSearchParams();
-        params.append("username", form.username.value.trim());
-        params.append("password", form.password.value);
+        const username = form.username.value.trim();
+        const password = form.password.value;
 
-        try {
-            const res = await fetch(auth.login, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: params,
-                credentials: 'include'
-            });
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 500));
 
-            const data = await res.json();
+        // Mock authentication - accept any username/password for demo
+        if (username && password) {
+            const mockUser = {
+                id: '3',
+                username: username,
+                email: `${username}@example.com`,
+                user_type: 'Supporter',
+                picture: 'https://via.placeholder.com/150'
+            };
 
-            if (!res.ok) {
-                setError(data.message || "Invalid username or password");
-                setLoading(false);
-                return;
-            }
-
-            if (data.profilePicture) {
-                localStorage.setItem('profilePicture', JSON.stringify(data.profilePicture));
-                window.dispatchEvent(new Event("profileUpdated"));
-            }
+            Cookies.set('user', JSON.stringify(mockUser), { expires: 7 });
+            localStorage.setItem('profilePicture', JSON.stringify(mockUser.picture));
+            window.dispatchEvent(new Event("profileUpdated"));
 
             navigate("/", { replace: true });
-        } catch (error) {
-            console.error("Login error:", error);
-            setError("Network error. Please check your connection and try again.");
+        } else {
+            setError("Please enter both username and password");
             setLoading(false);
         }
     }
@@ -104,12 +123,10 @@ export default function Login() {
                 <div className="divider">or continue with</div>
 
                 <div className="oauth-buttons">
-                    <a href={auth.googleLogin}>
-                        <button type='button' className="google">
-                            <img src={google} alt="Google" />
-                            <span>Continue with Google</span>
-                        </button>
-                    </a>
+                    <button type='button' className="google" onClick={handleGoogleLogin}>
+                        <img src={google} alt="Google" />
+                        <span>Continue with Google</span>
+                    </button>
 
                     <button
                         type='button'

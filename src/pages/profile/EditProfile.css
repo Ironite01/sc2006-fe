@@ -1,0 +1,151 @@
+.edit-profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 200px);
+    padding: 2rem;
+    background-color: #F5E6D3;
+}
+
+.edit-profile-form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.edit-profile-form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #4A3B2F;
+    font-size: 1.8rem;
+}
+
+.profile-picture-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.profile-image {
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4A3B2F;
+}
+
+.upload-icon {
+    position: absolute;
+    bottom: 0;
+    right: calc(50% - 60px);
+    background: white;
+    border-radius: 6px;
+    padding: 0.5rem 0.8rem;
+    font-size: 1.5rem;
+    color: #4A3B2F;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-field {
+    margin-bottom: 1.5rem;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #4A3B2F;
+    font-weight: 600;
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #DDD;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.form-field input[type="text"]:focus,
+.form-field input[type="email"]:focus,
+.form-field input[type="password"]:focus {
+    outline: none;
+    border-color: #FF6B35;
+}
+
+.radio-group {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+
+.radio-group div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.radio-group input[type="radio"] {
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"]:disabled {
+    cursor: not-allowed;
+}
+
+.radio-group label {
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.error {
+    color: #F54927;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.edit-profile-form button[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #00B894;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+}
+
+.edit-profile-form button[type="submit"]:hover:not(:disabled) {
+    background-color: #00a383;
+}
+
+.edit-profile-form button[type="submit"]:disabled {
+    background-color: #CCC;
+    cursor: not-allowed;
+}
+
+.cancel-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #DDD;
+    color: #4A3B2F;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.75rem;
+    transition: background-color 0.3s;
+}
+
+.cancel-btn:hover {
+    background-color: #CCC;
+}

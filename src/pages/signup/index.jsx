@@ -4,7 +4,6 @@ import './Signup.css';
 import { isEmailValid, isStrongPassword, isUsernameValid } from '../../helpers/regex';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../../paths';
 
 export default function Signup() {
     const [currentPicture, setCurrentPicture] = useState(null);
@@ -70,46 +69,23 @@ export default function Signup() {
 
         if (hasError) return;
 
-        const formData = new FormData();
-        formData.append('username', usernameVal);
-        formData.append('email', emailVal);
-        formData.append('password', passwordVal);
-        formData.append('user_type', user_type.value);
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 500));
 
-        if (profilePicture.files[0]) {
-            formData.append('profilePicture', profilePicture.files[0]);
-        }
+        // Mock registration - create user and log them in
+        const mockUser = {
+            id: Date.now().toString(),
+            username: usernameVal,
+            email: emailVal,
+            user_type: user_type.value,
+            picture: currentPicture || 'https://via.placeholder.com/150'
+        };
 
-        try {
-            const res = await fetch(auth.register, {
-                method: 'POST',
-                body: formData,
-                credentials: 'include'
-            });
+        Cookies.set('user', JSON.stringify(mockUser), { expires: 7 });
+        localStorage.setItem('profilePicture', JSON.stringify(mockUser.picture));
+        window.dispatchEvent(new Event("profileUpdated"));
 
-            const data = await res.json();
-
-            if (!res.ok) {
-                if (data.field === 'username') {
-                    setUsernameError(data.message || "Username already exists");
-                } else if (data.field === 'email') {
-                    setEmailError(data.message || "Email already exists");
-                } else {
-                    alert(data.message || "Registration failed. Please try again.");
-                }
-                return;
-            }
-
-            if (data.profilePicture) {
-                localStorage.setItem('profilePicture', JSON.stringify(data.profilePicture));
-                window.dispatchEvent(new Event("profileUpdated"));
-            }
-
-            navigate("/", { replace: true });
-        } catch (error) {
-            console.error("Registration error:", error);
-            alert("Network error. Please check your connection and try again.");
-        }
+        navigate("/", { replace: true });
     }
 
     return (

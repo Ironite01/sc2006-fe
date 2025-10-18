@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import "./Home.css";
 import ShopCard from "./components/ShopCard";
-import { shop as shopApi } from "../paths";
 import { useNavigate } from "react-router-dom";
+import mockShops from "./data/mockShops.json";
 
 export default function Home({ searchQuery }) {
   const navigate = useNavigate();
@@ -12,51 +12,12 @@ export default function Home({ searchQuery }) {
   const [err, setErr] = useState("");
 
   useEffect(() => {
-    let alive = true;
-
-    async function load() {
-      setLoading(true);
-      setErr("");
-
-      try {
-        // same as login: include credentials so cookies/session work
-        const res = await fetch(`${shopApi.list}?limit=100&page=1`, {
-          credentials: "include",
-        });
-
-        // backend returns JSON array; also surface server errors
-        const data = await res.json();
-
-        if (!res.ok) {
-          throw new Error(
-            (data && (data.error || data.message)) || "Failed to fetch shops"
-          );
-        }
-
-        // backend shape = [{ id, shop: { id, name, tag, imageUrl, progress, businessRepresentative, location }}]
-        // map to the flat shape your UI expects
-        const mapped = (data || []).map((x) => ({
-          id: x?.shop?.id ?? String(x?.id ?? ""),
-          name: x?.shop?.name ?? "",
-          tag: x?.shop?.tag ?? "",
-          imageUrl: x?.shop?.imageUrl ?? "",
-          progress: Number(x?.shop?.progress ?? 0),
-          businessRepresentative: x?.shop?.businessRepresentative ?? "",
-          location: x?.shop?.location ?? "",
-        }));
-
-        if (alive) setAllShops(mapped);
-      } catch (e) {
-        if (alive) setErr(e.message || "Network error loading shops");
-      } finally {
-        if (alive) setLoading(false);
-      }
-    }
-
-    load();
-    return () => {
-      alive = false;
-    };
+    // Simulate loading delay for realism
+    setLoading(true);
+    setTimeout(() => {
+      setAllShops(mockShops);
+      setLoading(false);
+    }, 300);
   }, []);
 
   // --- simple slicing to replicate the two sections you had ---
@@ -87,16 +48,6 @@ export default function Home({ searchQuery }) {
 
   if (loading) {
     return <div className="home"><p className="loading">Loading shops…</p></div>;
-  }
-
-  if (err) {
-    return (
-      <div className="home">
-        <p className="error">
-          {err} — make sure the backend is running on <code>http://localhost:3000</code> and you’re logged in.
-        </p>
-      </div>
-    );
   }
 
   if (!allShops.length) {

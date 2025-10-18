@@ -1,0 +1,196 @@
+.reward-proof-page {
+    min-height: calc(100vh - 200px);
+    background-color: #F5E6D3;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.reward-proof-container {
+    width: 100%;
+    max-width: 700px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #4A3B2F;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #FF6B35;
+}
+
+.reward-proof-container h1 {
+    color: #4A3B2F;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.reward-proof-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.campaign-image {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.campaign-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.reward-details {
+    padding: 2rem;
+}
+
+.reward-details h2 {
+    color: #4A3B2F;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.reward-info-section {
+    background-color: #F9F9F9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row .label {
+    color: #666;
+    font-weight: 600;
+}
+
+.info-row .value {
+    color: #4A3B2F;
+    font-weight: 500;
+}
+
+.status-completed {
+    color: #00B894;
+    font-weight: 700;
+}
+
+.qr-section {
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 2px solid #E0E0E0;
+    border-bottom: 2px solid #E0E0E0;
+    margin-bottom: 2rem;
+}
+
+.qr-section h3 {
+    color: #4A3B2F;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.qr-code {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.qr-code img {
+    width: 200px;
+    height: 200px;
+    border: 2px solid #DDD;
+    border-radius: 8px;
+    padding: 1rem;
+    background: white;
+}
+
+.reward-code {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.reward-code strong {
+    color: #FF6B35;
+    font-family: monospace;
+    font-size: 1.2rem;
+}
+
+.instructions {
+    background-color: #FFF9F5;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #FF6B35;
+}
+
+.instructions h4 {
+    color: #4A3B2F;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.instructions ol {
+    margin-left: 1.5rem;
+    color: #666;
+}
+
+.instructions li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.back-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: #4A3B2F;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #3A2B1F;
+}
+
+@media (max-width: 768px) {
+    .reward-proof-page {
+        padding: 1rem;
+    }
+
+    .reward-details {
+        padding: 1.5rem;
+    }
+
+    .campaign-image {
+        height: 200px;
+    }
+
+    .qr-code img {
+        width: 150px;
+        height: 150px;
+    }
+}

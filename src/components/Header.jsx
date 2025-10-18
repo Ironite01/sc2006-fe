@@ -4,7 +4,6 @@ import './Header.css';
 import Searchbar from './Searchbar';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../paths';
 
 export default function Header({ onSearch }) {
     const user = Cookies.get('user');
@@ -40,25 +39,13 @@ export default function Header({ onSearch }) {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    const handleLogout = async () => {
-        try {
-            await fetch(auth.logout, {
-                method: 'POST',
-                credentials: 'include'
-            });
-            Cookies.remove('user');
-            Cookies.remove('token');
-            localStorage.clear();
-            sessionStorage.clear();
-            navigate('/login', { replace: true });
-        } catch (error) {
-            console.error('Logout error:', error);
-            Cookies.remove('user');
-            Cookies.remove('token');
-            localStorage.clear();
-            sessionStorage.clear();
-            navigate('/login', { replace: true });
-        }
+    const handleLogout = () => {
+        // Mock logout - just clear local data
+        Cookies.remove('user');
+        Cookies.remove('token');
+        localStorage.clear();
+        sessionStorage.clear();
+        navigate('/login', { replace: true });
     };
 
     const handleSwitchAccount = () => {
@@ -68,10 +55,10 @@ export default function Header({ onSearch }) {
     return <header className="place-content-center">
         <nav className="flex justify-between items-center">
             <nav className="flex order-1 gap-[0.5rem] items-center">
-                <img src={profile} alt="App logo" className='h-[2.75rem] w-auto logo' />
-                <a>Home</a>
-                <a>Rewards</a>
-                <a>Updates</a>
+                <img src={profile} alt="App logo" className='h-[2.75rem] w-auto logo' onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
+                <a href="/" style={{ cursor: 'pointer' }}>Home</a>
+                <a href="/rewards" style={{ cursor: 'pointer' }}>Rewards</a>
+                <a href="/updates" style={{ cursor: 'pointer' }}>Updates</a>
             </nav>
             <div className="flex order-2 items-center gap-[1.25rem]">
                 <Searchbar onSearch={onSearch} />

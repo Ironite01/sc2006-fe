@@ -167,25 +167,27 @@ export default function CampaignDetails() {
           <ShopsLostSection category={campaign.tag} businessName={campaign.name} />
 
           {/* Meet The Owners */}
-          <section className="owners-section">
-            <h2>Meet The Owners</h2>
-            <div className="owners-grid">
-              {campaign.owners.map((owner, index) => (
-                <div key={index} className="owner-card">
-                  <img src={owner.image} alt={owner.name} className="owner-image" />
-                  <div className="owner-info">
-                    <h3>{owner.name}</h3>
-                    <p className="owner-role">{owner.role}</p>
-                    <p className="owner-bio">{owner.bio}</p>
+          {campaign.owners && campaign.owners.length > 0 && (
+            <section className="owners-section">
+              <h2>Meet The Owners</h2>
+              <div className="owners-grid">
+                {campaign.owners.map((owner, index) => (
+                  <div key={index} className="owner-card">
+                    <img src={owner.image} alt={owner.name} className="owner-image" />
+                    <div className="owner-info">
+                      <h3>{owner.name}</h3>
+                      <p className="owner-role">{owner.role}</p>
+                      <p className="owner-bio">{owner.bio}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Comments */}
           <section className="comments-section">
-            <h2>Comments ({campaign.comments.length})</h2>
+            <h2>Comments ({campaign.comments ? campaign.comments.length : 0})</h2>
 
             <form className="comment-form" onSubmit={handleCommentSubmit}>
               <textarea
@@ -200,18 +202,24 @@ export default function CampaignDetails() {
             </form>
 
             <div className="comments-list">
-              {campaign.comments.map(comment => (
-                <div key={comment.id} className="comment-card">
-                  <img src={comment.avatar} alt={comment.author} className="comment-avatar" />
-                  <div className="comment-content">
-                    <div className="comment-header">
-                      <span className="comment-author">{comment.author}</span>
-                      <span className="comment-date">{formatDate(comment.date)}</span>
+              {campaign.comments && campaign.comments.length > 0 ? (
+                campaign.comments.map(comment => (
+                  <div key={comment.id} className="comment-card">
+                    <img src={comment.avatar} alt={comment.author} className="comment-avatar" />
+                    <div className="comment-content">
+                      <div className="comment-header">
+                        <span className="comment-author">{comment.author}</span>
+                        <span className="comment-date">{formatDate(comment.date)}</span>
+                      </div>
+                      <p className="comment-text">{comment.content}</p>
                     </div>
-                    <p className="comment-text">{comment.content}</p>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p style={{ textAlign: 'center', color: '#666', padding: '2rem' }}>
+                  No comments yet. Be the first to leave encouragement!
+                </p>
+              )}
             </div>
           </section>
         </div>

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "1",
+    "name": "Uncle Tan's Laksa",
+    "tag": "Local Food",
+    "imageUrl": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop",
+    "progress": 75,
+    "businessRepresentative": "Tan Wei Ming",
+    "location": "Chinatown, Singapore"
+  },
+  {
+    "id": "2",
+    "name": "Ah Hock's Barber",
+    "tag": "Personal Care",
+    "imageUrl": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&h=300&fit=crop",
+    "progress": 45,
+    "businessRepresentative": "Hock Seng Lim",
+    "location": "Toa Payoh, Singapore"
+  },
+  {
+    "id": "3",
+    "name": "Mei Ling's Tailor",
+    "tag": "Fashion",
+    "imageUrl": "https://images.unsplash.com/photo-1558769132-cb1aea3c8cf5?w=400&h=300&fit=crop",
+    "progress": 60,
+    "businessRepresentative": "Mei Ling Tan",
+    "location": "Little India, Singapore"
+  },
+  {
+    "id": "4",
+    "name": "Old Street Bakery",
+    "tag": "Bakery",
+    "imageUrl": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=300&fit=crop",
+    "progress": 82,
+    "businessRepresentative": "Lee Cheng Huat",
+    "location": "Tiong Bahru, Singapore"
+  },
+  {
+    "id": "5",
+    "name": "Golden Dragon Restaurant",
+    "tag": "Chinese Cuisine",
+    "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=300&fit=crop",
+    "progress": 38,
+    "businessRepresentative": "Wong Kah Wai",
+    "location": "Geylang, Singapore"
+  },
+  {
+    "id": "6",
+    "name": "Mama's Nasi Lemak",
+    "tag": "Malay Food",
+    "imageUrl": "https://images.unsplash.com/photo-1596040033229-a0b27c021f15?w=400&h=300&fit=crop",
+    "progress": 91,
+    "businessRepresentative": "Siti Nurhaliza",
+    "location": "Kampong Glam, Singapore"
+  },
+  {
+    "id": "7",
+    "name": "Heritage Bookstore",
+    "tag": "Books",
+    "imageUrl": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop",
+    "progress": 25,
+    "businessRepresentative": "Kumar Selvam",
+    "location": "Bugis, Singapore"
+  },
+  {
+    "id": "8",
+    "name": "Rainbow Florist",
+    "tag": "Flowers",
+    "imageUrl": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=300&fit=crop",
+    "progress": 55,
+    "businessRepresentative": "Rose Lim",
+    "location": "Holland Village, Singapore"
+  },
+  {
+    "id": "9",
+    "name": "Roti Prata Corner",
+    "tag": "Indian Food",
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop",
+    "progress": 70,
+    "businessRepresentative": "Ravi Kumar",
+    "location": "Little India, Singapore"
+  },
+  {
+    "id": "10",
+    "name": "Vintage Vinyl Records",
+    "tag": "Music",
+    "imageUrl": "https://images.unsplash.com/photo-1594623930572-300a3011d9ae?w=400&h=300&fit=crop",
+    "progress": 48,
+    "businessRepresentative": "David Ng",
+    "location": "Bugis, Singapore"
+  },
+  {
+    "id": "11",
+    "name": "Grandma's Kaya Toast",
+    "tag": "Breakfast",
+    "imageUrl": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop",
+    "progress": 88,
+    "businessRepresentative": "Alice Chua",
+    "location": "Joo Chiat, Singapore"
+  },
+  {
+    "id": "12",
+    "name": "Traditional Herbal Shop",
+    "tag": "Health",
+    "imageUrl": "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&h=300&fit=crop",
+    "progress": 33,
+    "businessRepresentative": "Chen Wei",
+    "location": "Chinatown, Singapore"
+  },
+  {
+    "id": "13",
+    "name": "Noodle House",
+    "tag": "Chinese Food",
+    "imageUrl": "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=400&h=300&fit=crop",
+    "progress": 64,
+    "businessRepresentative": "Lim Ah Kow",
+    "location": "Ang Mo Kio, Singapore"
+  },
+  {
+    "id": "14",
+    "name": "Craft Coffee Roastery",
+    "tag": "Coffee",
+    "imageUrl": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop",
+    "progress": 77,
+    "businessRepresentative": "Marcus Lee",
+    "location": "Telok Ayer, Singapore"
+  },
+  {
+    "id": "15",
+    "name": "Satay King",
+    "tag": "Street Food",
+    "imageUrl": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400&h=300&fit=crop",
+    "progress": 52,
+    "businessRepresentative": "Ahmad Ibrahim",
+    "location": "East Coast, Singapore"
+  },
+  {
+    "id": "16",
+    "name": "Old School Ice Cream",
+    "tag": "Desserts",
+    "imageUrl": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=300&fit=crop",
+    "progress": 41,
+    "businessRepresentative": "Peter Tan",
+    "location": "Katong, Singapore"
+  }
+]

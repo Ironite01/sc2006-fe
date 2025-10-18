@@ -1,0 +1,247 @@
+.contact-page {
+    min-height: calc(100vh - 200px);
+    background-color: #F5E6D3;
+    padding: 3rem 2rem;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.contact-header h1 {
+    color: #4A3B2F;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.info-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.info-card h3 {
+    color: #4A3B2F;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-card p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-detail {
+    color: #999;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.info-link {
+    display: inline-block;
+    color: #FF6B35;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    transition: color 0.3s;
+}
+
+.info-link:hover {
+    color: #E85A2E;
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-link {
+    color: #4A3B2F;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 2px solid #E0E0E0;
+    border-radius: 6px;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.social-link:hover {
+    background-color: #FF6B35;
+    color: white;
+    border-color: #FF6B35;
+}
+
+.contact-form-section {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-section h2 {
+    color: #4A3B2F;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.success-message {
+    background-color: #D4EDDA;
+    color: #155724;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #C3E6CB;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #F8D7DA;
+    color: #721C24;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #F5C6CB;
+    text-align: center;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field label {
+    color: #4A3B2F;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.required {
+    color: #FF6B35;
+}
+
+.form-field input,
+.form-field textarea {
+    padding: 0.75rem;
+    border: 2px solid #E0E0E0;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: #FF6B35;
+}
+
+.form-field textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-field .error {
+    color: #DC3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.submit-btn {
+    background-color: #FF6B35;
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 0.5rem;
+}
+
+.submit-btn:hover {
+    background-color: #E85A2E;
+}
+
+@media (max-width: 992px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-info {
+        order: 2;
+    }
+
+    .contact-form-section {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-page {
+        padding: 2rem 1rem;
+    }
+
+    .contact-header h1 {
+        font-size: 2rem;
+    }
+
+    .info-card {
+        padding: 1.5rem;
+    }
+
+    .contact-form-section {
+        padding: 2rem 1.5rem;
+    }
+
+    .social-links {
+        flex-direction: column;
+    }
+
+    .social-link {
+        width: 100%;
+        text-align: center;
+    }
+}

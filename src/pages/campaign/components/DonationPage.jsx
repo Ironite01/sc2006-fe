@@ -3,9 +3,9 @@ import { useLocation, useParams } from "react-router-dom";
 import "./DonationPage.css";
 
 // use your existing campaigns.json (you already import this in CampaignDetails)
-import campaigns from "../../data/campaigns.json";
+import campaigns from "../../../data/campaigns.json";
 // fallback tiers if a campaign has no rewardTiers
-import tiersDB from "../../data/donationRewards.json";
+import tiersDB from "../../../data/donationRewards.json";
 
 export default function DonationPage() {
   const { id } = useParams();

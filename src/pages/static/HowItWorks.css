@@ -1,0 +1,364 @@
+.how-it-works-page {
+    min-height: calc(100vh - 200px);
+    background-color: #F5E6D3;
+    padding: 3rem 2rem;
+}
+
+.how-it-works-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-section {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.hero-section h1 {
+    color: #4A3B2F;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-section p {
+    color: #666;
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.user-types-section {
+    margin-bottom: 5rem;
+}
+
+.user-types-section h2 {
+    color: #4A3B2F;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.user-types-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.user-type-card {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.user-type-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.type-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.user-type-card h3 {
+    color: #4A3B2F;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.user-type-card p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.type-link {
+    color: #FF6B35;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.type-link:hover {
+    color: #E85A2E;
+}
+
+.flow-section {
+    margin-bottom: 5rem;
+    scroll-margin-top: 80px;
+}
+
+.flow-section h2 {
+    color: #4A3B2F;
+    font-size: 2.25rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.step-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #FF6B35 0%, #E85A2E 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h3 {
+    color: #4A3B2F;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.step-content p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.step-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.step-content ul li {
+    color: #666;
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.step-content ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #FF6B35;
+    font-weight: bold;
+}
+
+.flow-section.alternate .step-card {
+    background: linear-gradient(to right, #FFFFFF 0%, #FFF9F5 100%);
+}
+
+.key-features-section {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5rem;
+}
+
+.key-features-section h2 {
+    color: #4A3B2F;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    color: #4A3B2F;
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.faq-preview-section {
+    background: linear-gradient(135deg, #FF6B35 0%, #E85A2E 100%);
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.faq-preview-section h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.faq-preview-section p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.faq-link-btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: white;
+    color: #FF6B35;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.faq-link-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cta-section {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.cta-section h2 {
+    color: #4A3B2F;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.cta-btn {
+    padding: 0.75rem 2rem;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.cta-btn.primary {
+    background-color: #FF6B35;
+    color: white;
+}
+
+.cta-btn.primary:hover {
+    background-color: #E85A2E;
+}
+
+.cta-btn.secondary {
+    background-color: transparent;
+    color: #FF6B35;
+    border: 2px solid #FF6B35;
+}
+
+.cta-btn.secondary:hover {
+    background-color: #FF6B35;
+    color: white;
+}
+
+@media (max-width: 992px) {
+    .user-types-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .how-it-works-page {
+        padding: 2rem 1rem;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    .step-card {
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .step-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .key-features-section,
+    .faq-preview-section,
+    .cta-section {
+        padding: 2rem 1.5rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cta-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}

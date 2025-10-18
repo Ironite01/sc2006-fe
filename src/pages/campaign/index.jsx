@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import CampaignManager from './components/CampaignManager';
 import CampaignForm from './components/CampaignForm';
+import UpdateComposer from './components/UpdateComposer';
 import './Campaign.css';
 
 export default function Campaign() {
@@ -42,10 +43,7 @@ export default function Campaign() {
                         )}
 
                         {activeTab === 'update-composer' && (
-                            <div className="update-composer-placeholder">
-                                <h2>UPDATE COMPOSER</h2>
-                                <p>this section would contain the update composer functionality</p>
-                            </div>
+                            <UpdateComposer />
                         )}
                     </div>
                 </>
