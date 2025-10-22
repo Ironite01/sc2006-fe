@@ -2,18 +2,14 @@ import { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Home from './Home';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import ForgotPassword from './pages/forgot-password';
 import Campaign from './pages/campaign';
 import CampaignDetails from './pages/CampaignDetails';
-import AuthCallback from './pages/auth/AuthCallback';
-import DonationPage from "./pages/campaign/DonationPage.jsx";
-
-<Route path="/donation" element={<DonationPage />} />
-
+import DonationPage from "./pages/campaign/index.jsx";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,7 +25,6 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/campaign" element={<Campaign />} />
           <Route path="/campaign/:id" element={<CampaignDetails />} />
-          <Route path="/auth/callback" element={<AuthCallback />} />
           <Route path="/campaign/:id/donation" element={<DonationPage />} />
         </Routes>
       </main>
