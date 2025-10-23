@@ -15,8 +15,10 @@ export default function Header({ onSearch }) {
 
     useEffect(() => {
         if (user) {
-            const userObj = JSON.parse(user)
+            const userObj = JSON.parse(user);
             if (userObj?.picture) setProfilePicture(userObj.picture);
+        } else {
+            setProfilePicture(profile);
         }
     }, [user]);
 

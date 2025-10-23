@@ -26,7 +26,12 @@ export default function Login() {
 
         const form = e.target;
         const params = new URLSearchParams();
-        params.append("username", form.username.value.trim());
+        // TODO: Email validation
+        const temp = form.username.value.trim();
+        if (temp.includes("@"))
+            params.append("email", temp);
+        else
+            params.append("username", temp);
         params.append("password", form.password.value);
 
         try {

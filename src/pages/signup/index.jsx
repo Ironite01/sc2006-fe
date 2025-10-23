@@ -5,6 +5,7 @@ import { isEmailValid, isStrongPassword, isUsernameValid } from '../../helpers/r
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../paths';
+import { USER_ROLES } from '../../helpers/constants';
 
 export default function Signup() {
     const [currentPicture, setCurrentPicture] = useState(null);
@@ -32,7 +33,7 @@ export default function Signup() {
         setCpasswordError("");
 
         const form = e.target;
-        const { username, email, password, cpassword, user_type, profilePicture } = form;
+        const { username, email, password, cpassword, role, profilePicture } = form;
 
         let hasError = false;
 
@@ -74,38 +75,21 @@ export default function Signup() {
         formData.append('username', usernameVal);
         formData.append('email', emailVal);
         formData.append('password', passwordVal);
-        formData.append('user_type', user_type.value);
+        formData.append('role', role.value);
 
         if (profilePicture.files[0]) {
             formData.append('profilePicture', profilePicture.files[0]);
         }
 
         try {
-            const res = await fetch(auth.register, {
+            await fetch(auth.register, {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'
             });
 
-            const data = await res.json();
-
-            if (!res.ok) {
-                if (data.field === 'username') {
-                    setUsernameError(data.message || "Username already exists");
-                } else if (data.field === 'email') {
-                    setEmailError(data.message || "Email already exists");
-                } else {
-                    alert(data.message || "Registration failed. Please try again.");
-                }
-                return;
-            }
-
-            if (data.profilePicture) {
-                localStorage.setItem('profilePicture', JSON.stringify(data.profilePicture));
-                window.dispatchEvent(new Event("profileUpdated"));
-            }
-
-            navigate("/", { replace: true });
+            alert("Registration successful, you will now be re-navigated to login!")
+            navigate("/login");
         } catch (error) {
             console.error("Registration error:", error);
             alert("Network error. Please check your connection and try again.");
@@ -136,12 +120,12 @@ export default function Signup() {
                     <label>I am a: <span className='text-[#F54927]'>*</span></label>
                     <div className='radio-group'>
                         <div>
-                            <input type="radio" id="supporter" name='user_type' defaultChecked value="Supporter" />
-                            <label htmlFor="supporter">Supporter</label>
+                            <input type="radio" id={USER_ROLES.SUPPORTER} name='role' defaultChecked value={USER_ROLES.SUPPORTER} />
+                            <label htmlFor={USER_ROLES.SUPPORTER}>Supporter</label>
                         </div>
                         <div>
-                            <input type="radio" id="business_representative" name="user_type" value="business_representative" />
-                            <label htmlFor="business_representative">Business Representative</label>
+                            <input type="radio" id={USER_ROLES.BUSINESS_REPRESENTATIVE} name="role" value={USER_ROLES.BUSINESS_REPRESENTATIVE} />
+                            <label htmlFor={USER_ROLES.BUSINESS_REPRESENTATIVE}>Business Representative</label>
                         </div>
                     </div>
                 </div>
