@@ -1,22 +1,26 @@
 import { useState } from 'react';
 import './CampaignManager.css';
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CampaignManager({ onCreateCampaign }) {
     const [campaignCreated, setCampaignCreated] = useState(true);
 
+    const navigate = useNavigate(); 
+
     const handleCreateCampaign = () => {
+        navigate('/campaign/create'); 
         if (onCreateCampaign) {
             onCreateCampaign();
         }
     };
 
     const handleEditCampaign = () => {
-        // Logic to edit campaign details would go here
+        navigate('/campaign/edit'); 
         console.log('Edit campaign clicked');
     };
 
     const handleManageRewards = () => {
-        // Logic to manage rewards would go here
+        navigate('/campaign/rewards'); 
         console.log('Manage rewards clicked');
     };
 
@@ -56,10 +60,10 @@ export default function CampaignManager({ onCreateCampaign }) {
                     </button>
                 </div>
 
-                <div className="create-help-text">
+                {/* <div className="create-help-text">
                     Click this button to start creating the campaign. As a business 
                     representative you will need to fill in various details to create a campaign.
-                </div>
+                </div> */}
             </div>
 
             {/* My Campaign Section */}
@@ -108,7 +112,7 @@ export default function CampaignManager({ onCreateCampaign }) {
                         </div>
                     </div>
 
-                    <div className="campaign-help-text">
+                    {/* <div className="campaign-help-text">
                         <div className="help-left">
                             Click this button to be redirected to the page where the business 
                             representative can edit the campaign details.
@@ -121,7 +125,7 @@ export default function CampaignManager({ onCreateCampaign }) {
                             Current campaign and the amount of donations it has received over 
                             the total goal.
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             )}
         </div>
