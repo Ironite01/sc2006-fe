@@ -7,6 +7,7 @@ import Home from './Home';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import ForgotPassword from './pages/forgot-password';
+import ResetPassword from './pages/forgot-password/ResetPassword';
 import Campaign from './pages/campaign';
 import CampaignDetails from './pages/CampaignDetails';
 import DonationPage from "./pages/campaign/index.jsx";
@@ -23,6 +24,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/campaign" element={<Campaign />} />
           <Route path="/campaign/:id" element={<CampaignDetails />} />
           <Route path="/campaign/:id/donation" element={<DonationPage />} />

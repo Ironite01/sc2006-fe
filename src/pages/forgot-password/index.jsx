@@ -1,22 +1,49 @@
 import { useState } from 'react';
+import { auth } from '../../../paths';
 import './ForgotPassword.css';
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    function onFormSubmit(e) {
+    async function onFormSubmit(e) {
         e.preventDefault();
         setErrorMessage('');
         setSuccessMessage('');
+        setIsLoading(true);
 
         if (!email.trim()) {
-            setErrorMessage('ERROR MESSAGE');
+            setErrorMessage('Please enter your email or username');
+            setIsLoading(false);
             return;
         }
 
-        setSuccessMessage('BLACK TEXT WHEN EMAIL SENT SUCCESS - OTHERWISE RED TEXT ERROR');
+        try {
+            const response = await fetch(auth.forgotPassword, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    emailOrUsername: email.trim()
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setSuccessMessage(data.message || 'Password reset email sent successfully!');
+                setEmail(''); // Clear the input on success
+            } else {
+                setErrorMessage(data.message || 'Something went wrong. Please try again.');
+            }
+        } catch (error) {
+            setErrorMessage('Network error. Please check your connection and try again.');
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -53,8 +80,8 @@ export default function ForgotPassword() {
                         )}
                     </div>
                     
-                    <button type="submit" className="reset-button">
-                        Reset password
+                    <button type="submit" className="reset-button" disabled={isLoading}>
+                        {isLoading ? 'Sending...' : 'Reset password'}
                     </button>
 
                     <div className="back-to-login">

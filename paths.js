@@ -6,7 +6,9 @@ export const auth = {
     logout: `${backendPath}/logout`,
     checkAuth: `${backendPath}/auth/check`,
     googleLogin: `${backendPath}/login/google`,
-    azureLogin: `${backendPath}/login/azure`
+    azureLogin: `${backendPath}/login/azure`,
+    forgotPassword: `${backendPath}/forgot-password`,
+    resetPassword: `${backendPath}/reset-password`
 }
 
 export const shop = {
