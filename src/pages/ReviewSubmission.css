@@ -1,0 +1,406 @@
+.review-submission {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header */
+.review-submission .review-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.review-submission .review-header h1 {
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.review-submission .review-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Validation Section */
+.review-submission .validation-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.review-submission .validation-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.review-submission .validation-header h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.review-submission .validation-header.error {
+  color: #DC2626;
+}
+
+.review-submission .validation-header.success {
+  color: #059669;
+}
+
+.review-submission .validation-icon {
+  font-size: 1.5rem;
+}
+
+.review-submission .validation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.review-submission .validation-list li {
+  padding: 0.5rem;
+  background: #FEE2E2;
+  color: #991B1B;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.review-submission .validation-list li:last-child {
+  margin-bottom: 0;
+}
+
+.review-submission .validation-note {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Summary Section */
+.review-submission .summary-section {
+  margin-bottom: 2rem;
+}
+
+.review-submission .summary-section h2 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+}
+
+.review-submission .summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.review-submission .summary-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-submission .summary-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.review-submission .summary-card h3 {
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.review-submission .info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.review-submission .info-row:last-child {
+  border-bottom: none;
+}
+
+.review-submission .info-row .label {
+  color: #666;
+  font-weight: 500;
+}
+
+.review-submission .info-row .value {
+  color: #1a1a1a;
+  font-weight: 600;
+  text-align: right;
+  max-width: 60%;
+  word-wrap: break-word;
+}
+
+.review-submission .info-row .value.status-pending {
+  color: #92400E;
+  background: #FEF3C7;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.review-submission .info-row .value.status-approved {
+  color: #065F46;
+  background: #D1FAE5;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.review-submission .info-row .value.status-draft {
+  color: #666;
+  background: #f0f0f0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+/* Campaign Image Preview */
+.review-submission .campaign-image-preview {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
+
+.review-submission .campaign-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.review-submission .no-image {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 1.1rem;
+}
+
+/* Rewards Section */
+.review-submission .rewards-section {
+  margin-bottom: 2rem;
+}
+
+.review-submission .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.review-submission .section-header h2 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.review-submission .btn-link {
+  background: none;
+  border: none;
+  color: #4F46E5;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.review-submission .btn-link:hover {
+  text-decoration: underline;
+}
+
+.review-submission .rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.review-submission .reward-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f0f0f0;
+}
+
+.review-submission .reward-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.review-submission .reward-header h3 {
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.review-submission .reward-amount {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #4F46E5;
+}
+
+.review-submission .reward-description {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.review-submission .reward-details {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.review-submission .detail-item {
+  flex: 1;
+}
+
+.review-submission .detail-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 0.25rem;
+}
+
+.review-submission .detail-value {
+  display: block;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.review-submission .empty-rewards {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.review-submission .empty-rewards p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Actions */
+.review-submission .review-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.review-submission .btn-primary,
+.review-submission .btn-secondary {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.review-submission .btn-primary {
+  background: #4F46E5;
+  color: white;
+}
+
+.review-submission .btn-primary:hover:not(:disabled) {
+  background: #4338CA;
+}
+
+.review-submission .btn-primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.review-submission .btn-secondary {
+  background: white;
+  color: #4F46E5;
+  border: 2px solid #4F46E5;
+}
+
+.review-submission .btn-secondary:hover {
+  background: #f5f5ff;
+}
+
+.review-submission .help-text {
+  text-align: center;
+  color: #DC2626;
+  font-size: 0.95rem;
+  padding: 1rem;
+  background: #FEE2E2;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* Loading and Error States */
+.review-submission .loading,
+.review-submission .error-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.review-submission .error-state h2 {
+  color: #DC2626;
+  margin-bottom: 1rem;
+}
+
+.review-submission .action-btn {
+  padding: 0.75rem 2rem;
+  background: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.review-submission .action-btn:hover {
+  background: #4338CA;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .review-submission {
+    padding: 1rem;
+  }
+
+  .review-submission .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .review-submission .rewards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .review-submission .review-actions {
+    flex-direction: column;
+  }
+
+  .review-submission .review-actions button {
+    width: 100%;
+  }
+
+  .review-submission .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

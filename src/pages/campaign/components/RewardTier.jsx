@@ -1,39 +1,126 @@
-import { useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import "./RewardTier.css";
-
-// Mock supporters per tier – swap with API later
-const MOCK = {
-  1: [
-    { id: 101, name: "John Tan", email: "john@email.com", claimDate: "2025-08-15", status: "Pending" },
-    { id: 102, name: "Sarah Lee", email: "sarah@email.com", claimDate: "2025-08-18", status: "Completed" },
-    { id: 103, name: "Sandra Ong", email: "sandra@email.com", claimDate: "2025-08-31", status: "Redeemed" },
-  ],
-  2: [],
-  3: [],
-  4: [],
-};
 
 export default function RewardTier() {
   const { tierId } = useParams();
+  const [searchParams] = useSearchParams();
+  const campaignId = searchParams.get('campaignId');
   const navigate = useNavigate();
-  const initial = useMemo(() => MOCK[tierId] ?? [], [tierId]);
-  const [rows, setRows] = useState(initial);
 
-  const markCompleted = (id) => {
-    setRows((rs) =>
-      rs.map((r) => (r.id === id ? { ...r, status: "Completed" } : r))
+  const [reward, setReward] = useState(null);
+  const [supporters, setSupporters] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    loadData();
+  }, [tierId]);
+
+  async function loadData() {
+    try {
+      setLoading(true);
+
+      // Load reward details
+      const rewardRes = await fetch(`http://localhost:3000/rewards/${tierId}`, {
+        credentials: 'include'
+      });
+
+      if (!rewardRes.ok) {
+        throw new Error('Failed to load reward details');
+      }
+
+      const rewardData = await rewardRes.json();
+      setReward(rewardData.reward);
+
+      // Load supporters for this reward
+      const supportersRes = await fetch(`http://localhost:3000/rewards/${tierId}/supporters`, {
+        credentials: 'include'
+      });
+
+      if (!supportersRes.ok) {
+        throw new Error('Failed to load supporters');
+      }
+
+      const supportersData = await supportersRes.json();
+      setSupporters(supportersData.supporters);
+
+      setLoading(false);
+    } catch (err) {
+      console.error('Error loading data:', err);
+      setError(err.message);
+      setLoading(false);
+    }
+  }
+
+  async function markCompleted(userRewardId) {
+    try {
+      const res = await fetch(`http://localhost:3000/user-rewards/${userRewardId}/approve`, {
+        method: 'PUT',
+        credentials: 'include'
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to approve reward');
+      }
+
+      // Update local state
+      setSupporters(supporters.map(s =>
+        s.userRewardId === userRewardId
+          ? { ...s, status: 'completed', approvedAt: new Date().toISOString() }
+          : s
+      ));
+    } catch (err) {
+      console.error('Error approving reward:', err);
+      alert('Failed to approve reward: ' + err.message);
+    }
+  }
+
+  function formatDate(dateString) {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-SG', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+
+  function formatStatus(status) {
+    return status.charAt(0).toUpperCase() + status.slice(1);
+  }
+
+  if (loading) {
+    return (
+      <div className="reward-tier-page">
+        <div className="loading">Loading supporters...</div>
+      </div>
     );
-  };
+  }
+
+  if (error) {
+    return (
+      <div className="reward-tier-page">
+        <div className="error-state">
+          <h2>Error</h2>
+          <p>{error}</p>
+          <button onClick={loadData}>Try Again</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="reward-tier-page">
-      <h1 className="page-title">My Campaign</h1>
+      <h1 className="page-title">{reward?.campaignName || 'My Campaign'}</h1>
       <h2 className="page-subtitle">Manage Rewards</h2>
 
       <div className="tier-header">
-        <div className="tier-pill">Reward {tierId}</div>
-        <button className="back-link" onClick={() => navigate("/campaign/rewards")}>
+        <div className="tier-pill">{reward?.rewardName || `Reward ${tierId}`}</div>
+        <button
+          className="back-link"
+          onClick={() => navigate(`/campaign/rewards${campaignId ? `?campaignId=${campaignId}` : ''}`)}
+        >
           ← Back to Rewards
         </button>
       </div>
@@ -50,26 +137,29 @@ export default function RewardTier() {
             </tr>
           </thead>
           <tbody>
-            {rows.length === 0 ? (
+            {supporters.length === 0 ? (
               <tr>
                 <td colSpan="5" style={{ textAlign: "center", padding: "20px" }}>
                   No supporters yet.
                 </td>
               </tr>
             ) : (
-              rows.map((r) => (
-                <tr key={r.id}>
-                  <td>{r.name}</td>
-                  <td>{r.email}</td>
-                  <td>{r.claimDate}</td>
-                  <td>{r.status}</td>
+              supporters.map((supporter) => (
+                <tr key={supporter.userRewardId}>
+                  <td>{supporter.username}</td>
+                  <td>{supporter.email}</td>
+                  <td>{formatDate(supporter.claimedAt)}</td>
+                  <td>{formatStatus(supporter.status)}</td>
                   <td>
-                    {r.status === "Pending" ? (
-                      <button className="mark-btn" onClick={() => markCompleted(r.id)}>
+                    {supporter.status === 'pending' ? (
+                      <button
+                        className="mark-btn"
+                        onClick={() => markCompleted(supporter.userRewardId)}
+                      >
                         Mark Completed
                       </button>
                     ) : (
-                      "NA"
+                      <span style={{ color: '#999' }}>N/A</span>
                     )}
                   </td>
                 </tr>

@@ -234,28 +234,263 @@
     border-top: 1px solid #ddd;
 }
 
+/* Loading and Error States */
+.loading-state, .error-state {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.error-state p {
+    margin-bottom: 1rem;
+    color: #DC2626;
+}
+
+.login-btn {
+    background-color: #4F46E5;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #4338CA;
+}
+
+/* My Campaigns Section */
+.my-campaigns-section {
+    border-top: 2px solid #ddd;
+    padding-top: 2rem;
+}
+
+.my-campaigns-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.campaigns-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Campaign Item */
+.campaign-item {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    gap: 2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.campaign-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.campaign-item-image {
+    width: 250px;
+    height: 200px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.campaign-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.status-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-badge.status-pending {
+    background: #FEF3C7;
+    color: #92400E;
+}
+
+.status-badge.status-approved {
+    background: #D1FAE5;
+    color: #065F46;
+}
+
+.status-badge.status-rejected {
+    background: #FEE2E2;
+    color: #991B1B;
+}
+
+.status-badge.status-draft {
+    background: #E0E7FF;
+    color: #3730A3;
+}
+
+.campaign-item-content {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.campaign-header {
+    margin-bottom: 1rem;
+}
+
+.campaign-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.campaign-stats-inline {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.stat-item {
+    font-size: 0.9rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.stat-icon {
+    font-size: 1rem;
+}
+
+.campaign-description {
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.campaign-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.action-btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-view-analytics {
+    background: #4F46E5;
+    color: white;
+}
+
+.btn-view-analytics:hover {
+    background: #4338CA;
+}
+
+.btn-edit {
+    background: white;
+    color: #4F46E5;
+    border: 2px solid #4F46E5;
+}
+
+.btn-edit:hover {
+    background: #f5f5ff;
+}
+
+.btn-rewards {
+    background: white;
+    color: #059669;
+    border: 2px solid #059669;
+}
+
+.btn-rewards:hover {
+    background: #f0fdf4;
+}
+
+/* No Campaigns State */
+.no-campaigns-state {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.no-campaigns-state p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.no-campaigns-state .subtext {
+    font-size: 1rem;
+    color: #999;
+}
+
 @media (max-width: 768px) {
     .campaign-card {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
     }
-    
+
     .campaign-display {
         flex-direction: column;
         gap: 1.5rem;
     }
-    
+
     .campaign-help-text {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
-    
+
     .section-title {
         font-size: 1.8rem;
     }
-    
+
     .section-description {
         font-size: 1rem;
+    }
+
+    .campaign-item {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .campaign-item-image {
+        width: 100%;
+        height: 180px;
+    }
+
+    .campaign-actions {
+        flex-direction: column;
+    }
+
+    .action-btn {
+        width: 100%;
     }
 }

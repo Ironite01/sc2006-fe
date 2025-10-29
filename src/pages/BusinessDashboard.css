@@ -1,0 +1,423 @@
+.business-dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header */
+.business-dashboard .dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.business-dashboard .header-content h1 {
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.business-dashboard .header-content p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.business-dashboard .create-btn {
+  padding: 0.75rem 1.5rem;
+  background: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.business-dashboard .create-btn:hover {
+  background: #4338CA;
+}
+
+/* Stats Grid */
+.business-dashboard .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.business-dashboard .stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.business-dashboard .stat-icon {
+  font-size: 2.5rem;
+}
+
+.business-dashboard .stat-content {
+  flex: 1;
+}
+
+.business-dashboard .stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.business-dashboard .stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Quick Actions */
+.business-dashboard .quick-actions {
+  margin-bottom: 3rem;
+}
+
+.business-dashboard .quick-actions h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.business-dashboard .actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.business-dashboard .action-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+  text-align: left;
+}
+
+.business-dashboard .action-card:hover {
+  border-color: #4F46E5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.business-dashboard .action-icon {
+  font-size: 2rem;
+}
+
+.business-dashboard .action-text h3 {
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.business-dashboard .action-text p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Campaigns Section */
+.business-dashboard .campaigns-section {
+  margin-bottom: 2rem;
+}
+
+.business-dashboard .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.business-dashboard .section-header h2 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+}
+
+.business-dashboard .view-all-btn {
+  background: none;
+  border: none;
+  color: #4F46E5;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.business-dashboard .view-all-btn:hover {
+  text-decoration: underline;
+}
+
+.business-dashboard .campaigns-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.business-dashboard .campaign-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.business-dashboard .campaign-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.business-dashboard .campaign-image {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.business-dashboard .campaign-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.business-dashboard .placeholder-image {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.business-dashboard .placeholder-image span {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.business-dashboard .placeholder-image p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.business-dashboard .status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: white;
+}
+
+.business-dashboard .status-pending {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.business-dashboard .status-approved {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.business-dashboard .status-rejected {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.business-dashboard .status-onhold {
+  background: #E0E7FF;
+  color: #3730A3;
+}
+
+.business-dashboard .campaign-info {
+  padding: 1.5rem;
+}
+
+.business-dashboard .campaign-info h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.business-dashboard .campaign-stats {
+  margin-bottom: 1rem;
+}
+
+.business-dashboard .stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.business-dashboard .stat-row:last-child {
+  border-bottom: none;
+}
+
+.business-dashboard .stat-row .label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.business-dashboard .stat-row .value {
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.business-dashboard .progress-section {
+  margin-bottom: 1rem;
+}
+
+.business-dashboard .progress-bar {
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.business-dashboard .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4F46E5, #7C3AED);
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+.business-dashboard .progress-text {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.business-dashboard .campaign-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.business-dashboard .btn-primary,
+.business-dashboard .btn-secondary {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.business-dashboard .btn-primary {
+  background: #4F46E5;
+  color: white;
+}
+
+.business-dashboard .btn-primary:hover {
+  background: #4338CA;
+}
+
+.business-dashboard .btn-secondary {
+  background: white;
+  color: #4F46E5;
+  border: 2px solid #4F46E5;
+}
+
+.business-dashboard .btn-secondary:hover {
+  background: #f5f5ff;
+}
+
+/* Empty State */
+.business-dashboard .empty-state {
+  background: white;
+  padding: 4rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.business-dashboard .empty-state p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.business-dashboard .create-campaign-btn {
+  padding: 0.75rem 2rem;
+  background: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.business-dashboard .create-campaign-btn:hover {
+  background: #4338CA;
+}
+
+/* Loading and Error States */
+.business-dashboard .loading,
+.business-dashboard .error-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.business-dashboard .error-state h2 {
+  color: #DC2626;
+  margin-bottom: 1rem;
+}
+
+.business-dashboard .action-btn {
+  padding: 0.75rem 2rem;
+  background: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.business-dashboard .action-btn:hover {
+  background: #4338CA;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .business-dashboard {
+    padding: 1rem;
+  }
+
+  .business-dashboard .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .business-dashboard .stats-grid,
+  .business-dashboard .actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .business-dashboard .campaigns-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .business-dashboard .campaign-actions {
+    flex-direction: column;
+  }
+}

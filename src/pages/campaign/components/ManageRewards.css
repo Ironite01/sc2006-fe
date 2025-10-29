@@ -1,9 +1,203 @@
-.manage-rewards-page { padding: 24px; }
-.page-title { font-size: 32px; margin: 0 0 4px; }
-.page-subtitle { font-size: 20px; margin: 0 0 20px; color: #6b5f52; }
-.rewards-list { display: grid; gap: 16px; }
-.reward-row { display: grid; grid-template-columns: 180px 1fr 160px; gap: 16px; align-items: center; background: #fff4ea; padding: 16px; border-radius: 16px; }
-.reward-badge { background: #7b624d; color: #fff; border-radius: 16px; padding: 24px; text-align: center; font-weight: 700; }
-.reward-stats div { line-height: 1.6; }
-.view-btn { display: inline-block; padding: 10px 14px; border-radius: 999px; background: #2bb673; color: #fff; text-decoration: none; text-align: center; }
-.view-btn:hover { filter: brightness(0.95); }
+.manage-rewards-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.manage-rewards-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  margin: 0 0 0.25rem;
+  color: #1a1a1a;
+}
+
+.page-subtitle {
+  font-size: 1.25rem;
+  margin: 0 0 1.25rem;
+  color: #6b5f52;
+}
+
+.manage-rewards-page .back-btn {
+  padding: 0.75rem 1.5rem;
+  background: white;
+  color: #4F46E5;
+  border: 2px solid #4F46E5;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.manage-rewards-page .back-btn:hover {
+  background: #4F46E5;
+  color: white;
+}
+
+.manage-rewards-page .loading,
+.manage-rewards-page .error-state,
+.manage-rewards-page .empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.manage-rewards-page .error-state button,
+.manage-rewards-page .empty-state button {
+  padding: 0.75rem 1.5rem;
+  background: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.rewards-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.reward-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 180px;
+  gap: 1.5rem;
+  align-items: center;
+  background: #fff4ea;
+  padding: 1.5rem;
+  border-radius: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.reward-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.reward-badge {
+  background: #7b624d;
+  color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.reward-badge .reward-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.reward-badge .reward-amount {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.reward-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-around;
+}
+
+.reward-stats .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.reward-stats .stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.reward-stats .stat-value.pending {
+  color: #F59E0B;
+}
+
+.reward-stats .stat-value.completed {
+  color: #10B981;
+}
+
+.reward-stats .stat-value.redeemed {
+  color: #6366F1;
+}
+
+.reward-stats .stat-label {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.reward-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.view-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  background: #10B981;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 600;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.view-btn:hover {
+  background: #059669;
+  transform: scale(1.05);
+}
+
+.view-btn .pending-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #F59E0B;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 2px solid white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reward-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .reward-stats {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .manage-rewards-page .page-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .manage-rewards-page .back-btn {
+    width: 100%;
+  }
+}

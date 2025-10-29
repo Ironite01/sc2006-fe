@@ -270,10 +270,20 @@
 .form-actions {
     text-align: center;
     margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
 }
 
-.create-btn {
-    background-color: #28a745;
+.form-actions > div:first-child {
+    display: flex;
+    gap: 1rem;
+}
+
+.create-btn,
+.save-draft-btn,
+.submit-review-btn {
     color: white;
     border: none;
     padding: 1rem 3rem;
@@ -282,6 +292,10 @@
     border-radius: 0.8rem;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.create-btn {
+    background-color: #28a745;
     box-shadow: 0 2px 5px rgba(40, 167, 69, 0.3);
 }
 
@@ -296,6 +310,45 @@
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+}
+
+.save-draft-btn {
+    background-color: #6c757d;
+    box-shadow: 0 2px 5px rgba(108, 117, 125, 0.3);
+}
+
+.save-draft-btn:hover:not(:disabled) {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.4);
+}
+
+.save-draft-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.submit-review-btn {
+    background-color: #4F46E5;
+    box-shadow: 0 2px 5px rgba(79, 70, 229, 0.3);
+}
+
+.submit-review-btn:hover:not(:disabled) {
+    background-color: #4338CA;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.4);
+}
+
+.submit-review-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.loading-state {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    color: #666;
 }
 
 .submit-info {

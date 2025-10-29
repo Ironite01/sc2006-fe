@@ -25,6 +25,9 @@ import BrowseCampaigns from './pages/BrowseCampaigns';
 // Business Representative Pages
 import ViewSupporters from './pages/campaign/components/ViewSupporters';
 import CampaignComments from './pages/campaign/components/CampaignComments';
+import BusinessDashboard from './pages/BusinessDashboard';
+import CampaignAnalytics from './pages/CampaignAnalytics';
+import ReviewSubmission from './pages/ReviewSubmission';
 
 // Administrator Pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -69,11 +72,16 @@ function App() {
           <Route path="/campaign/:id" element={<CampaignDetails />} />
           <Route path="/campaign/:id/donation" element={<DonationPage />} />
           <Route path="/campaign/:id/comments" element={<CampaignComments />} />
+          <Route path="/campaign/:id/analytics" element={<CampaignAnalytics />} />
           <Route path="/campaign/create" element={<CampaignForm mode="create" />} />
           <Route path="/campaign/edit" element={<CampaignForm mode="edit" />} />
+          <Route path="/campaign/review" element={<ReviewSubmission />} />
           <Route path="/campaign/rewards" element={<ManageRewards />} />
           <Route path="/campaign/rewards/:tierId" element={<RewardTier />} />
           <Route path="/campaign/rewards/:tierId/supporters" element={<ViewSupporters />} />
+
+          {/* Business Representative Dashboard */}
+          <Route path="/business/dashboard" element={<BusinessDashboard />} />
 
           {/* Administrator Routes */}
           <Route path="/admin" element={<AdminLogin />} />

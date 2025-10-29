@@ -12,7 +12,18 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (user) navigate("/", { replace: true });
+        if (user) {
+            try {
+                const userData = JSON.parse(user);
+                if (userData.role === 'BUSINESS_REPRESENTATIVE') {
+                    navigate("/business/dashboard", { replace: true });
+                } else {
+                    navigate("/", { replace: true });
+                }
+            } catch {
+                navigate("/", { replace: true });
+            }
+        }
     }, [user]);
 
     function handleAzureLogin() {
@@ -57,7 +68,12 @@ export default function Login() {
                 window.dispatchEvent(new Event("profileUpdated"));
             }
 
-            navigate("/", { replace: true });
+            // Redirect based on user role
+            if (data.role === 'BUSINESS_REPRESENTATIVE') {
+                navigate("/business/dashboard", { replace: true });
+            } else {
+                navigate("/", { replace: true });
+            }
         } catch (error) {
             console.error("Login error:", error);
             setError("Network error. Please check your connection and try again.");

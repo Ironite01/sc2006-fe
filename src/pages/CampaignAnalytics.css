@@ -1,0 +1,460 @@
+.campaign-analytics {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header */
+.campaign-analytics .analytics-header {
+  margin-bottom: 2rem;
+}
+
+.campaign-analytics .header-content h1 {
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.campaign-analytics .campaign-name {
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.campaign-analytics .back-btn {
+  background: none;
+  border: none;
+  color: #4F46E5;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  font-weight: 600;
+}
+
+.campaign-analytics .back-btn:hover {
+  text-decoration: underline;
+}
+
+/* Overview Section */
+.campaign-analytics .overview-section {
+  margin-bottom: 3rem;
+}
+
+.campaign-analytics .overview-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.campaign-analytics .overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.campaign-analytics .overview-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.campaign-analytics .card-icon {
+  font-size: 2.5rem;
+}
+
+.campaign-analytics .card-content {
+  flex: 1;
+}
+
+.campaign-analytics .card-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.campaign-analytics .card-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.campaign-analytics .card-subtext {
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: 0.25rem;
+}
+
+.campaign-analytics .progress-bar {
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0.75rem 0;
+}
+
+.campaign-analytics .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4F46E5, #7C3AED);
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+.campaign-analytics .progress-text {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Stats Section */
+.campaign-analytics .stats-section {
+  margin-bottom: 3rem;
+}
+
+.campaign-analytics .stats-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.campaign-analytics .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.campaign-analytics .stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.campaign-analytics .stat-icon {
+  font-size: 2.5rem;
+}
+
+.campaign-analytics .stat-content {
+  flex: 1;
+}
+
+.campaign-analytics .stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.campaign-analytics .stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Timeline Section */
+.campaign-analytics .timeline-section {
+  margin-bottom: 3rem;
+}
+
+.campaign-analytics .timeline-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.campaign-analytics .timeline-chart {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 300px;
+  overflow-x: auto;
+}
+
+.campaign-analytics .timeline-bar-container {
+  flex: 1;
+  min-width: 60px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+.campaign-analytics .timeline-bar {
+  width: 100%;
+  max-width: 50px;
+  background: linear-gradient(180deg, #4F46E5, #7C3AED);
+  border-radius: 4px 4px 0 0;
+  transition: all 0.3s;
+  position: relative;
+  cursor: pointer;
+  min-height: 20px;
+}
+
+.campaign-analytics .timeline-bar:hover {
+  opacity: 0.8;
+}
+
+.campaign-analytics .bar-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1a;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  margin-bottom: 0.5rem;
+}
+
+.campaign-analytics .timeline-bar:hover .bar-tooltip {
+  opacity: 1;
+}
+
+.campaign-analytics .timeline-label {
+  font-size: 0.75rem;
+  color: #666;
+  text-align: center;
+  margin-top: 0.5rem;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  white-space: nowrap;
+}
+
+/* Rewards Section */
+.campaign-analytics .rewards-section {
+  margin-bottom: 3rem;
+}
+
+.campaign-analytics .rewards-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.campaign-analytics .rewards-list {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.campaign-analytics .reward-item {
+  margin-bottom: 1.5rem;
+}
+
+.campaign-analytics .reward-item:last-child {
+  margin-bottom: 0;
+}
+
+.campaign-analytics .reward-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.campaign-analytics .reward-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.campaign-analytics .reward-count {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.campaign-analytics .reward-bar {
+  height: 12px;
+  background: #f0f0f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.campaign-analytics .reward-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4F46E5, #7C3AED);
+  border-radius: 6px;
+  transition: width 0.3s;
+}
+
+/* Recent Donations Section */
+.campaign-analytics .recent-donations-section {
+  margin-bottom: 3rem;
+}
+
+.campaign-analytics .recent-donations-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.campaign-analytics .donations-table {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.campaign-analytics .donations-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.campaign-analytics .donations-table th {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 2px solid #f0f0f0;
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.campaign-analytics .donations-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #f0f0f0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.campaign-analytics .donations-table tr:last-child td {
+  border-bottom: none;
+}
+
+.campaign-analytics .status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.campaign-analytics .status-badge.completed {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.campaign-analytics .status-badge.pending {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.campaign-analytics .status-badge.failed {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+/* Actions */
+.campaign-analytics .analytics-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.campaign-analytics .btn-primary,
+.campaign-analytics .btn-secondary {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.campaign-analytics .btn-primary {
+  background: #4F46E5;
+  color: white;
+}
+
+.campaign-analytics .btn-primary:hover {
+  background: #4338CA;
+}
+
+.campaign-analytics .btn-secondary {
+  background: white;
+  color: #4F46E5;
+  border: 2px solid #4F46E5;
+}
+
+.campaign-analytics .btn-secondary:hover {
+  background: #f5f5ff;
+}
+
+/* Loading and Error States */
+.campaign-analytics .loading,
+.campaign-analytics .error-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.campaign-analytics .error-state h2 {
+  color: #DC2626;
+  margin-bottom: 1rem;
+}
+
+.campaign-analytics .action-btn {
+  padding: 0.75rem 2rem;
+  background: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.campaign-analytics .action-btn:hover {
+  background: #4338CA;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .campaign-analytics {
+    padding: 1rem;
+  }
+
+  .campaign-analytics .overview-grid,
+  .campaign-analytics .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .campaign-analytics .timeline-chart {
+    height: 250px;
+  }
+
+  .campaign-analytics .analytics-actions {
+    flex-direction: column;
+  }
+
+  .campaign-analytics .analytics-actions button {
+    width: 100%;
+  }
+
+  .campaign-analytics .donations-table {
+    font-size: 0.85rem;
+  }
+}

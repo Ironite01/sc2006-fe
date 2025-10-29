@@ -1,7 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import './CampaignForm.css';
 
 export default function CampaignForm() {
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const campaignId = searchParams.get('id');
+    const isEditMode = !!campaignId;
+
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         campaignName: '',
         description: '',
@@ -12,6 +19,41 @@ export default function CampaignForm() {
 
     const [errors, setErrors] = useState({});
     const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        if (isEditMode) {
+            loadCampaignData();
+        }
+    }, [campaignId]);
+
+    async function loadCampaignData() {
+        try {
+            setLoading(true);
+            const response = await fetch(`http://localhost:3000/campaigns/${campaignId}`, {
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to load campaign');
+            }
+
+            const campaign = await response.json();
+
+            setFormData({
+                campaignName: campaign.name || '',
+                description: campaign.description || '',
+                goal: campaign.goal || '',
+                endDate: campaign.endDate ? campaign.endDate.split('T')[0] : '',
+                rewards: [{ donationAmount: '', correspondingReward: '' }]
+            });
+
+            setLoading(false);
+        } catch (err) {
+            console.error('Error loading campaign:', err);
+            alert('Failed to load campaign data');
+            setLoading(false);
+        }
+    }
 
     const handleInputChange = (field, value) => {
         setFormData(prev => ({
@@ -93,18 +135,165 @@ export default function CampaignForm() {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validateForm()) {
-            // Handle form submission logic here
-            console.log('Form submitted:', formData);
-            alert('Campaign created successfully! Redirecting to home page...');
+        if (!validateForm()) {
+            return;
+        }
+
+        try {
+            setLoading(true);
+
+            // Get user data from cookies
+            const userDataCookie = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('userData='));
+
+            if (!userDataCookie) {
+                alert('Please log in to create/edit campaigns');
+                navigate('/login');
+                return;
+            }
+
+            const userData = JSON.parse(decodeURIComponent(userDataCookie.split('=')[1]));
+            const userId = userData.userId;
+
+            const campaignData = {
+                name: formData.campaignName,
+                description: formData.description,
+                goal: parseFloat(formData.goal),
+                endDate: formData.endDate,
+                imageUrl: images.length > 0 ? URL.createObjectURL(images[0]) : '',
+                status: 'draft',
+                userId: userId
+            };
+
+            let response;
+            if (isEditMode) {
+                // Update existing campaign
+                response = await fetch(`http://localhost:3000/campaigns/${campaignId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(campaignData)
+                });
+            } else {
+                // Create new campaign
+                response = await fetch('http://localhost:3000/campaigns', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(campaignData)
+                });
+            }
+
+            if (!response.ok) {
+                throw new Error('Failed to save campaign');
+            }
+
+            const result = await response.json();
+            const savedCampaignId = result.campaignId || result.id || campaignId;
+
+            alert(isEditMode ? 'Campaign updated successfully!' : 'Campaign created successfully!');
+            navigate('/campaign');
+        } catch (error) {
+            console.error('Error saving campaign:', error);
+            alert('Failed to save campaign: ' + error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
+    const handleSubmitForReview = async (e) => {
+        e.preventDefault();
+        if (!validateForm()) {
+            return;
+        }
+
+        try {
+            setLoading(true);
+
+            // First save the campaign
+            const userDataCookie = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('userData='));
+
+            if (!userDataCookie) {
+                alert('Please log in to create/edit campaigns');
+                navigate('/login');
+                return;
+            }
+
+            const userData = JSON.parse(decodeURIComponent(userDataCookie.split('=')[1]));
+            const userId = userData.userId;
+
+            const campaignData = {
+                name: formData.campaignName,
+                description: formData.description,
+                goal: parseFloat(formData.goal),
+                endDate: formData.endDate,
+                imageUrl: images.length > 0 ? URL.createObjectURL(images[0]) : '',
+                status: 'draft',
+                userId: userId
+            };
+
+            let response;
+            let savedCampaignId = campaignId;
+
+            if (isEditMode) {
+                response = await fetch(`http://localhost:3000/campaigns/${campaignId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(campaignData)
+                });
+            } else {
+                response = await fetch('http://localhost:3000/campaigns', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(campaignData)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    savedCampaignId = result.campaignId || result.id;
+                }
+            }
+
+            if (!response.ok) {
+                throw new Error('Failed to save campaign');
+            }
+
+            // Navigate to review submission page
+            navigate(`/campaign/review?campaignId=${savedCampaignId}`);
+        } catch (error) {
+            console.error('Error saving campaign:', error);
+            alert('Failed to save campaign: ' + error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading && isEditMode) {
+        return (
+            <div className="campaign-form-container">
+                <div className="loading-state">Loading campaign data...</div>
+            </div>
+        );
+    }
+
     return (
         <div className="campaign-form-container">
-            <h1 className="form-title">Create Your Campaign</h1>
+            <h1 className="form-title">{isEditMode ? 'Edit Your Campaign' : 'Create Your Campaign'}</h1>
             
             <form onSubmit={handleSubmit} className="campaign-form">
                 {/* Campaign Name Field */}
@@ -300,13 +489,27 @@ export default function CampaignForm() {
                     </div>
                 </div>
 
-                {/* Submit Button */}
+                {/* Submit Buttons */}
                 <div className="form-actions">
-                    <button type="submit" className="create-btn">
-                        Create
+                    <button
+                        type="submit"
+                        className="save-draft-btn"
+                        disabled={loading}
+                    >
+                        {loading ? 'Saving...' : (isEditMode ? 'Save Changes' : 'Save as Draft')}
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleSubmitForReview}
+                        className="submit-review-btn"
+                        disabled={loading}
+                    >
+                        {loading ? 'Saving...' : 'Submit for Review'}
                     </button>
                     <div className="submit-info">
-                        Disabled by default. If all validation is successful, the button is enabled, and will proceed with the create campaign flow. The user is then re-directed to the home page.
+                        {isEditMode
+                            ? 'Save your changes as a draft or submit for review'
+                            : 'Save as draft to continue editing later, or submit for review to request approval'}
                     </div>
                 </div>
             </form>
