@@ -1,0 +1,401 @@
+.public-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 80vh;
+}
+
+.public-page h1 {
+  font-size: 2.5rem;
+  color: #4a3f35;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.content-section {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  line-height: 1.8;
+}
+
+.content-section h2 {
+  font-size: 1.8rem;
+  color: #4a3f35;
+  margin: 2rem 0 1rem;
+}
+
+.content-section p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+/* FAQ Styles */
+.faq-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4a3f35;
+  text-align: left;
+  transition: background 0.3s;
+}
+
+.faq-question:hover {
+  background: #f9f9f9;
+}
+
+.faq-question.active {
+  background: #5d4e41;
+  color: white;
+}
+
+.faq-icon {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.faq-answer {
+  padding: 0 1.5rem 1.5rem;
+  background: #f9f9f9;
+}
+
+.faq-answer p {
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* About Page Styles */
+.hero-section {
+  text-align: center;
+  padding: 2rem 0;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 2rem;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.value-item {
+  padding: 1.5rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.value-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  color: #4a3f35;
+}
+
+.value-item p {
+  margin: 0;
+  color: #666;
+}
+
+.steps-list {
+  padding-left: 1.5rem;
+  color: #666;
+}
+
+.steps-list li {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+/* Contact Page Styles */
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
+}
+
+.contact-info h2 {
+  font-size: 1.8rem;
+  color: #4a3f35;
+  margin-bottom: 1rem;
+}
+
+.contact-methods {
+  margin-top: 2rem;
+}
+
+.contact-method {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.contact-method h3 {
+  font-size: 1.2rem;
+  color: #4a3f35;
+  margin-bottom: 0.5rem;
+}
+
+.contact-method p {
+  margin: 0;
+  color: #666;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #4a3f35;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #ff8c42;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.submit-button {
+  padding: 0.875rem;
+  background: #ff8c42;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-button:hover {
+  background: #e67a2f;
+}
+
+.success-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* How It Works Styles */
+.intro-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.intro-section p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.process-section {
+  margin-bottom: 4rem;
+}
+
+.process-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #4a3f35;
+  margin-bottom: 3rem;
+}
+
+.steps {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.step-item {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  align-items: flex-start;
+}
+
+.step-number {
+  width: 60px;
+  height: 60px;
+  background: #ff8c42;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.step-content h3 {
+  font-size: 1.4rem;
+  color: #4a3f35;
+  margin-bottom: 0.5rem;
+}
+
+.step-content p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.features-section {
+  background: #f9f9f9;
+  padding: 3rem;
+  border-radius: 12px;
+  margin: 3rem 0;
+}
+
+.features-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature-item {
+  text-align: center;
+}
+
+.feature-item h3 {
+  font-size: 1.2rem;
+  color: #4a3f35;
+  margin-bottom: 0.5rem;
+}
+
+.feature-item p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.cta-section {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.cta-section h2 {
+  font-size: 2rem;
+  color: #4a3f35;
+  margin-bottom: 1rem;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.cta-button {
+  padding: 0.875rem 2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cta-button.primary {
+  background: #ff8c42;
+  color: white;
+}
+
+.cta-button.primary:hover {
+  background: #e67a2f;
+}
+
+.cta-button.secondary {
+  background: white;
+  color: #ff8c42;
+  border: 2px solid #ff8c42;
+}
+
+.cta-button.secondary:hover {
+  background: #ff8c42;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+
+  .content-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .step-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+}

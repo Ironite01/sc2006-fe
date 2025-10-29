@@ -1,20 +1,79 @@
-import React, { useMemo, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import React, { useMemo, useState, useEffect } from "react";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import "./DonationPage.css";
 
-import campaigns from "../../../data/campaigns.json";
 import tiersDB from "../../../data/donationRewards.json";
+import { campaign as campaignApi, donation as donationApi } from "../../../paths";
 
 export default function DonationPage() {
   const { id } = useParams();
   const { state } = useLocation();
+  const navigate = useNavigate();
 
-  // 1) find the right campaign by :id
-  const campaign = useMemo(() => {
-    const found = campaigns.campaigns?.find(
-      (c) => String(c.id) === String(id)
-    );
-    return found || null;
+  // State for campaign data
+  const [campaign, setCampaign] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  // Fetch campaign data from API
+  useEffect(() => {
+    let alive = true;
+
+    async function loadCampaign() {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const res = await fetch(campaignApi.one(id), {
+          credentials: 'include'
+        });
+
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          throw new Error(errorData.error || 'Failed to fetch campaign');
+        }
+
+        const data = await res.json();
+
+        if (alive) {
+          // Map backend data to frontend expected structure
+          const mappedCampaign = {
+            id: data.campaignId,
+            campaignId: data.campaignId,
+            name: data.name,
+            description: data.description,
+            imageUrl: data.imageUrl || '/placeholder-shop.jpg',
+            tag: data.tag || 'Local Business',
+            fundingGoal: data.goal,
+            currentFunding: data.amtRaised || 0,
+            progress: data.progress || 0,
+            rentDue: data.endDate,
+            endDate: data.endDate,
+            status: data.status,
+            campaignName: data.name,
+            rewardTiers: data.rewardTiers || []
+          };
+
+          setCampaign(mappedCampaign);
+        }
+      } catch (err) {
+        if (alive) {
+          console.error('Error loading campaign:', err);
+          setError(err.message || 'Failed to load campaign');
+        }
+      } finally {
+        if (alive) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadCampaign();
+
+    return () => {
+      alive = false;
+    };
   }, [id]);
 
   // 2) tiers source: prefer campaign.rewardTiers; else fallback JSON; else empty
@@ -41,7 +100,7 @@ export default function DonationPage() {
   const [cvv, setCvv] = useState("");
   const [saveCard, setSaveCard] = useState(false);
   const [agreeTos, setAgreeTos] = useState(false);
-  const [error, setError] = useState("");
+  const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState("");
 
   // current numeric amount
@@ -63,26 +122,77 @@ export default function DonationPage() {
   const isValidExpiry = (val) => /^(0[1-9]|1[0-2])\/\d{2}$/.test(val);
   const isValidCvv = (val) => /^[0-9]{3,4}$/.test(val);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setFormError("");
     setSuccess("");
 
-    if (!isValidCardNumber(cardNumber)) return setError("Invalid card number");
-    if (!nameOnCard.trim()) return setError("Please enter name on card");
-    if (!isValidExpiry(expiry)) return setError("Invalid expiry format (MM/YY)");
-    if (!isValidCvv(cvv)) return setError("Invalid CVV");
-    if (!agreeTos) return setError("Please agree to the terms");
+    if (!isValidCardNumber(cardNumber)) return setFormError("Invalid card number");
+    if (!nameOnCard.trim()) return setFormError("Please enter name on card");
+    if (!isValidExpiry(expiry)) return setFormError("Invalid expiry format (MM/YY)");
+    if (!isValidCvv(cvv)) return setFormError("Invalid CVV");
+    if (!agreeTos) return setFormError("Please agree to the terms");
 
-    setSuccess(
-      `Thanks! You donated $${amount.toFixed(2)} to ${campaign?.name || "this shop"}`
-    );
+    // Submit donation to backend
+    setSubmitting(true);
+    try {
+      const res = await fetch(donationApi.create, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          campaignId: id,
+          amount: amount,
+          cardDetails: {
+            cardNumber,
+            nameOnCard,
+            expiry,
+            cvv
+          }
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to process donation');
+      }
+
+      setSuccess(
+        `Thanks! You donated $${amount.toFixed(2)} to ${campaign?.name || "this shop"}`
+      );
+
+      // Redirect to campaign page after 2 seconds to show updated stats
+      setTimeout(() => {
+        navigate(`/campaign/${id}`);
+      }, 2000);
+
+    } catch (err) {
+      console.error('Donation error:', err);
+      setFormError(err.message || 'Failed to process donation. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  if (!campaign) {
+  if (loading) {
+    return (
+      <div className="donation-page">
+        <h2>Loading campaign details...</h2>
+      </div>
+    );
+  }
+
+  if (error || !campaign) {
     return (
       <div className="donation-page">
         <h2>Campaign not found</h2>
+        {error && <p>{error}</p>}
+        <a href="/" style={{ color: '#4F46E5', textDecoration: 'underline' }}>
+          Return to Home
+        </a>
       </div>
     );
   }
@@ -209,13 +319,13 @@ export default function DonationPage() {
           </label>
         </div>
 
-        {error && <p className="error-msg">{error}</p>}
+        {formError && <p className="error-msg">{formError}</p>}
         {success && <p className="success-msg">{success}</p>}
 
-        <button type="submit" className="btn-donate">
-          Donate ${amount.toFixed(2)}
+        <button type="submit" className="btn-donate" disabled={submitting}>
+          {submitting ? 'Processing...' : `Donate $${amount.toFixed(2)}`}
         </button>
-        <button type="button" className="btn-paypal">
+        <button type="button" className="btn-paypal" disabled={submitting}>
           Continue with PayPal
         </button>
       </form>

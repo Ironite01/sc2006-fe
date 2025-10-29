@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './CampaignDetails.css';
-import campaigns from '../data/campaigns.json';
+import { campaign as campaignApi } from '../paths';
 import ShopsLostSection from '../components/ShopsLostSection';
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,7 @@ export default function CampaignDetails() {
   const { id } = useParams();
   const [campaign, setCampaign] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [donationAmount, setDonationAmount] = useState(25);
   const [commentText, setCommentText] = useState('');
   const navigate = useNavigate();
@@ -26,27 +27,82 @@ export default function CampaignDetails() {
 
 
   useEffect(() => {
-    // Handle both string and numeric IDs
-    const foundCampaign = campaigns.campaigns.find(c => {
-      // Try exact match first (for string IDs)
-      if (c.id === id) return true;
-      // Try numeric match (for numeric IDs)
-      if (c.id === parseInt(id)) return true;
-      return false;
-    });
-    setCampaign(foundCampaign);
-    setLoading(false);
+    let alive = true;
+
+    async function loadCampaign() {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const res = await fetch(campaignApi.one(id), {
+          credentials: 'include'
+        });
+
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          throw new Error(errorData.error || 'Failed to fetch campaign');
+        }
+
+        const data = await res.json();
+
+        if (alive) {
+          // Map backend data to frontend expected structure
+          const mappedCampaign = {
+            id: data.campaignId,
+            campaignId: data.campaignId,
+            name: data.name,
+            description: data.description,
+            imageUrl: data.imageUrl || '/placeholder-shop.jpg',
+            tag: data.tag || 'Local Business',
+            fundingGoal: data.goal,
+            currentFunding: data.amtRaised || 0,
+            progress: data.progress || 0,
+            rentDue: data.endDate,
+            endDate: data.endDate,
+            status: data.status,
+            supporters: data.backerCount || 0,
+            daysLeft: Math.max(0, Math.ceil((new Date(data.endDate) - new Date()) / (1000 * 60 * 60 * 24))),
+            story: data.description || 'Campaign story coming soon...',
+            updates: data.updates || [],
+            owners: data.owners || [],
+            comments: data.comments || [],
+            rewardTiers: data.rewardTiers || [
+              { amount: 25, title: 'Supporter', description: 'Thank you for your support!', backers: 0 },
+              { amount: 50, title: 'Bronze Supporter', description: 'Get a thank you card', backers: 0 },
+              { amount: 100, title: 'Silver Supporter', description: 'Get a special mention', backers: 0 }
+            ]
+          };
+
+          setCampaign(mappedCampaign);
+        }
+      } catch (err) {
+        if (alive) {
+          console.error('Error loading campaign:', err);
+          setError(err.message || 'Failed to load campaign');
+        }
+      } finally {
+        if (alive) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadCampaign();
+
+    return () => {
+      alive = false;
+    };
   }, [id]);
 
   if (loading) {
     return <div className="loading">Loading campaign details...</div>;
   }
 
-  if (!campaign) {
+  if (error || !campaign) {
     return (
       <div className="loading">
         <h2>Campaign Not Found</h2>
-        <p>This campaign is coming soon! Check back later.</p>
+        <p>{error || 'This campaign is coming soon! Check back later.'}</p>
         <a href="/" style={{ color: '#4F46E5', textDecoration: 'underline' }}>
           Return to Home
         </a>

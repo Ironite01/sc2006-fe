@@ -1,0 +1,267 @@
+.admin-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.admin-nav button {
+  padding: 0.75rem 1.5rem;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  color: #333;
+  font-weight: 500;
+}
+
+.admin-nav button:hover {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.admin-nav button.active {
+  background: #667eea;
+  border-color: #667eea;
+  color: white;
+}
+
+.admin-page h1 {
+  font-size: 2rem;
+  color: #4a3f35;
+  margin-bottom: 2rem;
+}
+
+.campaigns-table {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.campaigns-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.campaigns-table thead {
+  background: #4a3f35;
+  color: white;
+}
+
+.campaigns-table th,
+.campaigns-table td {
+  padding: 1rem;
+  text-align: left;
+}
+
+.campaigns-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.campaigns-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.approve-btn, .reject-btn, .suspend-btn, .unsuspend-btn, .view-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+.approve-btn {
+  background: #28a745;
+  color: white;
+}
+
+.approve-btn:hover {
+  background: #218838;
+}
+
+.reject-btn, .suspend-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.reject-btn:hover, .suspend-btn:hover {
+  background: #c82333;
+}
+
+.unsuspend-btn {
+  background: #ffc107;
+  color: #333;
+}
+
+.unsuspend-btn:hover {
+  background: #e0a800;
+}
+
+.view-btn {
+  background: #5d4e41;
+  color: white;
+}
+
+.view-btn:hover {
+  background: #4a3f35;
+}
+
+.campaigns-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.campaign-card {
+  background: #5d4e41;
+  color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.campaign-image {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.campaign-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.campaign-card p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: #5d4e41;
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-card h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.stats-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.stats-section h2 {
+  font-size: 1.5rem;
+  color: #4a3f35;
+  margin-bottom: 1.5rem;
+}
+
+.chart-placeholder {
+  background: #f5f5f5;
+  padding: 4rem;
+  border-radius: 8px;
+  text-align: center;
+  color: #666;
+  font-size: 1.2rem;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.stats-section.half {
+  margin-bottom: 0;
+}
+
+.funnel, .campaign-breakdown {
+  margin-bottom: 1.5rem;
+}
+
+.funnel-item, .breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #f5f5f5;
+  margin-bottom: 0.75rem;
+  border-radius: 6px;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 1rem;
+}
+
+.loading, .no-data {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  font-size: 1.2rem;
+}
+
+.no-data {
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-nav {
+    flex-direction: column;
+  }
+
+  .admin-nav button {
+    width: 100%;
+  }
+}

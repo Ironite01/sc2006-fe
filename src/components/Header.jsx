@@ -70,10 +70,10 @@ export default function Header({ onSearch }) {
     return <header className="place-content-center">
         <nav className="flex justify-between items-center">
             <nav className="flex order-1 gap-[0.5rem] items-center">
-                <img src={profile} alt="App logo" className='h-[2.75rem] w-auto logo' />
-                <a>Home</a>
-                <a>Rewards</a>
-                <a>Updates</a>
+                <img src={profile} alt="App logo" className='h-[2.75rem] w-auto logo' onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
+                <a onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>Home</a>
+                <a onClick={() => navigate('/rewards')} style={{ cursor: 'pointer' }}>Rewards</a>
+                <a onClick={() => navigate('/updates')} style={{ cursor: 'pointer' }}>Updates</a>
             </nav>
             <div className="flex order-2 items-center gap-[1.25rem]">
                 <Searchbar onSearch={onSearch} />

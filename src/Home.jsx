@@ -33,14 +33,14 @@ export default function Home({ searchQuery }) {
           );
         }
 
-        // backend shape = [{ id, shop: { id, name, tag, imageUrl, progress, businessRepresentative, location }}]
+        // backend shape = [{ id, shop: { id, name, tag, imageUrl, verificationStatus, businessRepresentative, location }}]
         // map to the flat shape your UI expects
         const mapped = (data || []).map((x) => ({
-          id: x?.shop?.id ?? String(x?.id ?? ""),
+          id: x?.id ?? "",  // Use numeric shopId instead of shop.id slug
           name: x?.shop?.name ?? "",
           tag: x?.shop?.tag ?? "",
           imageUrl: x?.shop?.imageUrl ?? "",
-          progress: Number(x?.shop?.progress ?? 0),
+          verificationStatus: x?.shop?.verificationStatus ?? "pending",
           businessRepresentative: x?.shop?.businessRepresentative ?? "",
           location: x?.shop?.location ?? "",
         }));
@@ -79,9 +79,30 @@ export default function Home({ searchQuery }) {
   const filteredLocalGems = filterShops(localGems);
   const filteredFlavours = filterShops(flavours);
 
-  const handleFeaturedClick = () => {
+  const handleFeaturedClick = async () => {
     if (featuredShop?.id) {
-      navigate(`/campaign/${featuredShop.id}`);
+      try {
+        // Fetch campaigns for this shop
+        const res = await fetch(`http://localhost:3000/shops/${featuredShop.id}/campaigns`, {
+          credentials: 'include'
+        });
+
+        if (!res.ok) {
+          console.error('Failed to fetch campaigns for featured shop:', featuredShop.id);
+          return;
+        }
+
+        const campaigns = await res.json();
+
+        // Navigate to the first active campaign if available
+        if (campaigns && campaigns.length > 0) {
+          navigate(`/campaign/${campaigns[0].campaignId}`);
+        } else {
+          console.warn('No campaigns found for featured shop:', featuredShop.id);
+        }
+      } catch (error) {
+        console.error('Error fetching campaigns:', error);
+      }
     }
   };
 
@@ -118,14 +139,12 @@ export default function Home({ searchQuery }) {
           </div>
           <div className="progress-indicator">
             <div className="progress-header">
-              <span className="progress-label">Funding Progress</span>
-              <span className="progress-percentage">{featuredShop.progress}%</span>
-            </div>
-            <div className="progress">
-              <div
-                className="progress-bar"
-                style={{ width: `${Math.min(100, Math.max(0, featuredShop.progress))}%` }}
-              />
+              <span className="progress-label">Shop Status</span>
+              <span className={`verification-badge ${featuredShop.verificationStatus}`}>
+                {featuredShop.verificationStatus === 'verified' && '✓ Verified'}
+                {featuredShop.verificationStatus === 'pending' && '⏳ Pending Verification'}
+                {featuredShop.verificationStatus === 'rejected' && '✗ Rejected'}
+              </span>
             </div>
           </div>
         </section>

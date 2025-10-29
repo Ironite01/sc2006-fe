@@ -1,0 +1,152 @@
+.view-supporters-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.back-button {
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  transition: color 0.3s;
+}
+
+.back-button:hover {
+  color: #333;
+}
+
+.view-supporters-page h1 {
+  font-size: 2rem;
+  color: #4a3f35;
+  margin-bottom: 0.5rem;
+}
+
+.view-supporters-page h2 {
+  font-size: 1.5rem;
+  color: #6b5d52;
+  margin-bottom: 2rem;
+}
+
+.reward-tier-header {
+  background: #5d4e41;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.reward-tier-header h3 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.supporters-table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
+.supporters-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.supporters-table thead {
+  background: #4a3f35;
+  color: white;
+}
+
+.supporters-table th,
+.supporters-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.supporters-table th {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.supporters-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.supporters-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.redeemed {
+  background: #e2e3e5;
+  color: #6c757d;
+}
+
+.action-button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+.action-button:hover {
+  background: #218838;
+}
+
+.na {
+  color: #999;
+  font-style: italic;
+}
+
+.no-supporters {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  padding: 3rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 3rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .supporters-table-container {
+    overflow-x: scroll;
+  }
+
+  .supporters-table {
+    min-width: 700px;
+  }
+}
