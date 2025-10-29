@@ -1,0 +1,106 @@
+/* Page */
+.uc-page { padding: 24px; }
+.uc-title { font-size: 28px; margin: 0 0 6px; }
+.uc-sub { color: #6b5f52; margin: 0 0 18px; }
+
+/* Layout */
+.uc-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 20px;
+}
+@media (max-width: 1000px) {
+  .uc-grid { grid-template-columns: 1fr; }
+}
+.uc-col { display: grid; gap: 16px; }
+
+/* Cards */
+.uc-card {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 14px;
+  background: #fff4ea;      
+  border-radius: 18px;
+  padding: 14px;
+}
+.uc-card--published { background: #7b624d; color: #fff; }
+.uc-card--published .uc-card-meta { color: #efe7df; }
+.uc-card--published .uc-btn--ghost { color: #fff; border-color: #fff; }
+
+.uc-card-media img, .uc-media-placeholder {
+  width: 140px; height: 100px; border-radius: 12px; object-fit: cover;
+  background: #b6a692;
+}
+.uc-card-body { display: grid; gap: 6px; }
+.uc-card-title { margin: 0; font-size: 18px; }
+.uc-card-meta { font-size: 12px; color: #8b7c6e; }
+.uc-card-text { margin: 0; line-height: 1.4; }
+.uc-actions { display: flex; gap: 8px; margin-top: 6px; }
+
+/* Panels (right column) */
+.uc-panel {
+  background: #fffdf9;
+  border: 1px solid #e3d7c7;
+  border-radius: 16px;
+  padding: 14px;
+}
+.uc-panel-title { margin: 0 0 10px; font-size: 16px; }
+.uc-stats { display: grid; gap: 6px; }
+
+/* Form */
+.uc-label { display: grid; gap: 6px; margin-bottom: 10px; font-weight: 600; }
+.uc-input, .uc-textarea, .uc-file {
+  width: 100%; border: 1px solid #cbb9a6; border-radius: 10px; padding: 10px;
+  background: #fff; font: inherit;
+}
+.uc-textarea { resize: vertical; }
+.uc-form-actions { display: flex; gap: 10px; margin-top: 6px; }
+
+/* Buttons */
+.uc-btn {
+  padding: 2px 8px;              /* much thinner vertically */
+  min-height: unset;             /* override any inherited height */
+  line-height: 1;                /* remove extra inner spacing */
+  border-radius: 999px;
+  border: 1px solid #b6a692;
+  background: transparent;
+  font-size: 12px;               /* slightly smaller font */
+  cursor: pointer;
+  display: inline-flex;          /* centers text neatly */
+  align-items: center;
+  justify-content: center;
+}
+
+.uc-btn--primary {
+  background: #2bb673; border-color: #2bb673; color: #fff;
+}
+.uc-btn--ghost {
+  background: transparent; border: 1px solid currentColor; color: inherit;
+}
+.uc-btn:hover { filter: brightness(0.98); }
+
+.uc-actions {
+  display: flex;
+  gap: 4px;        /* tighter spacing */
+  margin-top: 2px;
+}
+button.uc-btn {
+  height: auto;
+  padding-block: 2px;  /* ensures vertical padding is exactly 2px */
+}
+
+/* Compact pill buttons: force-thin */
+.uc-actions .uc-btn.uc-btn--compact {
+  padding: 0 8px !important;     /* very thin */
+  height: 22px !important;       /* force height */
+  line-height: 22px !important;  /* center text vertically */
+  font-size: 12px !important;
+  min-height: 0 !important;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+}

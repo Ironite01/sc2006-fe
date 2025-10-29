@@ -10,7 +10,10 @@ import ForgotPassword from './pages/forgot-password';
 import ResetPassword from './pages/forgot-password/ResetPassword';
 import Campaign from './pages/campaign';
 import CampaignDetails from './pages/CampaignDetails';
-import DonationPage from "./pages/campaign/index.jsx";
+import DonationPage from './pages/campaign/components/DonationPage.jsx';
+import CampaignForm from './pages/campaign/components/CampaignForm.jsx';
+import ManageRewards from './pages/campaign/components/ManageRewards.jsx';
+import RewardTier from './pages/campaign/components/RewardTier.jsx';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -28,6 +31,10 @@ function App() {
           <Route path="/campaign" element={<Campaign />} />
           <Route path="/campaign/:id" element={<CampaignDetails />} />
           <Route path="/campaign/:id/donation" element={<DonationPage />} />
+          <Route path="/campaign/create" element={<CampaignForm mode="create" />} />
+          <Route path="/campaign/edit" element={<CampaignForm mode="edit" />} />
+          <Route path="/campaign/rewards" element={<ManageRewards />} />
+          <Route path="/campaign/rewards/:tierId" element={<RewardTier />} />
         </Routes>
       </main>
       <Footer />

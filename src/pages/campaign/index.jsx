@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CampaignManager from './components/CampaignManager';
 import CampaignForm from './components/CampaignForm';
 import './Campaign.css';
+import UpdateComposer from "./components/UpdateComposer";
 
 export default function Campaign() {
     const [activeTab, setActiveTab] = useState('campaign-manager');
@@ -31,7 +32,7 @@ export default function Campaign() {
                             className={`nav-tab ${activeTab === 'update-composer' ? 'active' : ''}`}
                             onClick={() => setActiveTab('update-composer')}
                         >
-                            UPDATE COMPOSER
+                            Update Composer
                         </button>
                     </div>
 
@@ -42,11 +43,9 @@ export default function Campaign() {
                         )}
 
                         {activeTab === 'update-composer' && (
-                            <div className="update-composer-placeholder">
-                                <h2>UPDATE COMPOSER</h2>
-                                <p>this section would contain the update composer functionality</p>
-                            </div>
+                            <UpdateComposer />
                         )}
+
                     </div>
                 </>
             )}
