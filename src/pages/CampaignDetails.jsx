@@ -1,11 +1,75 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './CampaignDetails.css';
+import './carousel-styles.css';
 import { campaign as campaignApi } from '../paths';
 import ShopsLostSection from '../components/ShopsLostSection';
 import { useNavigate } from "react-router-dom";
 import UpdateComments from './updates/UpdateComments';
 import Cookies from 'js-cookie';
+
+// Story Images Carousel Component
+function StoryCarousel({ images }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  if (!images || images.length === 0) return null;
+
+  const nextImage = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  };
+
+  const goToImage = (index) => {
+    setCurrentIndex(index);
+  };
+
+  return (
+    <div className="story-carousel">
+      <div className="carousel-main">
+        <button className="carousel-btn prev" onClick={prevImage} aria-label="Previous image">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+
+        <div className="carousel-image-container">
+          <img
+            src={images[currentIndex].url}
+            alt={images[currentIndex].caption || `Story image ${currentIndex + 1}`}
+            className="carousel-image"
+          />
+          {images[currentIndex].caption && (
+            <div className="carousel-caption">{images[currentIndex].caption}</div>
+          )}
+        </div>
+
+        <button className="carousel-btn next" onClick={nextImage} aria-label="Next image">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div className="carousel-indicators">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            className={`indicator ${index === currentIndex ? 'active' : ''}`}
+            onClick={() => goToImage(index)}
+            aria-label={`Go to image ${index + 1}`}
+          />
+        ))}
+      </div>
+
+      <div className="carousel-counter">
+        {currentIndex + 1} / {images.length}
+      </div>
+    </div>
+  );
+}
 
 
 export default function CampaignDetails() {
@@ -19,6 +83,8 @@ export default function CampaignDetails() {
   const [loadingUpdates, setLoadingUpdates] = useState(true);
   const [commentsModal, setCommentsModal] = useState({ isOpen: false, updateId: null });
   const [currentUser, setCurrentUser] = useState(null);
+  const [isStoryExpanded, setIsStoryExpanded] = useState(false);
+  const [storyTab, setStoryTab] = useState('story'); // 'story' or 'photos'
   const navigate = useNavigate();
 
   const handleDonateClick = () => {
@@ -68,7 +134,8 @@ export default function CampaignDetails() {
             status: data.status,
             supporters: data.backerCount || 0,
             daysLeft: Math.max(0, Math.ceil((new Date(data.endDate) - new Date()) / (1000 * 60 * 60 * 24))),
-            story: data.description || 'Campaign story coming soon...',
+            story: data.story || data.description || 'Campaign story coming soon...',
+            storyImages: data.storyImages || [],
             updates: data.updates || [],
             owners: data.owners || [],
             comments: data.comments || [],
@@ -306,10 +373,90 @@ export default function CampaignDetails() {
           {/* Our Story */}
           <section className="story-section">
             <h2>Our Story</h2>
-            <div className="story-content">
-              {campaign.story.split('\n\n').map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
+
+            {/* Tab Navigation */}
+            <div className="story-tabs">
+              <button
+                className={`story-tab ${storyTab === 'story' ? 'active' : ''}`}
+                onClick={() => setStoryTab('story')}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                Story
+              </button>
+              <button
+                className={`story-tab ${storyTab === 'photos' ? 'active' : ''}`}
+                onClick={() => setStoryTab('photos')}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                Photos ({campaign.storyImages?.length || 0})
+              </button>
+            </div>
+
+            {/* Tab Content */}
+            <div className="story-tab-content">
+              {storyTab === 'story' ? (
+                <div className="story-content">
+                  {(() => {
+                    const paragraphs = campaign.story.split('\n\n');
+                    const displayParagraphs = isStoryExpanded ? paragraphs : paragraphs.slice(0, 2);
+
+                    return (
+                      <>
+                        <div className={`story-text ${!isStoryExpanded ? 'story-collapsed' : ''}`}>
+                          {displayParagraphs.map((paragraph, index) => (
+                            <p key={index}>{paragraph}</p>
+                          ))}
+                        </div>
+
+                        {paragraphs.length > 2 && (
+                          <button
+                            className="expand-story-btn"
+                            onClick={() => setIsStoryExpanded(!isStoryExpanded)}
+                          >
+                            {isStoryExpanded ? (
+                              <>
+                                <span>Read Less</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                  <path d="M18 15l-6-6-6 6" />
+                                </svg>
+                              </>
+                            ) : (
+                              <>
+                                <span>Read More</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                  <path d="M6 9l6 6 6-6" />
+                                </svg>
+                              </>
+                            )}
+                          </button>
+                        )}
+                      </>
+                    );
+                  })()}
+                </div>
+              ) : (
+                <div className="photos-content">
+                  {campaign.storyImages && campaign.storyImages.length > 0 ? (
+                    <StoryCarousel images={campaign.storyImages} />
+                  ) : (
+                    <div className="no-photos">
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                      </svg>
+                      <p>No photos available yet</p>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </section>
 
