@@ -11,6 +11,7 @@ export default function Header({ onSearch }) {
     const navigate = useNavigate();
     const [profilePicture, setProfilePicture] = useState(profile);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [userRole, setUserRole] = useState(null);
     const dropdownRef = useRef(null);
 
     useEffect(() => {
@@ -19,6 +20,17 @@ export default function Header({ onSearch }) {
             if (userObj?.picture) setProfilePicture(userObj.picture);
         } else {
             setProfilePicture(profile);
+        }
+
+        // Get user role from userData cookie
+        const userDataCookie = Cookies.get('userData');
+        if (userDataCookie) {
+            try {
+                const userData = JSON.parse(userDataCookie);
+                setUserRole(userData.role);
+            } catch (error) {
+                console.error('Error parsing userData cookie:', error);
+            }
         }
     }, [user]);
 
@@ -49,6 +61,7 @@ export default function Header({ onSearch }) {
                 credentials: 'include'
             });
             Cookies.remove('user');
+            Cookies.remove('userData');
             Cookies.remove('token');
             localStorage.clear();
             sessionStorage.clear();
@@ -56,6 +69,7 @@ export default function Header({ onSearch }) {
         } catch (error) {
             console.error('Logout error:', error);
             Cookies.remove('user');
+            Cookies.remove('userData');
             Cookies.remove('token');
             localStorage.clear();
             sessionStorage.clear();
@@ -72,6 +86,9 @@ export default function Header({ onSearch }) {
             <nav className="flex order-1 gap-[0.5rem] items-center">
                 <img src={profile} alt="App logo" className='h-[2.75rem] w-auto logo' onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
                 <a onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>Home</a>
+                {userRole === 'BUSINESS_REPRESENTATIVE' && (
+                    <a onClick={() => navigate('/business/dashboard')} style={{ cursor: 'pointer' }}>Dashboard</a>
+                )}
                 <a onClick={() => navigate('/rewards')} style={{ cursor: 'pointer' }}>Rewards</a>
                 <a onClick={() => navigate('/updates')} style={{ cursor: 'pointer' }}>Updates</a>
             </nav>
