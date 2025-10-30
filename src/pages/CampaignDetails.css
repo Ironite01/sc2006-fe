@@ -924,3 +924,104 @@
     font-size: 36px;
   }
 }
+
+/* Update Post Styles */
+.loading-text,
+.no-updates {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.update-description {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
+  white-space: pre-wrap;
+}
+
+.update-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.update-tag {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.scheduled-badge {
+  background: #6c757d;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.update-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.action-btn:hover {
+  background: var(--background);
+  color: var(--primary);
+}
+
+.action-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.like-btn:hover {
+  color: #e74c3c;
+}
+
+.like-btn:hover svg {
+  fill: #e74c3c;
+  stroke: #e74c3c;
+}
+
+.comment-btn:hover {
+  color: #3498db;
+}
+
+.view-btn {
+  cursor: default;
+}
+
+.view-btn:hover {
+  background: none;
+  color: var(--text-secondary);
+}

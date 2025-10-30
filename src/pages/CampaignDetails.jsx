@@ -4,6 +4,8 @@ import './CampaignDetails.css';
 import { campaign as campaignApi } from '../paths';
 import ShopsLostSection from '../components/ShopsLostSection';
 import { useNavigate } from "react-router-dom";
+import UpdateComments from './updates/UpdateComments';
+import Cookies from 'js-cookie';
 
 
 export default function CampaignDetails() {
@@ -13,6 +15,10 @@ export default function CampaignDetails() {
   const [error, setError] = useState(null);
   const [donationAmount, setDonationAmount] = useState(25);
   const [commentText, setCommentText] = useState('');
+  const [updates, setUpdates] = useState([]);
+  const [loadingUpdates, setLoadingUpdates] = useState(true);
+  const [commentsModal, setCommentsModal] = useState({ isOpen: false, updateId: null });
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
   const handleDonateClick = () => {
@@ -94,6 +100,60 @@ export default function CampaignDetails() {
     };
   }, [id]);
 
+  // Load current user
+  useEffect(() => {
+    const userDataCookie = Cookies.get('userData');
+    if (userDataCookie) {
+      try {
+        const userData = JSON.parse(userDataCookie);
+        setCurrentUser(userData);
+      } catch (err) {
+        console.error('Failed to parse user data:', err);
+      }
+    }
+  }, []);
+
+  // Load campaign updates
+  useEffect(() => {
+    let alive = true;
+
+    async function loadUpdates() {
+      setLoadingUpdates(true);
+      try {
+        const res = await fetch(`http://localhost:3000/updates/campaign/${id}`, {
+          credentials: 'include'
+        });
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch updates');
+        }
+
+        const data = await res.json();
+
+        if (alive) {
+          setUpdates(data.updates || []);
+        }
+      } catch (err) {
+        console.error('Error loading updates:', err);
+        if (alive) {
+          setUpdates([]);
+        }
+      } finally {
+        if (alive) {
+          setLoadingUpdates(false);
+        }
+      }
+    }
+
+    if (id) {
+      loadUpdates();
+    }
+
+    return () => {
+      alive = false;
+    };
+  }, [id]);
+
   if (loading) {
     return <div className="loading">Loading campaign details...</div>;
   }
@@ -140,6 +200,59 @@ export default function CampaignDetails() {
     return campaign.rewardTiers.reduce((prev, curr) => {
       return donationAmount >= curr.amount && curr.amount > (prev?.amount || 0) ? curr : prev;
     }, null);
+  };
+
+  const formatTimeAgo = (dateString) => {
+    const now = new Date();
+    const posted = new Date(dateString);
+    const diffMs = now - posted;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`;
+    if (diffHours < 24) return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`;
+    if (diffDays < 30) return `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
+
+    return formatDate(dateString);
+  };
+
+  const handleLikeUpdate = async (updateId) => {
+    if (!currentUser) {
+      alert('Please log in to like updates');
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:3000/updates/${updateId}/like`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId: currentUser.userId })
+      });
+
+      if (res.ok) {
+        // Refresh updates to get new like count
+        const updatesRes = await fetch(`http://localhost:3000/updates/campaign/${id}`, {
+          credentials: 'include'
+        });
+        const data = await updatesRes.json();
+        setUpdates(data.updates || []);
+      }
+    } catch (err) {
+      console.error('Error liking update:', err);
+    }
+  };
+
+  const handleOpenComments = (updateId) => {
+    setCommentsModal({ isOpen: true, updateId });
+  };
+
+  const handleCloseComments = () => {
+    setCommentsModal({ isOpen: false, updateId: null });
   };
 
   return (
@@ -203,20 +316,75 @@ export default function CampaignDetails() {
           {/* Updates */}
           <section className="updates-section">
             <h2>Updates</h2>
-            <div className="updates-list">
-              {campaign.updates.map(update => (
-                <div key={update.id} className="update-card">
-                  <div className="update-header">
-                    <h3>{update.title}</h3>
-                    <span className="update-date">{formatDate(update.date)}</span>
+            {loadingUpdates ? (
+              <p className="loading-text">Loading updates...</p>
+            ) : updates.length === 0 ? (
+              <p className="no-updates">No updates yet. Check back later!</p>
+            ) : (
+              <div className="updates-list">
+                {updates.map(update => (
+                  <div key={update.updateId} className="update-card">
+                    <div className="update-header">
+                      <div>
+                        <h3>{update.title}</h3>
+                        <span className="update-date">{formatTimeAgo(update.postedAt)}</span>
+                      </div>
+                      {update.status === 'SCHEDULED' && (
+                        <span className="scheduled-badge">Scheduled</span>
+                      )}
+                    </div>
+
+                    <p className="update-description">{update.description}</p>
+
+                    {update.imageUrl && (
+                      <img
+                        src={update.imageUrl}
+                        alt={update.title}
+                        className="update-image"
+                      />
+                    )}
+
+                    {update.tags && (
+                      <div className="update-tags">
+                        {update.tags.split(',').map((tag, idx) => (
+                          <span key={idx} className="update-tag">{tag.trim()}</span>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className="update-actions">
+                      <button
+                        className="action-btn like-btn"
+                        onClick={() => handleLikeUpdate(update.updateId)}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                        <span>{update.likeCount || 0}</span>
+                      </button>
+
+                      <button
+                        className="action-btn comment-btn"
+                        onClick={() => handleOpenComments(update.updateId)}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
+                        <span>{update.commentCount || 0}</span>
+                      </button>
+
+                      <button className="action-btn view-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                          <circle cx="12" cy="12" r="3" />
+                        </svg>
+                        <span>{update.viewCount || 0}</span>
+                      </button>
+                    </div>
                   </div>
-                  <p className="update-content">{update.content}</p>
-                  {update.image && (
-                    <img src={update.image} alt={update.title} className="update-image" />
-                  )}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </section>
 
           {/* Shops We've Lost */}
@@ -338,6 +506,14 @@ export default function CampaignDetails() {
           </div>
         </aside>
       </div>
+
+      {/* Comments Modal */}
+      {commentsModal.isOpen && (
+        <UpdateComments
+          updateId={commentsModal.updateId}
+          onClose={handleCloseComments}
+        />
+      )}
     </div>
   );
 }
