@@ -31,22 +31,40 @@ export default function CampaignForm() {
     async function loadCampaignData() {
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:3000/campaigns/${campaignId}`, {
+
+            // Load campaign data
+            const campaignResponse = await fetch(`http://localhost:3000/campaigns/${campaignId}`, {
                 credentials: 'include'
             });
 
-            if (!response.ok) {
+            if (!campaignResponse.ok) {
                 throw new Error('Failed to load campaign');
             }
 
-            const campaign = await response.json();
+            const campaign = await campaignResponse.json();
+
+            // Load rewards for this campaign
+            const rewardsResponse = await fetch(`http://localhost:3000/rewards?campaignId=${campaignId}`, {
+                credentials: 'include'
+            });
+
+            let rewards = [{ donationAmount: '', correspondingReward: '' }];
+            if (rewardsResponse.ok) {
+                const rewardsData = await rewardsResponse.json();
+                if (rewardsData && rewardsData.length > 0) {
+                    rewards = rewardsData.map(reward => ({
+                        donationAmount: reward.donationAmount || '',
+                        correspondingReward: reward.rewardName || ''
+                    }));
+                }
+            }
 
             setFormData({
                 campaignName: campaign.name || '',
                 description: campaign.description || '',
                 goal: campaign.goal || '',
                 endDate: campaign.endDate ? campaign.endDate.split('T')[0] : '',
-                rewards: [{ donationAmount: '', correspondingReward: '' }]
+                rewards: rewards
             });
 
             setLoading(false);

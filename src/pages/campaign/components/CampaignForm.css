@@ -136,6 +136,17 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    min-width: 0;
+}
+
+.reward-input-group:first-child {
+    flex: 0 0 200px;
+    max-width: 200px;
+}
+
+.reward-input-group:nth-child(2) {
+    flex: 1;
+    min-width: 250px;
 }
 
 .reward-input-label {
