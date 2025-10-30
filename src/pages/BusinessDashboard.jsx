@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './BusinessDashboard.css';
+import './campaign/components/CampaignManager.css';
 
 export default function BusinessDashboard() {
   const navigate = useNavigate();
@@ -119,6 +120,15 @@ export default function BusinessDashboard() {
     return badges[status] || { text: status, className: 'status-default' };
   };
 
+  const getStatusBadgeClass = (status) => {
+    switch (status?.toLowerCase()) {
+      case 'approved': return 'status-approved';
+      case 'pending': return 'status-pending';
+      case 'rejected': return 'status-rejected';
+      default: return 'status-draft';
+    }
+  };
+
   const getDaysLeft = (endDate) => {
     const days = Math.max(0, Math.ceil((new Date(endDate) - new Date()) / (1000 * 60 * 60 * 24)));
     return days;
@@ -197,159 +207,130 @@ export default function BusinessDashboard() {
         </div>
       </div>
 
-      {/* Quick Actions */}
-      <div className="quick-actions">
-        <h2>Quick Actions</h2>
-        <div className="actions-grid">
-          <button
-            className="action-card"
-            onClick={() => navigate('/campaign')}
-          >
-            <div className="action-icon">📋</div>
-            <div className="action-text">
-              <h3>My Campaigns</h3>
-              <p>View and manage all campaigns</p>
+      {/* Campaign Manager Section */}
+      <div className="campaign-manager-content">
+        {/* Create Your Campaign Section */}
+        <div className="create-section">
+          <h2 className="section-title">Create Your Campaign</h2>
+          <p className="section-description">
+            A campaign is your opportunity to share your business story and
+            rally support from the community. By creating a campaign, you can
+            explain why you need funding, set your fundraising goal, showcase
+            photos of your business, and offer rewards for different donation
+            amounts. This helps supporters understand your vision and
+            motivates them to contribute towards your success.
+          </p>
+
+          <div className="campaign-card">
+            <div className="campaign-placeholder">
+              <div className="placeholder-content">
+                <div className="placeholder-lines">
+                  <div className="line"></div>
+                  <div className="line"></div>
+                  <div className="line short"></div>
+                </div>
+              </div>
+              <div className="campaign-label">Campaign</div>
+              <div className="progress-bar-placeholder">
+                <div className="progress-fill"></div>
+              </div>
             </div>
-          </button>
-
-          <button
-            className="action-card"
-            onClick={() => navigate('/campaign/create')}
-          >
-            <div className="action-icon">➕</div>
-            <div className="action-text">
-              <h3>Create Campaign</h3>
-              <p>Start a new fundraising campaign</p>
-            </div>
-          </button>
-
-          <button
-            className="action-card"
-            onClick={() => navigate('/campaign/rewards')}
-          >
-            <div className="action-icon">🎁</div>
-            <div className="action-text">
-              <h3>Manage Rewards</h3>
-              <p>Configure reward tiers</p>
-            </div>
-          </button>
-        </div>
-      </div>
-
-      {/* Campaign List */}
-      <div className="campaigns-section">
-        <div className="section-header">
-          <h2>Your Campaigns</h2>
-          <button
-            className="view-all-btn"
-            onClick={() => navigate('/campaign')}
-          >
-            View All
-          </button>
-        </div>
-
-        {campaigns.length === 0 ? (
-          <div className="empty-state">
-            <p>You haven't created any campaigns yet.</p>
             <button
               className="create-campaign-btn"
               onClick={() => navigate('/campaign/create')}
             >
-              Create Your First Campaign
+              Create your campaign
             </button>
           </div>
+        </div>
+
+        {/* My Campaigns Section */}
+        {campaigns.length > 0 ? (
+          <div className="my-campaigns-section">
+            <h2 className="my-campaigns-title">My Campaigns ({campaigns.length})</h2>
+
+            <div className="campaigns-list">
+              {campaigns.map((campaign) => {
+                const progress = (parseFloat(campaign.amtRaised || 0) / parseFloat(campaign.goal || 1)) * 100;
+                const daysLeft = getDaysLeft(campaign.endDate);
+
+                return (
+                  <div key={campaign.id} className="campaign-item">
+                    <div className="campaign-item-image">
+                      {campaign.imageUrl ? (
+                        <img src={campaign.imageUrl} alt={campaign.name} />
+                      ) : (
+                        <div className="campaign-placeholder-small">
+                          <div className="placeholder-content">
+                            <div className="placeholder-lines">
+                              <div className="line"></div>
+                              <div className="line"></div>
+                              <div className="line short"></div>
+                            </div>
+                          </div>
+                          <div className="campaign-label">No Image</div>
+                        </div>
+                      )}
+                      <span className={`status-badge ${getStatusBadgeClass(campaign.status)}`}>
+                        {campaign.status || 'draft'}
+                      </span>
+                    </div>
+
+                    <div className="campaign-item-content">
+                      <div className="campaign-header">
+                        <h3 className="campaign-name">{campaign.name}</h3>
+                        <div className="campaign-stats-inline">
+                          <span className="stat-item">
+                            <span className="stat-icon">👥</span> {campaign.backerCount || 0} backers
+                          </span>
+                          <span className="stat-item">
+                            <span className="stat-icon">📅</span> {daysLeft} days left
+                          </span>
+                        </div>
+                      </div>
+
+                      <p className="campaign-description">{campaign.description}</p>
+
+                      <div className="campaign-progress">
+                        <div className="progress-bar">
+                          <div className="progress-fill-active" style={{width: `${Math.min(progress, 100)}%`}}></div>
+                        </div>
+                        <div className="progress-text">
+                          <span className="raised-amount">{formatCurrency(campaign.amtRaised || 0)} raised</span>
+                          <span className="goal-amount">of {formatCurrency(campaign.goal)} goal ({progress.toFixed(0)}%)</span>
+                        </div>
+                      </div>
+
+                      <div className="campaign-actions">
+                        <button
+                          className="action-btn btn-view-analytics"
+                          onClick={() => navigate(`/campaign/${campaign.id}/analytics`)}
+                        >
+                          View Analytics
+                        </button>
+                        <button
+                          className="action-btn btn-edit"
+                          onClick={() => navigate(`/campaign/edit?id=${campaign.id}`)}
+                        >
+                          Edit Campaign
+                        </button>
+                        <button
+                          className="action-btn btn-rewards"
+                          onClick={() => navigate(`/campaign/rewards?campaignId=${campaign.id}`)}
+                        >
+                          Manage Rewards
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         ) : (
-          <div className="campaigns-grid">
-            {campaigns.slice(0, 6).map(campaign => {
-              const statusBadge = getStatusBadge(campaign.status);
-              const progress = campaign.goal > 0
-                ? Math.round((campaign.amtRaised / campaign.goal) * 100)
-                : 0;
-
-              return (
-                <div
-                  key={campaign.id}
-                  className="campaign-card"
-                  onClick={() => navigate(`/campaign/${campaign.id}`)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div className="campaign-image">
-                    {campaign.imageUrl ? (
-                      <img
-                        src={campaign.imageUrl}
-                        alt={campaign.name}
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = 'https://via.placeholder.com/300x200?text=No+Image';
-                        }}
-                      />
-                    ) : (
-                      <div className="placeholder-image">
-                        <span>📷</span>
-                        <p>No Image</p>
-                      </div>
-                    )}
-                    <span className={`status-badge ${statusBadge.className}`}>
-                      {statusBadge.text}
-                    </span>
-                  </div>
-
-                  <div className="campaign-info">
-                    <h3>{campaign.name || 'Untitled Campaign'}</h3>
-
-                    <div className="campaign-stats">
-                      <div className="stat-row">
-                        <span className="label">Raised:</span>
-                        <span className="value">{formatCurrency(campaign.amtRaised || 0)}</span>
-                      </div>
-                      <div className="stat-row">
-                        <span className="label">Goal:</span>
-                        <span className="value">{formatCurrency(campaign.goal)}</span>
-                      </div>
-                      <div className="stat-row">
-                        <span className="label">Backers:</span>
-                        <span className="value">{campaign.backerCount || 0}</span>
-                      </div>
-                      <div className="stat-row">
-                        <span className="label">Days Left:</span>
-                        <span className="value">{getDaysLeft(campaign.endDate)}</span>
-                      </div>
-                    </div>
-
-                    <div className="progress-section">
-                      <div className="progress-bar">
-                        <div
-                          className="progress-fill"
-                          style={{ width: `${Math.min(progress, 100)}%` }}
-                        ></div>
-                      </div>
-                      <span className="progress-text">{progress}% funded</span>
-                    </div>
-
-                    <div className="campaign-actions">
-                      <button
-                        className="btn-secondary"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(`/campaign/${campaign.id}/analytics`);
-                        }}
-                      >
-                        View Analytics
-                      </button>
-                      <button
-                        className="btn-primary"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(`/campaign/edit?id=${campaign.id}`);
-                        }}
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="no-campaigns-state">
+            <p>You haven't created any campaigns yet</p>
+            <p className="subtext">Click the "Create your campaign" button above to get started</p>
           </div>
         )}
       </div>
