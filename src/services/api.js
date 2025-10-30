@@ -227,6 +227,43 @@ class ApiService {
     return this.request(`/updates/${updateId}/likes${params}`);
   }
 
+  /**
+   * Get comments for an update
+   * @param {number} updateId - Update ID
+   * @param {object} options - { limit, offset }
+   * @returns {Promise<object>} - { success: true, comments: [], totalComments: X }
+   */
+  getUpdateComments(updateId, options = {}) {
+    const params = new URLSearchParams(options);
+    return this.request(`/updates/${updateId}/comments?${params}`);
+  }
+
+  /**
+   * Post a comment on an update
+   * @param {number} updateId - Update ID
+   * @param {object} data - { userId, commentText }
+   * @returns {Promise<object>} - { success: true, commentId: X, comment: {...} }
+   */
+  postUpdateComment(updateId, data) {
+    return this.request(`/updates/${updateId}/comments`, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  }
+
+  /**
+   * Delete an update comment
+   * @param {number} commentId - Comment ID
+   * @param {number} userId - User ID
+   * @returns {Promise<object>} - { success: true }
+   */
+  deleteUpdateComment(commentId, userId) {
+    return this.request(`/comments/${commentId}`, {
+      method: 'DELETE',
+      body: JSON.stringify({ userId })
+    });
+  }
+
   // ============================================================================
   // CAMPAIGN COMMENT ENDPOINTS
   // ============================================================================

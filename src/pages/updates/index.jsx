@@ -3,6 +3,7 @@ import './updates.css';
 import Cookies from 'js-cookie';
 import API from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import UpdateComments from './UpdateComments';
 
 export default function Updates() {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ export default function Updates() {
   const [error, setError] = useState('');
   const [emailNotifications, setEmailNotifications] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [showComments, setShowComments] = useState(false);
+  const [selectedUpdateId, setSelectedUpdateId] = useState(null);
 
   useEffect(() => {
     const user = Cookies.get('user');
@@ -94,9 +97,14 @@ export default function Updates() {
     }
   };
 
-  const handleComment = (updateId, campaignId) => {
-    // Navigate to campaign detail page where comments are displayed
-    navigate(`/campaign/${campaignId}`);
+  const handleComment = (updateId) => {
+    setSelectedUpdateId(updateId);
+    setShowComments(true);
+  };
+
+  const handleCloseComments = () => {
+    setShowComments(false);
+    setSelectedUpdateId(null);
   };
 
   if (loading) {
@@ -161,7 +169,7 @@ export default function Updates() {
                   <span className="icon">{update.isLiked ? '❤️' : '🤍'}</span>
                   {update.likes} {update.likes === 1 ? 'Like' : 'Likes'}
                 </button>
-                <button className="action-button" onClick={() => handleComment(update.id, update.campaignId)}>
+                <button className="action-button" onClick={() => handleComment(update.id)}>
                   <span className="icon">💬</span> Comment
                 </button>
               </div>
@@ -171,6 +179,15 @@ export default function Updates() {
           <p className="no-updates">No updates available. Support campaigns to see their updates!</p>
         )}
       </div>
+
+      {/* Comments Modal */}
+      {showComments && selectedUpdateId && userId && (
+        <UpdateComments
+          updateId={selectedUpdateId}
+          userId={userId}
+          onClose={handleCloseComments}
+        />
+      )}
     </div>
   );
 }
