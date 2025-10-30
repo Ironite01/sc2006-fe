@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import './CampaignForm.css';
+import ManageCampaignUpdates from './ManageCampaignUpdates';
 
 export default function CampaignForm() {
     const navigate = useNavigate();
@@ -9,6 +10,7 @@ export default function CampaignForm() {
     const isEditMode = !!campaignId;
 
     const [loading, setLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState('details');
     const [formData, setFormData] = useState({
         campaignName: '',
         description: '',
@@ -294,7 +296,29 @@ export default function CampaignForm() {
     return (
         <div className="campaign-form-container">
             <h1 className="form-title">{isEditMode ? 'Edit Your Campaign' : 'Create Your Campaign'}</h1>
-            
+
+            {/* Tab Navigation - Only show in edit mode */}
+            {isEditMode && (
+                <div className="campaign-tabs">
+                    <button
+                        type="button"
+                        onClick={() => setActiveTab('details')}
+                        className={`tab-button ${activeTab === 'details' ? 'active' : ''}`}
+                    >
+                        Campaign Details
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setActiveTab('updates')}
+                        className={`tab-button ${activeTab === 'updates' ? 'active' : ''}`}
+                    >
+                        Manage Updates
+                    </button>
+                </div>
+            )}
+
+            {/* Campaign Details Tab */}
+            {activeTab === 'details' && (
             <form onSubmit={handleSubmit} className="campaign-form">
                 {/* Campaign Name Field */}
                 <div className="form-group">
@@ -513,6 +537,12 @@ export default function CampaignForm() {
                     </div>
                 </div>
             </form>
+            )}
+
+            {/* Manage Updates Tab */}
+            {activeTab === 'updates' && isEditMode && (
+                <ManageCampaignUpdates campaignId={campaignId} />
+            )}
         </div>
     );
 }
