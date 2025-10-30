@@ -419,49 +419,57 @@ export default function CampaignForm() {
                     <div className="field-info">
                         A text field for the 'Corresponding Reward' with respect to the 'Donation Amount'. It validates if the name of campaign is empty.
                     </div>
-                    
+
                     {formData.rewards.map((reward, index) => (
                         <div key={index} className="reward-row">
                             <div className="reward-inputs">
-                                <input
-                                    type="number"
-                                    placeholder="Donation Amount"
-                                    value={reward.donationAmount}
-                                    onChange={(e) => handleRewardChange(index, 'donationAmount', e.target.value)}
-                                    className="form-input reward-input"
-                                    step="0.01"
-                                    min="0"
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Corresponding Reward"
-                                    value={reward.correspondingReward}
-                                    onChange={(e) => handleRewardChange(index, 'correspondingReward', e.target.value)}
-                                    className="form-input reward-input"
-                                />
+                                <div className="reward-input-group">
+                                    <label className="reward-input-label">Donation Amount (SGD)</label>
+                                    <input
+                                        type="number"
+                                        placeholder="e.g., 50"
+                                        value={reward.donationAmount}
+                                        onChange={(e) => handleRewardChange(index, 'donationAmount', e.target.value)}
+                                        className="form-input reward-input"
+                                        step="0.01"
+                                        min="0"
+                                    />
+                                </div>
+                                <div className="reward-input-group">
+                                    <label className="reward-input-label">Corresponding Reward</label>
+                                    <input
+                                        type="text"
+                                        placeholder="e.g., Thank you card + sticker pack"
+                                        value={reward.correspondingReward}
+                                        onChange={(e) => handleRewardChange(index, 'correspondingReward', e.target.value)}
+                                        className="form-input reward-input"
+                                    />
+                                </div>
                                 {formData.rewards.length > 1 && (
                                     <button
                                         type="button"
                                         onClick={() => removeReward(index)}
                                         className="remove-reward-btn"
+                                        title="Remove this reward tier"
                                     >
                                         -
                                     </button>
                                 )}
-                                <button
-                                    type="button"
-                                    onClick={addReward}
-                                    className="add-reward-btn"
-                                >
-                                    +
-                                </button>
                             </div>
                             {errors[`reward_${index}`] && (
                                 <div className="error-message">{errors[`reward_${index}`]}</div>
                             )}
                         </div>
                     ))}
-                    
+
+                    <button
+                        type="button"
+                        onClick={addReward}
+                        className="add-reward-btn-main"
+                    >
+                        + Add Another Reward Tier
+                    </button>
+
                     <div className="reward-info">
                         Generate a new reward tier (i.e. create new 'Donation Amount' and 'Corresponding Reward').
                     </div>
