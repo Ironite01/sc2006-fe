@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './BusinessDashboard.css';
 import './campaign/components/CampaignManager.css';
+import UpdateComposer from './updates/UpdateComposer';
 
 export default function BusinessDashboard() {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ export default function BusinessDashboard() {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showUpdateComposer, setShowUpdateComposer] = useState(false);
+  const [selectedCampaign, setSelectedCampaign] = useState(null);
 
   useEffect(() => {
     loadDashboardData();
@@ -134,6 +137,22 @@ export default function BusinessDashboard() {
     return days;
   };
 
+  const handlePostUpdate = (campaign) => {
+    setSelectedCampaign(campaign);
+    setShowUpdateComposer(true);
+  };
+
+  const handleCloseComposer = () => {
+    setShowUpdateComposer(false);
+    setSelectedCampaign(null);
+  };
+
+  const handleUpdateSuccess = () => {
+    // Optionally reload dashboard data or show success message
+    setShowUpdateComposer(false);
+    setSelectedCampaign(null);
+  };
+
   if (loading) {
     return (
       <div className="business-dashboard">
@@ -210,39 +229,7 @@ export default function BusinessDashboard() {
       {/* Campaign Manager Section */}
       <div className="campaign-manager-content">
         {/* Create Your Campaign Section */}
-        <div className="create-section">
-          <h2 className="section-title">Create Your Campaign</h2>
-          <p className="section-description">
-            A campaign is your opportunity to share your business story and
-            rally support from the community. By creating a campaign, you can
-            explain why you need funding, set your fundraising goal, showcase
-            photos of your business, and offer rewards for different donation
-            amounts. This helps supporters understand your vision and
-            motivates them to contribute towards your success.
-          </p>
 
-          <div className="campaign-card">
-            <div className="campaign-placeholder">
-              <div className="placeholder-content">
-                <div className="placeholder-lines">
-                  <div className="line"></div>
-                  <div className="line"></div>
-                  <div className="line short"></div>
-                </div>
-              </div>
-              <div className="campaign-label">Campaign</div>
-              <div className="progress-bar-placeholder">
-                <div className="progress-fill"></div>
-              </div>
-            </div>
-            <button
-              className="create-campaign-btn"
-              onClick={() => navigate('/campaign/create')}
-            >
-              Create your campaign
-            </button>
-          </div>
-        </div>
 
         {/* My Campaigns Section */}
         {campaigns.length > 0 ? (
@@ -303,6 +290,12 @@ export default function BusinessDashboard() {
 
                       <div className="campaign-actions">
                         <button
+                          className="action-btn btn-post-update"
+                          onClick={() => handlePostUpdate(campaign)}
+                        >
+                          Post Update
+                        </button>
+                        <button
                           className="action-btn btn-view-analytics"
                           onClick={() => navigate(`/campaign/${campaign.id}/analytics`)}
                         >
@@ -334,6 +327,16 @@ export default function BusinessDashboard() {
           </div>
         )}
       </div>
+
+      {/* Update Composer Modal */}
+      {showUpdateComposer && selectedCampaign && (
+        <UpdateComposer
+          campaignId={selectedCampaign.id}
+          campaignName={selectedCampaign.name}
+          onClose={handleCloseComposer}
+          onSuccess={handleUpdateSuccess}
+        />
+      )}
     </div>
   );
 }

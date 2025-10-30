@@ -430,6 +430,15 @@
     background: #f0fdf4;
 }
 
+.btn-post-update {
+    background: #8b5cf6;
+    color: white;
+}
+
+.btn-post-update:hover {
+    background: #7c3aed;
+}
+
 /* No Campaigns State */
 .no-campaigns-state {
     text-align: center;
