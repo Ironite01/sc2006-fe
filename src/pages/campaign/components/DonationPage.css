@@ -111,17 +111,20 @@
 
 .checkbox-row {
   display: grid;
-  grid-template-columns: auto 1fr; /* box + text */
+  grid-template-columns: auto 1fr;
+  /* box + text */
   align-items: center;
   gap: 10px;
-  text-align: left; /* prevent text-align from parent */
+  text-align: left;
+  /* prevent text-align from parent */
 }
 
 .checkbox-row input[type="checkbox"] {
   width: 18px;
   height: 18px;
   margin: 0;
-  accent-color: #6b5b4b; /* brand tint */
+  accent-color: #6b5b4b;
+  /* brand tint */
 }
 
 .checkbox-row span {
@@ -148,20 +151,13 @@
   margin-top: 4px;
 }
 
-.btn-donate,
 .btn-paypal {
   width: 100%;
   padding: 12px;
   border-radius: 10px;
-  margin-top: 12px;
   cursor: pointer;
   border: none;
   font-weight: bold;
-}
-
-.btn-donate {
-  background-color: #6b5b4b;
-  color: white;
 }
 
 .btn-paypal {
@@ -170,14 +166,15 @@
 }
 
 
-.donation-form .checks { 
+.donation-form .checks {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .donation-form .checks label {
-  display: inline-flex !important;   /* ⬅ beats global label styles */
+  display: inline-flex !important;
+  /* ⬅ beats global label styles */
   align-items: center;
   gap: 8px;
   line-height: 1.2;
@@ -186,5 +183,6 @@
 .donation-form .checks input[type="checkbox"] {
   margin: 0;
   flex: 0 0 auto;
-  vertical-align: middle;            /* smooth baseline */
+  vertical-align: middle;
+  /* smooth baseline */
 }

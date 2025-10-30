@@ -2,3 +2,8 @@ main {
     min-height: calc(100vh - (6rem + 10rem));
     padding: 2rem 1rem;
 }
+
+.Toastify__toast-container.toast-container {
+    top: 5rem !important;
+    padding-top: 1rem;
+}

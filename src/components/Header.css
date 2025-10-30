@@ -24,6 +24,11 @@ header nav a {
     border-radius: 10px;
 }
 
+header nav a:visited {
+    color: white;
+    text-decoration: none;
+}
+
 header nav a::after {
     content: '';
     position: absolute;
@@ -110,6 +115,7 @@ header img.profile:hover {
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

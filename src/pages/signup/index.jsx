@@ -6,13 +6,11 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../paths';
 import { USER_ROLES } from '../../helpers/constants';
+import SubmitButton from '../../components/SubmitButton';
+import { toast } from 'react-toastify';
 
 export default function Signup() {
     const [currentPicture, setCurrentPicture] = useState(null);
-    const [usernameError, setUsernameError] = useState("");
-    const [emailError, setEmailError] = useState("");
-    const [passwordError, setPasswordError] = useState("");
-    const [cpasswordError, setCpasswordError] = useState("");
 
     const user = Cookies.get('user');
     const navigate = useNavigate();
@@ -27,49 +25,41 @@ export default function Signup() {
 
     async function onFormSubmit(e) {
         e.preventDefault();
-        setUsernameError("");
-        setEmailError("");
-        setPasswordError("");
-        setCpasswordError("");
 
         const form = e.target;
         const { username, email, password, cpassword, role, profilePicture } = form;
 
-        let hasError = false;
-
         const usernameVal = username.value.trim();
         if (usernameVal === "") {
-            setUsernameError("Username cannot be empty!");
-            hasError = true;
+            toast.error("Username cannot be empty!");
+            return;
         } else if (!isUsernameValid(usernameVal)) {
-            setUsernameError("Username must be at least 5 characters long and have at least 5 alphabets");
-            hasError = true;
+            toast.error("Username must be at least 5 characters long and have at least 5 alphabets");
+            return;
         }
 
         const emailVal = email.value.trim();
         if (emailVal === "") {
-            setEmailError("Email cannot be empty!");
-            hasError = true;
+            toast.error("Email cannot be empty!");
+            return;
         } else if (!isEmailValid(emailVal)) {
-            setEmailError("You have entered an invalid email!");
-            hasError = true;
+            toast.error("You have entered an invalid email!");
+            return;
         }
 
         const passwordVal = password.value;
         if (passwordVal === "") {
-            setPasswordError("Password cannot be empty!");
-            hasError = true;
+            toast.error("Password cannot be empty!");
+            return;
         } else if (!isStrongPassword(passwordVal)) {
-            setPasswordError("Password must be 8 characters long and contain at least 1 uppercase letter, 1 lowercase letter, 1 number and one symbol!");
-            hasError = true;
+            toast.error("Password must be 8 characters long and contain at least 1 uppercase letter, 1 lowercase letter, 1 number and one symbol!");
+            return;
         }
 
         if (cpassword.value !== password.value) {
-            setCpasswordError("Confirm password mismatch with password!");
-            hasError = true;
+            toast.error("Confirm password mismatch with password!");
+            return;
         }
-
-        if (hasError) return;
 
         const formData = new FormData();
         formData.append('username', usernameVal);
@@ -82,17 +72,20 @@ export default function Signup() {
         }
 
         try {
-            await fetch(auth.register, {
+            const res = await fetch(auth.register, {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'
             });
 
-            alert("Registration successful, you will now be re-navigated to login!")
+            if (!res.ok) {
+                toast.error("Something went wrong...");
+                return;
+            }
+            toast.success("Registration successful, you may now login!");
             navigate("/login");
         } catch (error) {
-            console.error("Registration error:", error);
-            alert("Network error. Please check your connection and try again.");
+            toast.error("Registration error.");
         }
     }
 
@@ -112,8 +105,7 @@ export default function Signup() {
 
                 <div className='form-field'>
                     <label htmlFor='username'>Username <span className='text-[#F54927]'>*</span></label>
-                    <input id="username" name="username" placeholder='Choose a username' required />
-                    <p className='text-[#F54927] error'>{usernameError}</p>
+                    <input id="username" name="username" placeholder='Choose a username' />
                 </div>
 
                 <div className='form-field'>
@@ -132,23 +124,20 @@ export default function Signup() {
 
                 <div className='form-field'>
                     <label htmlFor='email'>Email <span className='text-[#F54927]'>*</span></label>
-                    <input id="email" name="email" type='email' placeholder='your@email.com' required />
-                    <p className='text-[#F54927] error'>{emailError}</p>
+                    <input id="email" name="email" type='email' placeholder='your@email.com' />
                 </div>
 
                 <div className='form-field'>
                     <label htmlFor='password'>Password <span className='text-[#F54927]'>*</span></label>
-                    <input id="password" name="password" type='password' placeholder='Create a strong password' required />
-                    <p className='text-[#F54927] error'>{passwordError}</p>
+                    <input id="password" name="password" type='password' placeholder='Create a strong password' />
                 </div>
 
                 <div className='form-field'>
                     <label htmlFor='cpassword'>Confirm Password <span className='text-[#F54927]'>*</span></label>
-                    <input id="cpassword" name="cpassword" type='password' placeholder='Confirm your password' required />
-                    <p className='text-[#F54927] error'>{cpasswordError}</p>
+                    <input id="cpassword" name="cpassword" type='password' placeholder='Confirm your password' />
                 </div>
 
-                <button type="submit">Create Account</button>
+                <SubmitButton type="submit" className='bg-[#00bf63]'>Create Account</SubmitButton>
 
                 <div className='login-link'>
                     Already have an account? <a href='/login'>Sign in</a>

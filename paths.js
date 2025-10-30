@@ -1,14 +1,16 @@
 const backendPath = "http://localhost:3000";
 
 export const auth = {
-    login: `${backendPath}/login`,
-    register: `${backendPath}/register`,
-    logout: `${backendPath}/logout`,
-    checkAuth: `${backendPath}/auth/check`,
-    googleLogin: `${backendPath}/login/google`,
-    azureLogin: `${backendPath}/login/azure`,
-    forgotPassword: `${backendPath}/forgot-password`,
-    resetPassword: `${backendPath}/reset-password`
+  login: `${backendPath}/login`,
+  register: `${backendPath}/register`,
+  logout: `${backendPath}/logout`,
+  googleLogin: `${backendPath}/login/google`,
+  forgotPassword: `${backendPath}/user/forgot-password`,
+
+}
+
+export const user = {
+  updatePassword: `${backendPath}/user/update-password`
 }
 
 export const shop = {

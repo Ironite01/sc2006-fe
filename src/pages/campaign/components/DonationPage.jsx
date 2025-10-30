@@ -4,6 +4,7 @@ import "./DonationPage.css";
 
 import campaigns from "../../../data/campaigns.json";
 import tiersDB from "../../../data/donationRewards.json";
+import SubmitButton from "../../../components/SubmitButton";
 
 export default function DonationPage() {
   const { id } = useParams();
@@ -105,16 +106,16 @@ export default function DonationPage() {
       {/* TIERS */}
       <div className="tier-section">
         {tiers.map((t) => (
-            <div
+          <div
             key={t.amount}
             className={`tier ${amount >= t.amount && selectedAmount === t.amount ? "active" : ""}`}
             onClick={() => { setSelectedAmount(t.amount); setCustomAmount(""); }}
-            >
+          >
             <strong>${t.amount}</strong>
             {/* reward title intentionally hidden */}
-            </div>
+          </div>
         ))}
-       </div>
+      </div>
 
 
       {/* CUSTOM AMOUNT */}
@@ -212,9 +213,9 @@ export default function DonationPage() {
         {error && <p className="error-msg">{error}</p>}
         {success && <p className="success-msg">{success}</p>}
 
-        <button type="submit" className="btn-donate">
+        <SubmitButton type="submit" className="bg-[#6b5b4b]">
           Donate ${amount.toFixed(2)}
-        </button>
+        </SubmitButton>
         <button type="button" className="btn-paypal">
           Continue with PayPal
         </button>

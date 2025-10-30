@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './CampaignForm.css';
+import SubmitButton from '../../../components/SubmitButton';
 
 export default function CampaignForm() {
     const [formData, setFormData] = useState({
@@ -105,7 +106,7 @@ export default function CampaignForm() {
     return (
         <div className="campaign-form-container">
             <h1 className="form-title">Create Your Campaign</h1>
-            
+
             <form onSubmit={handleSubmit} className="campaign-form">
                 {/* Campaign Name Field */}
                 <div className="form-group">
@@ -206,7 +207,7 @@ export default function CampaignForm() {
                     <div className="field-info">
                         A text field for the 'Corresponding Reward' with respect to the 'Donation Amount'. It validates if the name of campaign is empty.
                     </div>
-                    
+
                     {formData.rewards.map((reward, index) => (
                         <div key={index} className="reward-row">
                             <div className="reward-inputs">
@@ -248,7 +249,7 @@ export default function CampaignForm() {
                             )}
                         </div>
                     ))}
-                    
+
                     <div className="reward-info">
                         Generate a new reward tier (i.e. create new 'Donation Amount' and 'Corresponding Reward').
                     </div>
@@ -272,13 +273,13 @@ export default function CampaignForm() {
                                 Choose Files
                             </label>
                         </div>
-                        
+
                         {images.length > 0 && (
                             <div className="uploaded-images">
                                 {images.map((image, index) => (
                                     <div key={index} className="image-preview">
-                                        <img 
-                                            src={URL.createObjectURL(image)} 
+                                        <img
+                                            src={URL.createObjectURL(image)}
                                             alt={`Preview ${index + 1}`}
                                             className="preview-image"
                                         />
@@ -293,7 +294,7 @@ export default function CampaignForm() {
                                 ))}
                             </div>
                         )}
-                        
+
                         <div className="upload-info">
                             Add picture button that allows user to upload up to 5 images in total. It can be accumulated by uploading one by one, or uploading multiple images at a time.
                         </div>
@@ -302,9 +303,9 @@ export default function CampaignForm() {
 
                 {/* Submit Button */}
                 <div className="form-actions">
-                    <button type="submit" className="create-btn">
+                    <SubmitButton type="submit" className="create-btn bg-[#218838]" loading={null}>
                         Create
-                    </button>
+                    </SubmitButton>
                     <div className="submit-info">
                         Disabled by default. If all validation is successful, the button is enabled, and will proceed with the create campaign flow. The user is then re-directed to the home page.
                     </div>

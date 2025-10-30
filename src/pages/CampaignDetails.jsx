@@ -4,6 +4,7 @@ import './CampaignDetails.css';
 import campaigns from '../data/campaigns.json';
 import ShopsLostSection from '../components/ShopsLostSection';
 import { useNavigate } from "react-router-dom";
+import SubmitButton from '../components/SubmitButton';
 
 
 export default function CampaignDetails() {
@@ -12,6 +13,7 @@ export default function CampaignDetails() {
   const [loading, setLoading] = useState(true);
   const [donationAmount, setDonationAmount] = useState(25);
   const [commentText, setCommentText] = useState('');
+  const [commentLoading, setCommentLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleDonateClick = () => {
@@ -194,9 +196,9 @@ export default function CampaignDetails() {
                 onChange={(e) => setCommentText(e.target.value)}
                 rows="4"
               />
-              <button type="submit" className="submit-comment-btn">
+              <SubmitButton className="bg-[#ffa500]" type="submit" loading={commentLoading}>
                 Post Comment
-              </button>
+              </SubmitButton>
             </form>
 
             <div className="comments-list">
@@ -268,9 +270,9 @@ export default function CampaignDetails() {
               })}
             </div>
 
-            <button className="donate-btn" onClick={handleDonateClick}>
+            <SubmitButton className="bg-[#ffa500]" loading={null} onClick={handleDonateClick}>
               Donate {formatCurrency(donationAmount)}
-            </button>
+            </SubmitButton>
 
 
             <p className="secure-note">

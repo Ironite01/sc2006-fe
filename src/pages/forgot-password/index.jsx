@@ -1,46 +1,41 @@
 import { useState } from 'react';
 import { auth } from '../../../paths';
+import { isEmailValid } from '../../helpers/regex';
 import './ForgotPassword.css';
+import { toast } from 'react-toastify';
+import SubmitButton from '../../components/SubmitButton';
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     async function onFormSubmit(e) {
         e.preventDefault();
-        setErrorMessage('');
-        setSuccessMessage('');
         setIsLoading(true);
 
         if (!email.trim()) {
-            setErrorMessage('Please enter your email or username');
+            toast.error('Please enter your email or username');
             setIsLoading(false);
             return;
         }
 
         try {
-            const response = await fetch(auth.forgotPassword, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    emailOrUsername: email.trim()
-                })
+            const response = await fetch(`${auth.forgotPassword}?${new URLSearchParams(
+                isEmailValid(email.trim()) ? { email: email.trim() } : { username: email.trim() }
+            ).toString()}`, {
+                method: 'PUT'
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                setSuccessMessage(data.message || 'Password reset email sent successfully!');
+                toast.success(data.message || 'Password reset email sent successfully!');
                 setEmail(''); // Clear the input on success
             } else {
-                setErrorMessage(data.message || 'Something went wrong. Please try again.');
+                toast.error(data.message || 'Something went wrong. Please try again.');
             }
         } catch (error) {
-            setErrorMessage('Network error. Please check your connection and try again.');
+            toast.error(`Reset password failed... ${error}`);
         } finally {
             setIsLoading(false);
         }
@@ -50,7 +45,7 @@ export default function ForgotPassword() {
         <div className="forgot-password-container">
             <div className="forgot-password-form">
                 <h1 className="forgot-password-title">Forgot password:</h1>
-                
+
                 <form onSubmit={onFormSubmit}>
                     <div className="form-group">
                         <label htmlFor="email" className="form-label">
@@ -65,24 +60,11 @@ export default function ForgotPassword() {
                             className="form-input"
                             placeholder="Enter your email or username"
                         />
-                        
-                        <p className="help-text">
-                            Some message when username requests for password reset{' '}
-                            <span className="help-text-link">or some error if any</span>
-                        </p>
-                        
-                        {errorMessage && (
-                            <p className="error-message">{errorMessage}</p>
-                        )}
-                        
-                        {successMessage && (
-                            <p className="success-message">{successMessage}</p>
-                        )}
                     </div>
-                    
-                    <button type="submit" className="reset-button" disabled={isLoading}>
-                        {isLoading ? 'Sending...' : 'Reset password'}
-                    </button>
+
+                    <SubmitButton type="submit" className='bg-[#ffa500]' loading={isLoading}>
+                        Reset password
+                    </SubmitButton>
 
                     <div className="back-to-login">
                         Remember your password? <a href='/login'>Back to login</a>

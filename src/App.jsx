@@ -7,13 +7,15 @@ import Home from './Home';
 import Signup from './pages/signup';
 import Login from './pages/login';
 import ForgotPassword from './pages/forgot-password';
-import ResetPassword from './pages/forgot-password/ResetPassword';
+import ResetPassword from './pages/reset-password';
 import Campaign from './pages/campaign';
 import CampaignDetails from './pages/CampaignDetails';
 import DonationPage from './pages/campaign/components/DonationPage.jsx';
 import CampaignForm from './pages/campaign/components/CampaignForm.jsx';
 import ManageRewards from './pages/campaign/components/ManageRewards.jsx';
 import RewardTier from './pages/campaign/components/RewardTier.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -36,6 +38,7 @@ function App() {
           <Route path="/campaign/rewards" element={<ManageRewards />} />
           <Route path="/campaign/rewards/:tierId" element={<RewardTier />} />
         </Routes>
+        <ToastContainer className="toast-container" />
       </main>
       <Footer />
     </BrowserRouter>

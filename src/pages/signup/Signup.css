@@ -76,23 +76,6 @@ label.profilePicture:hover span {
     transform: rotate(90deg);
 }
 
-form.signupForm button[type="submit"] {
-    width: 100%;
-    background: var(--primary);
-    padding: 0.875rem 1.5rem;
-    font-size: 1.05rem;
-    font-weight: 600;
-    border-radius: 1rem;
-    box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
-    transition: all 0.3s ease;
-}
-
-form.signupForm button[type="submit"]:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(217, 119, 6, 0.4);
-}
-
 .form-field {
     margin-bottom: 1.25rem;
 }
@@ -102,11 +85,6 @@ form.signupForm button[type="submit"]:hover {
     font-weight: 500;
     margin-bottom: 0.5rem;
     color: #333;
-}
-
-.form-field p.error {
-    font-size: 0.85rem;
-    min-height: 1.2rem;
 }
 
 .radio-group {

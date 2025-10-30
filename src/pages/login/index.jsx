@@ -1,34 +1,30 @@
 import { useEffect, useState } from 'react';
-import { profile, google, microsoft } from '../../assets';
+import { profile, google } from '../../assets';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../paths';
 import './Login.css';
+import { isEmailValid } from '../../helpers/regex';
+import { toast } from 'react-toastify';
+import SubmitButton from '../../components/SubmitButton';
 
 export default function Login() {
     const user = Cookies.get('user');
     const navigate = useNavigate();
-    const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (user) navigate("/", { replace: true });
     }, [user]);
 
-    function handleAzureLogin() {
-        window.location.href = auth.azureLogin;
-    }
-
     async function onFormSubmit(e) {
         e.preventDefault();
-        setError("");
         setLoading(true);
 
         const form = e.target;
         const params = new URLSearchParams();
-        // TODO: Email validation
         const temp = form.username.value.trim();
-        if (temp.includes("@"))
+        if (isEmailValid(temp))
             params.append("email", temp);
         else
             params.append("username", temp);
@@ -47,8 +43,7 @@ export default function Login() {
             const data = await res.json();
 
             if (!res.ok) {
-                setError(data.message || "Invalid username or password");
-                setLoading(false);
+                toast.error(data.message || "Invalid username or password");
                 return;
             }
 
@@ -59,8 +54,8 @@ export default function Login() {
 
             navigate("/", { replace: true });
         } catch (error) {
-            console.error("Login error:", error);
-            setError("Network error. Please check your connection and try again.");
+            toast.error(`Login failed. You may had entered wrong username/email and/or password!`);
+        } finally {
             setLoading(false);
         }
     }
@@ -70,12 +65,6 @@ export default function Login() {
             <form className='signupForm' onSubmit={onFormSubmit}>
                 <img src={profile} alt="Profile logo" />
                 <h2 className="text-center text-2xl font-semibold mb-6 text-gray-800">Welcome Back</h2>
-
-                {error && (
-                    <div className="error-message">
-                        {error}
-                    </div>
-                )}
 
                 <div className='flex flex-col gap-y-[1rem]'>
                     <input
@@ -98,12 +87,13 @@ export default function Login() {
                         <a href="/forgot-password">Forgot password?</a>
                     </div>
 
-                    <button
+                    <SubmitButton
                         type="submit"
-                        disabled={loading}
+                        loading={loading}
+                        className='bg-[#00bf63]'
                     >
-                        {loading ? "Logging in..." : "Login"}
-                    </button>
+                        Login
+                    </SubmitButton>
                 </div>
 
                 <div className="divider">or continue with</div>
@@ -115,15 +105,6 @@ export default function Login() {
                             <span>Continue with Google</span>
                         </button>
                     </a>
-
-                    <button
-                        type='button'
-                        className="azure"
-                        onClick={handleAzureLogin}
-                    >
-                        <img src={microsoft} alt="Microsoft" />
-                        <span>Continue with Microsoft</span>
-                    </button>
                 </div>
 
                 <div className="signup-link">
