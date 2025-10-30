@@ -258,7 +258,7 @@ class ApiService {
    * @returns {Promise<object>} - { success: true }
    */
   deleteUpdateComment(commentId, userId) {
-    return this.request(`/comments/${commentId}`, {
+    return this.request(`/update-comments/${commentId}`, {
       method: 'DELETE',
       body: JSON.stringify({ userId })
     });
