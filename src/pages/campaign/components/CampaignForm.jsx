@@ -218,6 +218,9 @@ export default function CampaignForm() {
             const result = await response.json();
             const savedCampaignId = result.campaignId || result.id || campaignId;
 
+            // Save rewards
+            await saveRewards(savedCampaignId);
+
             alert(isEditMode ? 'Campaign updated successfully!' : 'Campaign created successfully!');
             navigate('/campaign');
         } catch (error) {
@@ -225,6 +228,53 @@ export default function CampaignForm() {
             alert('Failed to save campaign: ' + error.message);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const saveRewards = async (campaignId) => {
+        try {
+            // In edit mode, first delete existing rewards
+            if (isEditMode) {
+                const existingRewardsRes = await fetch(`http://localhost:3000/rewards?campaignId=${campaignId}`, {
+                    credentials: 'include'
+                });
+
+                if (existingRewardsRes.ok) {
+                    const existingRewards = await existingRewardsRes.json();
+                    // Delete each existing reward
+                    await Promise.all(
+                        existingRewards.map(reward =>
+                            fetch(`http://localhost:3000/rewards/${reward.rewardId}`, {
+                                method: 'DELETE',
+                                credentials: 'include'
+                            })
+                        )
+                    );
+                }
+            }
+
+            // Create new rewards
+            const rewardPromises = formData.rewards
+                .filter(reward => reward.donationAmount && reward.correspondingReward)
+                .map(reward =>
+                    fetch('http://localhost:3000/rewards', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            campaignId: campaignId,
+                            rewardName: reward.correspondingReward,
+                            donationAmount: parseFloat(reward.donationAmount)
+                        })
+                    })
+                );
+
+            await Promise.all(rewardPromises);
+        } catch (error) {
+            console.error('Error saving rewards:', error);
+            throw new Error('Failed to save rewards: ' + error.message);
         }
     };
 
@@ -292,6 +342,9 @@ export default function CampaignForm() {
             if (!response.ok) {
                 throw new Error('Failed to save campaign');
             }
+
+            // Save rewards
+            await saveRewards(savedCampaignId);
 
             // Navigate to review submission page
             navigate(`/campaign/review?campaignId=${savedCampaignId}`);
