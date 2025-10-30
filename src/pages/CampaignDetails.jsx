@@ -120,7 +120,7 @@ export default function CampaignDetails() {
     async function loadUpdates() {
       setLoadingUpdates(true);
       try {
-        const res = await fetch(`http://localhost:3000/updates/campaign/${id}`, {
+        const res = await fetch(`http://localhost:3000/campaigns/${id}/updates`, {
           credentials: 'include'
         });
 
@@ -236,7 +236,7 @@ export default function CampaignDetails() {
 
       if (res.ok) {
         // Refresh updates to get new like count
-        const updatesRes = await fetch(`http://localhost:3000/updates/campaign/${id}`, {
+        const updatesRes = await fetch(`http://localhost:3000/campaigns/${id}/updates`, {
           credentials: 'include'
         });
         const data = await updatesRes.json();
