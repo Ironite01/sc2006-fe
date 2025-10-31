@@ -53,7 +53,8 @@ export default function ResetPassword() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ password })
+                body: JSON.stringify({ password }),
+                credentials: 'include'
             });
 
             if (!response.ok) {

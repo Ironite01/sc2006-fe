@@ -10,7 +10,9 @@ export const auth = {
 }
 
 export const user = {
-  updatePassword: `${backendPath}/user/update-password`
+  getUserById: (userId) => `${backendPath}/user/${userId}`,
+  updatePassword: `${backendPath}/user/update-password`,
+  updateProfile: (userId) => `${backendPath}/user/${userId}`
 }
 
 export const shop = {

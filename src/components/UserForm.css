@@ -1,0 +1,102 @@
+form.userForm {
+    background: white;
+    padding: 3rem 2.5rem;
+    border-radius: 2rem;
+    box-shadow: var(--shadow-lg);
+    max-width: 520px;
+    width: 100%;
+    border: 1px solid rgba(217, 119, 6, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+form.userForm::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary);
+}
+
+form.userForm input:not([type="radio"]):not([type="file"]) {
+    border-radius: 1rem;
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    border: 2px solid #E5E7EB;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #F9FAFB;
+}
+
+form.userForm input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.1);
+}
+
+label.profilePicture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    transition: all 0.4s ease;
+}
+
+label.profilePicture:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+}
+
+label.profilePicture img {
+    box-shadow: var(--shadow-md);
+    border: 3px solid var(--primary);
+}
+
+label.profilePicture span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: var(--primary);
+    color: white;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+label.profilePicture:hover span {
+    transform: rotate(90deg);
+}
+
+.form-field {
+    margin-bottom: 1.25rem;
+}
+
+.form-field label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.radio-group {
+    display: flex;
+    gap: 2rem;
+    padding: 0.75rem 0;
+}
+
+.radio-group input[type="radio"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.radio-group label {
+    display: inline;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.signup-form-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}

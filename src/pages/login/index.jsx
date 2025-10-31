@@ -9,13 +9,13 @@ import { toast } from 'react-toastify';
 import SubmitButton from '../../components/SubmitButton';
 
 export default function Login() {
-    const user = Cookies.get('user');
+    const access_token = Cookies.get('access_token');
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (user) navigate("/", { replace: true });
-    }, [user]);
+        if (access_token) navigate("/", { replace: true });
+    }, [access_token]);
 
     async function onFormSubmit(e) {
         e.preventDefault();

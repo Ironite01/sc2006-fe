@@ -1,0 +1,22 @@
+.form-container {
+    min-height: calc(100vh - 16rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.form-title h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.form-title p {
+    color: #666;
+}
+
+label.role-label {
+    color: rgb(216, 52, 52);
+}

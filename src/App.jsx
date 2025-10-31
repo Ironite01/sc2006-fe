@@ -16,6 +16,7 @@ import ManageRewards from './pages/campaign/components/ManageRewards.jsx';
 import RewardTier from './pages/campaign/components/RewardTier.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import EditProfile from './pages/profile/EditProfile.jsx';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -28,6 +29,7 @@ function App() {
           <Route path="/" element={<Home searchQuery={searchQuery} />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<EditProfile />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/campaign" element={<Campaign />} />
