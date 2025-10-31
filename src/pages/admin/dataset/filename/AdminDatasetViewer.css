@@ -1,0 +1,72 @@
+.dataset-viewer-container {
+    padding: 2rem;
+    background: #fafafa;
+    min-height: 100vh;
+}
+
+.dataset-viewer-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+    color: #333;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.dataset-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.dataset-table th,
+.dataset-table td {
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.dataset-table th {
+    background: #f3f4f6;
+    font-weight: 600;
+}
+
+.dataset-table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.dataset-table tr:hover {
+    background: #f0f9ff;
+}
+
+.dataset-viewer-container p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.viewer-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.viewer-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.back-btn {
+    color: black;
+    cursor: pointer;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+}

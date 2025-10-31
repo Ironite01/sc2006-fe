@@ -15,6 +15,11 @@ export const user = {
   updateProfile: (userId) => `${backendPath}/user/${userId}`
 }
 
+export const admin = {
+  datasets: `${backendPath}/admin/dataset`,
+  dataset: (filename) => `${backendPath}/admin/dataset/${filename}`
+}
+
 export const shop = {
   list: `${backendPath}/shops`,
   one: (id) => `${backendPath}/shops/${id}`

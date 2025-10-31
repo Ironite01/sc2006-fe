@@ -17,6 +17,9 @@ import RewardTier from './pages/campaign/components/RewardTier.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EditProfile from './pages/profile/EditProfile.jsx';
+import Admin from './pages/admin/index.jsx';
+import AdminDataset from './pages/admin/dataset/index.jsx';
+import AdminDatasetViewer from './pages/admin/dataset/filename/index.jsx';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -39,6 +42,9 @@ function App() {
           <Route path="/campaign/edit" element={<CampaignForm mode="edit" />} />
           <Route path="/campaign/rewards" element={<ManageRewards />} />
           <Route path="/campaign/rewards/:tierId" element={<RewardTier />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/dataset" element={<AdminDataset />} />
+          <Route path="/admin/dataset/:filename" element={<AdminDatasetViewer />} />
         </Routes>
         <ToastContainer className="toast-container" />
       </main>
