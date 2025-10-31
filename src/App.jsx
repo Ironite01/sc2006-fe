@@ -14,8 +14,6 @@ import DonationPage from './pages/campaign/components/DonationPage.jsx';
 import CampaignForm from './pages/campaign/components/CampaignForm.jsx';
 import ManageRewards from './pages/campaign/components/ManageRewards.jsx';
 import RewardTier from './pages/campaign/components/RewardTier.jsx';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import EditProfile from './pages/profile/EditProfile.jsx';
 import Admin from './pages/admin/index.jsx';
 import AdminDataset from './pages/admin/dataset/index.jsx';
@@ -46,7 +44,6 @@ function App() {
           <Route path="/admin/dataset" element={<AdminDataset />} />
           <Route path="/admin/dataset/:filename" element={<AdminDatasetViewer />} />
         </Routes>
-        <ToastContainer className="toast-container" />
       </main>
       <Footer />
     </BrowserRouter>
