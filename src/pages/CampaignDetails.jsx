@@ -7,6 +7,7 @@ import ShopsLostSection from '../components/ShopsLostSection';
 import { useNavigate } from "react-router-dom";
 import UpdateComments from './updates/UpdateComments';
 import Cookies from 'js-cookie';
+import api from '../services/api';
 
 // Story Images Carousel Component
 function StoryCarousel({ images }) {
@@ -84,7 +85,11 @@ export default function CampaignDetails() {
   const [commentsModal, setCommentsModal] = useState({ isOpen: false, updateId: null });
   const [currentUser, setCurrentUser] = useState(null);
   const [isStoryExpanded, setIsStoryExpanded] = useState(false);
-  const [storyTab, setStoryTab] = useState('story'); // 'story' or 'photos'
+  const [storyTab, setStoryTab] = useState('story'); // 'story', 'photos', or 'findus'
+  const [campaignComments, setCampaignComments] = useState([]);
+  const [loadingComments, setLoadingComments] = useState(true);
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editCommentText, setEditCommentText] = useState('');
   const navigate = useNavigate();
 
   const handleDonateClick = () => {
@@ -135,6 +140,7 @@ export default function CampaignDetails() {
             supporters: data.backerCount || 0,
             daysLeft: Math.max(0, Math.ceil((new Date(data.endDate) - new Date()) / (1000 * 60 * 60 * 24))),
             story: data.story || data.description || 'Campaign story coming soon...',
+            address: data.address || null,
             storyImages: data.storyImages || [],
             updates: data.updates || [],
             owners: data.owners || [],
@@ -221,6 +227,39 @@ export default function CampaignDetails() {
     };
   }, [id]);
 
+  // Load campaign comments
+  useEffect(() => {
+    let alive = true;
+
+    async function loadComments() {
+      setLoadingComments(true);
+      try {
+        const data = await api.getCampaignComments(id, { includeReplies: 'false' });
+
+        if (alive) {
+          setCampaignComments(data.comments || []);
+        }
+      } catch (err) {
+        console.error('Error loading comments:', err);
+        if (alive) {
+          setCampaignComments([]);
+        }
+      } finally {
+        if (alive) {
+          setLoadingComments(false);
+        }
+      }
+    }
+
+    if (id) {
+      loadComments();
+    }
+
+    return () => {
+      alive = false;
+    };
+  }, [id]);
+
   if (loading) {
     return <div className="loading">Loading campaign details...</div>;
   }
@@ -241,10 +280,87 @@ export default function CampaignDetails() {
     setDonationAmount(parseInt(e.target.value));
   };
 
-  const handleCommentSubmit = (e) => {
+  const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    console.log('Comment submitted:', commentText);
-    setCommentText('');
+
+    if (!commentText.trim()) {
+      return;
+    }
+
+    if (!currentUser) {
+      alert('Please log in to post a comment');
+      return;
+    }
+
+    try {
+      await api.postComment(id, {
+        userId: currentUser.userId,
+        commentText: commentText.trim(),
+        parentCommentId: null
+      });
+
+      // Clear the form
+      setCommentText('');
+
+      // Reload comments to show the new one
+      const data = await api.getCampaignComments(id, { includeReplies: 'false' });
+      setCampaignComments(data.comments || []);
+    } catch (err) {
+      console.error('Error posting comment:', err);
+      alert('Failed to post comment. Please try again.');
+    }
+  };
+
+  const handleEditComment = (comment) => {
+    setEditingCommentId(comment.commentId);
+    setEditCommentText(comment.commentText);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingCommentId(null);
+    setEditCommentText('');
+  };
+
+  const handleSaveEdit = async (commentId) => {
+    if (!editCommentText.trim()) {
+      alert('Comment cannot be empty');
+      return;
+    }
+
+    try {
+      await api.updateComment(commentId, {
+        userId: currentUser.userId,
+        commentText: editCommentText.trim()
+      });
+
+      // Reload comments to show the updated one
+      const data = await api.getCampaignComments(id, { includeReplies: 'false' });
+      setCampaignComments(data.comments || []);
+
+      // Clear edit state
+      setEditingCommentId(null);
+      setEditCommentText('');
+    } catch (err) {
+      console.error('Error updating comment:', err);
+      alert('Failed to update comment. Please try again.');
+    }
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    if (!window.confirm('Are you sure you want to delete this comment?')) {
+      return;
+    }
+
+    try {
+      await api.deleteComment(commentId, currentUser.userId);
+
+      // Reload comments to remove the deleted one
+      const data = await api.getCampaignComments(id, { includeReplies: 'false' });
+      setCampaignComments(data.comments || []);
+    } catch (err) {
+      console.error('Error deleting comment:', err);
+      alert('Failed to delete comment. Please try again.');
+    }
   };
 
   const formatCurrency = (amount) => {
@@ -397,6 +513,16 @@ export default function CampaignDetails() {
                 </svg>
                 Photos ({campaign.storyImages?.length || 0})
               </button>
+              <button
+                className={`story-tab ${storyTab === 'findus' ? 'active' : ''}`}
+                onClick={() => setStoryTab('findus')}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Find Us
+              </button>
             </div>
 
             {/* Tab Content */}
@@ -441,7 +567,7 @@ export default function CampaignDetails() {
                     );
                   })()}
                 </div>
-              ) : (
+              ) : storyTab === 'photos' ? (
                 <div className="photos-content">
                   {campaign.storyImages && campaign.storyImages.length > 0 ? (
                     <StoryCarousel images={campaign.storyImages} />
@@ -453,6 +579,38 @@ export default function CampaignDetails() {
                         <polyline points="21 15 16 10 5 21"></polyline>
                       </svg>
                       <p>No photos available yet</p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="findus-content">
+                  {campaign.address ? (
+                    <>
+                      <div className="address-text">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                          <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <p>{campaign.address}</p>
+                      </div>
+                      <div className="map-container">
+                        <iframe
+                          title="Campaign Location Map"
+                          width="100%"
+                          height="400"
+                          style={{ border: 0, borderRadius: '8px' }}
+                          src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(campaign.address)}`}
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="no-address">
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>
+                      <p>Location information not available yet</p>
                     </div>
                   )}
                 </div>
@@ -556,7 +714,7 @@ export default function CampaignDetails() {
 
           {/* Comments */}
           <section className="comments-section">
-            <h2>Comments ({campaign.comments.length})</h2>
+            <h2>Comments ({campaignComments.length})</h2>
 
             <form className="comment-form" onSubmit={handleCommentSubmit}>
               <textarea
@@ -570,20 +728,87 @@ export default function CampaignDetails() {
               </button>
             </form>
 
-            <div className="comments-list">
-              {campaign.comments.map(comment => (
-                <div key={comment.id} className="comment-card">
-                  <img src={comment.avatar} alt={comment.author} className="comment-avatar" />
-                  <div className="comment-content">
-                    <div className="comment-header">
-                      <span className="comment-author">{comment.author}</span>
-                      <span className="comment-date">{formatDate(comment.date)}</span>
+            {loadingComments ? (
+              <p className="loading-text">Loading comments...</p>
+            ) : campaignComments.length === 0 ? (
+              <p className="no-comments">No comments yet. Be the first to show your support!</p>
+            ) : (
+              <div className="comments-list">
+                {campaignComments.map(comment => {
+                  const isOwner = currentUser && comment.userId === currentUser.userId;
+                  const isEditing = editingCommentId === comment.commentId;
+
+                  return (
+                    <div key={comment.commentId} className="comment-card">
+                      <img
+                        src={comment.profilePicture || '/default-avatar.png'}
+                        alt={comment.username}
+                        className="comment-avatar"
+                      />
+                      <div className="comment-content">
+                        <div className="comment-header">
+                          <span className="comment-author">{comment.username}</span>
+                          <span className="comment-date">{formatTimeAgo(comment.createdAt)}</span>
+                        </div>
+
+                        {isEditing ? (
+                          <div className="comment-edit-form">
+                            <textarea
+                              value={editCommentText}
+                              onChange={(e) => setEditCommentText(e.target.value)}
+                              className="comment-edit-textarea"
+                              rows="3"
+                            />
+                            <div className="comment-edit-actions">
+                              <button
+                                className="comment-save-btn"
+                                onClick={() => handleSaveEdit(comment.commentId)}
+                              >
+                                Save
+                              </button>
+                              <button
+                                className="comment-cancel-btn"
+                                onClick={handleCancelEdit}
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          <>
+                            <p className="comment-text">{comment.commentText}</p>
+                            {isOwner && (
+                              <div className="comment-actions">
+                                <button
+                                  className="comment-action-btn edit-btn"
+                                  onClick={() => handleEditComment(comment)}
+                                >
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                  </svg>
+                                  Edit
+                                </button>
+                                <button
+                                  className="comment-action-btn delete-btn"
+                                  onClick={() => handleDeleteComment(comment.commentId)}
+                                >
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <polyline points="3 6 5 6 21 6" />
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                  </svg>
+                                  Delete
+                                </button>
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
                     </div>
-                    <p className="comment-text">{comment.content}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+                  );
+                })}
+              </div>
+            )}
           </section>
         </div>
 

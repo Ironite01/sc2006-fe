@@ -18,7 +18,7 @@ export default function RewardProof() {
     try {
       setLoading(true);
       setError('');
-      const response = await API.getUserRewardProof(id);
+      const response = await API.getRewardProof(id);
 
       if (response.success) {
         const rewardData = response.reward;

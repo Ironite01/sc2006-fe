@@ -17,6 +17,7 @@ import RewardTier from './pages/campaign/components/RewardTier.jsx';
 // Supporter Pages
 import MyRewards from './pages/rewards';
 import RewardProof from './pages/rewards/RewardProof';
+import VerifyReward from './pages/VerifyReward';
 import Updates from './pages/updates';
 import EditProfile from './pages/profile/EditProfile';
 import Dashboard from './pages/Dashboard';
@@ -64,6 +65,7 @@ function App() {
           <Route path="/campaigns" element={<BrowseCampaigns />} />
           <Route path="/rewards" element={<MyRewards />} />
           <Route path="/rewards/:id" element={<RewardProof />} />
+          <Route path="/verify-reward/:id" element={<VerifyReward />} />
           <Route path="/updates" element={<Updates />} />
           <Route path="/profile/edit" element={<EditProfile />} />
 

@@ -164,6 +164,40 @@ class ApiService {
     return this.request(`/campaigns/${campaignId}/reward-claims?${params}`);
   }
 
+  /**
+   * Get a single user reward by ID (for verification page)
+   * @param {number} userRewardId - User reward ID
+   * @returns {Promise<object>} - { success: true, reward: {...} }
+   */
+  getUserReward(userRewardId) {
+    return this.request(`/user-rewards/${userRewardId}`);
+  }
+
+  /**
+   * Redeem a reward (mark as redeemed)
+   * @param {number} userRewardId - User reward ID
+   * @returns {Promise<object>} - { success: true, message: '...', reward: {...} }
+   */
+  redeemReward(userRewardId) {
+    return this.request(`/rewards/${userRewardId}/redeem`, {
+      method: 'POST',
+      body: JSON.stringify({})
+    });
+  }
+
+  /**
+   * Verify and redeem a QR code (business scans supporter's QR code)
+   * @param {string} qrData - Decoded QR code data (JSON string)
+   * @returns {Promise<object>} - { success: true, reward: {...} }
+   * @deprecated Use getUserReward and redeemReward instead
+   */
+  verifyRewardQRCode(qrData) {
+    return this.request('/rewards/verify-qr', {
+      method: 'POST',
+      body: JSON.stringify({ qrData })
+    });
+  }
+
   // ============================================================================
   // CAMPAIGN UPDATE ENDPOINTS
   // ============================================================================
@@ -301,6 +335,19 @@ class ApiService {
   replyToComment(commentId, data) {
     return this.request(`/comments/${commentId}/reply`, {
       method: 'POST',
+      body: JSON.stringify(data)
+    });
+  }
+
+  /**
+   * Update a comment
+   * @param {number} commentId - Comment ID
+   * @param {object} data - { userId, commentText }
+   * @returns {Promise<object>} - { success: true }
+   */
+  updateComment(commentId, data) {
+    return this.request(`/comments/${commentId}`, {
+      method: 'PUT',
       body: JSON.stringify(data)
     });
   }

@@ -14,6 +14,7 @@ export default function CampaignForm() {
     const [formData, setFormData] = useState({
         campaignName: '',
         description: '',
+        address: '',
         goal: '',
         endDate: '',
         rewards: [{ donationAmount: '', correspondingReward: '' }]
@@ -62,6 +63,7 @@ export default function CampaignForm() {
             setFormData({
                 campaignName: campaign.name || '',
                 description: campaign.description || '',
+                address: campaign.address || '',
                 goal: campaign.goal || '',
                 endDate: campaign.endDate ? campaign.endDate.split('T')[0] : '',
                 rewards: rewards
@@ -181,6 +183,7 @@ export default function CampaignForm() {
             const campaignData = {
                 name: formData.campaignName,
                 description: formData.description,
+                address: formData.address || null,
                 goal: parseFloat(formData.goal),
                 endDate: formData.endDate,
                 imageUrl: images.length > 0 ? URL.createObjectURL(images[0]) : '',
@@ -304,6 +307,7 @@ export default function CampaignForm() {
             const campaignData = {
                 name: formData.campaignName,
                 description: formData.description,
+                address: formData.address || null,
                 goal: parseFloat(formData.goal),
                 endDate: formData.endDate,
                 imageUrl: images.length > 0 ? URL.createObjectURL(images[0]) : '',
@@ -433,6 +437,27 @@ export default function CampaignForm() {
                     </div>
                     {errors.description && (
                         <div className="error-message">{errors.description}</div>
+                    )}
+                </div>
+
+                {/* Address Field */}
+                <div className="form-group">
+                    <label htmlFor="address" className="form-label">
+                        Shop/Campaign Address
+                    </label>
+                    <input
+                        type="text"
+                        id="address"
+                        value={formData.address}
+                        onChange={(e) => handleInputChange('address', e.target.value)}
+                        className={`form-input ${errors.address ? 'error' : ''}`}
+                        placeholder="e.g., 123 Main Street, Singapore 123456"
+                    />
+                    <div className="field-info">
+                        A text field for the physical address of your shop or campaign location. This will be displayed on the "Find Us" tab with Google Maps integration.
+                    </div>
+                    {errors.address && (
+                        <div className="error-message">{errors.address}</div>
                     )}
                 </div>
 

@@ -1,0 +1,347 @@
+.verify-reward-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.verify-container {
+  max-width: 600px;
+  width: 100%;
+}
+
+.verify-container h1 {
+  font-size: 2.5rem;
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.verify-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.business-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.business-header h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.campaign-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.campaign-image {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.reward-details {
+  margin-bottom: 2rem;
+}
+
+.detail-section {
+  margin-bottom: 2rem;
+}
+
+.detail-section h3 {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.reward-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.reward-description {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.info-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.info-item .label {
+  font-weight: 600;
+  color: #555;
+}
+
+.info-item .value {
+  color: #333;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-redeemed {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.alert-warning {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.alert-info {
+  background: #cce5ff;
+  color: #004085;
+  border: 1px solid #b8daff;
+}
+
+.alert-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.action-section {
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 2px solid #f0f0f0;
+  margin-top: 2rem;
+}
+
+.scan-instruction {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.scan-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 1.25rem 3rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scan-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.scan-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.scan-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.scan-note {
+  font-size: 0.85rem;
+  color: #999;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.success-message {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border-radius: 12px;
+  margin-top: 2rem;
+}
+
+.success-icon {
+  font-size: 4rem;
+  color: #28a745;
+  margin-bottom: 1rem;
+  animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.success-message h3 {
+  font-size: 1.8rem;
+  color: #155724;
+  margin-bottom: 0.5rem;
+}
+
+.success-message p {
+  font-size: 1.1rem;
+  color: #155724;
+  margin: 0.5rem 0;
+}
+
+.timestamp {
+  font-size: 0.95rem !important;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.already-redeemed-message {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #cce5ff 0%, #b8daff 100%);
+  border-radius: 12px;
+  margin-top: 2rem;
+}
+
+.info-icon {
+  font-size: 4rem;
+  color: #004085;
+  margin-bottom: 1rem;
+  animation: scaleIn 0.5s ease;
+}
+
+.already-redeemed-message h3 {
+  font-size: 1.8rem;
+  color: #004085;
+  margin-bottom: 0.5rem;
+}
+
+.already-redeemed-message p {
+  font-size: 1.1rem;
+  color: #004085;
+}
+
+.alert strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.alert p {
+  margin: 0;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 3rem;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: white;
+  font-weight: 500;
+}
+
+.error {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 3rem;
+  color: white;
+}
+
+.error-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.error-container .error {
+  color: #dc3545;
+  margin-bottom: 1rem;
+}
+
+.retry-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.retry-button:hover {
+  background: #0056b3;
+}
