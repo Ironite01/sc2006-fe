@@ -130,7 +130,8 @@ export default function EditProfile() {
         }
     }
 
-    async function handleLogout() {
+    async function handleLogout(e) {
+        e.preventDefault();
         try {
             const res = await fetch(auth.logout, {
                 method: "POST",
@@ -144,7 +145,7 @@ export default function EditProfile() {
             Cookies.remove("access_token");
             localStorage.clear();
 
-            toast.success("Logged out successfully!");
+            toast.success("You have been signed out!");
             navigate("/");
         } catch (err) {
             toast.error("Logout request failed:", err);

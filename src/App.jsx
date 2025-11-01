@@ -18,6 +18,8 @@ import EditProfile from './pages/profile/EditProfile.jsx';
 import Admin from './pages/admin/index.jsx';
 import AdminDataset from './pages/admin/dataset/index.jsx';
 import AdminDatasetViewer from './pages/admin/dataset/filename/index.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -44,6 +46,7 @@ function App() {
           <Route path="/admin/dataset" element={<AdminDataset />} />
           <Route path="/admin/dataset/:filename" element={<AdminDatasetViewer />} />
         </Routes>
+        <ToastContainer className="toast-container" />
       </main>
       <Footer />
     </BrowserRouter>
