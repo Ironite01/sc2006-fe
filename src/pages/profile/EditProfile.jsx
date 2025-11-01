@@ -144,7 +144,7 @@ export default function EditProfile() {
 
     return (
         <div className='form-container'>
-            <UserForm title={<div className='form-title'>
+            <UserForm title={<div className='form-title title-bar'>
                 <h2>Update Profile</h2>
                 <button className="logout-btn" onClick={handleLogout}>Logout</button>
             </div>}
