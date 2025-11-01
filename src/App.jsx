@@ -22,6 +22,7 @@ import Updates from './pages/updates';
 import EditProfile from './pages/profile/EditProfile';
 import Dashboard from './pages/Dashboard';
 import BrowseCampaigns from './pages/BrowseCampaigns';
+import CategoryPage from './pages/CategoryPage';
 
 // Business Representative Pages
 import ViewSupporters from './pages/campaign/components/ViewSupporters';
@@ -63,6 +64,7 @@ function App() {
           {/* Supporter Routes */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/campaigns" element={<BrowseCampaigns />} />
+          <Route path="/category/:categoryName" element={<CategoryPage />} />
           <Route path="/rewards" element={<MyRewards />} />
           <Route path="/rewards/:id" element={<RewardProof />} />
           <Route path="/verify-reward/:id" element={<VerifyReward />} />

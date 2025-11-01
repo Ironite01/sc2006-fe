@@ -72,6 +72,164 @@ function StoryCarousel({ images }) {
   );
 }
 
+// Updates Carousel Component
+function UpdatesCarousel({ updates, onLikeUpdate, onOpenComments, formatTimeAgo, currentUser }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  if (!updates || updates.length === 0) return null;
+
+  const nextUpdate = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % updates.length);
+  };
+
+  const prevUpdate = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + updates.length) % updates.length);
+  };
+
+  const goToUpdate = (index) => {
+    setCurrentIndex(index);
+  };
+
+  const update = updates[currentIndex];
+
+  // Track view when user navigates to an update
+  useEffect(() => {
+    const trackView = async () => {
+      if (!update || !update.updateId) return;
+
+      try {
+        await fetch(`http://localhost:3000/updates/${update.updateId}/view`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            userId: currentUser?.userId || null
+          })
+        });
+      } catch (err) {
+        console.error('Error tracking view:', err);
+      }
+    };
+
+    trackView();
+  }, [currentIndex, update?.updateId, currentUser?.userId]);
+
+  return (
+    <div className="updates-carousel">
+      <div className="updates-carousel-main">
+        {updates.length > 1 && (
+          <button
+            className="updates-carousel-btn prev"
+            onClick={prevUpdate}
+            aria-label="Previous update"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+        )}
+
+        <div className="updates-carousel-content">
+          <div className="update-card-carousel">
+            <div className="update-header-carousel">
+              <div className="update-title-section">
+                <h3>{update.title}</h3>
+                <span className="update-date-carousel">{formatTimeAgo(update.postedAt)}</span>
+              </div>
+              {update.status === 'SCHEDULED' && (
+                <span className="scheduled-badge">Scheduled</span>
+              )}
+            </div>
+
+            <p className="update-description-carousel">{update.description}</p>
+
+            {update.imageUrl && (
+              <div className="update-image-wrapper">
+                <img
+                  src={update.imageUrl}
+                  alt={update.title}
+                  className="update-image-carousel"
+                />
+              </div>
+            )}
+
+            {update.tags && (
+              <div className="update-tags-carousel">
+                {update.tags.split(',').map((tag, idx) => (
+                  <span key={idx} className="update-tag-carousel">{tag.trim()}</span>
+                ))}
+              </div>
+            )}
+
+            <div className="update-actions-carousel">
+              <button
+                className="action-btn-carousel like-btn-carousel"
+                onClick={() => onLikeUpdate(update.updateId)}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                <span>{update.likeCount || 0}</span>
+              </button>
+
+              <button
+                className="action-btn-carousel comment-btn-carousel"
+                onClick={() => onOpenComments(update.updateId)}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+                <span>{update.commentCount || 0}</span>
+              </button>
+
+              <button className="action-btn-carousel view-btn-carousel">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                <span>{update.viewCount || 0}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {updates.length > 1 && (
+          <button
+            className="updates-carousel-btn next"
+            onClick={nextUpdate}
+            aria-label="Next update"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        )}
+      </div>
+
+      {updates.length > 1 && (
+        <>
+          <div className="updates-carousel-indicators">
+            {updates.map((_, index) => (
+              <button
+                key={index}
+                className={`updates-indicator ${index === currentIndex ? 'active' : ''}`}
+                onClick={() => goToUpdate(index)}
+                aria-label={`Go to update ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          <div className="updates-carousel-counter">
+            Update {currentIndex + 1} of {updates.length}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 
 export default function CampaignDetails() {
   const { id } = useParams();
@@ -626,69 +784,13 @@ export default function CampaignDetails() {
             ) : updates.length === 0 ? (
               <p className="no-updates">No updates yet. Check back later!</p>
             ) : (
-              <div className="updates-list">
-                {updates.map(update => (
-                  <div key={update.updateId} className="update-card">
-                    <div className="update-header">
-                      <div>
-                        <h3>{update.title}</h3>
-                        <span className="update-date">{formatTimeAgo(update.postedAt)}</span>
-                      </div>
-                      {update.status === 'SCHEDULED' && (
-                        <span className="scheduled-badge">Scheduled</span>
-                      )}
-                    </div>
-
-                    <p className="update-description">{update.description}</p>
-
-                    {update.imageUrl && (
-                      <img
-                        src={update.imageUrl}
-                        alt={update.title}
-                        className="update-image"
-                      />
-                    )}
-
-                    {update.tags && (
-                      <div className="update-tags">
-                        {update.tags.split(',').map((tag, idx) => (
-                          <span key={idx} className="update-tag">{tag.trim()}</span>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className="update-actions">
-                      <button
-                        className="action-btn like-btn"
-                        onClick={() => handleLikeUpdate(update.updateId)}
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                        </svg>
-                        <span>{update.likeCount || 0}</span>
-                      </button>
-
-                      <button
-                        className="action-btn comment-btn"
-                        onClick={() => handleOpenComments(update.updateId)}
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                        </svg>
-                        <span>{update.commentCount || 0}</span>
-                      </button>
-
-                      <button className="action-btn view-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                          <circle cx="12" cy="12" r="3" />
-                        </svg>
-                        <span>{update.viewCount || 0}</span>
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <UpdatesCarousel
+                updates={updates}
+                onLikeUpdate={handleLikeUpdate}
+                onOpenComments={handleOpenComments}
+                formatTimeAgo={formatTimeAgo}
+                currentUser={currentUser}
+              />
             )}
           </section>
 
