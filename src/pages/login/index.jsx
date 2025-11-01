@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { profile, google } from '../../assets';
-import Cookies from 'js-cookie';
+import getUser from '../../helpers/getUser';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../paths';
 import './Login.css';
@@ -9,13 +9,18 @@ import { toast } from 'react-toastify';
 import SubmitButton from '../../components/SubmitButton';
 
 export default function Login() {
-    const access_token = Cookies.get('access_token');
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (access_token) navigate("/", { replace: true });
-    }, [access_token]);
+        redirectIfLoggedIn();
+    }, []);
+
+    async function redirectIfLoggedIn() {
+        if (await getUser()) {
+            navigate("/", { replace: true });
+        }
+    }
 
     async function onFormSubmit(e) {
         e.preventDefault();

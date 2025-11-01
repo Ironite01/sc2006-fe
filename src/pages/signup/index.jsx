@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Signup.css';
 import { isEmailValid, isStrongPassword, isUsernameValid } from '../../helpers/regex';
-import Cookies from 'js-cookie';
+import getUser from '../../helpers/getUser';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../paths';
 import { toast } from 'react-toastify';
@@ -9,13 +9,17 @@ import UserForm from '../../components/UserForm';
 
 export default function Signup() {
     const [currentPicture, setCurrentPicture] = useState(null);
-
-    const access_token = Cookies.get('access_token');
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (access_token) navigate("/", { replace: true });
-    }, [access_token]);
+        redirectIfLoggedIn();
+    }, []);
+
+    async function redirectIfLoggedIn() {
+        if (await getUser()) {
+            navigate("/", { replace: true });
+        }
+    }
 
     async function onFormSubmit(e) {
         e.preventDefault();
