@@ -30,6 +30,13 @@ export default function EditProfile() {
             navigate("/");
             return;
         }
+        const handler = () => {
+            const stored = localStorage.getItem("profilePicture");
+            if (stored) setCurrentPicture(JSON.parse(stored));
+        };
+        window.addEventListener("profileUpdated", handler);
+        handler();
+        return () => window.removeEventListener("profileUpdated", handler);
     }, []);
 
     useEffect(() => {
@@ -39,7 +46,6 @@ export default function EditProfile() {
                 email: oldUserData.email,
                 role: oldUserData.role,
             });
-            setCurrentPicture(oldUserData.profilePicture);
         }
     }, [oldUserData]);
 
@@ -95,7 +101,8 @@ export default function EditProfile() {
         formData.append('email', emailVal);
         formData.append('currentPassword', currentPassword.value);
         formData.append('password', passwordVal);
-        formData.append('profilePicture', profilePicture.files[0] || null);
+        if (profilePicture.files[0])
+            formData.append('profilePicture', profilePicture.files[0]);
 
         try {
             const res = await fetch(userPath.updateProfile(oldUserData.userId), {
@@ -122,10 +129,24 @@ export default function EditProfile() {
         }
     }
 
+    async function handleLogout() {
+        try {
+            await fetch(auth.logout, { method: "POST", credentials: "include" });
+        } catch (err) {
+            console.error("Logout request failed:", err);
+        }
+
+        Cookies.remove("access_token");
+        localStorage.clear();
+        toast.success("Logged out successfully!");
+        navigate("/login");
+    }
+
     return (
         <div className='form-container'>
             <UserForm title={<div className='form-title'>
                 <h2>Update Profile</h2>
+                <button className="logout-btn" onClick={handleLogout}>Logout</button>
             </div>}
                 updateMode={true}
                 onFormSubmit={onFormSubmit}
