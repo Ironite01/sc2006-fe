@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import fileToBase64 from '../../helpers/fileToBase64';
 import getUser from '../../helpers/getUser';
+import { auth } from '../../../paths';
 
 export default function EditProfile() {
     const navigate = useNavigate();
@@ -131,15 +132,23 @@ export default function EditProfile() {
 
     async function handleLogout() {
         try {
-            await fetch(auth.logout, { method: "POST", credentials: "include" });
-        } catch (err) {
-            console.error("Logout request failed:", err);
-        }
+            const res = await fetch(auth.logout, {
+                method: "POST",
+                credentials: "include",
+            });
 
-        Cookies.remove("access_token");
-        localStorage.clear();
-        toast.success("Logged out successfully!");
-        navigate("/login");
+            if (!res.ok) {
+                toast.error("Failed to log out");
+                return;
+            }
+            Cookies.remove("access_token");
+            localStorage.clear();
+
+            toast.success("Logged out successfully!");
+            navigate("/");
+        } catch (err) {
+            toast.error("Logout request failed:", err);
+        }
     }
 
     return (
