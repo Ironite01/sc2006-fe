@@ -6,7 +6,7 @@ export const auth = {
   logout: `${backendPath}/logout`,
   googleLogin: `${backendPath}/login/google`,
   forgotPassword: `${backendPath}/user/forgot-password`,
-
+  me: `${backendPath}/auth/me` // for pages that require jwt decoding
 }
 
 export const user = {

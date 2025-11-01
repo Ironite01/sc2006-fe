@@ -25,6 +25,8 @@ export default function Admin() {
 
     const cards = [
         { title: "Datasets", value: noOfDatasets, description: "Click to view all datasets", link: 'dataset' },
+        { title: "Campaigns", value: "", description: "Click to review all campaigns", link: 'campaign' },
+        { title: "User moderation", value: "", description: "Click here to moderate users (currently unavailable)", link: '#', disabled: true }
     ];
 
     return (
@@ -36,7 +38,9 @@ export default function Admin() {
 
             <main className="dashboard-grid">
                 {cards.map((card, idx) => (
-                    <a href={`/admin/${card.link}`}>
+                    <a href={`/admin/${card.link}`} className={card?.disabled ? 'disabled' : ''} onClick={(e) => {
+                        if (card?.disabled) e.preventDefault()
+                    }}>
                         <div key={idx} className="dashboard-card">
                             <h2>{card.title}</h2>
                             <p className="value">{card.value}</p>

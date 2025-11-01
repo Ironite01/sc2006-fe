@@ -7,6 +7,7 @@ import { user as userPath } from '../../../paths';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import fileToBase64 from '../../helpers/fileToBase64';
+import getUser from '../../helpers/getUser';
 
 export default function EditProfile() {
     const navigate = useNavigate();
@@ -22,15 +23,12 @@ export default function EditProfile() {
     const [currentPicture, setCurrentPicture] = useState(null);
 
     useEffect(() => {
+        getUser_();
         const googleUser = Cookies.get('user');
         if (googleUser) {
             toast.error("Edit profile is not supported with Google accounts!");
             navigate("/");
             return;
-        }
-        const userId = Cookies.get('userId');
-        if (userId) {
-            getUserById(userId);
         }
     }, []);
 
@@ -45,17 +43,9 @@ export default function EditProfile() {
         }
     }, [oldUserData]);
 
-    async function getUserById(userId) {
+    async function getUser_() {
         try {
-            const res = await fetch(userPath.getUserById(userId), {
-                method: 'GET',
-                credentials: "include"
-            });
-            if (!res.ok) {
-                throw new Error("Something went wrong...");
-            }
-
-            const { user } = await res.json();
+            const user = await getUser();
             setOldUserData(user);
         } catch (e) {
             toast.error(e);

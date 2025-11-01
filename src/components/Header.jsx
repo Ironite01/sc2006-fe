@@ -4,6 +4,7 @@ import './Header.css';
 import Searchbar from './Searchbar';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import getUser from "../helpers/getUser";
 
 export default function Header({ onSearch }) {
     const user = Cookies.get('user');
@@ -29,16 +30,6 @@ export default function Header({ onSearch }) {
         return () => window.removeEventListener("profileUpdated", handler);
     }, []);
 
-    const handleProfileClick = () => {
-        if (user) {
-            // User is logged in, navigate to profile page
-            navigate('/profile');
-        } else {
-            // User is not logged in, navigate to login page
-            navigate('/login');
-        }
-    };
-
     return <header className="place-content-center">
         <nav className="flex justify-between items-center">
             <nav className="flex order-1 gap-[0.5rem] items-center">
@@ -54,7 +45,7 @@ export default function Header({ onSearch }) {
                     alt="Profile logo"
                     className='h-[2.75rem] w-[2.75rem] rounded-full profile cursor-pointer'
                     referrerPolicy="no-referrer"
-                    onClick={handleProfileClick}
+                    onClick={async () => await getUser() ? navigate('/profile') : navigate('/login')}
                 />
             </div>
         </nav>

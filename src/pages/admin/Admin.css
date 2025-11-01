@@ -22,19 +22,25 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-}
-
-.dashboard-grid a {
-    text-decoration: none;
+    align-items: stretch;
 }
 
 .dashboard-card {
     background-color: #fff;
     border-radius: 1rem;
-    /* rounded-2xl */
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.dashboard-grid a {
+    text-decoration: none;
 }
 
 .dashboard-card:hover {
@@ -58,4 +64,8 @@
 .dashboard-card .description {
     color: #6b7280;
     margin-top: 5px;
+}
+
+.disabled {
+    opacity: 50%;
 }
