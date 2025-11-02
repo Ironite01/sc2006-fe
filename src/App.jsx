@@ -21,6 +21,7 @@ import AdminDatasetViewer from './pages/admin/dataset/filename/index.jsx';
 import Rewards from './pages/rewards/index.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import RewardProof from './pages/rewards/RewardProof.jsx';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -41,9 +42,10 @@ function App() {
           <Route path="/campaign/:id/donation" element={<DonationPage />} />
           <Route path="/campaign/create" element={<CampaignForm mode="create" />} />
           <Route path="/campaign/edit" element={<CampaignForm mode="edit" />} />
-          <Route path="/campaign/rewards" element={<ManageRewards />} />
-          <Route path="/campaign/rewards/:tierId" element={<RewardTier />} />
+          <Route path="/campaign/:campaignId/rewards" element={<ManageRewards />} />
+          <Route path="/campaign/:campaignId/rewards/:tierId" element={<RewardTier />} />
           <Route path="/rewards" element={<Rewards />} />
+          <Route path="/rewards/:userRewardId" element={<RewardProof />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/dataset" element={<AdminDataset />} />
           <Route path="/admin/dataset/:filename" element={<AdminDatasetViewer />} />

@@ -1,0 +1,165 @@
+.reward-proof-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 80vh;
+}
+
+.back-button {
+    background: transparent;
+    border: none;
+    color: #666;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    margin-bottom: 2rem;
+    transition: color 0.3s;
+}
+
+.back-button:hover {
+    color: #333;
+}
+
+.proof-container h1 {
+    font-size: 2rem;
+    color: #4a3f35;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.proof-card {
+    background: #5d4e41;
+    color: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.campaign-name {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.campaign-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.campaign-image-placeholder {
+    width: 100%;
+    height: 200px;
+    background: #6b5d52;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    font-size: 4rem;
+}
+
+.reward-info {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 500;
+    color: #f0e6d2;
+}
+
+.info-value {
+    font-weight: 600;
+    color: white;
+}
+
+.info-value.status {
+    background: #28a745;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+}
+
+.qr-code-section {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.qr-code-placeholder {
+    width: 200px;
+    height: 200px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+
+.qr-code-placeholder p {
+    margin: 0.5rem;
+    color: #666;
+}
+
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.qr-code-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background: white;
+    padding: 1rem;
+}
+
+.qr-instruction {
+    font-size: 0.9rem;
+    text-align: center;
+    color: #f5f5f5;
+    max-width: 300px;
+    font-weight: 500;
+}
+
+.proof-note {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #f5f5f5;
+    margin-top: 1.5rem;
+    font-style: italic;
+}
+
+.loading,
+.error {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 3rem;
+    color: #666;
+}
+
+.error {
+    color: #dc3545;
+}

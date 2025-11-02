@@ -13,7 +13,8 @@ export const user = {
   getUserById: (userId) => `${backendPath}/user/${userId}`,
   updatePassword: `${backendPath}/user/update-password`,
   updateProfile: (userId) => `${backendPath}/user/${userId}`,
-  rewards: (userId) => `${backendPath}/user/${userId}/rewards`
+  rewards: (userId) => `${backendPath}/user/${userId}/rewards?limit=10000`,
+  reward: (userId, userRewardId) => `${backendPath}/user/${userId}/rewards/${userRewardId}`
 }
 
 export const admin = {
