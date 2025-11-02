@@ -35,7 +35,7 @@ export default function Header({ onSearch }) {
             <nav className="flex order-1 gap-[0.5rem] items-center">
                 <img src={profile} alt="App logo" className='h-[2.75rem] w-auto logo' />
                 <a className='no-underline hover:underline visited:no-underline' href='/'>Home</a>
-                <a>Rewards</a>
+                <a onClick={() => navigate("/rewards")}>Rewards</a>
                 <a>Updates</a>
             </nav>
             <div className="flex order-2 items-center gap-[1.25rem]">

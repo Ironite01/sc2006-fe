@@ -1,22 +1,34 @@
-import React, { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import "./DonationPage.css";
-
-import campaigns from "../../../data/campaigns.json";
 import tiersDB from "../../../data/donationRewards.json";
 import SubmitButton from "../../../components/SubmitButton";
+import { campaigns } from "../../../../paths";
 
 export default function DonationPage() {
   const { id } = useParams();
   const { state } = useLocation();
+  const [campaign, setCampaign] = useState(null);
 
-  // 1) find the right campaign by :id
-  const campaign = useMemo(() => {
-    const found = campaigns.campaigns?.find(
-      (c) => String(c.id) === String(id)
-    );
-    return found || null;
-  }, [id]);
+  useEffect(() => {
+    getCampaign();
+  }, []);
+
+  async function getCampaign() {
+    try {
+      const res = await fetch(campaigns.getById(id), {
+        method: 'GET',
+        credentials: 'include'
+      });
+      if (!res.ok) {
+        throw new Error("Failed to get campaign");
+      }
+      const campaign = await res.json();
+      setCampaign(campaign);
+    } catch (e) {
+      toast.error(e.message);
+    }
+  }
 
   // 2) tiers source: prefer campaign.rewardTiers; else fallback JSON; else empty
   const tiers = useMemo(() => {

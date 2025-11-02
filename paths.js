@@ -12,12 +12,18 @@ export const auth = {
 export const user = {
   getUserById: (userId) => `${backendPath}/user/${userId}`,
   updatePassword: `${backendPath}/user/update-password`,
-  updateProfile: (userId) => `${backendPath}/user/${userId}`
+  updateProfile: (userId) => `${backendPath}/user/${userId}`,
+  rewards: (userId) => `${backendPath}/user/${userId}/rewards`
 }
 
 export const admin = {
   datasets: `${backendPath}/admin/dataset`,
   dataset: (filename) => `${backendPath}/admin/dataset/${filename}`
+}
+
+export const campaigns = {
+  getById: (campaignId) => `${backendPath}/campaigns/${campaignId}`,
+  get: `${backendPath}/campaigns`
 }
 
 export const shop = {

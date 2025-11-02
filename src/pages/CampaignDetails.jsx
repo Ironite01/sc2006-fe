@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './CampaignDetails.css';
-import campaigns from '../data/campaigns.json';
 import ShopsLostSection from '../components/ShopsLostSection';
 import { useNavigate } from "react-router-dom";
 import SubmitButton from '../components/SubmitButton';
+import { campaigns } from '../../paths';
 
 
 export default function CampaignDetails() {
@@ -15,6 +15,26 @@ export default function CampaignDetails() {
   const [commentText, setCommentText] = useState('');
   const [commentLoading, setCommentLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getCampaign();
+  }, []);
+
+  async function getCampaign() {
+    try {
+      const res = await fetch(campaigns.getById(id), {
+        method: 'GET',
+        credentials: 'include'
+      });
+      if (!res.ok) {
+        throw new Error("Failed to get campaign");
+      }
+      const campaign = await res.json();
+      setCampaign(campaign);
+    } catch (e) {
+      toast.error(e.message);
+    }
+  }
 
   const handleDonateClick = () => {
     navigate(`/campaign/${id}/donation`, {
