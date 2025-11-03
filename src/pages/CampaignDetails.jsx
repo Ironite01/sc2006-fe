@@ -142,7 +142,7 @@ export default function CampaignDetails() {
           <section className="story-section">
             <h2>Our Story</h2>
             <div className="story-content">
-              {campaign.story.split('\n\n').map((paragraph, index) => (
+              {campaign?.story?.split('\n\n').map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
             </div>
