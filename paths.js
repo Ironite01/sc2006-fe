@@ -23,7 +23,6 @@ export const admin = {
   users: `${backendPath}/admin/user`,
   updateUserRole: (userId) => `${backendPath}/admin/user/${userId}/role`,
   deleteUser: (userId) => `${backendPath}/admin/user/${userId}`,
-  campaigns: `${backendPath}/admin/campaign`,
   updateCampaignStatus: (campaignId) => `${backendPath}/admin/campaign/${campaignId}/status`,
   deleteCampaign: (campaignId) => `${backendPath}/admin/campaign/${campaignId}`,
   comments: `${backendPath}/admin/comment`,
@@ -32,7 +31,8 @@ export const admin = {
 
 export const campaigns = {
   getById: (campaignId) => `${backendPath}/campaigns/${campaignId}`,
-  get: `${backendPath}/campaigns`
+  get: `${backendPath}/campaigns`,
+  stats: `${backendPath}/campaigns/stats`
 }
 
 export const updates = {

@@ -10,3 +10,10 @@ export const USER_REWARDS_STATUS = {
     COMPLETED: 'completed',
     PENDING: 'pending'
 }
+
+export const CAMPAIGNS_STATUS = {
+    APPROVED: 'approved',
+    PENDING: 'pending',
+    REJECTED: 'rejected',
+    SUSPENDED: 'suspended'
+}

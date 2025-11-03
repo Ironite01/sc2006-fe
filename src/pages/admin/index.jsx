@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Admin.css";
-import { admin } from "../../../paths";
+import { campaigns, admin } from "../../../paths";
 import { toast } from "react-toastify";
 
 export default function Admin() {
@@ -28,7 +28,7 @@ export default function Admin() {
     }
 
     async function getNumberOfCampaigns() {
-        const res = await fetch(admin.campaigns, {
+        const res = await fetch(campaigns.stats, {
             method: 'GET',
             credentials: 'include'
         });
@@ -36,8 +36,10 @@ export default function Admin() {
             toast.error("Unable to fetch campaigns...");
             return;
         }
-        const { campaigns } = await res.json();
-        setNoOfCampaigns(campaigns.length);
+        const data = await res.json();
+        console.log(data);
+        const totalCampaigns = Object.values(data).reduce((sum, count) => sum + count, 0);
+        setNoOfCampaigns(totalCampaigns);
     }
 
     async function getNumberOfUsers() {
@@ -52,7 +54,7 @@ export default function Admin() {
         const { users } = await res.json();
         setNoOfUsers(users.length);
     }
-
+    // TODO: We need to add admin moderating shops and campaigns
     const cards = [
         { title: "Datasets", value: noOfDatasets, description: "Click to view all datasets", link: 'dataset' },
         { title: "Campaigns", value: noOfCampaigns, description: "Click to review all campaigns", link: 'campaign' },
