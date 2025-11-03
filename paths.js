@@ -39,7 +39,8 @@ export const updates = {
   getById: (campaignId, updateId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}`,
   like: (campaignId, updateId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}/like`,
   comment: (campaignId, updateId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}/comment`,
-  editComment: (campaignId, updateId, commentId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}/comment/${commentId}`
+  editComment: (campaignId, updateId, commentId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}/comment/${commentId}`,
+  getByUserDonation: (userId) => `${backendPath}/updates/${userId}`
 }
 
 export const shop = {

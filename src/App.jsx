@@ -9,7 +9,7 @@ import Login from './pages/login';
 import ForgotPassword from './pages/forgot-password';
 import ResetPassword from './pages/reset-password';
 import Campaign from './pages/campaign';
-import CampaignDetails from './pages/CampaignDetails';
+import CampaignDetails from './pages/campaign/CampaignDetails';
 import DonationPage from './pages/campaign/components/DonationPage.jsx';
 import CampaignForm from './pages/campaign/components/CampaignForm.jsx';
 import ManageRewards from './pages/campaign/components/ManageRewards.jsx';
@@ -25,6 +25,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RewardProof from './pages/rewards/RewardProof.jsx';
 import Updates from './pages/campaign/updates/index.jsx';
+import UserUpdates from './pages/updates/index.jsx';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -40,6 +41,7 @@ function App() {
           <Route path="/profile" element={<EditProfile />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/updates" element={<UserUpdates />} />
           <Route path="/campaign" element={<Campaign />} />
           <Route path="/campaign/:id" element={<CampaignDetails />} />
           <Route path="/campaign/:campaignId/updates/:updateId" element={<Updates />} />

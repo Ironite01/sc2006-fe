@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './CampaignDetails.css';
-import ShopsLostSection from '../components/ShopsLostSection';
+import ShopsLostSection from '../../components/ShopsLostSection';
 import { useNavigate } from "react-router-dom";
-import SubmitButton from '../components/SubmitButton';
-import { campaigns } from '../../paths';
+import SubmitButton from '../../components/SubmitButton';
+import { campaigns } from '../../../paths';
 import { toast } from 'react-toastify';
-import daysLeft from "../helpers/daysLeft";
+import daysLeft from "../../helpers/daysLeft";
 
 export default function CampaignDetails() {
   const { id } = useParams();
