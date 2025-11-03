@@ -152,7 +152,7 @@ export default function CampaignDetails() {
           <section className="updates-section">
             <h2>Updates</h2>
             <div className="updates-list">
-              {campaign.updates.map(update => (
+              {campaign?.updates?.map(update => (
                 <div key={update.updateId} className="update-card" onClick={() => navigate(`${location.pathname}/updates/${update.updateId}`)}>
                   <div className="update-header">
                     <h3>{update.title}</h3>
@@ -170,7 +170,7 @@ export default function CampaignDetails() {
                   </div>
 
                   {/* Optional: Show comments */}
-                  {update.comments && update.comments.length > 0 && (
+                  {update?.comments && update.comments.length > 0 && (
                     <div className="comments-section">
                       {update.comments.map(comment => (
                         <div key={comment.commentId} className="comment">
@@ -218,7 +218,7 @@ export default function CampaignDetails() {
             {/* Reward Tiers */}
             <div className="reward-tiers">
               <h3>Rewards</h3>
-              {campaign.rewardTiers.map((tier, i) => {
+              {campaign?.rewardTiers.map((tier, i) => {
                 const isSelected = donationAmount >= tier.amount;
                 const isCurrentReward = getSelectedReward()?.amount === tier.amount;
 
