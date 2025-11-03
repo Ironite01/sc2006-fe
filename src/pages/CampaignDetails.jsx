@@ -218,7 +218,7 @@ export default function CampaignDetails() {
             {/* Reward Tiers */}
             <div className="reward-tiers">
               <h3>Rewards</h3>
-              {campaign?.rewardTiers.map((tier, i) => {
+              {campaign?.rewardTiers?.map((tier, i) => {
                 const isSelected = donationAmount >= tier.amount;
                 const isCurrentReward = getSelectedReward()?.amount === tier.amount;
 
