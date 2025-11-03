@@ -13,7 +13,6 @@ export default function CampaignDetails() {
   const [campaign, setCampaign] = useState(null);
   const [loading, setLoading] = useState(true);
   const [donationAmount, setDonationAmount] = useState(25);
-  //const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
   async function getCampaign() {
