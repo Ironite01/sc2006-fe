@@ -3,20 +3,19 @@ import "./Home.css";
 import ShopCard from "./components/ShopCard";
 import { shop as shopApi } from "../paths";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Home({ searchQuery }) {
   const navigate = useNavigate();
 
   const [allShops, setAllShops] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState("");
 
   useEffect(() => {
     let alive = true;
 
     async function load() {
       setLoading(true);
-      setErr("");
 
       try {
         // same as login: include credentials so cookies/session work
@@ -28,26 +27,13 @@ export default function Home({ searchQuery }) {
         const data = await res.json();
 
         if (!res.ok) {
-          throw new Error(
-            (data && (data.error || data.message)) || "Failed to fetch shops"
-          );
+          toast.error((data && (data.error || data.message)) || "Failed to fetch shops");
+          return;
         }
 
-        // backend shape = [{ id, shop: { id, name, tag, imageUrl, progress, businessRepresentative, location }}]
-        // map to the flat shape your UI expects
-        const mapped = (data || []).map((x) => ({
-          id: x?.shop?.id ?? String(x?.id ?? ""),
-          name: x?.shop?.name ?? "",
-          tag: x?.shop?.tag ?? "",
-          imageUrl: x?.shop?.imageUrl ?? "",
-          progress: Number(x?.shop?.progress ?? 0),
-          businessRepresentative: x?.shop?.businessRepresentative ?? "",
-          location: x?.shop?.location ?? "",
-        }));
-
-        if (alive) setAllShops(mapped);
+        if (alive) setAllShops(data);
       } catch (e) {
-        if (alive) setErr(e.message || "Network error loading shops");
+        if (alive) toast.error(e.message || "Network error loading shops");
       } finally {
         if (alive) setLoading(false);
       }
@@ -80,23 +66,13 @@ export default function Home({ searchQuery }) {
   const filteredFlavours = filterShops(flavours);
 
   const handleFeaturedClick = () => {
-    if (featuredShop?.id) {
-      navigate(`/campaign/${featuredShop.id}`);
+    if (featuredShop?.newestCampaignId) {
+      navigate(`/campaign/${featuredShop.newestCampaignId}`);
     }
   };
 
   if (loading) {
     return <div className="home"><p className="loading">Loading shops…</p></div>;
-  }
-
-  if (err) {
-    return (
-      <div className="home">
-        <p className="error">
-          {err} — make sure the backend is running on <code>http://localhost:3000</code> and you’re logged in.
-        </p>
-      </div>
-    );
   }
 
   if (!allShops.length) {
@@ -144,7 +120,7 @@ export default function Home({ searchQuery }) {
         <div className="row">
           {filteredLocalGems.length ? (
             filteredLocalGems.map((s) => (
-              <ShopCard key={s.id} id={s.id} imageUrl={s.imageUrl} tag={s.tag} name={s.name} />
+              <ShopCard key={s.newestCampaignId} id={s.newestCampaignId} imageUrl={s.imageUrl} tag={s.tag} name={s.name} />
             ))
           ) : (
             <p className="no-results">No shops found matching your search.</p>
@@ -157,7 +133,7 @@ export default function Home({ searchQuery }) {
         <div className="row">
           {filteredFlavours.length ? (
             filteredFlavours.map((s) => (
-              <ShopCard key={s.id} id={s.id} imageUrl={s.imageUrl} tag={s.tag} name={s.name} />
+              <ShopCard key={s.newestCampaignId} id={s.newestCampaignId} imageUrl={s.imageUrl} tag={s.tag} name={s.name} />
             ))
           ) : (
             <p className="no-results">No shops found matching your search.</p>
