@@ -5,20 +5,16 @@ import ShopsLostSection from '../components/ShopsLostSection';
 import { useNavigate } from "react-router-dom";
 import SubmitButton from '../components/SubmitButton';
 import { campaigns } from '../../paths';
-
+import { toast } from 'react-toastify';
+import daysLeft from "../helpers/daysLeft";
 
 export default function CampaignDetails() {
   const { id } = useParams();
   const [campaign, setCampaign] = useState(null);
   const [loading, setLoading] = useState(true);
   const [donationAmount, setDonationAmount] = useState(25);
-  const [commentText, setCommentText] = useState('');
-  const [commentLoading, setCommentLoading] = useState(false);
+  //const [image, setImage] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getCampaign();
-  }, []);
 
   async function getCampaign() {
     try {
@@ -48,15 +44,7 @@ export default function CampaignDetails() {
 
 
   useEffect(() => {
-    // Handle both string and numeric IDs
-    const foundCampaign = campaigns.campaigns.find(c => {
-      // Try exact match first (for string IDs)
-      if (c.id === id) return true;
-      // Try numeric match (for numeric IDs)
-      if (c.id === parseInt(id)) return true;
-      return false;
-    });
-    setCampaign(foundCampaign);
+    getCampaign();
     setLoading(false);
   }, [id]);
 
@@ -78,12 +66,6 @@ export default function CampaignDetails() {
 
   const handleDonationChange = (e) => {
     setDonationAmount(parseInt(e.target.value));
-  };
-
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
-    console.log('Comment submitted:', commentText);
-    setCommentText('');
   };
 
   const formatCurrency = (amount) => {
@@ -112,18 +94,18 @@ export default function CampaignDetails() {
     <div className="campaign-details">
       {/* Hero Section */}
       <section className="hero">
-        <img src={campaign.imageUrl} alt={campaign.name} />
+        <img src={campaign.image} alt={campaign.name} />
         <div className="hero-overlay">
           <div className="hero-content">
             <div className="hero-tag">{campaign.tag}</div>
             <h1 className="hero-title">{campaign.name}</h1>
             <div className="hero-stats">
               <div className="stat">
-                <span className="stat-value">{campaign.supporters}</span>
+                <span className="stat-value">{campaign.backerCount}</span>
                 <span className="stat-label">Supporters</span>
               </div>
               <div className="stat">
-                <span className="stat-value">{campaign.daysLeft}</span>
+                <span className="stat-value">{daysLeft(campaign.endDate)}</span>
                 <span className="stat-label">Days Left</span>
               </div>
             </div>
@@ -136,15 +118,15 @@ export default function CampaignDetails() {
         <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
           <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
         </svg>
-        <span>Rent due by <strong>{formatDate(campaign.rentDue)}</strong></span>
+        <span>Rent due by <strong>{formatDate(campaign.endDate)}</strong></span>
       </div>
 
       {/* Funding Progress */}
       <div className="funding-section">
         <div className="funding-header">
           <div className="funding-amount">
-            <span className="current-amount">{formatCurrency(campaign.currentFunding)}</span>
-            <span className="goal-amount">of {formatCurrency(campaign.fundingGoal)} goal</span>
+            <span className="current-amount">{formatCurrency(campaign.currentAmount)}</span>
+            <span className="goal-amount">of {formatCurrency(campaign.goal)} goal</span>
           </div>
           <div className="funding-percentage">{campaign.progress}%</div>
         </div>
@@ -171,71 +153,39 @@ export default function CampaignDetails() {
             <h2>Updates</h2>
             <div className="updates-list">
               {campaign.updates.map(update => (
-                <div key={update.id} className="update-card">
+                <div key={update.updateId} className="update-card" onClick={() => navigate(`${location.pathname}/updates/${update.updateId}`)}>
                   <div className="update-header">
                     <h3>{update.title}</h3>
-                    <span className="update-date">{formatDate(update.date)}</span>
+                    <span className="update-date">{formatDate(update.postedAt)}</span>
                   </div>
-                  <p className="update-content">{update.content}</p>
-                  {update.image && (
-                    <img src={update.image} alt={update.title} className="update-image" />
+                  <p className="update-content">{update.description}</p>
+
+                  <div className="update-actions">
+                    <button className="like-button">
+                      ❤️ {update.likeCount || 0}
+                    </button>
+                    <button className="comment-button">
+                      💬 {update.commentCount || 0}
+                    </button>
+                  </div>
+
+                  {/* Optional: Show comments */}
+                  {update.comments && update.comments.length > 0 && (
+                    <div className="comments-section">
+                      {update.comments.map(comment => (
+                        <div key={comment.commentId} className="comment">
+                          <strong>{comment.username}</strong> <span>{comment.commentText}</span>
+                        </div>
+                      ))}
+                    </div>
                   )}
                 </div>
               ))}
             </div>
           </section>
 
-          {/* Shops We've Lost */}
+          {/* TODO: Shops We've Lost */}
           <ShopsLostSection category={campaign.tag} businessName={campaign.name} />
-
-          {/* Meet The Owners */}
-          <section className="owners-section">
-            <h2>Meet The Owners</h2>
-            <div className="owners-grid">
-              {campaign.owners.map((owner, index) => (
-                <div key={index} className="owner-card">
-                  <img src={owner.image} alt={owner.name} className="owner-image" />
-                  <div className="owner-info">
-                    <h3>{owner.name}</h3>
-                    <p className="owner-role">{owner.role}</p>
-                    <p className="owner-bio">{owner.bio}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Comments */}
-          <section className="comments-section">
-            <h2>Comments ({campaign.comments.length})</h2>
-
-            <form className="comment-form" onSubmit={handleCommentSubmit}>
-              <textarea
-                placeholder="Leave a word of encouragement..."
-                value={commentText}
-                onChange={(e) => setCommentText(e.target.value)}
-                rows="4"
-              />
-              <SubmitButton className="bg-[#ffa500]" type="submit" loading={commentLoading}>
-                Post Comment
-              </SubmitButton>
-            </form>
-
-            <div className="comments-list">
-              {campaign.comments.map(comment => (
-                <div key={comment.id} className="comment-card">
-                  <img src={comment.avatar} alt={comment.author} className="comment-avatar" />
-                  <div className="comment-content">
-                    <div className="comment-header">
-                      <span className="comment-author">{comment.author}</span>
-                      <span className="comment-date">{formatDate(comment.date)}</span>
-                    </div>
-                    <p className="comment-text">{comment.content}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
         </div>
 
         {/* Sidebar */}
@@ -268,13 +218,13 @@ export default function CampaignDetails() {
             {/* Reward Tiers */}
             <div className="reward-tiers">
               <h3>Rewards</h3>
-              {campaign.rewardTiers.map(tier => {
+              {campaign.rewardTiers.map((tier, i) => {
                 const isSelected = donationAmount >= tier.amount;
                 const isCurrentReward = getSelectedReward()?.amount === tier.amount;
 
                 return (
                   <div
-                    key={tier.amount}
+                    key={i}
                     className={`reward-tier ${isSelected ? 'unlocked' : 'locked'} ${isCurrentReward ? 'selected' : ''}`}
                     onClick={() => setDonationAmount(tier.amount)}
                   >
@@ -290,6 +240,7 @@ export default function CampaignDetails() {
               })}
             </div>
 
+            {/* TODO */}
             <SubmitButton className="bg-[#ffa500]" loading={null} onClick={handleDonateClick}>
               Donate {formatCurrency(donationAmount)}
             </SubmitButton>

@@ -27,6 +27,10 @@ export const campaigns = {
   get: `${backendPath}/campaigns`
 }
 
+export const updates = {
+  like: (campaignId, updateId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}/like`
+}
+
 export const shop = {
   list: `${backendPath}/shops`,
   one: (id) => `${backendPath}/shops/${id}`
