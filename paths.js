@@ -28,7 +28,10 @@ export const campaigns = {
 }
 
 export const updates = {
-  like: (campaignId, updateId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}/like`
+  getById: (campaignId, updateId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}`,
+  like: (campaignId, updateId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}/like`,
+  comment: (campaignId, updateId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}/comment`,
+  editComment: (campaignId, updateId, commentId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}/comment/${commentId}`
 }
 
 export const shop = {

@@ -22,6 +22,7 @@ import Rewards from './pages/rewards/index.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RewardProof from './pages/rewards/RewardProof.jsx';
+import Updates from './pages/campaign/updates/index.jsx';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -39,6 +40,7 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/campaign" element={<Campaign />} />
           <Route path="/campaign/:id" element={<CampaignDetails />} />
+          <Route path="/campaign/:campaignId/updates/:updateId" element={<Updates />} />
           <Route path="/campaign/:id/donation" element={<DonationPage />} />
           <Route path="/campaign/create" element={<CampaignForm mode="create" />} />
           <Route path="/campaign/edit" element={<CampaignForm mode="edit" />} />
