@@ -19,8 +19,9 @@ export default function UserUpdates() {
         try {
             setLoading(true);
             const user = await getUser();
-            if (user.role !== USER_ROLES.SUPPORTER) {
+            if (!user || user.role !== USER_ROLES.SUPPORTER) {
                 toast.error("This page is only for supporters!");
+                navigate("/");
                 return;
             }
             const response = await fetch(updatesPath.getByUserDonation(user.userId), {
