@@ -18,6 +18,8 @@ import EditProfile from './pages/profile/EditProfile.jsx';
 import Admin from './pages/admin/index.jsx';
 import AdminDataset from './pages/admin/dataset/index.jsx';
 import AdminDatasetViewer from './pages/admin/dataset/filename/index.jsx';
+import AdminUsers from './pages/admin/users/index.jsx';
+import AdminCampaign from './pages/admin/campaign/index.jsx';
 import Rewards from './pages/rewards/index.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -51,6 +53,8 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/dataset" element={<AdminDataset />} />
           <Route path="/admin/dataset/:filename" element={<AdminDatasetViewer />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/campaign" element={<AdminCampaign />} />
         </Routes>
         <ToastContainer className="toast-container" />
       </main>

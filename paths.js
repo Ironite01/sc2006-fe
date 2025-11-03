@@ -19,7 +19,15 @@ export const user = {
 
 export const admin = {
   datasets: `${backendPath}/admin/dataset`,
-  dataset: (filename) => `${backendPath}/admin/dataset/${filename}`
+  dataset: (filename) => `${backendPath}/admin/dataset/${filename}`,
+  users: `${backendPath}/admin/user`,
+  updateUserRole: (userId) => `${backendPath}/admin/user/${userId}/role`,
+  deleteUser: (userId) => `${backendPath}/admin/user/${userId}`,
+  campaigns: `${backendPath}/admin/campaign`,
+  updateCampaignStatus: (campaignId) => `${backendPath}/admin/campaign/${campaignId}/status`,
+  deleteCampaign: (campaignId) => `${backendPath}/admin/campaign/${campaignId}`,
+  comments: `${backendPath}/admin/comment`,
+  deleteComment: (commentId) => `${backendPath}/admin/comment/${commentId}`
 }
 
 export const campaigns = {
