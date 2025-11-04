@@ -33,10 +33,10 @@ export default function UpdateComposer() {
     });
     const data = await res.json();
     setCampaigns(data.campaigns);
+    setSelectCampaignId(data.campaigns[0].id);
   }
 
   useEffect(() => {
-    if (!selectedCampaignId) setSelectCampaignId(campaigns[0]?.id || null);
     getUpdates();
   }, [selectedCampaignId]);
 

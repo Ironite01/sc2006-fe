@@ -36,6 +36,7 @@ export const admin = {
 }
 
 export const campaigns = {
+  userReward: (campaignId, supporterId, userRewardId) => `${backendPath}/campaigns/${campaignId}/user/${supporterId}/rewards/${userRewardId}`,
   getById: (campaignId) => `${backendPath}/campaigns/${campaignId}`,
   get: `${backendPath}/campaigns`,
   stats: `${backendPath}/campaigns/stats`

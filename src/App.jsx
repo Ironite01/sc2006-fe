@@ -122,9 +122,7 @@ function App() {
           <Route
             path="/campaign/:id"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
-                <CampaignDetails />
-              </RequireRole>
+              <CampaignDetails />
             }
           />
 
@@ -132,9 +130,7 @@ function App() {
           <Route
             path="/campaign/:campaignId/updates/:updateId"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
-                <Updates />
-              </RequireRole>
+              <Updates />
             }
           />
 
