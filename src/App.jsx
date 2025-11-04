@@ -46,8 +46,8 @@ function App() {
           <Route path="/campaign/:id" element={<CampaignDetails />} />
           <Route path="/campaign/:campaignId/updates/:updateId" element={<Updates />} />
           <Route path="/campaign/:id/donation" element={<DonationPage />} />
-          <Route path="/campaign/create" element={<CampaignForm mode="create" />} />
-          <Route path="/campaign/edit" element={<CampaignForm mode="edit" />} />
+          <Route path="/campaign/create" element={<CampaignForm />} />
+          <Route path="/campaign/:campaignId/edit" element={<CampaignForm />} />
           <Route path="/campaign/:campaignId/rewards" element={<ManageRewards />} />
           <Route path="/campaign/:campaignId/rewards/:tierId" element={<RewardTier />} />
           <Route path="/rewards" element={<Rewards />} />

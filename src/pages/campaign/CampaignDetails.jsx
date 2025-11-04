@@ -152,7 +152,7 @@ export default function CampaignDetails() {
             <h2>Updates</h2>
             <div className="updates-list">
               {campaign?.updates?.map(update => (
-                <div key={update.updateId} className="update-card" onClick={() => navigate(`${location.pathname}/updates/${update.updateId}`)}>
+                <div key={update.updateId} className="update-card" onClick={() => navigate(`updates/${update.updateId}`)}>
                   <div className="update-header">
                     <h3>{update.title}</h3>
                     <span className="update-date">{formatDate(update.postedAt)}</span>

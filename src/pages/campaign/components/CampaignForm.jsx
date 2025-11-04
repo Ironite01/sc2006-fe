@@ -1,31 +1,74 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './CampaignForm.css';
 import SubmitButton from '../../../components/SubmitButton';
+import { toast } from 'react-toastify';
+import { useNavigate, useParams } from 'react-router-dom';
+import getUser from '../../../helpers/getUser';
+import { USER_ROLES } from '../../../helpers/constants';
+import { campaigns } from '../../../../paths';
 
 export default function CampaignForm() {
+    const navigate = useNavigate();
+    const params = useParams();
+    const [deletedRewardIds, setDeletedRewardIds] = useState([]);
+
+    useEffect(() => {
+        authorize();
+    }, []);
+
+    async function authorize() {
+        const user = await getUser();
+        if (!user || user?.role !== USER_ROLES.BUSINESS_REPRESENTATIVE) {
+            toast.error("This page is only for business representative!");
+            navigate("/");
+        }
+    }
+
+    useEffect(() => {
+        if (params?.campaignId) {
+            getCampaign();
+        }
+    }, [params]);
+
+    async function getCampaign() {
+        const res = await fetch(campaigns.getById(params.campaignId), {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (!res.ok) {
+            toast.error("Something went wrong fetching campaigns!");
+            return;
+        }
+
+        const data = await res.json();
+        setFormData({
+            campaignName: data.name,
+            description: data.description,
+            goal: data.goal,
+            endDate: new Date(data.endDate).toISOString().split('T')[0],
+            rewards: data?.rewardTiers?.length ? data.rewardTiers : [{ amount: '', title: '', description: '' }],
+            story: data.story
+        });
+        setImage(data.image);
+    }
+
     const [formData, setFormData] = useState({
         campaignName: '',
         description: '',
         goal: '',
         endDate: '',
-        rewards: [{ donationAmount: '', correspondingReward: '' }]
+        story: '',
+        rewards: [{ amount: '', title: '', description: '' }]
     });
 
-    const [errors, setErrors] = useState({});
-    const [images, setImages] = useState([]);
+    const [image, setImage] = useState();
 
     const handleInputChange = (field, value) => {
         setFormData(prev => ({
             ...prev,
             [field]: value
         }));
-        // Clear error when user starts typing
-        if (errors[field]) {
-            setErrors(prev => ({
-                ...prev,
-                [field]: ''
-            }));
-        }
     };
 
     const handleRewardChange = (index, field, value) => {
@@ -40,13 +83,15 @@ export default function CampaignForm() {
     const addReward = () => {
         setFormData(prev => ({
             ...prev,
-            rewards: [...prev.rewards, { donationAmount: '', correspondingReward: '' }]
+            rewards: [...prev.rewards, { amount: '', title: '', description: '' }]
         }));
     };
 
     const removeReward = (index) => {
         if (formData.rewards.length > 1) {
             const newRewards = formData.rewards.filter((_, i) => i !== index);
+
+            if (formData.rewards[index]?.rewardId) setDeletedRewardIds([...deletedRewardIds, formData.rewards[index].rewardId]);
             setFormData(prev => ({
                 ...prev,
                 rewards: newRewards
@@ -56,13 +101,7 @@ export default function CampaignForm() {
 
     const handleImageUpload = (e) => {
         const files = Array.from(e.target.files);
-        if (images.length + files.length <= 5) {
-            setImages(prev => [...prev, ...files]);
-        }
-    };
-
-    const removeImage = (index) => {
-        setImages(prev => prev.filter((_, i) => i !== index));
+        setImage(files[0]);
     };
 
     const validateForm = () => {
@@ -85,27 +124,64 @@ export default function CampaignForm() {
         }
 
         formData.rewards.forEach((reward, index) => {
-            if (!reward.donationAmount || !reward.correspondingReward) {
+            if (!reward.amount || !reward.title) {
                 newErrors[`reward_${index}`] = 'Some error relating to rewards for donation';
             }
         });
 
-        setErrors(newErrors);
+        Object.values(newErrors).map((v) => toast.error(v))
+
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validateForm()) {
-            // Handle form submission logic here
-            console.log('Form submitted:', formData);
-            alert('Campaign created successfully! Redirecting to home page...');
+        if (!validateForm()) return;
+        let res;
+        const _formData = new FormData();
+
+        _formData.append('fields[name]', formData.campaignName);
+        _formData.append('fields[description]', formData.description);
+        _formData.append('fields[goal]', formData.goal);
+        _formData.append('fields[endDate]', formData.endDate);
+
+        if (image instanceof File) {
+            _formData.append('fields[image]', image);
         }
+
+        _formData.append('newRewards', JSON.stringify(formData.rewards.map((r) => ({
+            donationAmount: r.amount,
+            rewardName: r.title,
+            rewardDescription: r.description,
+        }))));
+        _formData.append('deletedRewardIds', JSON.stringify(deletedRewardIds));
+
+        if (params?.campaignId) {
+            res = await fetch(campaigns.getById(params.campaignId), {
+                method: 'PUT',
+                credentials: 'include',
+                body: _formData
+            });
+        } else {
+            res = await fetch(campaigns.get, {
+                method: 'POST',
+                credentials: 'include',
+                body: _formData
+            });
+        }
+
+        if (!res.ok) {
+            toast.error("Something went wrong...");
+            return;
+        }
+
+        toast.info(`Campaign ${params?.campaignId ? 'edited' : 'created'} successfully!`);
+        navigate('/campaign');
     };
 
     return (
         <div className="campaign-form-container">
-            <h1 className="form-title">Create Your Campaign</h1>
+            <h1 className="form-title">{params?.campaignId ? 'Edit' : 'Create'} Your Campaign</h1>
 
             <form onSubmit={handleSubmit} className="campaign-form">
                 {/* Campaign Name Field */}
@@ -118,15 +194,12 @@ export default function CampaignForm() {
                         id="campaignName"
                         value={formData.campaignName}
                         onChange={(e) => handleInputChange('campaignName', e.target.value)}
-                        className={`form-input ${errors.campaignName ? 'error' : ''}`}
+                        className='form-input'
                         placeholder="Enter campaign name"
                     />
                     <div className="field-info">
-                        A text field for the 'Name of Campaign'. It validates if the name of campaign is empty.
+                        Name your campaign!
                     </div>
-                    {errors.campaignName && (
-                        <div className="error-message">{errors.campaignName}</div>
-                    )}
                 </div>
 
                 {/* Description Field */}
@@ -138,7 +211,7 @@ export default function CampaignForm() {
                         id="description"
                         value={formData.description}
                         onChange={(e) => handleInputChange('description', e.target.value)}
-                        className={`form-textarea ${errors.description ? 'error' : ''}`}
+                        className='form-textarea'
                         placeholder="Describe your campaign and justify funding needs"
                         rows="4"
                     />
@@ -146,11 +219,28 @@ export default function CampaignForm() {
                         ({formData.description.length} / 2000 chars)
                     </div>
                     <div className="field-info">
-                        A text area field for the 'Description of Campaign and Funding Justification'. Limiting justification validation checks if it will reject any inputs after 2000 characters.
+                        Your business story!
                     </div>
-                    {errors.description && (
-                        <div className="error-message">{errors.description}</div>
-                    )}
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="story" className="form-label">
+                        Business story*
+                    </label>
+                    <textarea
+                        id="story"
+                        value={formData.story}
+                        onChange={(e) => handleInputChange('story', e.target.value)}
+                        className='form-textarea'
+                        placeholder="Your businesss story"
+                        rows="4"
+                    />
+                    <div className="char-count">
+                        ({formData.story.length} / 2000 chars)
+                    </div>
+                    <div className="field-info">
+                        Provide your campaign description!
+                    </div>
                 </div>
 
                 {/* Goal Field */}
@@ -165,18 +255,15 @@ export default function CampaignForm() {
                             id="goal"
                             value={formData.goal}
                             onChange={(e) => handleInputChange('goal', e.target.value)}
-                            className={`form-input currency ${errors.goal ? 'error' : ''}`}
+                            className='form-input currency'
                             placeholder="0.00"
                             step="0.01"
                             min="0"
                         />
                     </div>
                     <div className="field-info">
-                        A text field for the 'Goal (SGD)'. It validates if it is a valid amount in SGD (with 2 decimal points).
+                        Your campaign donation goal (in 2 decimal places).
                     </div>
-                    {errors.goal && (
-                        <div className="error-message">{errors.goal}</div>
-                    )}
                 </div>
 
                 {/* End Date Field */}
@@ -189,14 +276,11 @@ export default function CampaignForm() {
                         id="endDate"
                         value={formData.endDate}
                         onChange={(e) => handleInputChange('endDate', e.target.value)}
-                        className={`form-input ${errors.endDate ? 'error' : ''}`}
+                        className='form-input'
                     />
                     <div className="field-info">
-                        Date field (input either by text or from date picker) for 'End date of campaign'. Validation checks if the date is valid (non-empty).
+                        Specify when the campaign should end.
                     </div>
-                    {errors.endDate && (
-                        <div className="error-message">{errors.endDate}</div>
-                    )}
                 </div>
 
                 {/* Rewards Section */}
@@ -205,53 +289,58 @@ export default function CampaignForm() {
                         Reward(s)*
                     </label>
                     <div className="field-info">
-                        A text field for the 'Corresponding Reward' with respect to the 'Donation Amount'. It validates if the name of campaign is empty.
+                        Rewards for your supporters!
                     </div>
 
-                    {formData.rewards.map((reward, index) => (
-                        <div key={index} className="reward-row">
-                            <div className="reward-inputs">
+                    {formData?.rewards?.map((reward, index) => (
+                        <div key={index} className="flex mt-[3em]">
+                            <div className='flex gap-[1em]'>
+                                {reward?.rewardId && <input type="hidden" value={reward.rewardId} />}
                                 <input
                                     type="number"
                                     placeholder="Donation Amount"
-                                    value={reward.donationAmount}
-                                    onChange={(e) => handleRewardChange(index, 'donationAmount', e.target.value)}
+                                    value={reward.amount}
+                                    onChange={(e) => handleRewardChange(index, 'amount', e.target.value)}
                                     className="form-input reward-input"
                                     step="0.01"
                                     min="0"
                                 />
                                 <input
                                     type="text"
-                                    placeholder="Corresponding Reward"
-                                    value={reward.correspondingReward}
-                                    onChange={(e) => handleRewardChange(index, 'correspondingReward', e.target.value)}
+                                    placeholder="Title"
+                                    value={reward.title}
+                                    onChange={(e) => handleRewardChange(index, 'title', e.target.value)}
                                     className="form-input reward-input"
                                 />
-                                {formData.rewards.length > 1 && (
-                                    <button
-                                        type="button"
-                                        onClick={() => removeReward(index)}
-                                        className="remove-reward-btn"
-                                    >
-                                        -
-                                    </button>
-                                )}
+                                <textarea
+                                    value={reward.description}
+                                    onChange={(e) => handleRewardChange(index, 'description', e.target.value)}
+                                    placeholder="Description"
+                                    rows="1"
+                                    className="form-input reward-input"
+                                />
+                            </div>
+                            {formData.rewards.length > 1 && (
                                 <button
                                     type="button"
-                                    onClick={addReward}
-                                    className="add-reward-btn"
+                                    onClick={() => removeReward(index)}
+                                    className="remove-reward-btn"
                                 >
-                                    +
+                                    -
                                 </button>
-                            </div>
-                            {errors[`reward_${index}`] && (
-                                <div className="error-message">{errors[`reward_${index}`]}</div>
                             )}
+                            <button
+                                type="button"
+                                onClick={addReward}
+                                className="add-reward-btn"
+                            >
+                                +
+                            </button>
                         </div>
                     ))}
 
                     <div className="reward-info">
-                        Generate a new reward tier (i.e. create new 'Donation Amount' and 'Corresponding Reward').
+                        Generate a new reward tier (i.e. create new 'Donation Amount' and 'Reward').
                     </div>
                 </div>
 
@@ -260,55 +349,36 @@ export default function CampaignForm() {
                     <div className="image-upload-section">
                         <div className="upload-area">
                             <div className="upload-icon">📁</div>
-                            <div className="upload-text">Add up to 5 images</div>
                             <input
                                 type="file"
                                 accept="image/*"
-                                multiple
                                 onChange={handleImageUpload}
                                 className="file-input"
                                 id="imageUpload"
                             />
                             <label htmlFor="imageUpload" className="upload-label">
-                                Choose Files
+                                Upload image
                             </label>
                         </div>
 
-                        {images.length > 0 && (
-                            <div className="uploaded-images">
-                                {images.map((image, index) => (
-                                    <div key={index} className="image-preview">
-                                        <img
-                                            src={URL.createObjectURL(image)}
-                                            alt={`Preview ${index + 1}`}
-                                            className="preview-image"
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => removeImage(index)}
-                                            className="remove-image-btn"
-                                        >
-                                            ×
-                                        </button>
-                                    </div>
-                                ))}
+                        {image && (
+                            <div className="image-preview">
+                                <img
+                                    src={image instanceof File
+                                        ? URL.createObjectURL(image)
+                                        : image}
+                                    className="preview-image"
+                                />
                             </div>
                         )}
-
-                        <div className="upload-info">
-                            Add picture button that allows user to upload up to 5 images in total. It can be accumulated by uploading one by one, or uploading multiple images at a time.
-                        </div>
                     </div>
                 </div>
 
                 {/* Submit Button */}
                 <div className="form-actions">
-                    <SubmitButton type="submit" className="create-btn bg-[#218838]" loading={null}>
-                        Create
+                    <SubmitButton type="submit" className={`create-btn bg-[${params?.campaignId ? '#ffa500' : '#218838'}]`} loading={null}>
+                        {params?.campaignId ? 'Edit' : 'Create'}
                     </SubmitButton>
-                    <div className="submit-info">
-                        Disabled by default. If all validation is successful, the button is enabled, and will proceed with the create campaign flow. The user is then re-directed to the home page.
-                    </div>
                 </div>
             </form>
         </div>

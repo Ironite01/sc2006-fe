@@ -1,5 +1,5 @@
 .campaign-form-container {
-    max-width: 800px;
+    max-width: 60%;
     margin: 0 auto;
     padding: 2rem;
     background-color: #FDF3EA;
@@ -124,15 +124,9 @@
     border: 1px solid #e9ecef;
 }
 
-.reward-inputs {
-    display: grid;
-    grid-template-columns: 1fr 2fr auto auto;
-    gap: 0.5rem;
-    align-items: center;
-}
-
 .reward-input {
     margin: 0;
+    min-width: 200px;
 }
 
 .add-reward-btn,
@@ -227,17 +221,13 @@
     margin-top: 1rem;
 }
 
-.image-preview {
-    position: relative;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    border: 2px solid #ddd;
-}
-
 .preview-image {
+    padding-top: 1em;
     width: 100%;
-    height: 120px;
-    object-fit: cover;
+    max-height: 240px;
+    height: auto;
+    object-fit: contain;
+    display: block;
 }
 
 .remove-image-btn {
@@ -313,10 +303,6 @@
         width: 100%;
         height: 40px;
         border-radius: 0.5rem;
-    }
-
-    .uploaded-images {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
 
     .preview-image {
