@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
 import getUser from '../../../helpers/getUser';
 import { USER_ROLES } from '../../../helpers/constants';
-import { campaigns } from '../../../../paths';
+import { campaigns, shop } from '../../../../paths';
 
 export default function CampaignForm() {
     const navigate = useNavigate();
@@ -21,6 +21,22 @@ export default function CampaignForm() {
         if (!user || user?.role !== USER_ROLES.BUSINESS_REPRESENTATIVE) {
             toast.error("This page is only for business representative!");
             navigate("/");
+        }
+
+        try {
+            const res = await fetch(shop.me, {
+                method: "GET",
+                credentials: "include",
+            });
+
+            if (res.status === 404) {
+                toast.error("Please register your shop before creating a campaign.");
+                navigate("/shop/create");
+                return;
+            }
+            // if res.ok, they have a shop – continue
+        } catch (e) {
+            console.error("Failed to check shop:", e);
         }
     }
 
