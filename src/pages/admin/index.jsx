@@ -80,10 +80,10 @@ export default function Admin() {
             method: 'GET',
             credentials: 'include'
         });
-        if (!res.ok) {
-            toast.error("Unable to fetch users...");
-            return;
-        }
+        // if (!res.ok) {
+        //     toast.error("Unable to fetch users...");
+        //     return;
+        // }
         const { users } = await res.json();
         setNoOfUsers(users.length);
     }
