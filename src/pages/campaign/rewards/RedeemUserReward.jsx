@@ -36,7 +36,7 @@ export default function RedeemUserReward() {
             const formattedReward = {
                 userRewardId: rewardData.userRewardId,
                 campaignName: rewardData.campaignName,
-                campaignImage: rewardData.campaignImage || '',
+                campaignImage: rewardData?.campaignImage || '',
                 reward: rewardData.rewardName,
                 rewardDetails: rewardData.rewardDescription,
                 status: rewardData.status,

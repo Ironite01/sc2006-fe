@@ -102,7 +102,7 @@ export default function DonationPage() {
         paymentMethod: "card"
       };
 
-      const res = await fetch(donation.normal, {
+      const res = await fetch(donation.normal(id), {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -114,9 +114,8 @@ export default function DonationPage() {
         return toast.error(err.message || "Failed to submit donation");
       }
 
-      setSuccess(
-        `Thanks! You donated $${amount.toFixed(2)} to ${campaign?.name || "this shop"}`
-      );
+      toast.info("Donation successful");
+      navigate("/");
     } catch (err) {
       toast.error(err.message || "Network error while submitting donation");
     }

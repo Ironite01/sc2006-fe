@@ -4,21 +4,44 @@ import "./UpdateComposer.css";
 import { toast } from "react-toastify";
 import UpdateComposterModal from "./UpdateComposerModal";
 import { useNavigate } from "react-router-dom";
+import { USER_ROLES } from "../../../helpers/constants";
+import getUser from "../../../helpers/getUser";
+import { campaigns as campaignsPath } from "../../../../paths";
 
-export default function UpdateComposer({ campaigns }) {
+export default function UpdateComposer() {
   const navigate = useNavigate();
   const [selectedCampaignId, setSelectCampaignId] = useState(null);
   const [updates, setUpdates] = useState([]);
   const [selectedUpdate, setSelectedUpdate] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [campaigns, setCampaigns] = useState([]);
 
   useEffect(() => {
-    if (!selectedCampaignId) setSelectCampaignId(campaigns[0].id);
+    getCampaigns();
+  }, []);
+
+  async function getCampaigns() {
+    const user = await getUser();
+    if (!user || user.role !== USER_ROLES.BUSINESS_REPRESENTATIVE) {
+      toast.error("This page is only for business representatives!");
+      navigate("/");
+      return;
+    }
+    const res = await fetch(`${campaignsPath.get}?userId=${user.userId}?offset=10000`, {
+      method: 'GET',
+      credentials: 'include'
+    });
+    const data = await res.json();
+    setCampaigns(data.campaigns);
+    setSelectCampaignId(data.campaigns[0].id);
+  }
+
+  useEffect(() => {
     getUpdates();
   }, [selectedCampaignId]);
 
   async function getUpdates() {
-    const res = await fetch(updatesPath.getAllByCampaignId(selectedCampaignId || campaigns[0].id), {
+    const res = await fetch(updatesPath.getAllByCampaignId(selectedCampaignId || campaigns[0]?.id), {
       method: 'GET',
       credentials: 'include'
     });

@@ -9,7 +9,6 @@ import Login from './pages/login';
 import ForgotPassword from './pages/forgot-password';
 import ResetPassword from './pages/reset-password';
 import TermsAndConditions from './pages/terms';
-import Campaign from './pages/campaign';
 import CampaignDetails from './pages/campaign/CampaignDetails';
 import DonationPage from './pages/campaign/components/DonationPage.jsx';
 import CampaignForm from './pages/campaign/components/CampaignForm.jsx';
@@ -29,9 +28,13 @@ import RewardProof from './pages/rewards/RewardProof.jsx';
 import Updates from './pages/campaign/updates/index.jsx';
 import UserUpdates from './pages/updates/index.jsx';
 import AuthCallback from './pages/auth/AuthCallback.jsx';
+import RoleSelection from './pages/auth/RoleSelection.jsx';
 import RedeemUserReward from './pages/campaign/rewards/RedeemUserReward.jsx';
 import RegisterShop from "./pages/shop/RegisterShop.jsx";
 import RequireRole from './helpers/RequireRole.jsx';
+import CampaignManager from './pages/campaign/CampaignManager.jsx';
+import UpdateComposer from './pages/campaign/components/UpdateComposer.jsx';
+import MapView from './pages/map/index.jsx';
 
 
 function App() {
@@ -46,9 +49,11 @@ function App() {
               GENERAL + PROFILE (everyone)
              ========================= */}
           <Route path="/" element={<Home searchQuery={searchQuery} />} />
+          <Route path="/map" element={<MapView />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/auth/select-role" element={<RoleSelection />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/terms" element={<TermsAndConditions />} />
@@ -103,7 +108,16 @@ function App() {
             path="/campaign"
             element={
               <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
-                <Campaign />
+                <CampaignManager />
+              </RequireRole>
+            }
+          />
+
+          <Route
+            path="/updates/new"
+            element={
+              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+                <UpdateComposer />
               </RequireRole>
             }
           />
@@ -112,9 +126,7 @@ function App() {
           <Route
             path="/campaign/:id"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
-                <CampaignDetails />
-              </RequireRole>
+              <CampaignDetails />
             }
           />
 
@@ -122,9 +134,7 @@ function App() {
           <Route
             path="/campaign/:campaignId/updates/:updateId"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
-                <Updates />
-              </RequireRole>
+              <Updates />
             }
           />
 
