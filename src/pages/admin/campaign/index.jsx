@@ -161,7 +161,6 @@ export default function AdminCampaign() {
                     value={filterStatus}
                     onChange={(e) => {
                         setFilterStatus(e.target.value);
-                        setTimeout(() => fetchCampaigns(), 0);
                     }}
                     className="status-filter"
                 >
