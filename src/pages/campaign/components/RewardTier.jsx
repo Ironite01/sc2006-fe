@@ -17,6 +17,7 @@ export default function RewardTier() {
   }, [tierId, campaignId]);
 
   async function getRewardSupporters() {
+
     const res = await fetch(rewards.getById(campaignId, tierId), {
       method: 'GET',
       credentials: 'include'

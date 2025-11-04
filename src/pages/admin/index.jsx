@@ -67,10 +67,10 @@ export default function Admin() {
             method: 'GET',
             credentials: 'include'
         });
-        if (!res.ok) {
-            toast.error("Unable to fetch users...");
-            return;
-        }
+        // if (!res.ok) {
+        //     toast.error("Unable to fetch users...");
+        //     return;
+        // }
         const { users } = await res.json();
         setNoOfUsers(users.length);
     }
@@ -78,7 +78,7 @@ export default function Admin() {
     const cards = [
         { title: "Datasets", value: noOfDatasets, description: "Click to view all datasets", link: 'dataset' },
         { title: "Campaigns", value: noOfCampaigns, description: "Click to review all campaigns", link: 'campaign' },
-        { title: "Shops", value: noOfShops, description: "Click to review all shops", link: 'shop' }, 
+        { title: "Shops", value: noOfShops, description: "Click to review all shops", link: 'shop' },
         { title: "User Management", value: noOfUsers, description: "Click here to manage users", link: 'users' }
     ];
 

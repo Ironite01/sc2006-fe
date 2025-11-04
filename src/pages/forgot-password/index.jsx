@@ -1,13 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { auth } from '../../../paths';
 import { isEmailValid } from '../../helpers/regex';
 import './ForgotPassword.css';
 import { toast } from 'react-toastify';
 import SubmitButton from '../../components/SubmitButton';
+import getUser from '../../helpers/getUser';
+import { useNavigate } from 'react-router-dom';
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState('');
+    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        redirectIfLoggedIn();
+    }, []);
+
+    async function redirectIfLoggedIn() {
+        if (await getUser()) {
+            navigate("/", { replace: true });
+        }
+    }
 
     async function onFormSubmit(e) {
         e.preventDefault();

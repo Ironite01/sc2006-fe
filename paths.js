@@ -37,6 +37,7 @@ export const admin = {
 }
 
 export const campaigns = {
+  userReward: (campaignId, supporterId, userRewardId) => `${backendPath}/campaigns/${campaignId}/user/${supporterId}/rewards/${userRewardId}`,
   getById: (campaignId) => `${backendPath}/campaigns/${campaignId}`,
   get: `${backendPath}/campaigns`,
   stats: `${backendPath}/campaigns/stats`
@@ -60,12 +61,14 @@ export const shop = {
   one: (id) => `${backendPath}/shops/${id}`,// GET single shop by id (existing)
   create: `${backendPath}/shops`,          // POST to create shop (business rep)
   me: `${backendPath}/shops/me`,           // GET current user's shop
+  mapData: `${backendPath}/shops/map-data` // GET map data for visualization
 };
 
 export const rewards = {
   // GET /campaigns/:campaignId/user/rewards/:rewardId
   getById: (campaignId, rewardId) =>
     `${backendPath}/campaigns/${campaignId}/user/rewards/${rewardId}`,
+  stats: (rewardId) => `${backendPath}/rewards/${rewardId}/stats`
 };
 
 export const donation = {

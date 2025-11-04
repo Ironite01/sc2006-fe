@@ -3,21 +3,19 @@ import { admin } from "../../../../paths";
 import { toast } from "react-toastify";
 import ConfirmModal from "../../../components/ConfirmModal";
 import "./AdminUsers.css";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminUsers() {
+    const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [modalConfig, setModalConfig] = useState({
         isOpen: false,
         title: '',
         message: '',
-        onConfirm: () => {},
+        onConfirm: () => { },
         isDangerous: false
     });
-
-    useEffect(() => {
-        fetchUsers();
-    }, []);
 
     async function fetchUsers() {
         try {

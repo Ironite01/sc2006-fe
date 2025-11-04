@@ -3,25 +3,22 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./ManageRewards.css";
-
-// If your backend runs somewhere else, change this:
-const API_BASE_URL = "http://localhost:3000";
+import { campaigns, rewards as rewardsPath } from "../../../../paths";
+import { toast } from "react-toastify";
 
 export default function ManageRewards() {
   const { campaignId } = useParams();           // from /campaign/:campaignId/rewards
   const [rewards, setRewards] = useState([]);   // [{ id, name, pending, completed, redeemed, total }]
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     async function loadRewards() {
       try {
         setLoading(true);
-        setError("");
 
         // 1) Get campaign + its rewardTiers
         const campaignRes = await fetch(
-          `${API_BASE_URL}/campaigns/${campaignId}`,
+          campaigns.getById(campaignId),
           { credentials: "include" }
         );
 
@@ -36,7 +33,7 @@ export default function ManageRewards() {
         const rewardsWithStats = await Promise.all(
           tiers.map(async (tier, index) => {
             const statsRes = await fetch(
-              `${API_BASE_URL}/rewards/${tier.rewardId}/stats`,
+              rewardsPath.stats(tier.rewardId),
               { credentials: "include" }
             );
 
@@ -59,8 +56,7 @@ export default function ManageRewards() {
 
         setRewards(rewardsWithStats);
       } catch (err) {
-        console.error(err);
-        setError(err.message || "Something went wrong");
+        toast.error(err.message || "Something went wrong");
       } finally {
         setLoading(false);
       }
@@ -75,16 +71,6 @@ export default function ManageRewards() {
         <h1 className="page-title">My Campaign</h1>
         <h2 className="page-subtitle">Manage Rewards</h2>
         <p>Loading rewards...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="manage-rewards-page">
-        <h1 className="page-title">My Campaign</h1>
-        <h2 className="page-subtitle">Manage Rewards</h2>
-        <p style={{ color: "red" }}>{error}</p>
       </div>
     );
   }

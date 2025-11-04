@@ -1,13 +1,11 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './redeemUserReward.css';
-import { USER_REWARDS_STATUS, USER_ROLES } from '../../../helpers/constants';
+import { USER_REWARDS_STATUS } from '../../../helpers/constants';
 import { user_rewards, user as userPath } from '../../../../paths';
 import { toast } from 'react-toastify';
-import getUser from '../../../helpers/getUser';
 
 export default function RedeemUserReward() {
-    const navigate = useNavigate();
     const { campaignId, userRewardsId, userId } = useParams();
     const [reward, setReward] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -17,17 +15,6 @@ export default function RedeemUserReward() {
     useEffect(() => {
         fetchAndRedeemReward();
     }, [campaignId, userRewardsId]);
-
-    useEffect(() => {
-        authorize();
-    }, []);
-
-    async function authorize() {
-        const user = await getUser();
-        if (!user || user.role !== USER_ROLES.BUSINESS_REPRESENTATIVE) {
-            navigate("/");
-        }
-    }
 
     const fetchAndRedeemReward = async () => {
         try {
@@ -49,7 +36,7 @@ export default function RedeemUserReward() {
             const formattedReward = {
                 userRewardId: rewardData.userRewardId,
                 campaignName: rewardData.campaignName,
-                campaignImage: rewardData.campaignImage || '',
+                campaignImage: rewardData?.campaignImage || '',
                 reward: rewardData.rewardName,
                 rewardDetails: rewardData.rewardDescription,
                 status: rewardData.status,
