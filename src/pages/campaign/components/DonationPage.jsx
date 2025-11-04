@@ -59,7 +59,7 @@ export default function DonationPage() {
   const [nameOnCard, setNameOnCard] = useState("");
   const [expiry, setExpiry] = useState("");
   const [cvv, setCvv] = useState("");
-  const [saveCard, setSaveCard] = useState(false);
+  //const [saveCard, setSaveCard] = useState(false);
   const [agreeTos, setAgreeTos] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -239,14 +239,14 @@ export default function DonationPage() {
 
         {/* CHECKBOXES */}
         <div className="checkboxes">
-          <label className="checkbox-row">
-            <input
+          {/*<label className="checkbox-row">
+           <input
               type="checkbox"
               checked={saveCard}
               onChange={(e) => setSaveCard(e.target.checked)}
             />
             <span>Save my card details</span>
-          </label>
+          </label> */}
 
           <label className="checkbox-row">
             <input
