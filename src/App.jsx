@@ -33,6 +33,7 @@ import RegisterShop from "./pages/shop/RegisterShop.jsx";
 import RequireRole from './helpers/RequireRole.jsx';
 import CampaignManager from './pages/campaign/CampaignManager.jsx';
 import UpdateComposer from './pages/campaign/components/UpdateComposer.jsx';
+import MapView from './pages/map/index.jsx';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
               GENERAL + PROFILE (everyone)
              ========================= */}
           <Route path="/" element={<Home searchQuery={searchQuery} />} />
+          <Route path="/map" element={<MapView />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
