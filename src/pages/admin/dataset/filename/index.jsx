@@ -3,8 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { admin } from "../../../../../paths";
 import "./AdminDatasetViewer.css";
-import getUser from "../../../../helpers/getUser";
-import { USER_ROLES } from "../../../../helpers/constants";
 
 export default function AdminDatasetViewer() {
     const navigate = useNavigate();
@@ -15,18 +13,6 @@ export default function AdminDatasetViewer() {
     useEffect(() => {
         fetchDataset();
     }, [filename]);
-
-    useEffect(() => {
-        authorize();
-    }, []);
-
-    async function authorize() {
-        const user = await getUser();
-        if (!user || user.role !== USER_ROLES.ADMIN) {
-            toast.error("This page is only for business representatives!");
-            navigate("/", { replace: true });
-        }
-    }
 
     async function fetchDataset() {
         try {

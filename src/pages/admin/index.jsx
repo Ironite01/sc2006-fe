@@ -2,32 +2,19 @@ import { useEffect, useState } from "react";
 import "./Admin.css";
 import { campaigns, admin } from "../../../paths";
 import { toast } from "react-toastify";
-import getUser from "../../helpers/getUser";
-import { USER_ROLES } from "../../helpers/constants";
-import { useNavigate } from "react-router-dom";
 
 export default function Admin() {
-    const navigate = useNavigate();
     const [noOfDatasets, setNoOfDatasets] = useState(0);
     const [noOfCampaigns, setNoOfCampaigns] = useState(0);
     const [noOfShops, setNoOfShops] = useState(0);
     const [noOfUsers, setNoOfUsers] = useState(0);
 
     useEffect(() => {
-        authorize();
         getNumberOfDatasets();
         getNumberOfCampaigns();
         getNumberOfUsers();
         getNumberOfShops();
     }, []);
-
-    async function authorize() {
-        const user = await getUser();
-        if (!user || user.role !== USER_ROLES.ADMIN) {
-            toast.error("This page is only for business representatives!");
-            navigate("/", { replace: true });
-        }
-    }
 
     async function getNumberOfDatasets() {
         const res = await fetch(admin.datasets, {

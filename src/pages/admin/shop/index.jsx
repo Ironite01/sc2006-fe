@@ -3,8 +3,6 @@ import { admin } from "../../../../paths";
 import { toast } from "react-toastify";
 import ConfirmModal from "../../../components/ConfirmModal";
 import "./AdminShop.css";
-import getUser from "../../../helpers/getUser";
-import { USER_ROLES } from "../../../helpers/constants";
 import { useNavigate } from "react-router-dom";
 
 const SHOP_STATUS = {
@@ -29,18 +27,6 @@ export default function AdminShop() {
     useEffect(() => {
         fetchShops();
     }, [filterStatus]);
-
-    useEffect(() => {
-        authorize();
-    }, []);
-
-    async function authorize() {
-        const user = await getUser();
-        if (!user || user.role !== USER_ROLES.ADMIN) {
-            toast.error("This page is only for business representatives!");
-            navigate("/", { replace: true });
-        }
-    }
 
     async function fetchShops() {
         try {

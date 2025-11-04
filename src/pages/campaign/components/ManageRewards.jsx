@@ -1,30 +1,15 @@
 // src/pages/campaign/components/ManageRewards.jsx
 
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./ManageRewards.css";
 import { campaigns, rewards as rewardsPath } from "../../../../paths";
 import { toast } from "react-toastify";
-import { USER_ROLES } from "../../../helpers/constants";
-import getUser from "../../../helpers/getUser";
 
 export default function ManageRewards() {
-  const navigate = useNavigate();
   const { campaignId } = useParams();           // from /campaign/:campaignId/rewards
   const [rewards, setRewards] = useState([]);   // [{ id, name, pending, completed, redeemed, total }]
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    authorize();
-  }, []);
-
-  async function authorize() {
-    const user = await getUser();
-    if (!user || user.role !== USER_ROLES.BUSINESS_REPRESENTATIVE) {
-      toast.error("This page is only for business representatives!");
-      navigate("/", { replace: true });
-    }
-  }
 
   useEffect(() => {
     async function loadRewards() {
