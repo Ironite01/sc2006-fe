@@ -56,3 +56,9 @@ export const shop = {
   create: `${backendPath}/shops`,          // POST to create shop (business rep)
   me: `${backendPath}/shops/me`,           // GET current user's shop
 };
+
+export const rewards = {
+  // GET /campaigns/:campaignId/user/rewards/:rewardId
+  getById: (campaignId, rewardId) =>
+    `${backendPath}/campaigns/${campaignId}/user/rewards/${rewardId}`,
+};
