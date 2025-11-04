@@ -18,7 +18,7 @@ export default function Footer() {
             <div className='flex justify-between flex-wrap gap-[2rem] footer-section'>
                 <nav className="flex order-1 items-center gap-[0.5rem] flex-wrap">
                     <p>Need help?</p>
-                    <a>FAQ</a>
+                    <a href="/terms#faq">FAQ</a>
                     <span className='opacity-30'>|</span>
                     <a>Contact Us</a>
                     <span className='opacity-30'>|</span>
