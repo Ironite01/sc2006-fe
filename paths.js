@@ -7,6 +7,7 @@ export const auth = {
   googleLogin: `${backendPath}/login/google`,
   azureLogin: `${backendPath}/login/azure`,
   azureCallback: `${backendPath}/login/azure/callback`,
+  selectRole: `${backendPath}/auth/select-role`,
   forgotPassword: `${backendPath}/user/forgot-password`,
   me: `${backendPath}/auth/me` // for pages that require jwt decoding
 }
@@ -22,9 +23,9 @@ export const user = {
 export const admin = {
   datasets: `${backendPath}/admin/dataset`,
   dataset: (filename) => `${backendPath}/admin/dataset/${filename}`,
-  users: `${backendPath}/admin/user`,
-  updateUserRole: (userId) => `${backendPath}/admin/user/${userId}/role`,
-  deleteUser: (userId) => `${backendPath}/admin/user/${userId}`,
+  users: `${backendPath}/admin/users`,
+  updateUserRole: (userId) => `${backendPath}/admin/users/${userId}/role`,
+  deleteUser: (userId) => `${backendPath}/admin/users/${userId}`,
   updateCampaignStatus: (campaignId) => `${backendPath}/admin/campaign/${campaignId}/status`,
   deleteCampaign: (campaignId) => `${backendPath}/admin/campaign/${campaignId}`,
   comments: `${backendPath}/admin/comment`,
@@ -36,6 +37,7 @@ export const admin = {
 }
 
 export const campaigns = {
+  userReward: (campaignId, supporterId, userRewardId) => `${backendPath}/campaigns/${campaignId}/user/${supporterId}/rewards/${userRewardId}`,
   getById: (campaignId) => `${backendPath}/campaigns/${campaignId}`,
   get: `${backendPath}/campaigns`,
   stats: `${backendPath}/campaigns/stats`
@@ -59,6 +61,7 @@ export const shop = {
   one: (id) => `${backendPath}/shops/${id}`,// GET single shop by id (existing)
   create: `${backendPath}/shops`,          // POST to create shop (business rep)
   me: `${backendPath}/shops/me`,           // GET current user's shop
+  mapData: `${backendPath}/shops/map-data` // GET map data for visualization
 };
 
 export const rewards = {

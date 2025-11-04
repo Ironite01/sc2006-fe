@@ -57,7 +57,7 @@ export default function DonationPage() {
   const [nameOnCard, setNameOnCard] = useState("");
   const [expiry, setExpiry] = useState("");
   const [cvv, setCvv] = useState("");
-  const [saveCard, setSaveCard] = useState(false);
+  //const [saveCard, setSaveCard] = useState(false);
   const [agreeTos, setAgreeTos] = useState(false);
 
   // current numeric amount
@@ -102,7 +102,7 @@ export default function DonationPage() {
         paymentMethod: "card"
       };
 
-      const res = await fetch(donation.normal, {
+      const res = await fetch(donation.normal(id), {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -114,9 +114,8 @@ export default function DonationPage() {
         return toast.error(err.message || "Failed to submit donation");
       }
 
-      setSuccess(
-        `Thanks! You donated $${amount.toFixed(2)} to ${campaign?.name || "this shop"}`
-      );
+      toast.info("Donation successful");
+      navigate("/");
     } catch (err) {
       toast.error(err.message || "Network error while submitting donation");
     }
@@ -231,14 +230,14 @@ export default function DonationPage() {
 
         {/* CHECKBOXES */}
         <div className="checkboxes">
-          <label className="checkbox-row">
-            <input
+          {/*<label className="checkbox-row">
+           <input
               type="checkbox"
               checked={saveCard}
               onChange={(e) => setSaveCard(e.target.checked)}
             />
             <span>Save my card details</span>
-          </label>
+          </label> */}
 
           <label className="checkbox-row">
             <input

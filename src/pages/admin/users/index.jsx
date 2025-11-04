@@ -4,9 +4,11 @@ import { toast } from "react-toastify";
 import ConfirmModal from "../../../components/ConfirmModal";
 import "./AdminUsers.css";
 import { useNavigate } from "react-router-dom";
+import getUser from "../../../helpers/getUser"; // adjust path if needed
 
 export default function AdminUsers() {
     const navigate = useNavigate();
+    const [currentUserId, setCurrentUserId] = useState(null);
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [modalConfig, setModalConfig] = useState({
@@ -17,26 +19,33 @@ export default function AdminUsers() {
         isDangerous: false
     });
 
-    async function fetchUsers() {
-        try {
-            const res = await fetch(admin.users, {
-                method: 'GET',
-                credentials: 'include'
-            });
+useEffect(() => {
+  getUser().then((user) => {
+    if (user?.userId) setCurrentUserId(user.userId);
+    fetchUsers();
+  });
+}, []);
 
-            if (!res.ok) {
-                throw new Error("Failed to fetch users");
-            }
+async function fetchUsers() {
+    try {
+        console.log("Fetching users from:", admin.users);
+        const res = await fetch(admin.users, {
+            method: 'GET',
+            credentials: 'include'
+        });
 
-            const { users } = await res.json();
-            setUsers(users);
-        } catch (error) {
-            toast.error("Unable to fetch users");
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
+        console.log("Response status:", res.status);
+        const data = await res.json();
+        console.log("Fetched data:", data);
+
+        setUsers(data.users);
+    } catch (error) {
+        toast.error("Unable to fetch users");
+        console.error("Fetch error:", error);
+    } finally {
+        setLoading(false);
     }
+}
 
     function handleRoleChange(userId, newRole) {
         setModalConfig({
@@ -85,8 +94,8 @@ export default function AdminUsers() {
     async function confirmDeleteUser(userId) {
         try {
             const res = await fetch(admin.deleteUser(userId), {
-                method: 'DELETE',
-                credentials: 'include'
+            method: 'PUT',
+            credentials: 'include'
             });
 
             if (!res.ok) {
@@ -149,8 +158,8 @@ export default function AdminUsers() {
                     </thead>
                     <tbody>
                         {users.map((user) => (
-                            <tr key={user.userId}>
-                                <td>{user.userId}</td>
+                                <tr key={user.id}>
+                                <td>{user.id}</td>
                                 <td>
                                     {user.profilePicture ? (
                                         <img
@@ -169,7 +178,7 @@ export default function AdminUsers() {
                                 <td>
                                     <select
                                         value={user.role}
-                                        onChange={(e) => handleRoleChange(user.userId, e.target.value)}
+                                        onChange={(e) => handleRoleChange(user.userId, e.target.value)} 
                                         className="role-select"
                                     >
                                         <option value="SUPPORTER">Supporter</option>
@@ -179,12 +188,15 @@ export default function AdminUsers() {
                                 </td>
                                 <td>{formatDate(user.createdAt)}</td>
                                 <td>
-                                    <button
-                                        onClick={() => handleDeleteUser(user.userId, user.username)}
-                                        className="delete-btn"
-                                    >
-                                        Delete
-                                    </button>
+                                      {user.userId != currentUserId && (
+                                        <button
+                                            onClick={() => handleDeleteUser(user.userId, user.username)}
+                                            className="delete-btn"
+                                        >
+                                            Delete
+                                        </button>
+                                          )}
+
                                 </td>
                             </tr>
                         ))}
