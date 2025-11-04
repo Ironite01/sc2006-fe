@@ -40,6 +40,7 @@ export const campaigns = {
 }
 
 export const updates = {
+  getAllByCampaignId: (campaignId) => `${backendPath}/campaigns/${campaignId}/updates`,
   getById: (campaignId, updateId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}`,
   like: (campaignId, updateId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}/like`,
   comment: (campaignId, updateId) => `${backendPath}/campaigns/${campaignId}/updates/${updateId}/comment`,
