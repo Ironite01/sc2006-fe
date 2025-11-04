@@ -1,24 +1,32 @@
 import { useEffect, useMemo, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./DonationPage.css";
 import tiersDB from "../../../data/donationRewards.json";
 import SubmitButton from "../../../components/SubmitButton";
-import { campaigns } from "../../../../paths";
+import { campaigns, donation } from "../../../../paths";
 import getUser from "../../../helpers/getUser";
+import PaypalButton from "../../../components/PaypalButton";
+import { toast } from "react-toastify";
+import { USER_ROLES } from "../../../helpers/constants";
 
 export default function DonationPage() {
   const { id } = useParams();
   const { state } = useLocation();
+  const navigate = useNavigate();
   const [campaign, setCampaign] = useState(null);
 
   useEffect(() => {
     getCampaign();
   }, []);
 
-
-
   async function getCampaign() {
     try {
+      const user = await getUser();
+      if (!user || user.role !== USER_ROLES.SUPPORTER) {
+        toast.error("You need to be logged in as a supporter!");
+        navigate("/");
+        return;
+      }
       const res = await fetch(campaigns.getById(id), {
         method: 'GET',
         credentials: 'include'
@@ -27,15 +35,12 @@ export default function DonationPage() {
         throw new Error("Failed to get campaign");
       }
       const campaign = await res.json();
-    console.log("Fetched campaign:", campaign);
 
       setCampaign(campaign);
     } catch (e) {
       toast.error(e.message);
     }
   }
-
-
 
   // 2) tiers source: prefer campaign.rewardTiers; else fallback JSON; else empty
   const tiers = useMemo(() => {
@@ -61,8 +66,6 @@ export default function DonationPage() {
   const [cvv, setCvv] = useState("");
   //const [saveCard, setSaveCard] = useState(false);
   const [agreeTos, setAgreeTos] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   // current numeric amount
   const amount = useMemo(() => {
@@ -85,31 +88,28 @@ export default function DonationPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
-    if (!isValidCardNumber(cardNumber)) return setError("Invalid card number");
-    if (!nameOnCard.trim()) return setError("Please enter name on card");
-    if (!isValidExpiry(expiry)) return setError("Invalid expiry format (MM/YY)");
-    if (!isValidCvv(cvv)) return setError("Invalid CVV");
-    if (!agreeTos) return setError("Please agree to the terms");
+    if (!isValidCardNumber(cardNumber)) return toast.error("Invalid card number");
+    if (!nameOnCard.trim()) return toast.error("Please enter name on card");
+    if (!isValidExpiry(expiry)) return toast.error("Invalid expiry format (MM/YY)");
+    if (!isValidCvv(cvv)) return toast.error("Invalid CVV");
+    if (!agreeTos) return toast.error("Please agree to the terms");
 
     try {
       const user = await getUser(); // existing helper returning current user or null
-      console.log("getUser() returned:", user);
+      if (!user) {
+        navigate("/login");
+        return;
+      }
 
       const body = {
-        userId: user?.userId ?? null, 
+        userId: user?.userId ?? null,
         amount,
         paymentGatewayOrderId: `CLIENT-${Date.now()}`,
         paymentMethod: "card"
       };
 
-
-      const donationUrl = `http://localhost:3000/campaign/${campaign.campaignId}/donation`;
-
-
-      const res = await fetch(donationUrl, {
+      const res = await fetch(donation.normal, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -118,15 +118,14 @@ export default function DonationPage() {
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({ message: "Failed to submit donation" }));
-        return setError(err.message || "Failed to submit donation");
+        return toast.error(err.message || "Failed to submit donation");
       }
 
       setSuccess(
         `Thanks! You donated $${amount.toFixed(2)} to ${campaign?.name || "this shop"}`
       );
     } catch (err) {
-      console.error(err);
-      setError("Network error while submitting donation");
+      toast.error(err.message || "Network error while submitting donation");
     }
   };
 
@@ -144,9 +143,9 @@ export default function DonationPage() {
 
       {/* HERO */}
       <div className="donation-hero">
-      <img
-        src={campaign.image || campaign.imageBlob}
-        alt={campaign.name}
+        <img
+          src={campaign.image || campaign.imageBlob}
+          alt={campaign.name}
         />
         <div className="hero-overlay">
           <h2>{campaign.name}</h2>
@@ -263,15 +262,10 @@ export default function DonationPage() {
           </label>
         </div>
 
-        {error && <p className="error-msg">{error}</p>}
-        {success && <p className="success-msg">{success}</p>}
-
         <SubmitButton type="submit" className="bg-[#6b5b4b]">
           Donate ${amount.toFixed(2)}
         </SubmitButton>
-        <button type="button" className="btn-paypal">
-          Continue with PayPal
-        </button>
+        <PaypalButton campaignId={id} amount={amount} />
       </form>
     </div>
   );

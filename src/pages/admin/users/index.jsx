@@ -3,21 +3,34 @@ import { admin } from "../../../../paths";
 import { toast } from "react-toastify";
 import ConfirmModal from "../../../components/ConfirmModal";
 import "./AdminUsers.css";
+import getUser from "../../../helpers/getUser";
+import { USER_ROLES } from "../../../helpers/constants";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminUsers() {
+    const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [modalConfig, setModalConfig] = useState({
         isOpen: false,
         title: '',
         message: '',
-        onConfirm: () => {},
+        onConfirm: () => { },
         isDangerous: false
     });
 
     useEffect(() => {
+        authorize();
         fetchUsers();
     }, []);
+
+    async function authorize() {
+        const user = await getUser();
+        if (!user || user.role !== USER_ROLES.ADMIN) {
+            toast.error("This page is only for business representatives!");
+            navigate("/", { replace: true });
+        }
+    }
 
     async function fetchUsers() {
         try {

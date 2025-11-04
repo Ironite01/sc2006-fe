@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./RewardTier.css";
 import { campaigns, rewards } from "../../../../paths";
 import { toast } from "react-toastify";
-import { USER_REWARDS_STATUS } from '../../../helpers/constants';
+import { USER_REWARDS_STATUS, USER_ROLES } from '../../../helpers/constants';
+import getUser from "../../../helpers/getUser";
 
 export default function RewardTier() {
   const { tierId, campaignId } = useParams();
@@ -16,7 +17,20 @@ export default function RewardTier() {
     }
   }, [tierId, campaignId]);
 
+  useEffect(() => {
+    authorize();
+  }, []);
+
+  async function authorize() {
+    const user = await getUser();
+    if (!user || user.role !== USER_ROLES.BUSINESS_REPRESENTATIVE) {
+      toast.error("This page is only for business representatives!");
+      navigate("/", { replace: true });
+    }
+  }
+
   async function getRewardSupporters() {
+
     const res = await fetch(rewards.getById(campaignId, tierId), {
       method: 'GET',
       credentials: 'include'

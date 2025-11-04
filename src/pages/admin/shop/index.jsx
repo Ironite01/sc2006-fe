@@ -3,6 +3,9 @@ import { admin } from "../../../../paths";
 import { toast } from "react-toastify";
 import ConfirmModal from "../../../components/ConfirmModal";
 import "./AdminShop.css";
+import getUser from "../../../helpers/getUser";
+import { USER_ROLES } from "../../../helpers/constants";
+import { useNavigate } from "react-router-dom";
 
 const SHOP_STATUS = {
     PENDING: "pending",
@@ -11,6 +14,7 @@ const SHOP_STATUS = {
 };
 
 export default function AdminShop() {
+    const navigate = useNavigate();
     const [shops, setShops] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filterStatus, setFilterStatus] = useState("ALL");
@@ -18,13 +22,25 @@ export default function AdminShop() {
         isOpen: false,
         title: "",
         message: "",
-        onConfirm: () => {},
+        onConfirm: () => { },
         isDangerous: false,
     });
 
     useEffect(() => {
         fetchShops();
     }, [filterStatus]);
+
+    useEffect(() => {
+        authorize();
+    }, []);
+
+    async function authorize() {
+        const user = await getUser();
+        if (!user || user.role !== USER_ROLES.ADMIN) {
+            toast.error("This page is only for business representatives!");
+            navigate("/", { replace: true });
+        }
+    }
 
     async function fetchShops() {
         try {

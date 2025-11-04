@@ -22,6 +22,18 @@ export default function AdminCampaign() {
         fetchCampaigns();
     }, [filterStatus]);
 
+    useEffect(() => {
+        authorize();
+    }, []);
+
+    async function authorize() {
+        const user = await getUser();
+        if (!user || user.role !== USER_ROLES.ADMIN) {
+            toast.error("This page is only for business representatives!");
+            navigate("/", { replace: true });
+        }
+    }
+
     async function fetchCampaigns() {
         try {
             const url = filterStatus !== 'ALL'
@@ -161,7 +173,6 @@ export default function AdminCampaign() {
                     value={filterStatus}
                     onChange={(e) => {
                         setFilterStatus(e.target.value);
-                        setTimeout(() => fetchCampaigns(), 0);
                     }}
                     className="status-filter"
                 >
