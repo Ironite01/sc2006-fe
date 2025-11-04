@@ -160,12 +160,6 @@
   font-weight: bold;
 }
 
-.btn-paypal {
-  background-color: #fff;
-  border: 1px solid #aaa;
-}
-
-
 .donation-form .checks {
   display: flex;
   flex-direction: column;

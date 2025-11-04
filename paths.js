@@ -1,4 +1,4 @@
-const backendPath = "http://localhost:3000";
+const backendPath = import.meta.env.VITE_BACKEND_ORIGIN;
 
 export const auth = {
   login: `${backendPath}/login`,
@@ -66,3 +66,9 @@ export const rewards = {
   getById: (campaignId, rewardId) =>
     `${backendPath}/campaigns/${campaignId}/user/rewards/${rewardId}`,
 };
+
+export const donation = {
+  normal: (campaignId) => `${backendPath}/campaign/${campaignId}/donation`,
+  createOrder: `${backendPath}/donations/paypal/create-order`,
+  captureOrder: `${backendPath}/donations/paypal/capture-order`,
+}
