@@ -9,7 +9,6 @@ import Login from './pages/login';
 import ForgotPassword from './pages/forgot-password';
 import ResetPassword from './pages/reset-password';
 import TermsAndConditions from './pages/terms';
-import Campaign from './pages/campaign';
 import CampaignDetails from './pages/campaign/CampaignDetails';
 import DonationPage from './pages/campaign/components/DonationPage.jsx';
 import CampaignForm from './pages/campaign/components/CampaignForm.jsx';
@@ -32,6 +31,8 @@ import AuthCallback from './pages/auth/AuthCallback.jsx';
 import RedeemUserReward from './pages/campaign/rewards/RedeemUserReward.jsx';
 import RegisterShop from "./pages/shop/RegisterShop.jsx";
 import RequireRole from './helpers/RequireRole.jsx';
+import CampaignManager from './pages/campaign/CampaignManager.jsx';
+import UpdateComposer from './pages/campaign/components/UpdateComposer.jsx';
 
 
 function App() {
@@ -103,7 +104,16 @@ function App() {
             path="/campaign"
             element={
               <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
-                <Campaign />
+                <CampaignManager />
+              </RequireRole>
+            }
+          />
+
+          <Route
+            path="/updates/new"
+            element={
+              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+                <UpdateComposer />
               </RequireRole>
             }
           />

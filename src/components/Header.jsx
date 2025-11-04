@@ -51,6 +51,10 @@ export default function Header({ onSearch }) {
                     <a onClick={() => navigate("/rewards")}>Rewards</a>
                     <a onClick={() => navigate("/updates")}>Updates</a>
                 </>}
+                {userRole === USER_ROLES.BUSINESS_REPRESENTATIVE && <>
+                    <a onClick={() => navigate("/campaign")}>Campaign Manager</a>
+                    <a onClick={() => navigate("/updates/new")}>Update Composer</a>
+                </>}
             </nav>
             <div className="flex order-2 items-center gap-[1.25rem]">
                 <Searchbar onSearch={onSearch} />
