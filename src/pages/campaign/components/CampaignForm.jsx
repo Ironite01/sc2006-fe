@@ -44,11 +44,11 @@ export default function CampaignForm() {
         const data = await res.json();
         setFormData({
             campaignName: data.name,
-            description: data.description,
+            description: data?.description || "",
             goal: data.goal,
             endDate: new Date(data.endDate).toISOString().split('T')[0],
             rewards: data?.rewardTiers?.length ? data.rewardTiers : [{ amount: '', title: '', description: '' }],
-            story: data.story
+            story: data?.story || ""
         });
         setImage(data.image);
     }
@@ -138,31 +138,50 @@ export default function CampaignForm() {
         e.preventDefault();
         if (!validateForm()) return;
         let res;
-        const _formData = new FormData();
-
-        _formData.append('fields[name]', formData.campaignName);
-        _formData.append('fields[description]', formData.description);
-        _formData.append('fields[goal]', formData.goal);
-        _formData.append('fields[endDate]', formData.endDate);
-
-        if (image instanceof File) {
-            _formData.append('fields[image]', image);
-        }
-
-        _formData.append('newRewards', JSON.stringify(formData.rewards.map((r) => ({
-            donationAmount: r.amount,
-            rewardName: r.title,
-            rewardDescription: r.description,
-        }))));
-        _formData.append('deletedRewardIds', JSON.stringify(deletedRewardIds));
-
         if (params?.campaignId) {
+            const _formData = new FormData();
+
+            _formData.append('fields[name]', formData.campaignName);
+            _formData.append('fields[description]', formData.description);
+            _formData.append('fields[goal]', formData.goal);
+            _formData.append('fields[story]', formData.story);
+            _formData.append('fields[endDate]', formData.endDate);
+
+            if (image instanceof File) {
+                _formData.append('fields[image]', image);
+            }
+
+            _formData.append('newRewards', JSON.stringify(formData.rewards.map((r) => ({
+                donationAmount: r.amount,
+                rewardName: r.title,
+                rewardDescription: r.description,
+            }))));
+            _formData.append('deletedRewardIds', JSON.stringify(deletedRewardIds));
+
             res = await fetch(campaigns.getById(params.campaignId), {
                 method: 'PUT',
                 credentials: 'include',
                 body: _formData
             });
         } else {
+            const _formData = new FormData();
+
+            _formData.append('name', formData.campaignName);
+            _formData.append('description', formData.description);
+            _formData.append('goal', formData.goal);
+            _formData.append('story', formData.story);
+            _formData.append('endDate', formData.endDate);
+
+            if (image instanceof File) {
+                _formData.append('image', image);
+            }
+
+            _formData.append('rewards', JSON.stringify(formData.rewards.map((r) => ({
+                donationAmount: r.amount,
+                rewardName: r.title,
+                rewardDescription: r.description,
+            }))));
+
             res = await fetch(campaigns.get, {
                 method: 'POST',
                 credentials: 'include',
@@ -229,7 +248,7 @@ export default function CampaignForm() {
                     </label>
                     <textarea
                         id="story"
-                        value={formData.story}
+                        value={formData?.story}
                         onChange={(e) => handleInputChange('story', e.target.value)}
                         className='form-textarea'
                         placeholder="Your businesss story"
@@ -376,7 +395,7 @@ export default function CampaignForm() {
 
                 {/* Submit Button */}
                 <div className="form-actions">
-                    <SubmitButton type="submit" className={`create-btn bg-[${params?.campaignId ? '#ffa500' : '#218838'}]`} loading={null}>
+                    <SubmitButton type="submit" style={{ backgroundColor: params?.campaignId ? '#ffa500' : '#218838' }} className={`create-btn`} loading={null}>
                         {params?.campaignId ? 'Edit' : 'Create'}
                     </SubmitButton>
                 </div>

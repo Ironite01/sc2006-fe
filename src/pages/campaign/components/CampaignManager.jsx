@@ -80,7 +80,7 @@ export default function CampaignManager({ onCreateCampaign }) {
                     {campaigns.map((c) => {
                         const progress = parseInt((c.amtRaised / c.goal) * 100);
                         return (
-                            <>
+                            <div key={c.id}>
                                 <div className="campaign-actions">
                                     <span
                                         className="action-link"
@@ -124,7 +124,7 @@ export default function CampaignManager({ onCreateCampaign }) {
                                 </div>
                                 <div className="line"></div>
                                 <br />
-                            </>)
+                            </div>)
                     })}
                 </div>
             )}
