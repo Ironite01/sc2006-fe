@@ -127,7 +127,9 @@
 .funding-section {
   max-width: 1400px;
   margin: 32px auto 0;
-  padding: 0 64px 0;
+  padding: 0 64px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .funding-header {
@@ -161,7 +163,7 @@
   color: var(--primary);
 }
 
-.progress-bar {
+.campaign-details .progress-bar {
   width: 100%;
   height: 16px;
   background: rgba(217, 119, 6, 0.15);

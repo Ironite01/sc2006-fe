@@ -8,6 +8,7 @@ import Signup from './pages/signup';
 import Login from './pages/login';
 import ForgotPassword from './pages/forgot-password';
 import ResetPassword from './pages/reset-password';
+import TermsAndConditions from './pages/terms';
 import Campaign from './pages/campaign';
 import CampaignDetails from './pages/campaign/CampaignDetails';
 import DonationPage from './pages/campaign/components/DonationPage.jsx';
@@ -29,6 +30,7 @@ import Updates from './pages/campaign/updates/index.jsx';
 import UserUpdates from './pages/updates/index.jsx';
 import AuthCallback from './pages/auth/AuthCallback.jsx';
 import RedeemUserReward from './pages/campaign/rewards/RedeemUserReward.jsx';
+import RegisterShop from "./pages/shop/RegisterShop.jsx";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -45,6 +47,7 @@ function App() {
           <Route path="/profile" element={<EditProfile />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
           <Route path="/updates" element={<UserUpdates />} />
           <Route path="/campaign" element={<Campaign />} />
           <Route path="/campaign/:id" element={<CampaignDetails />} />
@@ -63,6 +66,7 @@ function App() {
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/campaign" element={<AdminCampaign />} />
           <Route path="/admin/shop" element={<AdminShop />} />
+          <Route path="/shop/create" element={<RegisterShop />} />
         </Routes>
         <ToastContainer className="toast-container" />
       </main>
