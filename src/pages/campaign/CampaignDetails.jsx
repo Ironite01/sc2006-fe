@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './CampaignDetails.css';
-import ShopsLostSection from '../components/ShopsLostSection';
+import ShopsLostSection from '../../components/ShopsLostSection';
 import { useNavigate } from "react-router-dom";
-import SubmitButton from '../components/SubmitButton';
-import { campaigns } from '../../paths';
+import SubmitButton from '../../components/SubmitButton';
+import { campaigns } from '../../../paths';
 import { toast } from 'react-toastify';
-import daysLeft from "../helpers/daysLeft";
+import daysLeft from "../../helpers/daysLeft";
 
 export default function CampaignDetails() {
   const { id } = useParams();
   const [campaign, setCampaign] = useState(null);
   const [loading, setLoading] = useState(true);
   const [donationAmount, setDonationAmount] = useState(25);
-  //const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
   async function getCampaign() {
@@ -153,7 +152,7 @@ export default function CampaignDetails() {
             <h2>Updates</h2>
             <div className="updates-list">
               {campaign?.updates?.map(update => (
-                <div key={update.updateId} className="update-card" onClick={() => navigate(`${location.pathname}/updates/${update.updateId}`)}>
+                <div key={update.updateId} className="update-card" onClick={() => navigate(`updates/${update.updateId}`)}>
                   <div className="update-header">
                     <h3>{update.title}</h3>
                     <span className="update-date">{formatDate(update.postedAt)}</span>
@@ -218,7 +217,7 @@ export default function CampaignDetails() {
             {/* Reward Tiers */}
             <div className="reward-tiers">
               <h3>Rewards</h3>
-              {campaign?.rewardTiers.map((tier, i) => {
+              {campaign?.rewardTiers?.map((tier, i) => {
                 const isSelected = donationAmount >= tier.amount;
                 const isCurrentReward = getSelectedReward()?.amount === tier.amount;
 

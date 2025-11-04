@@ -6,12 +6,14 @@ import { toast } from "react-toastify";
 export default function Admin() {
     const [noOfDatasets, setNoOfDatasets] = useState(0);
     const [noOfCampaigns, setNoOfCampaigns] = useState(0);
+    const [noOfShops, setNoOfShops] = useState(0);
     const [noOfUsers, setNoOfUsers] = useState(0);
 
     useEffect(() => {
         getNumberOfDatasets();
         getNumberOfCampaigns();
         getNumberOfUsers();
+        getNumberOfShops();
     }, []);
 
     async function getNumberOfDatasets() {
@@ -42,6 +44,24 @@ export default function Admin() {
         setNoOfCampaigns(totalCampaigns);
     }
 
+
+    async function getNumberOfShops() {
+        const res = await fetch(admin.getAllShops(), {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (!res.ok) {
+            toast.error("Unable to fetch shops...");
+            return;
+        }
+
+        const { shops } = await res.json();
+        setNoOfShops(shops.length);
+    }
+
+
+
     async function getNumberOfUsers() {
         const res = await fetch(admin.users, {
             method: 'GET',
@@ -58,6 +78,7 @@ export default function Admin() {
     const cards = [
         { title: "Datasets", value: noOfDatasets, description: "Click to view all datasets", link: 'dataset' },
         { title: "Campaigns", value: noOfCampaigns, description: "Click to review all campaigns", link: 'campaign' },
+        { title: "Shops", value: noOfShops, description: "Click to review all shops", link: 'shop' }, 
         { title: "User Management", value: noOfUsers, description: "Click here to manage users", link: 'users' }
     ];
 

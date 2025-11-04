@@ -1,28 +1,57 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./RewardTier.css";
-
-// Mock supporters per tier – swap with API later
-const MOCK = {
-  1: [
-    { id: 101, name: "John Tan", email: "john@email.com", claimDate: "2025-08-15", status: "Pending" },
-    { id: 102, name: "Sarah Lee", email: "sarah@email.com", claimDate: "2025-08-18", status: "Completed" },
-    { id: 103, name: "Sandra Ong", email: "sandra@email.com", claimDate: "2025-08-31", status: "Redeemed" },
-  ],
-  2: [],
-  3: [],
-  4: [],
-};
+import { campaigns, rewards } from "../../../../paths";
+import { toast } from "react-toastify";
+import { USER_REWARDS_STATUS } from '../../../helpers/constants';
 
 export default function RewardTier() {
-  const { tierId } = useParams();
+  const { tierId, campaignId } = useParams();
   const navigate = useNavigate();
-  const initial = useMemo(() => MOCK[tierId] ?? [], [tierId]);
-  const [rows, setRows] = useState(initial);
+  const [rows, setRows] = useState([]);
 
-  const markCompleted = (id) => {
+  useEffect(() => {
+    if (tierId, campaignId) {
+      getRewardSupporters();
+    }
+  }, [tierId, campaignId]);
+
+  async function getRewardSupporters() {
+    const res = await fetch(rewards.getById(campaignId, tierId), {
+      method: 'GET',
+      credentials: 'include'
+    });
+
+    if (!res.ok) {
+      toast.error("Unable to get supporters!");
+      return;
+    }
+
+    const data = await res.json();
+    setRows(data.map((d) => ({
+      id: d.userRewardId,
+      userId: d.userId,
+      name: d.userName,
+      email: d.userEmail,
+      claimDate: d?.claimedAt ? new Date(d?.claimedAt).toLocaleString() : null,
+      status: d.status,
+      rewardName: d.rewardName
+    })));
+  }
+
+  const markCompleted = async (id, userId) => {
+    const res = await fetch(campaigns.userReward(campaignId, userId, id), {
+      method: 'PUT',
+      credentials: 'include'
+    });
+
+    if (!res.ok) {
+      toast.error("Something went wrong completing the rewarding...");
+      return;
+    }
+    toast.info("You have mark the user reward as completed!");
     setRows((rs) =>
-      rs.map((r) => (r.id === id ? { ...r, status: "Completed" } : r))
+      rs.map((r) => (r.id === id ? { ...r, status: USER_REWARDS_STATUS.COMPLETED.toLowerCase() } : r))
     );
   };
 
@@ -32,8 +61,8 @@ export default function RewardTier() {
       <h2 className="page-subtitle">Manage Rewards</h2>
 
       <div className="tier-header">
-        <div className="tier-pill">Reward {tierId}</div>
-        <button className="back-link" onClick={() => navigate("/campaign/rewards")}>
+        <div className="tier-pill">{rows[0]?.rewardName || `Reward ${tierId}`}</div>
+        <button className="back-link" onClick={() => navigate(`/campaign/${campaignId}/rewards`)}>
           ← Back to Rewards
         </button>
       </div>
@@ -64,8 +93,8 @@ export default function RewardTier() {
                   <td>{r.claimDate}</td>
                   <td>{r.status}</td>
                   <td>
-                    {r.status === "Pending" ? (
-                      <button className="mark-btn" onClick={() => markCompleted(r.id)}>
+                    {r.status === USER_REWARDS_STATUS.PENDING.toLowerCase() ? (
+                      <button className="mark-btn" onClick={() => markCompleted(r.id, r.userId)}>
                         Mark Completed
                       </button>
                     ) : (

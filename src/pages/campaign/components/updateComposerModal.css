@@ -1,0 +1,187 @@
+/* Background overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Modal box */
+.modal-container {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    animation: slideUp 0.3s ease;
+}
+
+/* Title */
+.modal-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: center;
+    color: #222;
+    margin-bottom: 1.5rem;
+}
+
+/* Form groups */
+.form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* ✅ ensures labels align left */
+}
+
+/* Left-aligned labels */
+.form-label {
+    display: block;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+    text-align: left;
+    /* ✅ explicitly enforce left alignment */
+    width: 100%;
+}
+
+/* Text input */
+.form-input {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 8px;
+    border: 1.8px solid #ccc;
+    font-size: 1rem;
+    background-color: #fafafa;
+    transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #218838;
+    background-color: white;
+}
+
+/* Textarea */
+.form-textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1.8px solid #ccc;
+    font-size: 1rem;
+    resize: none;
+    background-color: #fafafa;
+    transition: border-color 0.2s ease;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #218838;
+    background-color: white;
+}
+
+/* File upload */
+.form-file {
+    display: block;
+    font-size: 0.95rem;
+    color: #333;
+    margin-top: 0.25rem;
+}
+
+.image-preview {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.preview-img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Buttons */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.btn-cancel,
+.btn-submit {
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-cancel {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.btn-cancel:hover {
+    background-color: #ccc;
+    transform: scale(1.03);
+}
+
+.btn-submit {
+    background-color: #218838;
+    color: #fff;
+}
+
+.btn-submit:hover {
+    background-color: #1c6f2f;
+    transform: scale(1.03);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(25px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .modal-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .modal-title {
+        font-size: 1.4rem;
+    }
+
+    .btn-cancel,
+    .btn-submit {
+        flex: 1;
+    }
+}

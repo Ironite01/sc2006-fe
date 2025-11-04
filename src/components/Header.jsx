@@ -36,7 +36,7 @@ export default function Header({ onSearch }) {
                 <img src={profile} alt="App logo" className='h-[2.75rem] w-auto logo' />
                 <a className='no-underline hover:underline visited:no-underline' href='/'>Home</a>
                 <a onClick={() => navigate("/rewards")}>Rewards</a>
-                <a>Updates</a>
+                <a onClick={() => navigate("/updates")}>Updates</a>
             </nav>
             <div className="flex order-2 items-center gap-[1.25rem]">
                 <Searchbar onSearch={onSearch} />

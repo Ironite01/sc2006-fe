@@ -1,155 +1,147 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { updates as updatesPath } from "../../../../paths";
 import "./UpdateComposer.css";
+import { toast } from "react-toastify";
+import UpdateComposterModal from "./UpdateComposerModal";
+import { useNavigate } from "react-router-dom";
 
-const seedPublished = [
-  {
-    id: 1,
-    title: "We’ve reopened for weekend brunch!",
-    date: "Posted Aug 31, 2025",
-    body:
-      "Thanks to your support, we’ve fixed our stove and reopened for weekend brunch!",
-    image: null,
-  },
-];
+export default function UpdateComposer({ campaigns }) {
+  const navigate = useNavigate();
+  const [selectedCampaignId, setSelectCampaignId] = useState(null);
+  const [updates, setUpdates] = useState([]);
+  const [selectedUpdate, setSelectedUpdate] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-export default function UpdateComposer() {
-  const [published] = useState(seedPublished);
-  const [title, setTitle] = useState("Big repairs made!");
-  const [body, setBody] = useState("Our stove was repairing our oven stove");
-  const [image, setImage] = useState(null);
+  useEffect(() => {
+    if (!selectedCampaignId) setSelectCampaignId(campaigns[0].id);
+    getUpdates();
+  }, [selectedCampaignId]);
 
-  const stats = { total: 3, reached: 250, avgViews: 120 };
+  async function getUpdates() {
+    const res = await fetch(updatesPath.getAllByCampaignId(selectedCampaignId || campaigns[0].id), {
+      method: 'GET',
+      credentials: 'include'
+    });
 
-  const handleImage = (e) => setImage(e.target.files?.[0] ?? null);
+    if (!res.ok) {
+      toast.error("Failed to get updates!");
+      return;
+    }
 
-  const handlePublish = (e) => {
-    e.preventDefault();
-    // TODO: POST to API
-    alert("Update published! (wire API when ready)");
-  };
+    const data = await res.json();
+    setUpdates(data);
+  }
+
+  async function deleteUpdate(updateId) {
+    if (!confirm("Are you sure you want to delete this update!")) return;
+    const res = await fetch(updatesPath.getById(selectedCampaignId, updateId), {
+      method: 'DELETE',
+      credentials: 'include'
+    });
+
+    if (!res.ok) {
+      toast.error("Failed to delete update!");
+      return;
+    }
+
+    location.reload();
+  }
 
   return (
-    <div className="uc-page">
-      <h1 className="uc-title">Post an Update!</h1>
-      <p className="uc-sub">
-        Updates are your way to keep supporters connected to your journey. Share
-        milestones, new challenges, photos, or announcements so the community
-        knows how their contributions are making an impact.
-      </p>
-
-      <div className="uc-grid">
-        {/* Left column: Published + Draft preview */}
-        <div className="uc-col">
-          {/* Latest published example */}
-          {published.map((u) => (
-            <article className="uc-card uc-card--published" key={u.id}>
-              <div className="uc-card-media">
-                {/* optional image slot */}
-                {u.image ? (
-                  <img src={URL.createObjectURL(u.image)} alt="" />
-                ) : (
-                  <div className="uc-media-placeholder" />
-                )}
-              </div>
-              <div className="uc-card-body">
-                <h3 className="uc-card-title">{u.title}</h3>
-                <div className="uc-card-meta">{u.date}</div>
-                <p className="uc-card-text">{u.body}</p>
-                <div className="uc-actions">
-                    <button className="uc-btn uc-btn--ghost uc-btn--compact">Like</button>
-                    <button className="uc-btn uc-btn--ghost uc-btn--compact">Comment</button>
-                </div>
-              </div>
-            </article>
-          ))}
-
-          {/* Draft preview */}
-          <article className="uc-card">
-            <div className="uc-card-media">
-              {image ? (
-                <img src={URL.createObjectURL(image)} alt="" />
-              ) : (
-                <div className="uc-media-placeholder" />
-              )}
-            </div>
-            <div className="uc-card-body">
-              <h3 className="uc-card-title">{title || "Untitled update"}</h3>
-              <div className="uc-card-meta">Draft preview</div>
-              <p className="uc-card-text">{body || "Draft body…"}</p>
-              <div className="uc-actions">
-                <button className="uc-btn uc-btn--ghost uc-btn--compact">Like</button>
-                <button className="uc-btn uc-btn--ghost uc-btn--compact">Comment</button>
-            </div>
-
-            </div>
-          </article>
+    <div className="update-composter-container">
+      <UpdateComposterModal isOpen={isOpen} onClose={() => {
+        setIsOpen(false);
+        setSelectedUpdate(null);
+      }} selectedCampaignId={selectedCampaignId}
+        update={selectedUpdate}
+        selectedCampaignName={campaigns?.find(c => parseInt(c.id) === parseInt(selectedCampaignId))?.name} />
+      <div className="header-row">
+        <div className="filter-controls">
+          <label>Your updates:</label>
+          <select
+            value={selectedCampaignId}
+            onChange={(e) => {
+              setSelectCampaignId(e.target.value);
+            }}
+            className="status-filter"
+          >
+            {campaigns.map(c =>
+              <option key={c.id} value={c.id}>{c.name}</option>
+            )}
+          </select>
         </div>
+        <button className="compose-button" onClick={() => setIsOpen(true)}>Compose new update</button>
+      </div>
 
-        {/* Right column: Stats + Composer */}
-        <div className="uc-col">
-          {/* Stats */}
-          <section className="uc-panel">
-            <h4 className="uc-panel-title">Latest Update Stats</h4>
-            <div className="uc-stats">
-              <div>
-                <strong>{stats.total}</strong> Updates Posted
-              </div>
-              <div>
-                <strong>{stats.reached}</strong> Supporters Reached
-              </div>
-              <div>
-                Avg. <strong>{stats.avgViews}</strong> Views per Update
-              </div>
-            </div>
-          </section>
-
-          {/* Composer */}
-          <section className="uc-panel">
-            <h4 className="uc-panel-title">Compose an Update</h4>
-            <form className="uc-form" onSubmit={handlePublish}>
-              <label className="uc-label">
-                Title
-                <input
-                  className="uc-input"
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="What’s new?"
-                />
-              </label>
-
-              <label className="uc-label">
-                Message
-                <textarea
-                  className="uc-textarea"
-                  rows={6}
-                  value={body}
-                  onChange={(e) => setBody(e.target.value)}
-                  placeholder="Share your progress, stories, or milestones…"
-                />
-              </label>
-
-              <label className="uc-label">
-                Image (optional)
-                <input className="uc-file" type="file" accept="image/*" onChange={handleImage} />
-              </label>
-
-              <div className="uc-form-actions">
-                <button type="submit" className="uc-btn uc-btn--primary">
-                  Publish Update
-                </button>
-                <button
-                  type="button"
-                  className="uc-btn"
-                  onClick={() => alert("Saved as draft (stub)")}
-                >
-                  Save Draft
-                </button>
-              </div>
-            </form>
-          </section>
-        </div>
+      <div className="updates-table-container">
+        <table className="updates-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Image</th>
+              <th>Content</th>
+              <th>Posted At</th>
+              <th>Likes</th>
+              <th>Comments</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {updates.map((update) => (
+              <tr key={update.updateId}>
+                <td>{update.updateId}</td>
+                <td>
+                  {update.image ? (
+                    <img
+                      src={update.image}
+                      alt={update.title}
+                      className="campaign-image"
+                    />
+                  ) : (
+                    <div className="campaign-image-placeholder">No Image</div>
+                  )}
+                </td>
+                <td>
+                  <strong>{update.title}</strong>
+                  <br />
+                  {update.description?.substring(0, 50)}...
+                </td>
+                <td>{new Date(update.postedAt).toLocaleDateString()}</td>
+                <td>{update.likeCount}</td>
+                <td>{update.commentCount}</td>
+                <td>
+                  <div className="action-buttons">
+                    <button
+                      onClick={() => navigate(`/campaign/${selectedCampaignId}/updates/${update.updateId}`)}
+                      className="go-btn"
+                    >
+                      Go
+                    </button>
+                    <button
+                      onClick={() => {
+                        setSelectedUpdate(update);
+                        setIsOpen(true);
+                      }}
+                      className="edit-btn"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => deleteUpdate(update.updateId)}
+                      className="delete-btn"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {updates.length === 0 && (
+          <div className="no-data">No updates found</div>
+        )}
       </div>
     </div>
-  );
+  )
 }

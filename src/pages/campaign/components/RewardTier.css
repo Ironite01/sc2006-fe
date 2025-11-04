@@ -1,12 +1,73 @@
-.reward-tier-page { padding: 24px; }
-.page-title { font-size: 32px; margin: 0 0 4px; }
-.page-subtitle { font-size: 20px; margin: 0 0 20px; color: #6b5f52; }
-.tier-header { display: flex; align-items: center; gap: 12px; margin: 12px 0 16px; }
-.tier-pill { background: #7b624d; color: #fff; border-radius: 999px; padding: 8px 16px; font-weight: 700; }
-.back-link { background: transparent; border: none; color: #1a73e8; text-decoration: underline; cursor: pointer; }
-.table-wrap { overflow-x: auto; background: #fff4ea; padding: 12px; border-radius: 16px; }
-.supporters-table { width: 100%; border-collapse: collapse; }
-.supporters-table th, .supporters-table td { border: 1px solid #b6a692; padding: 10px 12px; }
-.supporters-table th { background: #d0c2b3; text-align: left; }
-.mark-btn { padding: 8px 12px; border-radius: 999px; border: none; background: #2bb673; color: #fff; cursor: pointer; }
-.mark-btn:hover { filter: brightness(0.95); }
+.reward-tier-page {
+    padding: 24px;
+}
+
+.page-title {
+    font-size: 32px;
+    margin: 0 0 4px;
+}
+
+.page-subtitle {
+    font-size: 20px;
+    margin: 0 0 20px;
+    color: #6b5f52;
+}
+
+.tier-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0 16px;
+}
+
+.tier-pill {
+    background: #7b624d;
+    color: #fff;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-weight: 700;
+}
+
+.back-link {
+    background: transparent;
+    border: none;
+    color: #1a73e8;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    background: #fff4ea;
+    padding: 12px;
+    border-radius: 16px;
+}
+
+.supporters-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.supporters-table th,
+.supporters-table td {
+    border: 1px solid #b6a692;
+    padding: 10px 12px;
+}
+
+.supporters-table th {
+    background: #d0c2b3;
+    text-align: left;
+}
+
+.mark-btn {
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: none;
+    background: #2bb673;
+    color: #fff;
+    cursor: pointer;
+}
+
+.mark-btn:hover {
+    filter: brightness(0.95);
+}

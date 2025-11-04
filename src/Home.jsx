@@ -24,14 +24,17 @@ export default function Home({ searchQuery }) {
         });
 
         // backend returns JSON array; also surface server errors
-        const data = await res.json();
-
         if (!res.ok) {
           toast.error((data && (data.error || data.message)) || "Failed to fetch shops");
           return;
         }
+        const data = await res.json();
+        const d = data.map((x) => ({
+          ...x,
+          progress: parseInt(x.newestCampaignCurrentAmount / x.newestCampaignGoal * 100)
+        }))
 
-        if (alive) setAllShops(data);
+        if (alive) setAllShops(d);
       } catch (e) {
         if (alive) toast.error(e.message || "Network error loading shops");
       } finally {

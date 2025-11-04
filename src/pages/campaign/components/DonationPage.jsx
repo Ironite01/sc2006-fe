@@ -4,6 +4,7 @@ import "./DonationPage.css";
 import tiersDB from "../../../data/donationRewards.json";
 import SubmitButton from "../../../components/SubmitButton";
 import { campaigns } from "../../../../paths";
+import getUser from "../../../helpers/getUser";
 
 export default function DonationPage() {
   const { id } = useParams();
@@ -13,6 +14,8 @@ export default function DonationPage() {
   useEffect(() => {
     getCampaign();
   }, []);
+
+
 
   async function getCampaign() {
     try {
@@ -24,11 +27,15 @@ export default function DonationPage() {
         throw new Error("Failed to get campaign");
       }
       const campaign = await res.json();
+    console.log("Fetched campaign:", campaign);
+
       setCampaign(campaign);
     } catch (e) {
       toast.error(e.message);
     }
   }
+
+
 
   // 2) tiers source: prefer campaign.rewardTiers; else fallback JSON; else empty
   const tiers = useMemo(() => {
@@ -76,7 +83,7 @@ export default function DonationPage() {
   const isValidExpiry = (val) => /^(0[1-9]|1[0-2])\/\d{2}$/.test(val);
   const isValidCvv = (val) => /^[0-9]{3,4}$/.test(val);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -87,9 +94,40 @@ export default function DonationPage() {
     if (!isValidCvv(cvv)) return setError("Invalid CVV");
     if (!agreeTos) return setError("Please agree to the terms");
 
-    setSuccess(
-      `Thanks! You donated $${amount.toFixed(2)} to ${campaign?.name || "this shop"}`
-    );
+    try {
+      const user = await getUser(); // existing helper returning current user or null
+      console.log("getUser() returned:", user);
+
+      const body = {
+        userId: user?.userId ?? null, 
+        amount,
+        paymentGatewayOrderId: `CLIENT-${Date.now()}`,
+        paymentMethod: "card"
+      };
+
+
+      const donationUrl = `http://localhost:3000/campaign/${campaign.campaignId}/donation`;
+
+
+      const res = await fetch(donationUrl, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ message: "Failed to submit donation" }));
+        return setError(err.message || "Failed to submit donation");
+      }
+
+      setSuccess(
+        `Thanks! You donated $${amount.toFixed(2)} to ${campaign?.name || "this shop"}`
+      );
+    } catch (err) {
+      console.error(err);
+      setError("Network error while submitting donation");
+    }
   };
 
   if (!campaign) {
@@ -106,10 +144,13 @@ export default function DonationPage() {
 
       {/* HERO */}
       <div className="donation-hero">
-        <img src={campaign.imageUrl} alt={campaign.name} />
+      <img
+        src={campaign.image || campaign.imageBlob}
+        alt={campaign.name}
+        />
         <div className="hero-overlay">
           <h2>{campaign.name}</h2>
-          <p>Rent due: {new Date(campaign.rentDue).toLocaleDateString("en-SG")}</p>
+          {/*<p>Rent due: {new Date(campaign.rentDue).toLocaleDateString("en-SG")}</p>*/ /*add this back if we have it*/}
         </div>
       </div>
 
