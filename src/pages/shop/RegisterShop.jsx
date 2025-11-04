@@ -50,7 +50,7 @@ export default function RegisterShop() {
     } catch (e) {
       console.error("Failed to check shop:", e);
     }
-    
+
 
   }
 
