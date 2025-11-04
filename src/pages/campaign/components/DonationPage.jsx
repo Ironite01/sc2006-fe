@@ -14,13 +14,7 @@ export default function DonationPage() {
   useEffect(() => {
     getCampaign();
   }, []);
-    useEffect(() => {
-    return () => {
-      if (campaign?.imageBlob?.startsWith("blob:")) {
-        URL.revokeObjectURL(campaign.imageBlob);
-      }
-    };
-  }, [campaign?.imageBlob]);
+
 
 
   async function getCampaign() {
@@ -40,13 +34,7 @@ export default function DonationPage() {
       toast.error(e.message);
     }
   }
-    function handleImageUpload(e) {
-    const file = e.target.files[0];
-    if (file) {
-      const blobUrl = URL.createObjectURL(file);
-      setCampaign(prev => ({ ...prev, imageBlob: blobUrl }));
-    }
-  }
+
 
 
   // 2) tiers source: prefer campaign.rewardTiers; else fallback JSON; else empty
