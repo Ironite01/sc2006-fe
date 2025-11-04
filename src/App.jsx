@@ -29,6 +29,7 @@ import RewardProof from './pages/rewards/RewardProof.jsx';
 import Updates from './pages/campaign/updates/index.jsx';
 import UserUpdates from './pages/updates/index.jsx';
 import AuthCallback from './pages/auth/AuthCallback.jsx';
+import RoleSelection from './pages/auth/RoleSelection.jsx';
 import RedeemUserReward from './pages/campaign/rewards/RedeemUserReward.jsx';
 import RegisterShop from "./pages/shop/RegisterShop.jsx";
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/auth/select-role" element={<RoleSelection />} />
           <Route path="/profile" element={<EditProfile />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />

@@ -7,6 +7,7 @@ export const auth = {
   googleLogin: `${backendPath}/login/google`,
   azureLogin: `${backendPath}/login/azure`,
   azureCallback: `${backendPath}/login/azure/callback`,
+  selectRole: `${backendPath}/auth/select-role`,
   forgotPassword: `${backendPath}/user/forgot-password`,
   me: `${backendPath}/auth/me` // for pages that require jwt decoding
 }
