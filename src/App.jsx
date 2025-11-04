@@ -31,6 +31,8 @@ import UserUpdates from './pages/updates/index.jsx';
 import AuthCallback from './pages/auth/AuthCallback.jsx';
 import RedeemUserReward from './pages/campaign/rewards/RedeemUserReward.jsx';
 import RegisterShop from "./pages/shop/RegisterShop.jsx";
+import RequireRole from './helpers/RequireRole.jsx';
+
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -40,39 +42,204 @@ function App() {
       <Header onSearch={setSearchQuery} />
       <main>
         <Routes>
+          {/* =========================
+              GENERAL + PROFILE (everyone)
+             ========================= */}
           <Route path="/" element={<Home searchQuery={searchQuery} />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
-          <Route path="/profile" element={<EditProfile />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/terms" element={<TermsAndConditions />} />
-          <Route path="/updates" element={<UserUpdates />} />
-          <Route path="/campaign" element={<Campaign />} />
-          <Route path="/campaign/:id" element={<CampaignDetails />} />
-          <Route path="/campaign/:campaignId/updates/:updateId" element={<Updates />} />
-          <Route path="/campaign/:id/donation" element={<DonationPage />} />
-          <Route path="/campaign/create" element={<CampaignForm />} />
-          <Route path="/campaign/:campaignId/edit" element={<CampaignForm />} />
-          <Route path="/campaign/:campaignId/rewards" element={<ManageRewards />} />
-          <Route path="/campaign/:campaignId/rewards/:tierId" element={<RewardTier />} />
-          <Route path="/campaign/:campaignId/user/:userId/rewards/:userRewardsId/redeem" element={<RedeemUserReward />} />
-          <Route path="/rewards" element={<Rewards />} />
-          <Route path="/rewards/:userRewardId" element={<RewardProof />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/dataset" element={<AdminDataset />} />
-          <Route path="/admin/dataset/:filename" element={<AdminDatasetViewer />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="/admin/campaign" element={<AdminCampaign />} />
-          <Route path="/admin/shop" element={<AdminShop />} />
-          <Route path="/shop/create" element={<RegisterShop />} />
+          <Route path="/profile" element={<EditProfile />} />
+
+          {/* =========================
+              SUPPORTER-ONLY PAGES
+             ========================= */}
+          {/* UserUpdates page (you said only supporters) */}
+          <Route
+            path="/updates"
+            element={
+              <RequireRole allowedRoles={['SUPPORTER']}>
+                <UserUpdates />
+              </RequireRole>
+            }
+          />
+
+          {/* Donation page (supporters donate) */}
+          <Route
+            path="/campaign/:id/donation"
+            element={
+              <RequireRole allowedRoles={['SUPPORTER']}>
+                <DonationPage />
+              </RequireRole>
+            }
+          />
+
+          {/* Rewards pages (supporter only) */}
+          <Route
+            path="/rewards"
+            element={
+              <RequireRole allowedRoles={['SUPPORTER']}>
+                <Rewards />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/rewards/:userRewardId"
+            element={
+              <RequireRole allowedRoles={['SUPPORTER']}>
+                <RewardProof />
+              </RequireRole>
+            }
+          />
+
+          {/* =========================
+              BUSINESS REP-ONLY PAGES
+             ========================= */}
+          {/* Main campaign page (business rep landing) */}
+          <Route
+            path="/campaign"
+            element={
+              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+                <Campaign />
+              </RequireRole>
+            }
+          />
+
+          {/* Campaign details (you said all campaign pages = biz rep only) */}
+          <Route
+            path="/campaign/:id"
+            element={
+              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+                <CampaignDetails />
+              </RequireRole>
+            }
+          />
+
+          {/* Per-campaign update page (biz rep only) */}
+          <Route
+            path="/campaign/:campaignId/updates/:updateId"
+            element={
+              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+                <Updates />
+              </RequireRole>
+            }
+          />
+
+          {/* Create / edit campaign (biz rep only) */}
+          <Route
+            path="/campaign/create"
+            element={
+              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+                <CampaignForm />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/campaign/:campaignId/edit"
+            element={
+              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+                <CampaignForm />
+              </RequireRole>
+            }
+          />
+
+          {/* Manage rewards for campaign (biz rep only) */}
+          <Route
+            path="/campaign/:campaignId/rewards"
+            element={
+              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+                <ManageRewards />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/campaign/:campaignId/rewards/:tierId"
+            element={
+              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+                <RewardTier />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/campaign/:campaignId/user/:userId/rewards/:userRewardsId/redeem"
+            element={
+              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+                <RedeemUserReward />
+              </RequireRole>
+            }
+          />
+
+          {/* Shop registration (biz rep only) */}
+          <Route
+            path="/shop/create"
+            element={
+              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+                <RegisterShop />
+              </RequireRole>
+            }
+          />
+
+          {/* =========================
+              ADMIN-ONLY PAGES
+             ========================= */}
+          <Route
+            path="/admin"
+            element={
+              <RequireRole allowedRoles={['ADMIN']}>
+                <Admin />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/admin/dataset"
+            element={
+              <RequireRole allowedRoles={['ADMIN']}>
+                <AdminDataset />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/admin/dataset/:filename"
+            element={
+              <RequireRole allowedRoles={['ADMIN']}>
+                <AdminDatasetViewer />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <RequireRole allowedRoles={['ADMIN']}>
+                <AdminUsers />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/admin/campaign"
+            element={
+              <RequireRole allowedRoles={['ADMIN']}>
+                <AdminCampaign />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/admin/shop"
+            element={
+              <RequireRole allowedRoles={['ADMIN']}>
+                <AdminShop />
+              </RequireRole>
+            }
+          />
         </Routes>
+
         <ToastContainer className="toast-container" />
       </main>
       <Footer />
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
