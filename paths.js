@@ -38,12 +38,15 @@ export const admin = {
 export const campaigns = {
   getById: (campaignId) => `${backendPath}/campaigns/${campaignId}`,
   get: `${backendPath}/campaigns`,
-  stats: `${backendPath}/campaigns/stats`,
-  userReward: (campaignId, supporterId, userRewardId) => `${backendPath}/campaigns/${campaignId}/user/${supporterId}/rewards/${userRewardId}`
+  stats: `${backendPath}/campaigns/stats`
 }
 
 export const rewards = {
   getById: (campaignId, rewardId) => `${backendPath}/campaigns/${campaignId}/user/rewards/${rewardId}`,
+}
+
+export const user_rewards = {
+  redeem: (campaignId, supporterId, userRewardId) => `${backendPath}/campaigns/${campaignId}/user/${supporterId}/rewards/${userRewardId}/redeem`
 }
 
 export const updates = {

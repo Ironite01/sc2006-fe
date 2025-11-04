@@ -28,6 +28,7 @@ import RewardProof from './pages/rewards/RewardProof.jsx';
 import Updates from './pages/campaign/updates/index.jsx';
 import UserUpdates from './pages/updates/index.jsx';
 import AuthCallback from './pages/auth/AuthCallback.jsx';
+import RedeemUserReward from './pages/campaign/rewards/RedeemUserReward.jsx';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -53,6 +54,7 @@ function App() {
           <Route path="/campaign/:campaignId/edit" element={<CampaignForm />} />
           <Route path="/campaign/:campaignId/rewards" element={<ManageRewards />} />
           <Route path="/campaign/:campaignId/rewards/:tierId" element={<RewardTier />} />
+          <Route path="/campaign/:campaignId/user/:userId/rewards/:userRewardsId/redeem" element={<RedeemUserReward />} />
           <Route path="/rewards" element={<Rewards />} />
           <Route path="/rewards/:userRewardId" element={<RewardProof />} />
           <Route path="/admin" element={<Admin />} />
@@ -60,7 +62,7 @@ function App() {
           <Route path="/admin/dataset/:filename" element={<AdminDatasetViewer />} />
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/campaign" element={<AdminCampaign />} />
-          <Route path="/admin/shop" element={<AdminShop />} /> 
+          <Route path="/admin/shop" element={<AdminShop />} />
         </Routes>
         <ToastContainer className="toast-container" />
       </main>
