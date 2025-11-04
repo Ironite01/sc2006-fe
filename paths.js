@@ -5,6 +5,8 @@ export const auth = {
   register: `${backendPath}/register`,
   logout: `${backendPath}/logout`,
   googleLogin: `${backendPath}/login/google`,
+  azureLogin: `${backendPath}/login/azure`,
+  azureCallback: `${backendPath}/login/azure/callback`,
   forgotPassword: `${backendPath}/user/forgot-password`,
   me: `${backendPath}/auth/me` // for pages that require jwt decoding
 }

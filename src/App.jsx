@@ -27,6 +27,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import RewardProof from './pages/rewards/RewardProof.jsx';
 import Updates from './pages/campaign/updates/index.jsx';
 import UserUpdates from './pages/updates/index.jsx';
+import AuthCallback from './pages/auth/AuthCallback.jsx';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -39,6 +40,7 @@ function App() {
           <Route path="/" element={<Home searchQuery={searchQuery} />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
           <Route path="/profile" element={<EditProfile />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { profile, google } from '../../assets';
+import { profile, google, microsoft } from '../../assets';
 import getUser from '../../helpers/getUser';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../paths';
@@ -170,6 +170,12 @@ export default function Login() {
                         <button type="button" className="google">
                             <img src={google} alt="Google" />
                             <span>Continue with Google</span>
+                        </button>
+                    </a>
+                    <a href={auth.azureLogin}>
+                        <button type='button' className="google">
+                            <img src={microsoft} alt="Microsoft" />
+                            <span>Continue with Microsoft</span>
                         </button>
                     </a>
                 </div>
