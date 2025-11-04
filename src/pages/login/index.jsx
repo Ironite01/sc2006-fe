@@ -16,22 +16,46 @@ export default function Login() {
         redirectIfLoggedIn();
     }, []);
 
+    // async function redirectIfLoggedIn() {
+    //     try {
+    //         const user = await getUser();
+    //         if (!user) return;
+
+    //         const role = user.role?.toLowerCase();
+    //         if (role === 'admin' || role === 'root') {
+    //             navigate('/admin', { replace: true });
+    //         } else {
+    //             navigate('/', { replace: true });
+    //         }
+    //     } catch (e) {
+    //         // if getUser fails, just stay on login page
+    //         console.error('redirectIfLoggedIn error:', e);
+    //     }
+    // }
+
     async function redirectIfLoggedIn() {
         try {
             const user = await getUser();
             if (!user) return;
 
             const role = user.role?.toLowerCase();
+
             if (role === 'admin' || role === 'root') {
                 navigate('/admin', { replace: true });
-            } else {
+            } 
+            // 👇 change this to specifically check for business reps
+            else if (role === 'business_representative') {
+                navigate('/campaign', { replace: true });
+            } 
+            // 👇 everyone else (e.g. supporter) goes to home
+            else {
                 navigate('/', { replace: true });
             }
         } catch (e) {
-            // if getUser fails, just stay on login page
             console.error('redirectIfLoggedIn error:', e);
         }
     }
+
 
     async function onFormSubmit(e) {
         e.preventDefault();
@@ -82,11 +106,15 @@ export default function Login() {
             }
 
             const role = user?.role?.toLowerCase();
+
             if (role === 'admin' || role === 'root') {
                 navigate('/admin', { replace: true });
+            } else if (role === 'business_representative') {
+                navigate('/campaign', { replace: true });
             } else {
-                navigate('/', { replace: true });
+                navigate('/', { replace: true }); // supporter / fallback
             }
+
         } catch (error) {
             console.error('Login error:', error);
             toast.error(
