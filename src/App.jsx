@@ -29,6 +29,7 @@ import RewardProof from './pages/rewards/RewardProof.jsx';
 import Updates from './pages/campaign/updates/index.jsx';
 import UserUpdates from './pages/updates/index.jsx';
 import AuthCallback from './pages/auth/AuthCallback.jsx';
+import RegisterShop from "./pages/shop/RegisterShop.jsx";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -63,6 +64,7 @@ function App() {
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/campaign" element={<AdminCampaign />} />
           <Route path="/admin/shop" element={<AdminShop />} /> 
+          <Route path="/shop/create" element={<RegisterShop />} />
         </Routes>
         <ToastContainer className="toast-container" />
       </main>

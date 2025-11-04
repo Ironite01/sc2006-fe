@@ -16,7 +16,7 @@ export const user = {
   updatePassword: `${backendPath}/user/update-password`,
   updateProfile: (userId) => `${backendPath}/user/${userId}`,
   rewards: (userId) => `${backendPath}/user/${userId}/rewards?limit=10000`,
-  reward: (userId, userRewardId) => `${backendPath}/user/${userId}/rewards/${userRewardId}`,
+  reward: (userId, userRewardId) => `${backendPath}/user/${userId}/rewards/${userRewardId}`
 }
 
 export const admin = {
@@ -38,12 +38,7 @@ export const admin = {
 export const campaigns = {
   getById: (campaignId) => `${backendPath}/campaigns/${campaignId}`,
   get: `${backendPath}/campaigns`,
-  stats: `${backendPath}/campaigns/stats`,
-  userReward: (campaignId, supporterId, userRewardId) => `${backendPath}/campaigns/${campaignId}/user/${supporterId}/rewards/${userRewardId}`
-}
-
-export const rewards = {
-  getById: (campaignId, rewardId) => `${backendPath}/campaigns/${campaignId}/user/rewards/${rewardId}`,
+  stats: `${backendPath}/campaigns/stats`
 }
 
 export const updates = {
@@ -56,6 +51,8 @@ export const updates = {
 }
 
 export const shop = {
-  list: `${backendPath}/shops`,
-  one: (id) => `${backendPath}/shops/${id}`
+  list: `${backendPath}/shops`,             // GET public shops (existing)
+  one: (id) => `${backendPath}/shops/${id}`,// GET single shop by id (existing)
+  create: `${backendPath}/shops`,          // POST to create shop (business rep)
+  me: `${backendPath}/shops/me`,           // GET current user's shop
 };
