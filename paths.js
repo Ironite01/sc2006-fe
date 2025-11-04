@@ -26,7 +26,11 @@ export const admin = {
   updateCampaignStatus: (campaignId) => `${backendPath}/admin/campaign/${campaignId}/status`,
   deleteCampaign: (campaignId) => `${backendPath}/admin/campaign/${campaignId}`,
   comments: `${backendPath}/admin/comment`,
-  deleteComment: (commentId) => `${backendPath}/admin/comment/${commentId}`
+  deleteComment: (commentId) => `${backendPath}/admin/comment/${commentId}`,
+  getAllShops: () => `${backendPath}/admin/shops`,
+  getShopsByStatus: (status) => `${backendPath}/admin/shops?status=${status}`,
+  updateShopStatus: (id) => `${backendPath}/admin/shops/${id}/status`,
+  deleteShop: (id) => `${backendPath}/admin/shops/${id}`,
 }
 
 export const campaigns = {
