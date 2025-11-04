@@ -47,6 +47,7 @@ export default function Header({ onSearch }) {
             <nav className="flex order-1 gap-[0.5rem] items-center">
                 <img src={logo} alt="App logo" className='h-[2.75rem] w-auto logo rounded-full' />
                 <a className='no-underline hover:underline visited:no-underline' href='/'>Home</a>
+                <a onClick={() => navigate("/map")}>Map</a>
                 {userRole === USER_ROLES.SUPPORTER && <>
                     <a onClick={() => navigate("/rewards")}>Rewards</a>
                     <a onClick={() => navigate("/updates")}>Updates</a>

@@ -60,6 +60,7 @@ export const shop = {
   one: (id) => `${backendPath}/shops/${id}`,// GET single shop by id (existing)
   create: `${backendPath}/shops`,          // POST to create shop (business rep)
   me: `${backendPath}/shops/me`,           // GET current user's shop
+  mapData: `${backendPath}/shops/map-data` // GET map data for visualization
 };
 
 export const rewards = {
