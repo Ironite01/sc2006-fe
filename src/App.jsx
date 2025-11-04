@@ -8,6 +8,7 @@ import Signup from './pages/signup';
 import Login from './pages/login';
 import ForgotPassword from './pages/forgot-password';
 import ResetPassword from './pages/reset-password';
+import TermsAndConditions from './pages/terms';
 import Campaign from './pages/campaign';
 import CampaignDetails from './pages/campaign/CampaignDetails';
 import DonationPage from './pages/campaign/components/DonationPage.jsx';
@@ -44,6 +45,7 @@ function App() {
           <Route path="/profile" element={<EditProfile />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
           <Route path="/updates" element={<UserUpdates />} />
           <Route path="/campaign" element={<Campaign />} />
           <Route path="/campaign/:id" element={<CampaignDetails />} />
