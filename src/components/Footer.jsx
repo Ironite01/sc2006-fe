@@ -6,14 +6,11 @@ export default function Footer() {
         <footer className="place-content-center">
             <div className='footer-section'>
                 <nav className='flex gap-[0.5rem] flex-wrap'>
-                    <a>Home</a>
-                    <span className='opacity-30'>|</span>
                     <a>Discover</a>
-                    <span className='opacity-30'>|</span>
-                    <a>Rewards</a>
                     <span className='opacity-30'>|</span>
                     <a>About Us</a>
                 </nav>
+
             </div>
             <div className='flex justify-between flex-wrap gap-[2rem] footer-section'>
                 <nav className="flex order-1 items-center gap-[0.5rem] flex-wrap">
