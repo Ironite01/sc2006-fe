@@ -1,3 +1,8 @@
+/* Smooth scrolling for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
 .terms-container {
     display: flex;
     justify-content: center;

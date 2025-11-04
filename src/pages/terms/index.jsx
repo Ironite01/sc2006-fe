@@ -48,8 +48,8 @@ export default function TermsAndConditions() {
                     </div>
                 </div>
 
-                <div className="faq-section">
-                    <h2 className="faq-title">FAQ</h2>
+                                <div className="faq-section" id="faq">
+                    <h2 className="faq-title">Frequently Asked Questions</h2>
                     
                     {faqData.map((faq, index) => (
                         <div key={index} className="faq-item">
