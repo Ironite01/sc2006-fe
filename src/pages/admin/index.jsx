@@ -47,10 +47,10 @@ export default function Admin() {
             method: 'GET',
             credentials: 'include'
         });
-        // if (!res.ok) {
-        //     toast.error("Unable to fetch campaigns...");
-        //     return;
-        // }
+        if (!res.ok) {
+            toast.error("Unable to fetch campaigns...");
+            return;
+        }
         const data = await res.json();
         console.log(data);
         const totalCampaigns = Object.values(data).reduce((sum, count) => sum + count, 0);
@@ -80,10 +80,10 @@ export default function Admin() {
             method: 'GET',
             credentials: 'include'
         });
-        if (!res.ok) {
-            toast.error("Unable to fetch users...");
-            return;
-        }
+        // if (!res.ok) {
+        //     toast.error("Unable to fetch users...");
+        //     return;
+        // }
         const { users } = await res.json();
         setNoOfUsers(users.length);
     }
