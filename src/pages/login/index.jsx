@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { profile, google, microsoft } from '../../assets';
 import getUser from '../../helpers/getUser';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../../paths';
+import { auth, shop } from '../../../paths';
 import './Login.css';
 import { isEmailValid } from '../../helpers/regex';
 import { toast } from 'react-toastify';
 import SubmitButton from '../../components/SubmitButton';
+
 
 export default function Login() {
     const navigate = useNavigate();
@@ -43,11 +44,11 @@ export default function Login() {
             if (role === 'admin' || role === 'root') {
                 navigate('/admin', { replace: true });
             } 
-            // 👇 change this to specifically check for business reps
+            // specifically check for business reps
             else if (role === 'business_representative') {
-                navigate('/campaign', { replace: true });
+                await redirectBusinessRep();
             } 
-            // 👇 everyone else (e.g. supporter) goes to home
+            // everyone else (e.g. supporter) goes to home
             else {
                 navigate('/', { replace: true });
             }
@@ -55,6 +56,34 @@ export default function Login() {
             console.error('redirectIfLoggedIn error:', e);
         }
     }
+
+    async function redirectBusinessRep() {
+        try {
+            const res = await fetch(shop.me, {
+                method: "GET",
+                credentials: "include",
+            });
+
+            if (res.status === 404) {
+                // no shop yet
+                navigate("/shop/create", { replace: true });
+                return;
+            }
+
+            if (res.ok) {
+                // has a shop
+                navigate("/campaign", { replace: true });
+                return;
+            }
+
+            // fallback
+            navigate("/campaign", { replace: true });
+        } catch (e) {
+            console.error("redirectBusinessRep error:", e);
+            navigate("/campaign", { replace: true });
+        }
+    }
+
 
 
     async function onFormSubmit(e) {
@@ -97,7 +126,7 @@ export default function Login() {
                 window.dispatchEvent(new Event('profileUpdated'));
             }
 
-            // ✅ After successful login, fetch user to check role
+            // After successful login, fetch user to check role
             let user = null;
             try {
                 user = await getUser();
@@ -110,7 +139,7 @@ export default function Login() {
             if (role === 'admin' || role === 'root') {
                 navigate('/admin', { replace: true });
             } else if (role === 'business_representative') {
-                navigate('/campaign', { replace: true });
+                await redirectBusinessRep();
             } else {
                 navigate('/', { replace: true }); // supporter / fallback
             }
