@@ -65,6 +65,7 @@ export const rewards = {
   // GET /campaigns/:campaignId/user/rewards/:rewardId
   getById: (campaignId, rewardId) =>
     `${backendPath}/campaigns/${campaignId}/user/rewards/${rewardId}`,
+  stats: (rewardId) => `${backendPath}/rewards/${rewardId}/stats`
 };
 
 export const donation = {

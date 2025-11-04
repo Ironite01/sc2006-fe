@@ -7,6 +7,7 @@ import { campaigns, donation } from "../../../../paths";
 import getUser from "../../../helpers/getUser";
 import PaypalButton from "../../../components/PaypalButton";
 import { toast } from "react-toastify";
+import { USER_ROLES } from "../../../helpers/constants";
 
 export default function DonationPage() {
   const { id } = useParams();
@@ -20,6 +21,12 @@ export default function DonationPage() {
 
   async function getCampaign() {
     try {
+      const user = await getUser();
+      if (!user || user.role !== USER_ROLES.SUPPORTER) {
+        toast.error("You need to be logged in as a supporter!");
+        navigate("/");
+        return;
+      }
       const res = await fetch(campaigns.getById(id), {
         method: 'GET',
         credentials: 'include'

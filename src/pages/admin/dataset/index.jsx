@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./AdminDataset.css";
 import { admin } from "../../../../paths";
+import getUser from "../../../helpers/getUser";
+import { USER_ROLES } from "../../../helpers/constants";
 
 export default function DatasetTable() {
     const navigate = useNavigate();
@@ -10,8 +12,17 @@ export default function DatasetTable() {
     const [datasets, setDatasets] = useState(new Set([]));
 
     useEffect(() => {
+        authorize();
         getDatasets();
     }, []);
+
+    async function authorize() {
+        const user = await getUser();
+        if (!user || user.role !== USER_ROLES.ADMIN) {
+            toast.error("This page is only for business representatives!");
+            navigate("/", { replace: true });
+        }
+    }
 
     async function getDatasets() {
         const res = await fetch(admin.datasets, {

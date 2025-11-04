@@ -4,6 +4,7 @@ import './rewardProof.css';
 import { user as userPath } from "../../../paths";
 import { toast } from 'react-toastify';
 import getUser from '../../helpers/getUser';
+import { USER_ROLES } from '../../helpers/constants';
 
 export default function RewardProof() {
     const { userRewardId } = useParams();
@@ -18,7 +19,13 @@ export default function RewardProof() {
     const fetchRewardProof = async () => {
         try {
             setLoading(true);
-            const { userId } = await getUser();
+            const user = await getUser();
+            if (!user || user.role !== USER_ROLES.SUPPORTER) {
+                toast.error("Unauthorized!");
+                navigate("/");
+                return;
+            }
+            const userId = user.userId;
             const response = await fetch(userPath.reward(userId, userRewardId), {
                 method: 'GET',
                 credentials: 'include'

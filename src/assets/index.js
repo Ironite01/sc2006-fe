@@ -5,6 +5,7 @@ import facebook from './facebook.svg';
 import instagram from './instagram.svg';
 import google from './google.svg';
 import microsoft from './microsoft.svg';
+import logo from './logo.jpg';
 
 export {
     profile,
@@ -13,5 +14,6 @@ export {
     facebook,
     instagram,
     google,
-    microsoft
+    microsoft,
+    logo
 };

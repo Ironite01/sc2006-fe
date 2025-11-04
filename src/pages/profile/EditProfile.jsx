@@ -51,12 +51,13 @@ export default function EditProfile() {
     }, [oldUserData]);
 
     async function getUser_() {
-        try {
-            const user = await getUser();
-            setOldUserData(user);
-        } catch (e) {
-            toast.error(e);
+        const user = await getUser();
+        if (!user) {
+            toast.error("You need to be logged in!");
+            navigate("/");
+            return;
         }
+        setOldUserData(user);
     }
 
     async function onFormSubmit(e) {
