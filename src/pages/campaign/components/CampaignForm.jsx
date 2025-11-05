@@ -167,12 +167,21 @@ export default function CampaignForm() {
                 _formData.append('fields[image]', image);
             }
 
+            // Collect all existing reward IDs to soft-delete them before recreating
+            const existingRewardIds = formData.rewards
+                .filter(r => r.rewardId)
+                .map(r => r.rewardId);
+
+            // Combine explicitly deleted rewards with existing rewards (to recreate with updates)
+            const allDeletedIds = [...deletedRewardIds, ...existingRewardIds];
+
+            // Send ALL rewards as new (including edited existing ones)
             _formData.append('newRewards', JSON.stringify(formData.rewards.map((r) => ({
                 donationAmount: r.amount,
                 rewardName: r.title,
                 rewardDescription: r.description,
             }))));
-            _formData.append('deletedRewardIds', JSON.stringify(deletedRewardIds));
+            _formData.append('deletedRewardIds', JSON.stringify(allDeletedIds));
 
             res = await fetch(campaigns.getById(params.campaignId), {
                 method: 'PUT',
