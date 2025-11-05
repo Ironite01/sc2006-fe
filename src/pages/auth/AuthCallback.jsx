@@ -19,19 +19,17 @@ export default function AuthCallback() {
                 }
                 window.dispatchEvent(new Event("profileUpdated"));
 
-                if (needsRoleSelection === 'true') {
+                const role = userData.role?.toLowerCase();
+
+                if (needsRoleSelection === 'true' || role === 'pending_role_selection') {
                     Cookies.remove('needs_role_selection');
                     navigate("/auth/select-role", { replace: true });
+                } else if (role === 'admin' || role === 'root') {
+                    navigate('/admin', { replace: true });
+                } else if (role === 'business_representative') {
+                    navigate('/campaign', { replace: true });
                 } else {
-                    const role = userData.role?.toLowerCase();
-
-                    if (role === 'admin' || role === 'root') {
-                        navigate('/admin', { replace: true });
-                    } else if (role === 'business_representative') {
-                        navigate('/campaign', { replace: true });
-                    } else {
-                        navigate('/', { replace: true });
-                    }
+                    navigate('/', { replace: true });
                 }
             } else {
                 setTimeout(checkAuth, 100);
