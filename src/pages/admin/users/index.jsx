@@ -19,33 +19,33 @@ export default function AdminUsers() {
         isDangerous: false
     });
 
-useEffect(() => {
-  getUser().then((user) => {
-    if (user?.userId) setCurrentUserId(user.userId);
-    fetchUsers();
-  });
-}, []);
-
-async function fetchUsers() {
-    try {
-        console.log("Fetching users from:", admin.users);
-        const res = await fetch(admin.users, {
-            method: 'GET',
-            credentials: 'include'
+    useEffect(() => {
+        getUser().then((user) => {
+            if (user?.userId) setCurrentUserId(user.userId);
+            fetchUsers();
         });
+    }, []);
 
-        console.log("Response status:", res.status);
-        const data = await res.json();
-        console.log("Fetched data:", data);
+    async function fetchUsers() {
+        try {
+            console.log("Fetching users from:", admin.users);
+            const res = await fetch(admin.users, {
+                method: 'GET',
+                credentials: 'include'
+            });
 
-        setUsers(data.users);
-    } catch (error) {
-        toast.error("Unable to fetch users");
-        console.error("Fetch error:", error);
-    } finally {
-        setLoading(false);
+            console.log("Response status:", res.status);
+            const data = await res.json();
+            console.log("Fetched data:", data);
+
+            setUsers(data.users);
+        } catch (error) {
+            toast.error("Unable to fetch users");
+            console.error("Fetch error:", error);
+        } finally {
+            setLoading(false);
+        }
     }
-}
 
     function handleRoleChange(userId, newRole) {
         setModalConfig({
@@ -94,8 +94,8 @@ async function fetchUsers() {
     async function confirmDeleteUser(userId) {
         try {
             const res = await fetch(admin.deleteUser(userId), {
-            method: 'PUT',
-            credentials: 'include'
+                method: 'PUT',
+                credentials: 'include'
             });
 
             if (!res.ok) {
@@ -158,8 +158,8 @@ async function fetchUsers() {
                     </thead>
                     <tbody>
                         {users.map((user) => (
-                                <tr key={user.id}>
-                                <td>{user.id}</td>
+                            <tr key={user.userId}>
+                                <td>{user.userId}</td>
                                 <td>
                                     {user.profilePicture ? (
                                         <img
@@ -178,7 +178,7 @@ async function fetchUsers() {
                                 <td>
                                     <select
                                         value={user.role}
-                                        onChange={(e) => handleRoleChange(user.userId, e.target.value)} 
+                                        onChange={(e) => handleRoleChange(user.userId, e.target.value)}
                                         className="role-select"
                                     >
                                         <option value="SUPPORTER">Supporter</option>
@@ -188,14 +188,14 @@ async function fetchUsers() {
                                 </td>
                                 <td>{formatDate(user.createdAt)}</td>
                                 <td>
-                                      {user.userId != currentUserId && (
+                                    {user.userId != currentUserId && (
                                         <button
                                             onClick={() => handleDeleteUser(user.userId, user.username)}
                                             className="delete-btn"
                                         >
                                             Delete
                                         </button>
-                                          )}
+                                    )}
 
                                 </td>
                             </tr>

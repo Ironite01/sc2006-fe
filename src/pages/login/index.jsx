@@ -7,6 +7,7 @@ import './Login.css';
 import { isEmailValid } from '../../helpers/regex';
 import { toast } from 'react-toastify';
 import SubmitButton from '../../components/SubmitButton';
+import { USER_ROLES } from '../../helpers/constants';
 
 
 export default function Login() {
@@ -43,11 +44,11 @@ export default function Login() {
 
             if (role === 'admin' || role === 'root') {
                 navigate('/admin', { replace: true });
-            } 
+            }
             // specifically check for business reps
             else if (role === 'business_representative') {
                 await redirectBusinessRep();
-            } 
+            }
             // everyone else (e.g. supporter) goes to home
             else {
                 navigate('/', { replace: true });
@@ -66,21 +67,21 @@ export default function Login() {
 
             if (res.status === 404) {
                 // no shop yet
-                navigate("/shop/create", { replace: true });
+                navigate("/shop/create", { replace: true, state: { role: USER_ROLES.BUSINESS_REPRESENTATIVE } });
                 return;
             }
 
             if (res.ok) {
                 // has a shop
-                navigate("/campaign", { replace: true });
+                navigate("/campaign", { replace: true, state: { role: USER_ROLES.BUSINESS_REPRESENTATIVE } });
                 return;
             }
 
             // fallback
-            navigate("/campaign", { replace: true });
+            navigate("/campaign", { replace: true, state: { role: USER_ROLES.BUSINESS_REPRESENTATIVE } });
         } catch (e) {
             console.error("redirectBusinessRep error:", e);
-            navigate("/campaign", { replace: true });
+            navigate("/campaign", { replace: true, state: { role: USER_ROLES.BUSINESS_REPRESENTATIVE } });
         }
     }
 
@@ -137,11 +138,11 @@ export default function Login() {
             const role = user?.role?.toLowerCase();
 
             if (role === 'admin' || role === 'root') {
-                navigate('/admin', { replace: true });
-            } else if (role === 'business_representative') {
+                navigate('/admin', { replace: true, state: { role: user?.role } });
+            } else if (role === USER_ROLES.BUSINESS_REPRESENTATIVE) {
                 await redirectBusinessRep();
             } else {
-                navigate('/', { replace: true }); // supporter / fallback
+                navigate('/', { replace: true, state: { role: user?.role } });
             }
 
         } catch (error) {
