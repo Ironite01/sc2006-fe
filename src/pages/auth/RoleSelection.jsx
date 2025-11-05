@@ -25,7 +25,7 @@ export default function RoleSelection() {
                 return;
             }
 
-            if (user.role !== null) {
+            if (user.role !== null && user.role !== USER_ROLES.PENDING_ROLE_SELECTION) {
                 const role = user.role?.toLowerCase();
 
                 if (role === 'admin' || role === 'root') {
