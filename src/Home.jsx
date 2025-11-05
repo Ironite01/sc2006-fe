@@ -49,8 +49,8 @@ export default function Home({ searchQuery }) {
   }, []);
 
   // --- simple slicing to replicate the two sections you had ---
-  const localGems = useMemo(() => allShops.slice(0, 8), [allShops]);
-  const flavours = useMemo(() => allShops.slice(8, 16), [allShops]);
+  const localGems = useMemo(() => allShops.slice(6, 16), [allShops]);
+  const flavours = useMemo(() => allShops.slice(0, 5), [allShops]);
 
   const featuredShop = localGems[0];
 
@@ -119,10 +119,10 @@ export default function Home({ searchQuery }) {
       )}
 
       <section className="section">
-        <h2>Local Gems Worth Saving:</h2>
+        <h2>Flavours You’ll Love:</h2>
         <div className="row">
-          {filteredLocalGems.length ? (
-            filteredLocalGems.map((s) => (
+          {filteredFlavours.length ? (
+            filteredFlavours.map((s) => (
               <ShopCard key={s.newestCampaignId} id={s.newestCampaignId} imageUrl={s.imageUrl} tag={s.tag} name={s.name} />
             ))
           ) : (
@@ -131,11 +131,11 @@ export default function Home({ searchQuery }) {
         </div>
       </section>
 
-      <section className="section">
-        <h2>Flavours You’ll Love:</h2>
+            <section className="section">
+        <h2>Local Gems Worth Saving:</h2>
         <div className="row">
-          {filteredFlavours.length ? (
-            filteredFlavours.map((s) => (
+          {filteredLocalGems.length ? (
+            filteredLocalGems.map((s) => (
               <ShopCard key={s.newestCampaignId} id={s.newestCampaignId} imageUrl={s.imageUrl} tag={s.tag} name={s.name} />
             ))
           ) : (

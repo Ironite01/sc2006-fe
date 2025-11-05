@@ -27,6 +27,7 @@ import AdminDatasetViewer from './pages/admin/dataset/filename/index.jsx';
 import AdminUsers from './pages/admin/users/index.jsx';
 import AdminCampaign from './pages/admin/campaign/index.jsx';
 import AdminShop from "./pages/admin/shop/index.jsx"
+import AdminStats from './pages/admin/stats/index.jsx';
 import Rewards from './pages/rewards/index.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -249,6 +250,14 @@ function App() {
             element={
               <RequireRole allowedRoles={['ADMIN']}>
                 <AdminShop />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/admin/stats"
+            element={
+              <RequireRole allowedRoles={['ADMIN']}>
+                <AdminStats />
               </RequireRole>
             }
           />

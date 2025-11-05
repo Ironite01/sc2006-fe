@@ -79,7 +79,8 @@ export default function Admin() {
         { title: "Datasets", value: noOfDatasets, description: "Click to view all datasets", link: 'dataset' },
         { title: "Campaigns", value: noOfCampaigns, description: "Click to review all campaigns", link: 'campaign' },
         { title: "Shops", value: noOfShops, description: "Click to review all shops", link: 'shop' },
-        { title: "User Management", value: noOfUsers, description: "Click here to manage users", link: 'users' }
+        { title: "User Management", value: noOfUsers, description: "Click here to manage users", link: 'users' },
+        { title: "Platform Statistics", value: "📊", description: "View comprehensive platform analytics and metrics", link: 'stats' }
     ];
 
     return (

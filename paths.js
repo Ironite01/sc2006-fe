@@ -34,6 +34,12 @@ export const admin = {
   getShopsByStatus: (status) => `${backendPath}/admin/shops?status=${status}`,
   updateShopStatus: (id) => `${backendPath}/admin/shops/${id}/status`,
   deleteShop: (id) => `${backendPath}/admin/shops/${id}`,
+  stats: {
+    all: `${backendPath}/admin/stats/all`,
+    platform: `${backendPath}/admin/stats/platform`,
+    donationsOverTime: `${backendPath}/admin/stats/donations-over-time`,
+    conversionFunnel: `${backendPath}/admin/stats/conversion-funnel`
+  }
 }
 
 export const campaigns = {

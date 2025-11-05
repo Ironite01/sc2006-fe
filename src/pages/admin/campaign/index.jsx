@@ -48,12 +48,16 @@ export default function AdminCampaign() {
     }
 
     function handleStatusChange(campaignId, newStatus) {
+        console.log('handleStatusChange called:', { campaignId, newStatus, CAMPAIGNS_STATUS });
+
         const statusLabels = {
-            [CAMPAIGNS_STATUS.APPROVED.toLowerCase()]: 'Approve',
-            [CAMPAIGNS_STATUS.SUSPENDED.toLowerCase()]: 'Suspend',
-            [CAMPAIGNS_STATUS.REJECTED.toLowerCase()]: 'Reject',
-            [CAMPAIGNS_STATUS.PENDING.toLowerCase()]: 'Set to Pending'
+            [CAMPAIGNS_STATUS.APPROVED]: 'Approve',
+            [CAMPAIGNS_STATUS.SUSPENDED]: 'Suspend',
+            [CAMPAIGNS_STATUS.REJECTED]: 'Reject',
+            [CAMPAIGNS_STATUS.PENDING]: 'Set to Pending'
         };
+
+        console.log('Status label for', newStatus, ':', statusLabels[newStatus]);
 
         setModalConfig({
             isOpen: true,
@@ -65,26 +69,38 @@ export default function AdminCampaign() {
     }
 
     async function confirmStatusChange(campaignId, newStatus) {
+        console.log('confirmStatusChange called:', { campaignId, newStatus });
+        console.log('API endpoint:', admin.updateCampaignStatus(campaignId));
+
         try {
+            const requestBody = { status: newStatus };
+            console.log('Request body:', requestBody);
+
             const res = await fetch(admin.updateCampaignStatus(campaignId), {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 credentials: 'include',
-                body: JSON.stringify({ status: newStatus })
+                body: JSON.stringify(requestBody)
             });
+
+            console.log('Response status:', res.status);
 
             if (!res.ok) {
                 const errorData = await res.json();
+                console.error('Error response:', errorData);
                 throw new Error(errorData.error || "Failed to update campaign status");
             }
+
+            const responseData = await res.json();
+            console.log('Success response:', responseData);
 
             toast.success(`Campaign status updated to ${newStatus}`);
             fetchCampaigns();
         } catch (error) {
+            console.error('Error in confirmStatusChange:', error);
             toast.error(error.message);
-            console.error(error);
         }
     }
 
