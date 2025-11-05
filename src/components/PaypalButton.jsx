@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import getUser from "../helpers/getUser";
 
-export default function PaypalButton({ campaignId, amount }) {
+export default function PaypalButton({ campaignId, amount, rewardId }) {
     const paypalRef = useRef(null);
     const navigate = useNavigate();
 
@@ -56,6 +56,7 @@ export default function PaypalButton({ campaignId, amount }) {
                             amount,
                             paymentGatewayOrderId: data.orderID,
                             paymentMethod: "paypal",
+                            rewardId,
                         }),
                     });
 
@@ -79,7 +80,7 @@ export default function PaypalButton({ campaignId, amount }) {
         return () => {
             if (paypalRef.current) paypalRef.current.innerHTML = "";
         };
-    }, []);
+    }, [amount]);
 
     return <div ref={paypalRef}></div>;
 }

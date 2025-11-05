@@ -4,9 +4,11 @@ import { toast } from "react-toastify";
 import ConfirmModal from "../../../components/ConfirmModal";
 import "./AdminUsers.css";
 import { useNavigate } from "react-router-dom";
+import getUser from "../../../helpers/getUser"; // adjust path if needed
 
 export default function AdminUsers() {
     const navigate = useNavigate();
+    const [currentUserId, setCurrentUserId] = useState(null);
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [modalConfig, setModalConfig] = useState({
@@ -17,22 +19,29 @@ export default function AdminUsers() {
         isDangerous: false
     });
 
+    useEffect(() => {
+        getUser().then((user) => {
+            if (user?.userId) setCurrentUserId(user.userId);
+            fetchUsers();
+        });
+    }, []);
+
     async function fetchUsers() {
         try {
+            console.log("Fetching users from:", admin.users);
             const res = await fetch(admin.users, {
                 method: 'GET',
                 credentials: 'include'
             });
 
-            if (!res.ok) {
-                throw new Error("Failed to fetch users");
-            }
+            console.log("Response status:", res.status);
+            const data = await res.json();
+            console.log("Fetched data:", data);
 
-            const { users } = await res.json();
-            setUsers(users);
+            setUsers(data.users);
         } catch (error) {
             toast.error("Unable to fetch users");
-            console.error(error);
+            console.error("Fetch error:", error);
         } finally {
             setLoading(false);
         }
@@ -85,7 +94,7 @@ export default function AdminUsers() {
     async function confirmDeleteUser(userId) {
         try {
             const res = await fetch(admin.deleteUser(userId), {
-                method: 'DELETE',
+                method: 'PUT',
                 credentials: 'include'
             });
 
@@ -179,12 +188,15 @@ export default function AdminUsers() {
                                 </td>
                                 <td>{formatDate(user.createdAt)}</td>
                                 <td>
-                                    <button
-                                        onClick={() => handleDeleteUser(user.userId, user.username)}
-                                        className="delete-btn"
-                                    >
-                                        Delete
-                                    </button>
+                                    {user.userId != currentUserId && (
+                                        <button
+                                            onClick={() => handleDeleteUser(user.userId, user.username)}
+                                            className="delete-btn"
+                                        >
+                                            Delete
+                                        </button>
+                                    )}
+
                                 </td>
                             </tr>
                         ))}

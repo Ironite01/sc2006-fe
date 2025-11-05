@@ -30,15 +30,23 @@ export default function DonationPage() {
       const campaign = await res.json();
 
       setCampaign(campaign);
+      if (!campaign?.rewardTiers.find((r) => state?.amount === r?.amount)) {
+        setCustomAmount(state?.amount);
+      }
     } catch (e) {
       toast.error(e.message);
     }
   }
 
-  // 2) tiers source: prefer campaign.rewardTiers; else fallback JSON; else empty
+
   const tiers = useMemo(() => {
     if (campaign?.rewardTiers?.length) return campaign.rewardTiers
-      .map(t => ({ amount: t.amount, title: t.title, description: t.description }));
+      .map(t => ({
+        rewardId: t.rewardId,
+        amount: t.amount,
+        title: t.title,
+        description: t.description
+      }));
     const fallback = tiersDB[id] || tiersDB.default || [];
     return fallback;
   }, [campaign, id]);
@@ -57,7 +65,6 @@ export default function DonationPage() {
   const [nameOnCard, setNameOnCard] = useState("");
   const [expiry, setExpiry] = useState("");
   const [cvv, setCvv] = useState("");
-  const [saveCard, setSaveCard] = useState(false);
   const [agreeTos, setAgreeTos] = useState(false);
 
   // current numeric amount
@@ -99,7 +106,8 @@ export default function DonationPage() {
         userId: user?.userId ?? null,
         amount,
         paymentGatewayOrderId: `CLIENT-${Date.now()}`,
-        paymentMethod: "card"
+        paymentMethod: "card",
+        rewardId: currentReward?.rewardId ?? null
       };
 
       const res = await fetch(donation.normal(id), {
@@ -233,15 +241,6 @@ export default function DonationPage() {
           <label className="checkbox-row">
             <input
               type="checkbox"
-              checked={saveCard}
-              onChange={(e) => setSaveCard(e.target.checked)}
-            />
-            <span>Save my card details</span>
-          </label>
-
-          <label className="checkbox-row">
-            <input
-              type="checkbox"
               checked={agreeTos}
               onChange={(e) => setAgreeTos(e.target.checked)}
             />
@@ -257,7 +256,7 @@ export default function DonationPage() {
         <SubmitButton type="submit" className="bg-[#6b5b4b]">
           Donate ${amount.toFixed(2)}
         </SubmitButton>
-        <PaypalButton campaignId={id} amount={amount} />
+        <PaypalButton campaignId={id} amount={amount} rewardId={currentReward?.rewardId ?? null} />
       </form>
     </div>
   );

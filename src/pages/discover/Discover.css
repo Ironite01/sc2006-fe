@@ -1,0 +1,239 @@
+.discover-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 16rem);
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.discover-content {
+    background-color: white;
+    padding: 3rem 2.5rem;
+    border-radius: 2rem;
+    box-shadow: var(--shadow-lg);
+    max-width: 1100px;
+    width: 100%;
+    border: 1px solid rgba(217, 119, 6, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.discover-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), #f59e0b, var(--primary));
+}
+
+.discover-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary), #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.discover-hero {
+    margin-bottom: 3rem;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(217, 119, 6, 0.1);
+}
+
+.discover-hero h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.discover-hero p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.discover-section {
+    margin-bottom: 3rem;
+}
+
+.discover-box {
+    background: linear-gradient(135deg, #fbfbfb 0%, #f6f6f6 100%);
+    border: 1px solid #e8e8e8;
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.03), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+}
+
+.discover-subtitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.discover-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.discover-item {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.discover-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: rgba(217, 119, 6, 0.2);
+}
+
+.discover-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.discover-item h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.discover-item p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.discover-cta {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(217, 119, 6, 0.1);
+    margin-bottom: 3rem;
+}
+
+.discover-cta h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.discover-cta p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.discover-button {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary);
+}
+
+.discover-button:hover {
+    background: #b45309;
+    border-color: #b45309;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+}
+
+.back-to-home {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.back-to-home a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.back-to-home a:hover {
+    color: #b45309;
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .discover-container {
+        padding: 1rem;
+    }
+
+    .discover-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .discover-title {
+        font-size: 2rem;
+    }
+
+    .discover-hero {
+        padding: 1.5rem;
+    }
+
+    .discover-hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .discover-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .discover-cta {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .discover-content {
+        padding: 1.5rem 1rem;
+        border-radius: 1rem;
+    }
+
+    .discover-title {
+        font-size: 1.75rem;
+    }
+
+    .discover-icon {
+        font-size: 2.5rem;
+    }
+
+    .discover-item {
+        padding: 1.5rem 1rem;
+    }
+}
