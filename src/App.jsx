@@ -39,6 +39,8 @@ import RegisterShop from "./pages/shop/RegisterShop.jsx";
 import RequireRole from './helpers/RequireRole.jsx';
 import CampaignManager from './pages/campaign/CampaignManager.jsx';
 import UpdateComposer from './pages/campaign/components/UpdateComposer.jsx';
+import RoleSelection from './pages/auth/RoleSelection.jsx';
+import MapView from './pages/map/index.jsx';
 
 
 function App() {
@@ -65,6 +67,8 @@ function App() {
           <Route path="/discover" element={<Discover />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/profile" element={<EditProfile />} />
+          <Route path="/auth/select-role" element={<RoleSelection />} />
+          <Route path="/map" element={<MapView />} />
 
           {/* =========================
               SUPPORTER-ONLY PAGES
@@ -129,23 +133,17 @@ function App() {
             }
           />
 
-          {/* Campaign details (you said all campaign pages = biz rep only) */}
           <Route
             path="/campaign/:id"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
-                <CampaignDetails />
-              </RequireRole>
+              <CampaignDetails />
             }
           />
 
-          {/* Per-campaign update page (biz rep only) */}
           <Route
             path="/campaign/:campaignId/updates/:updateId"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
-                <Updates />
-              </RequireRole>
+              <Updates />
             }
           />
 

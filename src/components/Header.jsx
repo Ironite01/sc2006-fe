@@ -15,15 +15,17 @@ export default function Header({ onSearch }) {
     const [profilePicture, setProfilePicture] = useState(profile);
     const [userRole, setUserRole] = useState(USER_ROLES.SUPPORTER);
 
-    useEffect(() => {
-        getRole();
-    }, []);
-
     async function getRole() {
         const user = await getUser();
         if (!user) return;
         setUserRole(user.role);
     }
+
+    useEffect(() => {
+        if (location?.state?.role) {
+            setUserRole(location.state.role);
+        }
+    }, [location]);
 
     useEffect(() => {
         if (user) {
@@ -38,6 +40,7 @@ export default function Header({ onSearch }) {
         const handler = () => {
             const stored = localStorage.getItem("profilePicture");
             if (stored) setProfilePicture(JSON.parse(stored));
+            getRole();
         };
         window.addEventListener("profileUpdated", handler);
         handler();
