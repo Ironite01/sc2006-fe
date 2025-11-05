@@ -6,11 +6,6 @@ export default function Footer() {
         <footer className="place-content-center">
             <div className='footer-section'>
                 <nav className='flex gap-[0.5rem] flex-wrap'>
-<<<<<<< HEAD
-                    <a href="/">Home</a>
-                    <span className='opacity-30'>|</span>
-=======
->>>>>>> 689b63876ac3ed3a26572892e5fd62fb5274f8a4
                     <a>Discover</a>
                     <span className='opacity-30'>|</span>
                     <a>About Us</a>
