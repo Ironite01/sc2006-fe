@@ -39,17 +39,17 @@ export default function DonationPage() {
   }
 
 
-const tiers = useMemo(() => {
-  if (campaign?.rewardTiers?.length) return campaign.rewardTiers
-    .map(t => ({
-      rewardId: t.rewardId, 
-      amount: t.amount,
-      title: t.title,
-      description: t.description
-    }));
-  const fallback = tiersDB[id] || tiersDB.default || [];
-  return fallback;
-}, [campaign, id]);
+  const tiers = useMemo(() => {
+    if (campaign?.rewardTiers?.length) return campaign.rewardTiers
+      .map(t => ({
+        rewardId: t.rewardId,
+        amount: t.amount,
+        title: t.title,
+        description: t.description
+      }));
+    const fallback = tiersDB[id] || tiersDB.default || [];
+    return fallback;
+  }, [campaign, id]);
 
   // 3) starting amount (from router state or default to first tier amount)
   const initialAmount =
@@ -242,15 +242,6 @@ const tiers = useMemo(() => {
           <label className="checkbox-row">
             <input
               type="checkbox"
-              checked={saveCard}
-              onChange={(e) => setSaveCard(e.target.checked)}
-            />
-            <span>Save my card details</span>
-          </label>
-
-          <label className="checkbox-row">
-            <input
-              type="checkbox"
               checked={agreeTos}
               onChange={(e) => setAgreeTos(e.target.checked)}
             />
@@ -266,7 +257,7 @@ const tiers = useMemo(() => {
         <SubmitButton type="submit" className="bg-[#6b5b4b]">
           Donate ${amount.toFixed(2)}
         </SubmitButton>
-        <PaypalButton campaignId={id} amount={amount} rewardId={currentReward?.rewardId ?? null}/>
+        <PaypalButton campaignId={id} amount={amount} rewardId={currentReward?.rewardId ?? null} />
       </form>
     </div>
   );
