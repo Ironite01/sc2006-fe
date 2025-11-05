@@ -1,15 +1,46 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../paths';
 import { toast } from 'react-toastify';
 import { USER_ROLES } from '../../helpers/constants';
 import SubmitButton from '../../components/SubmitButton';
+import getUser from '../../helpers/getUser';
 import './RoleSelection.css';
 
 export default function RoleSelection() {
     const navigate = useNavigate();
     const [selectedRole, setSelectedRole] = useState(USER_ROLES.SUPPORTER);
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        checkUserRole();
+    }, []);
+
+    async function checkUserRole() {
+        try {
+            const user = await getUser();
+
+            if (!user) {
+                navigate('/login', { replace: true });
+                return;
+            }
+
+            if (user.role !== null) {
+                const role = user.role?.toLowerCase();
+
+                if (role === 'admin' || role === 'root') {
+                    navigate('/admin', { replace: true });
+                } else if (role === 'business_representative') {
+                    navigate('/campaign', { replace: true });
+                } else {
+                    navigate('/', { replace: true });
+                }
+            }
+        } catch (error) {
+            console.error('Error checking user role:', error);
+            navigate('/login', { replace: true });
+        }
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
