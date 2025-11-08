@@ -2,22 +2,21 @@ import { useState, useEffect } from 'react';
 import { profile, logo } from '../assets';
 import './Header.css';
 import Searchbar from './Searchbar';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import getUser from "../helpers/getUser";
 import { USER_ROLES } from '../helpers/constants';
 import { useLocation } from 'react-router-dom';
 
 export default function Header({ onSearch }) {
-    const user = Cookies.get('user');
     const navigate = useNavigate();
     const location = useLocation();
     const [profilePicture, setProfilePicture] = useState(profile);
     const [userRole, setUserRole] = useState(USER_ROLES.SUPPORTER);
 
-    async function getRole() {
+    async function _getUser() {
         const user = await getUser();
         if (!user) return;
+        if (user?.pictureUrl) setProfilePicture(user.pictureUrl);
         setUserRole(user.role);
     }
 
@@ -28,19 +27,10 @@ export default function Header({ onSearch }) {
     }, [location]);
 
     useEffect(() => {
-        if (user) {
-            const userObj = JSON.parse(user);
-            if (userObj?.picture) setProfilePicture(userObj.picture);
-        } else {
-            setProfilePicture(profile);
-        }
-    }, [user]);
-
-    useEffect(() => {
         const handler = () => {
             const stored = localStorage.getItem("profilePicture");
             if (stored) setProfilePicture(JSON.parse(stored));
-            getRole();
+            _getUser();
         };
         window.addEventListener("profileUpdated", handler);
         handler();

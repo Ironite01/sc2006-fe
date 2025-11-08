@@ -25,12 +25,6 @@ export default function EditProfile() {
 
     useEffect(() => {
         getUser_();
-        const googleUser = Cookies.get('user');
-        if (googleUser) {
-            toast.error("Edit profile is not supported with Google accounts!");
-            navigate("/");
-            return;
-        }
         const handler = () => {
             const stored = localStorage.getItem("profilePicture");
             if (stored) setCurrentPicture(JSON.parse(stored));
@@ -62,6 +56,12 @@ export default function EditProfile() {
 
     async function onFormSubmit(e) {
         e.preventDefault();
+
+        const user = await getUser();
+        if (user?.type === 'oauth') {
+            toast.error("OAuth users cannot edit their profiles!");
+            return;
+        }
 
         const form = e.target;
         const { username, email, currentPassword, password, cpassword, profilePicture } = form;

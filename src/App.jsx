@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -14,7 +14,6 @@ import HowItWorks from './pages/how-it-works';
 import ComingSoon from './pages/coming-soon';
 import Discover from './pages/discover';
 import AboutUs from './pages/about';
-import Campaign from './pages/campaign/CampaignManager';
 import CampaignDetails from './pages/campaign/CampaignDetails';
 import DonationPage from './pages/campaign/components/DonationPage.jsx';
 import CampaignForm from './pages/campaign/components/CampaignForm.jsx';
@@ -34,7 +33,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import RewardProof from './pages/rewards/RewardProof.jsx';
 import Updates from './pages/campaign/updates/index.jsx';
 import UserUpdates from './pages/updates/index.jsx';
-import AuthCallback from './pages/auth/AuthCallback.jsx';
 import RedeemUserReward from './pages/campaign/rewards/RedeemUserReward.jsx';
 import RegisterShop from "./pages/shop/RegisterShop.jsx";
 import RequireRole from './helpers/RequireRole.jsx';
@@ -42,7 +40,8 @@ import CampaignManager from './pages/campaign/CampaignManager.jsx';
 import UpdateComposer from './pages/campaign/components/UpdateComposer.jsx';
 import RoleSelection from './pages/auth/RoleSelection.jsx';
 import MapView from './pages/map/index.jsx';
-
+import { USER_ROLES } from './helpers/constants.js';
+import RedirectPendingRoleUser from './pages/auth/RedirectPendingRoleUser.jsx';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -51,6 +50,7 @@ function App() {
     <BrowserRouter>
       <Header onSearch={setSearchQuery} />
       <main>
+        <RedirectPendingRoleUser />
         <Routes>
           {/* =========================
               GENERAL + PROFILE (everyone)
@@ -58,7 +58,10 @@ function App() {
           <Route path="/" element={<Home searchQuery={searchQuery} />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/auth/callback" element={
+            <RequireRole allowedRoles={[USER_ROLES.PENDING_ROLE_SELECTION]}>
+              <RoleSelection />
+            </RequireRole>} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/terms" element={<TermsAndConditions />} />
@@ -68,7 +71,6 @@ function App() {
           <Route path="/discover" element={<Discover />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/profile" element={<EditProfile />} />
-          <Route path="/auth/select-role" element={<RoleSelection />} />
           <Route path="/map" element={<MapView />} />
 
           {/* =========================
@@ -78,7 +80,7 @@ function App() {
           <Route
             path="/updates"
             element={
-              <RequireRole allowedRoles={['SUPPORTER']}>
+              <RequireRole allowedRoles={[USER_ROLES.SUPPORTER]}>
                 <UserUpdates />
               </RequireRole>
             }
@@ -88,7 +90,7 @@ function App() {
           <Route
             path="/campaign/:id/donation"
             element={
-              <RequireRole allowedRoles={['SUPPORTER']}>
+              <RequireRole allowedRoles={[USER_ROLES.SUPPORTER]}>
                 <DonationPage />
               </RequireRole>
             }
@@ -98,7 +100,7 @@ function App() {
           <Route
             path="/rewards"
             element={
-              <RequireRole allowedRoles={['SUPPORTER']}>
+              <RequireRole allowedRoles={[USER_ROLES.SUPPORTER]}>
                 <Rewards />
               </RequireRole>
             }
@@ -106,7 +108,7 @@ function App() {
           <Route
             path="/rewards/:userRewardId"
             element={
-              <RequireRole allowedRoles={['SUPPORTER']}>
+              <RequireRole allowedRoles={[USER_ROLES.SUPPORTER]}>
                 <RewardProof />
               </RequireRole>
             }
@@ -119,7 +121,7 @@ function App() {
           <Route
             path="/campaign"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+              <RequireRole allowedRoles={[USER_ROLES.BUSINESS_REPRESENTATIVE]}>
                 <CampaignManager />
               </RequireRole>
             }
@@ -128,7 +130,7 @@ function App() {
           <Route
             path="/updates/new"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+              <RequireRole allowedRoles={[USER_ROLES.BUSINESS_REPRESENTATIVE]}>
                 <UpdateComposer />
               </RequireRole>
             }
@@ -152,7 +154,7 @@ function App() {
           <Route
             path="/campaign/create"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+              <RequireRole allowedRoles={[USER_ROLES.BUSINESS_REPRESENTATIVE]}>
                 <CampaignForm />
               </RequireRole>
             }
@@ -160,7 +162,7 @@ function App() {
           <Route
             path="/campaign/:campaignId/edit"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+              <RequireRole allowedRoles={[USER_ROLES.BUSINESS_REPRESENTATIVE]}>
                 <CampaignForm />
               </RequireRole>
             }
@@ -170,7 +172,7 @@ function App() {
           <Route
             path="/campaign/:campaignId/rewards"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+              <RequireRole allowedRoles={[USER_ROLES.BUSINESS_REPRESENTATIVE]}>
                 <ManageRewards />
               </RequireRole>
             }
@@ -178,7 +180,7 @@ function App() {
           <Route
             path="/campaign/:campaignId/rewards/:tierId"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+              <RequireRole allowedRoles={[USER_ROLES.BUSINESS_REPRESENTATIVE]}>
                 <RewardTier />
               </RequireRole>
             }
@@ -186,7 +188,7 @@ function App() {
           <Route
             path="/campaign/:campaignId/user/:userId/rewards/:userRewardsId/redeem"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+              <RequireRole allowedRoles={[USER_ROLES.BUSINESS_REPRESENTATIVE]}>
                 <RedeemUserReward />
               </RequireRole>
             }
@@ -196,7 +198,7 @@ function App() {
           <Route
             path="/shop/create"
             element={
-              <RequireRole allowedRoles={['BUSINESS_REPRESENTATIVE']}>
+              <RequireRole allowedRoles={[USER_ROLES.BUSINESS_REPRESENTATIVE]}>
                 <RegisterShop />
               </RequireRole>
             }
@@ -208,7 +210,7 @@ function App() {
           <Route
             path="/admin"
             element={
-              <RequireRole allowedRoles={['ADMIN']}>
+              <RequireRole allowedRoles={[USER_ROLES.ADMIN]}>
                 <Admin />
               </RequireRole>
             }
@@ -216,7 +218,7 @@ function App() {
           <Route
             path="/admin/dataset"
             element={
-              <RequireRole allowedRoles={['ADMIN']}>
+              <RequireRole allowedRoles={[USER_ROLES.ADMIN]}>
                 <AdminDataset />
               </RequireRole>
             }
@@ -224,7 +226,7 @@ function App() {
           <Route
             path="/admin/dataset/:filename"
             element={
-              <RequireRole allowedRoles={['ADMIN']}>
+              <RequireRole allowedRoles={[USER_ROLES.ADMIN]}>
                 <AdminDatasetViewer />
               </RequireRole>
             }
@@ -232,7 +234,7 @@ function App() {
           <Route
             path="/admin/users"
             element={
-              <RequireRole allowedRoles={['ADMIN']}>
+              <RequireRole allowedRoles={[USER_ROLES.ADMIN]}>
                 <AdminUsers />
               </RequireRole>
             }
@@ -240,7 +242,7 @@ function App() {
           <Route
             path="/admin/campaign"
             element={
-              <RequireRole allowedRoles={['ADMIN']}>
+              <RequireRole allowedRoles={[USER_ROLES.ADMIN]}>
                 <AdminCampaign />
               </RequireRole>
             }
@@ -248,7 +250,7 @@ function App() {
           <Route
             path="/admin/shop"
             element={
-              <RequireRole allowedRoles={['ADMIN']}>
+              <RequireRole allowedRoles={[USER_ROLES.ADMIN]}>
                 <AdminShop />
               </RequireRole>
             }
@@ -256,7 +258,7 @@ function App() {
           <Route
             path="/admin/stats"
             element={
-              <RequireRole allowedRoles={['ADMIN']}>
+              <RequireRole allowedRoles={[USER_ROLES.ADMIN]}>
                 <AdminStats />
               </RequireRole>
             }

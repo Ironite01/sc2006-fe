@@ -186,7 +186,7 @@ export default function AdminUsers() {
                                         <option value="ADMIN">Admin</option>
                                     </select>
                                 </td>
-                                <td>{formatDate(user.createdAt)}</td>
+                                <td>{user?.createdAt ? formatDate(user.createdAt) : ""}</td>
                                 <td>
                                     {user.userId != currentUserId && (
                                         <button
