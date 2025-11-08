@@ -4,7 +4,6 @@ import './rewards.css';
 import { user as userPath } from '../../../paths';
 import getUser from '../../helpers/getUser';
 import { USER_REWARDS_STATUS, USER_ROLES } from '../../helpers/constants';
-import Cookies from 'js-cookie';
 import { profile } from '../../assets';
 import { toast } from 'react-toastify';
 
@@ -18,16 +17,6 @@ export default function Rewards() {
     const [loading, setLoading] = useState(true);
     const [userObj, setUserObj] = useState('');
     const [profilePicture, setProfilePicture] = useState(profile);
-
-    const user = Cookies.get('user');
-    useEffect(() => {
-        if (user) {
-            const userObj = JSON.parse(user);
-            if (userObj?.picture) setProfilePicture(userObj.picture);
-        } else {
-            setProfilePicture(profile);
-        }
-    }, [user]);
 
     useEffect(() => {
         _getUser();
@@ -50,6 +39,7 @@ export default function Rewards() {
             navigate("/");
             return;
         }
+        if (user?.pictureUrl) setProfilePicture(user.pictureUrl)
         setUserObj(user);
     }
 

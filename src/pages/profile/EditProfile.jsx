@@ -51,6 +51,7 @@ export default function EditProfile() {
             navigate("/");
             return;
         }
+        if (user?.pictureUrl) setCurrentPicture(user.pictureUrl);
         setOldUserData(user);
     }
 
